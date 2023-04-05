@@ -67,6 +67,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\BaseCommand.cs" />
+    <Compile Include="Commands\Dashboard\DropDownEmloyeesCommand.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Windows\DashboardViewModel.cs" />
     <Compile Include="Views\UserControls\PatientControls.xaml.cs">
       <DependentUpon>PatientControls.xaml</DependentUpon>
