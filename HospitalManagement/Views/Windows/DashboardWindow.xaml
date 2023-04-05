@@ -29,6 +29,20 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="EmployeesStack" TargetType="{x:Type StackPanel}">
+            <Setter Property="Height" Value="0"/>
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding EmployeeSituation}" Value="true">
+                    <Setter Property="Height" Value="100"/>
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding EmployeeSituation}" Value="false">
+                    <Setter Property="Height" Value="0"/>
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <Style x:Key="btnEmployeesMenu" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="LightSlateGray"/>
@@ -63,8 +77,8 @@
             <ScrollViewer>
                 <Grid>
                     <StackPanel>
-                        <Button Name="btnEmployees" Content="Employees" Style="{StaticResource btnMenu}"/>
-                        <StackPanel  Style="{DynamicResource EmployeesStack}" >
+                        <Button Name="btnEmployees" Content="Employees" Style="{StaticResource btnMenu}" Command="{Binding Path=DropDown}"/>
+                        <StackPanel  Style="{StaticResource EmployeesStack}" >
                             <Button Name="btnDoctors" Content="Doctors" Style="{StaticResource btnEmployeesMenu}"/>
                             <Button Name="btnNurses" Content="Nurses" Style="{StaticResource btnEmployeesMenu}" />
                             <Button Name="btnReceptionists" Content="Receptionist" Style="{StaticResource btnEmployeesMenu}"/>
