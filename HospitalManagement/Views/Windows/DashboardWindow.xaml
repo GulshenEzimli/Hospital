@@ -64,7 +64,7 @@
                 <Grid>
                     <StackPanel>
                         <Button Name="btnEmployees" Content="Employees" Style="{StaticResource btnMenu}"/>
-                        <StackPanel>
+                        <StackPanel  Style="{DynamicResource EmployeesStack}" >
                             <Button Name="btnDoctors" Content="Doctors" Style="{StaticResource btnEmployeesMenu}"/>
                             <Button Name="btnNurses" Content="Nurses" Style="{StaticResource btnEmployeesMenu}" />
                             <Button Name="btnReceptionists" Content="Receptionist" Style="{StaticResource btnEmployeesMenu}"/>
