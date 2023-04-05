@@ -65,6 +65,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\OtherEmployeesControol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\PatientControls.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -80,6 +84,7 @@
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\Dashboard\DropDownEmloyeesCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenNursesCommand.cs" />
+    <Compile Include="Commands\Dashboard\OpenOtherEmployeesCommand.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Windows\DashboardViewModel.cs" />
     <Compile Include="Views\Components\CustomDatePicker.xaml.cs">
@@ -87,6 +92,9 @@
     </Compile>
     <Compile Include="Views\UserControls\NurseControl.xaml.cs">
       <DependentUpon>NurseControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\OtherEmployeesControol.xaml.cs">
+      <DependentUpon>OtherEmployeesControol.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\PatientControls.xaml.cs">
       <DependentUpon>PatientControls.xaml</DependentUpon>

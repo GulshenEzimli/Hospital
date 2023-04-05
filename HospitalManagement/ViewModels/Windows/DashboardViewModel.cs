@@ -31,5 +31,7 @@ namespace HospitalManagement.ViewModels.Windows
         public DropDownEmloyeesCommand DropDown => new DropDownEmloyeesCommand(this);
 
         public OpenNursesCommand OpenNurses => new OpenNursesCommand(this);
+
+        public OpenOtherEmployeesCommand OpenOtherEmployees => new OpenOtherEmployeesCommand(this);
     }
 }
