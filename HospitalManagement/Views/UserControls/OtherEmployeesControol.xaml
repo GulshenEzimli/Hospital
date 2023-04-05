@@ -13,7 +13,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Background="LightGray">
+            <StackPanel Grid.Row="0" Background="CornflowerBlue">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5*"/>
@@ -36,13 +36,13 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">
-                            <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding Path=Name, Mode=TwoWay}"/>
-                            <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding Path=Surname, Mode=TwoWay}"/>
-                            <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding Path=PhoneNumber, Mode=TwoWay}"/>
+                            <TextBox Height="25" FontSize="15" Margin="5 5" />
+                            <TextBox Height="25" FontSize="15" Margin="5 5"/>
+                            <TextBox Height="25" FontSize="15" Margin="5 5" />
 
                             <WrapPanel>
-                                <RadioButton GroupName="Gender"  Content="Male" Margin="10 0"/>
-                                <RadioButton Content="Female" GroupName="Gender" Margin=" 10 0"/>
+                                <RadioButton GroupName="Gender"  Content="Male" Margin="6"/>
+                                <RadioButton Content="Female" GroupName="Gender" Margin="6"/>
                             </WrapPanel>
                         </StackPanel>
 
@@ -54,10 +54,10 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="3">
-                            <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding Path=Email, Mode=TwoWay}"/>
-                            <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding Path=Pin, Mode=TwoWay}"/>
-                            <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding Path=Salary, Mode=TwoWay}"/>
-                            <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding Path=Position, Mode=TwoWay}"/>
+                            <TextBox Height="25" FontSize="15" Margin="5 5" />
+                            <TextBox Height="25" FontSize="15" Margin="5 5" />
+                            <TextBox Height="25" FontSize="15" Margin="5 5" />
+                            <TextBox Height="25" FontSize="15" Margin="5 5" />
                         </StackPanel>
                     </Grid>
 
@@ -75,9 +75,51 @@
                 </Grid>
             </StackPanel>
 
-            <ListView Grid.Row="1">
-
+            <ListView x:Name="MainList" Grid.Row="1" 
+                      ItemsSource="{Binding Values}"
+                      SelectedItem="{Binding SelectedValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                <ListView.View>
+                    <GridView >
+                        <GridViewColumn DisplayMemberBinding="{Binding Path=No}" Header="No" Width="30" />
+                        <GridViewColumn Header="Surname" Width="60">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Surname}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Name" Width="60">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Name}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Birth Date" Width="70">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=BirthDate, StringFormat='dd.MM.yyyy'}"  HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Nationality" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Account.Email}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Note" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=LicenseNumber}"  HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
             </ListView>
+
         </Grid>
     </Border>
 </UserControl>
