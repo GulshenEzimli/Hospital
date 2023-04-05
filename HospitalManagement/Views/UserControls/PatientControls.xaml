@@ -21,7 +21,6 @@
     </Window.Resources>
     <Border Background="Blue" BorderThickness="5">
         <Grid>
-            
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -33,12 +32,12 @@
                 <!--<components:ErrorDialog Height="0" x:Name="ErrorDialog"/>-->
 
                 <Grid Background="DarkBlue" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="5*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Row="0" >
+                    <Grid Grid.Column="0" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1.5*"/>
@@ -77,18 +76,18 @@
                             <TextBox Style="{StaticResource myTextBox}" Text="{Binding CurrentValue.Adress,Mode=TwoWay}"/>
                         </StackPanel>
                     </Grid>
-
-                    
-                        <Grid Grid.Row="1">
-                            <WrapPanel VerticalAlignment="Center" Background="#ffb2b2b2">
-                             <Button Width="150"  Height="30" Margin="4 4"/>
-                            <Button Width="150" Height="30" Margin="4 4"/>
-                            <Button Width="150" Height="30" Margin="4 4"/>
-                            <Button Width="150" Height="30" Margin="4 4"/>
-                            <Button Width="150" Height="30" Margin="4 4" Click="Button_Click"/>
-                            </WrapPanel>
+                    <StackPanel Grid.Column="1">
+                        <Grid>
+                            <StackPanel VerticalAlignment="Center" Background="#ffb2b2b2">
+                                <Button  Height="30" Margin="4 4"/>
+                                <Button  Height="30" Margin="4 4"/>
+                                <Button  Height="30" Margin="4 4"/>
+                                <Button  Height="30" Margin="4 4"/>
+                                <Button  Height="30" Margin="4 4"/>
+                            </StackPanel>
                         </Grid>
-                    
+                    </StackPanel>
+
                 </Grid>
             </StackPanel>
             <ListView x:Name="MainList" Grid.Row="1" 
