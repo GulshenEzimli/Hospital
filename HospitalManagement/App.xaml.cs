@@ -21,6 +21,8 @@ namespace HospitalManagement
             DashboardViewModel viewModel = new DashboardViewModel();
 
             dashboardWindow.DataContext = viewModel;
+            viewModel.CenterGrid = dashboardWindow.grdCenter;
+
             MainWindow = dashboardWindow;
             MainWindow.Show();
         }
