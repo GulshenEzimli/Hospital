@@ -29,5 +29,7 @@ namespace HospitalManagement.ViewModels.Windows
         public Grid CenterGrid { get; set; }
 
         public DropDownEmloyeesCommand DropDown => new DropDownEmloyeesCommand(this);
+
+        public OpenNursesCommand OpenNurses => new OpenNursesCommand(this);
     }
 }
