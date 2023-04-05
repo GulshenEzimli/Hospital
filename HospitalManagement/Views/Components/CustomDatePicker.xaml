@@ -7,6 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <TextBox VerticalContentAlignment="Center" TextChanged="txtTextChanged" MouseDoubleClick="txtMouseDoubleClick" GotFocus="txtGotFocus"  x:Name="txt" ></TextBox>
+        <Popup x:Name="pop" PopupAnimation="Slide">
+            <Calendar Name="calendar" GotFocus="txtGotFocus" SelectedDatesChanged="CalendarSelectedDatesChanged"></Calendar>
+        </Popup>
     </Grid>
 </UserControl>

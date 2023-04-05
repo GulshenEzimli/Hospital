@@ -24,5 +24,39 @@ namespace HospitalManagement.Views.Components
         {
             InitializeComponent();
         }
+        private void CalendarSelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataContext = ((Calendar)sender).SelectedDate;
+            pop.IsOpen = false;
+
+        }
+
+        private void WindowDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            txt.Text = DataContext != null ? ((DateTime)DataContext).ToString("dd.MM.yyyy") : "";
+        }
+
+        private void txtGotFocus(object sender, RoutedEventArgs e)
+        {
+            pop.IsOpen = true;
+        }
+
+        private void UserControlLostFocus(object sender, RoutedEventArgs e)
+        {
+            pop.IsOpen = false;
+        }
+
+        private void txtMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            pop.IsOpen = !pop.IsOpen;
+        }
+
+        private void txtTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (DateTime.TryParseExact(txt.Text, "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime tempDate))
+            {
+                calendar.SelectedDate = tempDate;
+            }
+        }
     }
 }
