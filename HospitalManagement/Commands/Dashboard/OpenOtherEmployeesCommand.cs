@@ -1,4 +1,5 @@
-﻿using HospitalManagement.ViewModels.Windows;
+﻿using HospitalManagement.ViewModels.UserControls;
+using HospitalManagement.ViewModels.Windows;
 using HospitalManagement.Views.UserControls;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,12 @@ namespace HospitalManagement.Commands.Dashboard
         }
         public override void Execute(object parameter)
         {
-            OtherEmployeesControol otherEmployeesControol = new OtherEmployeesControol();
+            OtherEmployeesViewModel otherEmployeesViewModel = new OtherEmployeesViewModel();
+            OtherEmployeesControl otherEmployeesControl = new OtherEmployeesControl();
+
+            otherEmployeesControl.DataContext = otherEmployeesViewModel;
             _viewModel.CenterGrid.Children.Clear();
-            _viewModel.CenterGrid.Children.Add(otherEmployeesControol);
+            _viewModel.CenterGrid.Children.Add(otherEmployeesControl);
         }
     }
 }

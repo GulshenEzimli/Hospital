@@ -18,9 +18,9 @@ namespace HospitalManagement.Views.UserControls
     /// <summary>
     /// Interaction logic for OtherEmployeesControol.xaml
     /// </summary>
-    public partial class OtherEmployeesControol : UserControl
+    public partial class OtherEmployeesControl : UserControl
     {
-        public OtherEmployeesControol()
+        public OtherEmployeesControl()
         {
             InitializeComponent();
         }
