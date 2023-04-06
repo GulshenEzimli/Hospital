@@ -203,8 +203,8 @@
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                         <GradientStop Offset="0.0" Color="DarkBlue"/>
                         <GradientStop Offset="0.25" Color="Blue"/>
-                        <GradientStop Offset="0.5" Color="BlueViolet"/>
-                        <GradientStop Offset="0.75" Color="MediumSlateBlue"/>
+                        <GradientStop Offset="0.6" Color="BlueViolet"/>
+                        <GradientStop Offset="0.85" Color="MediumSlateBlue"/>
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
