@@ -85,8 +85,14 @@
     <Compile Include="Commands\Dashboard\DropDownEmloyeesCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenNursesCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenOtherEmployeesCommand.cs" />
+    <Compile Include="Commands\Nurses\AddNurseCommand.cs" />
+    <Compile Include="Commands\Nurses\DeleteNurseCommand.cs" />
+    <Compile Include="Commands\Nurses\EditNurseCommand.cs" />
+    <Compile Include="Commands\Nurses\RejectNurseCommand.cs" />
+    <Compile Include="Commands\Nurses\SaveNurseCommand.cs" />
     <Compile Include="Enums\Situations.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\NursesViewModel.cs" />
     <Compile Include="ViewModels\Windows\DashboardViewModel.cs" />
     <Compile Include="Views\Components\CustomDatePicker.xaml.cs">
       <DependentUpon>CustomDatePicker.xaml</DependentUpon>
@@ -133,10 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\hospital.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\Nurses\" />
-    <Folder Include="ViewModels\UserControls\" />
+    <Resource Include="Images\hospnew.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
