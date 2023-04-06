@@ -1,4 +1,5 @@
-﻿using HospitalManagement.ViewModels.Windows;
+﻿using HospitalManagement.ViewModels.UserControls;
+using HospitalManagement.ViewModels.Windows;
 using HospitalManagement.Views.UserControls;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,10 @@ namespace HospitalManagement.Commands.Dashboard
         }
         public override void Execute(object parameter)
         {
+            NursesViewModel nursesViewModel = new NursesViewModel();
             NurseControl nurseControl = new NurseControl();
+
+            nurseControl.DataContext = nursesViewModel;
             _viewModel.CenterGrid.Children.Clear();
             _viewModel.CenterGrid.Children.Add(nurseControl);
         }
