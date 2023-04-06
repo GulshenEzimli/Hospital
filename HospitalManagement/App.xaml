@@ -197,19 +197,65 @@
             <Setter Property="Padding" Value="15,0"/>
         </Style>
         
+        
+
         <Style x:Key="BackColorStyle" TargetType="{x:Type Border}">
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Offset="0.0" Color="DarkBlue"/>
-                        <GradientStop Offset="0.25" Color="Blue"/>
-                        <GradientStop Offset="0.6" Color="BlueViolet"/>
-                        <GradientStop Offset="0.85" Color="MediumSlateBlue"/>
+                        <GradientStop Offset="0.0" Color="#6930C3"/>
+                        <GradientStop Offset="0.16" Color="#5E60CE"/>
+                        <GradientStop Offset="0.33" Color="#5390D9"/>
+                        <GradientStop Offset="0.49" Color="#4EA8DE"/>
+                        <GradientStop Offset="0.66" Color="#5390D9"/>
+                        <GradientStop Offset="0.83" Color="#5E60CE"/>
+                        <GradientStop Offset="1.0" Color="#6930C3"/>
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
         </Style>
 
+        <Style x:Key="NurseFormGrid" TargetType="{x:Type Grid}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Offset="0.0" Color="#7400BB"/>
+                        <GradientStop Offset="0.1" Color="#6930C3"/>
+                        <GradientStop Offset="0.2" Color="#5E60CE"/>
+                        <GradientStop Offset="0.3" Color="#5390D9"/>
+                        <GradientStop Offset="0.4" Color="#4EA8DE"/>
+                        <GradientStop Offset="0.6" Color="#4EA8DE"/>
+                        <GradientStop Offset="0.7" Color="#5390D9"/>
+                        <GradientStop Offset="0.8" Color="#5E60CE"/>
+                        <GradientStop Offset="0.9" Color="#6930C3"/>
+                        <GradientStop Offset="1.0" Color="#7400BB"/>
+
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="btnButtons" TargetType="Button">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" CornerRadius="15" BorderThickness="2" BorderBrush="WhiteSmoke" >
+                            <ContentPresenter TextElement.Foreground="White"  TextElement.FontWeight="Bold"
+                                              VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Border.Background>
+                                <RadialGradientBrush  GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
+                                    <GradientStop Offset="0.0" Color="#7400BB"/>
+                                    <GradientStop Offset="0.5" Color="#6930C3"/>
+                                    <GradientStop Offset="1.0" Color="#5E60CE"/>
+                                </RadialGradientBrush>
+                            </Border.Background>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
     </Application.Resources>
 </Application>
