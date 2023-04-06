@@ -61,6 +61,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\DoctorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\NurseControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -90,6 +94,9 @@
     <Compile Include="ViewModels\Windows\DashboardViewModel.cs" />
     <Compile Include="Views\Components\CustomDatePicker.xaml.cs">
       <DependentUpon>CustomDatePicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\DoctorControl.xaml.cs">
+      <DependentUpon>DoctorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\NurseControl.xaml.cs">
       <DependentUpon>NurseControl.xaml</DependentUpon>
