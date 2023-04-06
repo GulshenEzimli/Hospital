@@ -78,11 +78,11 @@
                 <Grid>
                     <StackPanel>
                         <Button Name="btnEmployees" Content="Employees" Style="{StaticResource btnMenu}" Command="{Binding Path=DropDown}"/>
-                        <StackPanel  Style="{StaticResource EmployeesStack}" >
+                        <StackPanel  Style="{StaticResource EmployeesStack}">
                             <Button Name="btnDoctors" Content="Doctors" Style="{StaticResource btnEmployeesMenu}"/>
-                            <Button Name="btnNurses" Content="Nurses" Style="{StaticResource btnEmployeesMenu}" />
+                            <Button Name="btnNurses" Content="Nurses" Style="{StaticResource btnEmployeesMenu}" Command="{Binding Path=OpenNurses}"/>
                             <Button Name="btnReceptionists" Content="Receptionist" Style="{StaticResource btnEmployeesMenu}"/>
-                            <Button Name="btnOtherEmployees" Content="OtherEmployees" Style="{StaticResource btnEmployeesMenu}"/>
+                            <Button Name="btnOtherEmployees" Content="OtherEmployees" Style="{StaticResource btnEmployeesMenu}" Command="{Binding Path=OpenOtherEmployees}"/>
                         </StackPanel>
                         <Button Name="btnPatients" Content="Patients" Style="{StaticResource btnMenu}"/>
                         <Button Name="btnOperations" Content="Operations" Style="{StaticResource btnMenu}"/>

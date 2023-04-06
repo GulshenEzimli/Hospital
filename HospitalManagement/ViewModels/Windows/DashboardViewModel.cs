@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace HospitalManagement.ViewModels.Windows
 {
@@ -25,6 +26,12 @@ namespace HospitalManagement.ViewModels.Windows
             }
         }
 
+        public Grid CenterGrid { get; set; }
+
         public DropDownEmloyeesCommand DropDown => new DropDownEmloyeesCommand(this);
+
+        public OpenNursesCommand OpenNurses => new OpenNursesCommand(this);
+
+        public OpenOtherEmployeesCommand OpenOtherEmployees => new OpenOtherEmployeesCommand(this);
     }
 }
