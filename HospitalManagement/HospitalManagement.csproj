@@ -90,6 +90,11 @@
     <Compile Include="Commands\Dashboard\OpenDoctorsCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenNursesCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenOtherEmployeesCommand.cs" />
+    <Compile Include="Commands\Doctors\AddDoctorCommand.cs" />
+    <Compile Include="Commands\Doctors\DeleteDoctorCommand.cs" />
+    <Compile Include="Commands\Doctors\EditDoctorCommand.cs" />
+    <Compile Include="Commands\Doctors\RejectDoctorCommand.cs" />
+    <Compile Include="Commands\Doctors\SaveDoctorCommand.cs" />
     <Compile Include="Commands\Nurses\AddNurseCommand.cs" />
     <Compile Include="Commands\Nurses\DeleteNurseCommand.cs" />
     <Compile Include="Commands\Nurses\EditNurseCommand.cs" />
