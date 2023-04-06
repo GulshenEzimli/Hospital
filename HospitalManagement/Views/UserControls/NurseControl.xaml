@@ -15,7 +15,7 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Background="LightGray">
-                <Grid Style="{DynamicResource NurseFormGrid}">
+                <Grid Style="{DynamicResource FormGridStyle}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5*"/>
                         <ColumnDefinition Width="*"/>

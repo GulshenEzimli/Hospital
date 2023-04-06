@@ -215,7 +215,7 @@
             </Setter>
         </Style>
 
-        <Style x:Key="NurseFormGrid" TargetType="{x:Type Grid}">
+        <Style x:Key="FormGridStyle" TargetType="{x:Type Grid}">
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
