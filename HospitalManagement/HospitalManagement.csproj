@@ -101,6 +101,11 @@
     <Compile Include="Commands\Nurses\EditNurseCommand.cs" />
     <Compile Include="Commands\Nurses\RejectNurseCommand.cs" />
     <Compile Include="Commands\Nurses\SaveNurseCommand.cs" />
+    <Compile Include="Commands\OtherEmployees\AddOtherEmployeeCommand.cs" />
+    <Compile Include="Commands\OtherEmployees\DeleteOtherEmployeeCommand.cs" />
+    <Compile Include="Commands\OtherEmployees\EditOtherEmployeeCommand.cs" />
+    <Compile Include="Commands\OtherEmployees\RejectOtherEmployeeCommand.cs" />
+    <Compile Include="Commands\OtherEmployees\SaveOtherEmployeeCommand.cs" />
     <Compile Include="Enums\Situations.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\UserControls\DoctorsViewModel.cs" />
