@@ -162,5 +162,11 @@
     <Resource Include="Images\hospital.jpg" />
     <Resource Include="Images\hospnew.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HospitalManagementCore\HospitalManagementCore.csproj">
+      <Project>{4537ac99-7525-4f9c-b03c-25c5b57aed42}</Project>
+      <Name>HospitalManagementCore</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
