@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace HospitalManagement.Views.UserControls
@@ -17,16 +18,11 @@ namespace HospitalManagement.Views.UserControls
     /// <summary>
     /// Interaction logic for PatientControls.xaml
     /// </summary>
-    public partial class PatientControls : Window
+    public partial class PatientControls : UserControl
     {
         public PatientControls()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
