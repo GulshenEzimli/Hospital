@@ -12,7 +12,7 @@ namespace HospitalManagement.ViewModels.UserControls
     {
         public NursesViewModel()
         {
-            
+            CurrentSituation = 1;
         }
 
         private int _currentSituation = (int)Situations.NORMAL;
