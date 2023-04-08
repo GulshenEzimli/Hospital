@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Commands.Receptionists
 {
-    internal class DeleteReceptionistCommand:BaseCommand
+    public class DeleteReceptionistCommand:BaseCommand
     { 
         private readonly ReceptionistViewModel _receptionistViewModel;
         public DeleteReceptionistCommand(ReceptionistViewModel receptionistViewModel)

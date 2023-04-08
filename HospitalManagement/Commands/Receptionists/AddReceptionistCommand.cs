@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Commands.Receptionists
 {
-    internal class AddReceptionistCommand : BaseCommand
+    public class AddReceptionistCommand : BaseCommand
     {
         private readonly ReceptionistViewModel _receptionistViewModel;
         public AddReceptionistCommand(ReceptionistViewModel receptionistViewModel)

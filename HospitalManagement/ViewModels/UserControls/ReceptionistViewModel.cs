@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.ViewModels.UserControls
 {
-    internal class ReceptionistViewModel:BaseViewModel
+    public class ReceptionistViewModel:BaseViewModel
     {
         public ReceptionistViewModel()
         {
