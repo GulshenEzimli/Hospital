@@ -15,8 +15,7 @@
         <Style x:Key="myRadioButton" TargetType="RadioButton">
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Padding" Value="0 -5"/>
-            <Setter Property="Foreground" Value="White"/>
-            
+
         </Style>
         <Style x:Key="myTextBox" TargetType="TextBox">
             <Setter Property="Height" Value="Auto"/>
