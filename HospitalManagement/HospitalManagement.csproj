@@ -77,6 +77,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\ProceduresControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\DashboardWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -91,6 +95,7 @@
     <Compile Include="Commands\Dashboard\OpenNursesCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenOtherEmployeesCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenPatientsCommand.cs" />
+    <Compile Include="Commands\Dashboard\OpenProceduresCommand.cs" />
     <Compile Include="Commands\Doctors\AddDoctorCommand.cs" />
     <Compile Include="Commands\Doctors\DeleteDoctorCommand.cs" />
     <Compile Include="Commands\Doctors\EditDoctorCommand.cs" />
@@ -111,12 +116,18 @@
     <Compile Include="Commands\Patients\EditPatientCommand.cs" />
     <Compile Include="Commands\Patients\RejectPatientCommand.cs" />
     <Compile Include="Commands\Patients\SavePatientCommand.cs" />
+    <Compile Include="Commands\Procedures\AddProcedureCommand.cs" />
+    <Compile Include="Commands\Procedures\DeleteProcedureCommand.cs" />
+    <Compile Include="Commands\Procedures\EditProcedureCommand.cs" />
+    <Compile Include="Commands\Procedures\RejectProcedureCommand.cs" />
+    <Compile Include="Commands\Procedures\SaveProcedureCommand.cs" />
     <Compile Include="Enums\Situations.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\UserControls\DoctorsViewModel.cs" />
     <Compile Include="ViewModels\UserControls\NursesViewModel.cs" />
     <Compile Include="ViewModels\UserControls\OtherEmployeesViewModel.cs" />
     <Compile Include="ViewModels\UserControls\PatientsViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\ProceduresViewModel.cs" />
     <Compile Include="ViewModels\Windows\DashboardViewModel.cs" />
     <Compile Include="Views\Components\CustomDatePicker.xaml.cs">
       <DependentUpon>CustomDatePicker.xaml</DependentUpon>
@@ -132,6 +143,9 @@
     </Compile>
     <Compile Include="Views\UserControls\PatientControls.xaml.cs">
       <DependentUpon>PatientControls.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ProceduresControl.xaml.cs">
+      <DependentUpon>ProceduresControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\DashboardWindow.xaml.cs">
       <DependentUpon>DashboardWindow.xaml</DependentUpon>
