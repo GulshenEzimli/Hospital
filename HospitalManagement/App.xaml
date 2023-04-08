@@ -3,29 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:HospitalManagement">
     <Application.Resources>
-        <!--<Style x:Key="BaseButton" TargetType="{x:Type Button}">
+        <Style x:Key="BaseButton" TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Padding" Value="5,0"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Grid x:Name="grid">
-                            <Border x:Name="border" CornerRadius="10" BorderBrush="Gray" BorderThickness="2">
+                            <Border x:Name="border" CornerRadius="10" BorderBrush="CadetBlue" BorderThickness="2">
                                 <Border.Background>
-                                    <RadialGradientBrush GradientOrigin="0.496,1.052">
-                                        <RadialGradientBrush.RelativeTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform CenterX="0.5" CenterY="0.5" 
-                                                        ScaleX="1.5" ScaleY="1.5"/>
-                                                <TranslateTransform X="0.02" Y="0.3"/>
-                                            </TransformGroup>
-                                        </RadialGradientBrush.RelativeTransform>
-                                        <GradientStop Offset="1" Color="#00000000"/>
-                                        <GradientStop Offset="0.3" Color="#FFFFFFFF"/>
-                                    </RadialGradientBrush>
+                                    <LinearGradientBrush  StartPoint="1,0" EndPoint="0,1">
+                                        <GradientStop Offset="0.0" Color="#6930C3"/>
+                                        <GradientStop Offset="0.5" Color="#5E60CE"/>
+                                        <GradientStop Offset="1.0" Color="#5E60CE"/>
+                                    </LinearGradientBrush>
                                 </Border.Background>
-                                <ContentPresenter HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"
-                                          TextElement.FontWeight="Bold">
-                                </ContentPresenter>
+                                <ContentPresenter x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center" TextElement.Foreground="Black" TextElement.FontWeight="Bold"></ContentPresenter>
                             </Border>
                         </Grid>
                         <ControlTemplate.Triggers>
@@ -39,78 +33,29 @@
                                                     <TranslateTransform X="0.02" Y="0.3"/>
                                                 </TransformGroup>
                                             </RadialGradientBrush.RelativeTransform>
-                                            <GradientStop Color="#00000000" Offset="1"/>
-                                            <GradientStop Color="#FF303030" Offset="0.3"/>
+                                            <GradientStop Color="#5E60CE" Offset="1"/>
+                                            <GradientStop Color="#5390D9" Offset="0.3"/>
                                         </RadialGradientBrush>
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="BorderBrush" TargetName="border" Value="#FF33962B"/>
+                                <Setter Property="BorderBrush" TargetName="border"  Value="gray"/>
+                                <Setter Property="TextElement.Foreground" TargetName="content" Value="white"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Opacity" TargetName="grid" Value="0.25"/>
+                                <Setter Property="Opacity" TargetName="grid" Value="0.3"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>-->
+        </Style>
 
-        <!--<Style x:Key="WellDesignedButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseButton}">
+        <Style x:Key="WellDesignedButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseButton}">
             <Setter Property="BitmapEffect">
                 <Setter.Value>
                     <DropShadowBitmapEffect Color="Black" Direction="320" Softness="1" ShadowDepth="10" Opacity="0.5" />
-                </Setter.Value>
-            </Setter>
-        </Style>-->
-
-        <Style x:Key="BaseButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="Margin" Value="3"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid x:Name="grid">
-                            <Border x:Name="border" CornerRadius="15" BorderThickness="2" BorderBrush="WhiteSmoke" >
-                                <ContentPresenter x:Name="contentpresenter" TextElement.Foreground="White"  TextElement.FontWeight="Bold"
-                                              VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                <Border.Background>
-                                    <RadialGradientBrush  GradientOrigin="0.5,0.5" Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
-                                        <GradientStop Offset="0.0" Color="#7400BB"/>
-                                        <GradientStop Offset="0.5" Color="#6930C3"/>
-                                        <GradientStop Offset="1.0" Color="#5E60CE"/>
-                                    </RadialGradientBrush>
-                                </Border.Background>
-                            </Border>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" TargetName="border">
-                                    <Setter.Value>
-                                        <RadialGradientBrush GradientOrigin="0.496,1.052">
-                                            <RadialGradientBrush.RelativeTransform>
-                                                <TransformGroup>
-                                                    <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5"/>
-                                                    <TranslateTransform X="0.02" Y="0.3"/>
-                                                </TransformGroup>
-                                            </RadialGradientBrush.RelativeTransform>
-                                            <GradientStop Color="#00000000" Offset="1"/>
-                                            <GradientStop Color="#FF303030" Offset="0.3"/>
-                                        </RadialGradientBrush>
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="BorderBrush" TargetName="border" Value="Indigo"/>
-                                <Setter Property="FontSize" Value="15"/>
-                                <Setter Property="BorderThickness" TargetName="border" Value="4"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Opacity" TargetName="grid" Value="0.5"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -162,18 +107,34 @@
         </Style>
 
         <Style TargetType="{x:Type Grid}" x:Key="grdForm">
-            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="IsEnabled" Value="True"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Offset="0.0" Color="#5E60CE"/>
+                        <GradientStop Offset="0.125" Color="#5E60CE"/>
+                        <GradientStop Offset="0.25" Color="#5E60CE"/>
+                        <GradientStop Offset="0.375" Color="#5390D9"/>
+                        <GradientStop Offset="0.5" Color="#4EA8DE"/>
+                        <GradientStop Offset="0.625" Color="#4EA8DE"/>
+                        <GradientStop Offset="0.75" Color="#4EA8DE"/>
+                        <GradientStop Offset="0.875" Color="LightSkyBlue"/>
+                        <GradientStop Offset="1.0" Color="LightSkyBlue"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding CurrentSituation}" Value="2">
-                    <Setter Property="IsEnabled" Value="True"/>
+                <DataTrigger Binding="{Binding CurrentSituation}" Value="1">
+                    <Setter Property="IsEnabled" Value="False"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding CurrentSituation}" Value="4">
-                    <Setter Property="IsEnabled" Value="True"/>
+                <DataTrigger Binding="{Binding CurrentSituation}" Value="3">
+                    <Setter Property="IsEnabled" Value="False"/>
                 </DataTrigger>
             </Style.Triggers>
+
         </Style>
 
-        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseButtonStyle}" x:Key="btnAdd">
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource WellDesignedButton}" x:Key="btnAdd">
             <Setter Property="Content" Value="Add"/>
             <Setter Property="Command" Value="{Binding Add}"/>
             <Setter Property="IsEnabled" Value="True"/>
@@ -191,7 +152,7 @@
             </Style.Triggers>
         </Style>
 
-        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseButtonStyle}" x:Key="btnSave">
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource WellDesignedButton}" x:Key="btnSave">
             <Setter Property="Content" Value="Save"/>
             <Setter Property="Command" Value="{Binding Save}"/>
             <Setter Property="Visibility" Value="Collapsed"/>
@@ -205,22 +166,22 @@
             </Style.Triggers>
         </Style>
 
-        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseButtonStyle}" x:Key="btnChange">
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource WellDesignedButton}" x:Key="btnChange">
             <Setter Property="Content" Value="Edit"/>
             <Setter Property="Command" Value="{Binding Edit}"/>
             <Setter Property="IsEnabled" Value="False"/>
             <Setter Property="Visibility" Value="Visible"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding CurrentSituation}" Value="3">
+                <DataTrigger Binding="{Binding CurrentSituation}" Value="4">
                     <Setter Property="IsEnabled" Value="True"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding CurrentSituation}" Value="4">
+                <DataTrigger Binding="{Binding CurrentSituation}" Value="3">
                     <Setter Property="Visibility" Value="Collapsed"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
 
-        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseButtonStyle}" x:Key="btnReject">
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource WellDesignedButton}" x:Key="btnReject">
             <Setter Property="Content" Value="Cancel Changes"/>
             <Setter Property="Command" Value="{Binding Reject}"/>
             <Setter Property="IsEnabled" Value="True"/>
@@ -231,7 +192,7 @@
             </Style.Triggers>
         </Style>
 
-        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseButtonStyle}" x:Key="btnDelete">
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource WellDesignedButton}" x:Key="btnDelete">
             <Setter Property="Content" Value="Delete"/>
             <Setter Property="Command" Value="{Binding Delete}"/>
             <Setter Property="IsEnabled" Value="False"/>
@@ -246,8 +207,6 @@
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Padding" Value="15,0"/>
         </Style>
-
-
 
         <Style x:Key="DashBoardBackColor" TargetType="{x:Type Border}">
             <Setter Property="Background">
@@ -265,27 +224,17 @@
             </Setter>
         </Style>
 
-        <Style x:Key="FormGridStyle" TargetType="{x:Type Grid}">
+        <Style x:Key="ControlsButtonsBack" TargetType="{x:Type StackPanel}">
             <Setter Property="Background">
                 <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Offset="0.0" Color="#5E60CE"/>
-                        <GradientStop Offset="0.1" Color="#5E60CE"/>
-                        <GradientStop Offset="0.2" Color="#5E60CE"/>
-                        <GradientStop Offset="0.3" Color="#5390D9"/>
-                        <GradientStop Offset="0.4" Color="#5390D9"/>
-                        <GradientStop Offset="0.6" Color="#5390D9"/>
-                        <GradientStop Offset="0.7" Color="#5390D9"/>
-                        <GradientStop Offset="0.8" Color="#4EA8DE"/>
-                        <GradientStop Offset="0.9" Color="#4EA8DE"/>
-                        <GradientStop Offset="1.0" Color="#4EA8DE"/>
-
+                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                        <GradientStop Offset="0.0" Color="LightSkyBlue"/>
+                        <GradientStop Offset="0.5" Color="LightSkyBlue"/>
+                        <GradientStop Offset="1.0" Color="Aqua"/>
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
         </Style>
-
-
-
+        
     </Application.Resources>
 </Application>

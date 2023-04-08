@@ -16,13 +16,13 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0">
-                <Grid Style="{DynamicResource FormGridStyle}">
+                <Grid >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="4.8*"/>
+                        <ColumnDefinition Width="1.2*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Column="0">
+                    <Grid Grid.Column="0" Style="{DynamicResource grdForm}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -64,7 +64,7 @@
                         </StackPanel>
                     </Grid>
 
-                    <StackPanel Grid.Column="1">
+                    <StackPanel Grid.Column="1" Style="{DynamicResource ControlsButtonsBack}">
                         <Grid>
                             <StackPanel>
                                 <Button Content="Add" Style="{DynamicResource btnAdd}"/>
