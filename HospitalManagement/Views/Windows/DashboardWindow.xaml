@@ -74,7 +74,7 @@
                         <Button Name="btnOperations" Content="Operations" Style="{StaticResource btnMenu}"/>
                         <Button Name="btnRooms" Content="Rooms" Style="{StaticResource btnMenu}"/>
                         <Button Name="btnQueues" Content="Queues" Style="{StaticResource btnMenu}"/>
-                        <Button Name="btnProcedures" Content="Procedures" Style="{StaticResource btnMenu}"/>
+                        <Button Name="btnProcedures" Content="Procedures" Style="{StaticResource btnMenu}" Command="{Binding Path=OpenProcedures}"/>
                         <Button Name="btnAdmins" Content="Admins" Style="{StaticResource btnMenu}"/>
                         <Button Name="btnPatientProcedures" Content="PatientProcedures" Style="{StaticResource btnMenu}"/>
                     </StackPanel>

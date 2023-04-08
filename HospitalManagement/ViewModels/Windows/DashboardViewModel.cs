@@ -36,6 +36,8 @@ namespace HospitalManagement.ViewModels.Windows
 
         public OpenPatientsCommand OpenPatients => new OpenPatientsCommand(this);
 
+        public OpenProceduresCommand OpenProcedures=> new OpenProceduresCommand(this);
+
 
     }
 }
