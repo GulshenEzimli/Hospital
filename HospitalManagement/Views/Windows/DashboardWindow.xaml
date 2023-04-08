@@ -84,7 +84,7 @@
                         <StackPanel  Style="{StaticResource EmployeesStack}">
                             <Button Name="btnDoctors" Content="Doctors" Style="{StaticResource btnEmployeesMenu}" Command="{Binding Path=OpenDoctors}"/>
                             <Button Name="btnNurses" Content="Nurses" Style="{StaticResource btnEmployeesMenu}" Command="{Binding Path=OpenNurses}"/>
-                            <Button Name="btnReceptionists" Content="Receptionist" Style="{StaticResource btnEmployeesMenu}"/>
+                            <Button Name="btnReceptionists" Content="Receptionist" Style="{StaticResource btnEmployeesMenu}" Command="{Binding Path=OpenReceptionists}"/>
                             <Button Name="btnOtherEmployees" Content="OtherEmployees" Style="{StaticResource btnEmployeesMenu}" Command="{Binding Path=OpenOtherEmployees}"/>
                         </StackPanel>
                         <Button Name="btnPatients" Content="Patients" Style="{StaticResource btnMenu}" Command="{Binding Path=OpenPatients}"/>
