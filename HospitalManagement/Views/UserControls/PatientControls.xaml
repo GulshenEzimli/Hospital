@@ -9,12 +9,18 @@
     <UserControl.Resources>
         <Style x:Key="myTextBlock" TargetType="TextBlock">
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Height" Value="20"/>
-            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="FontSize" Value="15"/>
             <Setter Property="Margin" Value="10 10"/>
         </Style>
+        <Style x:Key="myRadioButton" TargetType="RadioButton">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Padding" Value="0 -5"/>
+            <Setter Property="Foreground" Value="White"/>
+            
+        </Style>
         <Style x:Key="myTextBox" TargetType="TextBox">
-            <Setter Property="Height" Value="25"/>
+            <Setter Property="Height" Value="Auto"/>
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="Margin" Value="8 8"/>
         </Style>
@@ -32,7 +38,7 @@
                 <!--<components:ControlHeader/>-->
                 <!--<components:ErrorDialog Height="0" x:Name="ErrorDialog"/>-->
 
-                <Grid Background="DarkBlue" >
+                <Grid Style="{DynamicResource FormGridStyle}" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5*"/>
                         <ColumnDefinition Width="*"/>
@@ -49,49 +55,48 @@
                         <StackPanel Grid.Column="0">
                             <TextBlock Style="{StaticResource myTextBlock}" >Name</TextBlock>
                             <TextBlock Style="{StaticResource myTextBlock}" >Surname</TextBlock>
-                            <TextBlock Style="{StaticResource myTextBlock}" >Father name</TextBlock>
                             <TextBlock Style="{StaticResource myTextBlock}" >Birth date</TextBlock>
+                            <TextBlock Style="{StaticResource myTextBlock}" >Gender</TextBlock>
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">
-                            <TextBox Style="{StaticResource myTextBox}" Text="{Binding CurrentValue.Name,Mode=TwoWay}"/>
-                            <TextBox Style="{StaticResource myTextBox}" Text="{Binding CurrentValue.Surname,Mode=TwoWay}"/>
-                            <TextBox Style="{StaticResource myTextBox}" Text="{Binding CurrentValue.Fathername,Mode=TwoWay}"/>
+                            <TextBox Style="{StaticResource myTextBox}" />
+                            <TextBox Style="{StaticResource myTextBox}" />
                             <DatePicker Margin="4" FontFamily="Times New Roman" Width="200" Height="26" RenderTransformOrigin="0.491,1.021"></DatePicker>
+                            <WrapPanel Margin="-50 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <RadioButton Style="{StaticResource myRadioButton}" Margin="8 8" >Woman</RadioButton>
+                                <RadioButton Style="{StaticResource myRadioButton}" Margin="9 8" >Man</RadioButton>
+                            </WrapPanel>
                         </StackPanel>
 
                         <StackPanel Grid.Column="2">
-                            <TextBlock Style="{StaticResource myTextBlock}" >Gender</TextBlock>
                             <TextBlock Style="{StaticResource myTextBlock}" >PIN</TextBlock>
                             <TextBlock Style="{StaticResource myTextBlock}" >Phone number</TextBlock>
                             <TextBlock Style="{StaticResource myTextBlock}" >Address</TextBlock>
                         </StackPanel>
 
                         <StackPanel Grid.Column="3">
-                            <WrapPanel Margin="2" Height="35">
-                                <RadioButton Padding="0 -5" Foreground="White" Margin="8 8" Height="Auto" FontSize="18" Width="Auto">Woman</RadioButton>
-                                <RadioButton Padding="0 -5" Foreground="White" Margin="9 8" Height="Auto" FontSize="18" Width="Auto">Man</RadioButton>
-                            </WrapPanel>
-                            <TextBox Style="{StaticResource myTextBox}" Text="{Binding CurrentValue.PIN,Mode=TwoWay}"/>
-                            <TextBox Style="{StaticResource myTextBox}" Text="{Binding CurrentValue.Phonenumber,Mode=TwoWay}"/>
-                            <TextBox Style="{StaticResource myTextBox}" Text="{Binding CurrentValue.Adress,Mode=TwoWay}"/>
+                            
+                            <TextBox Style="{StaticResource myTextBox}" />
+                            <TextBox Style="{StaticResource myTextBox}" />
+                            <TextBox Style="{StaticResource myTextBox}" />
                         </StackPanel>
                     </Grid>
                     <StackPanel Grid.Column="1">
                         <Grid>
-                            <StackPanel VerticalAlignment="Center" Background="#ffb2b2b2">
-                                <Button  Height="30" Margin="4 4"/>
-                                <Button  Height="30" Margin="4 4"/>
-                                <Button  Height="30" Margin="4 4"/>
-                                <Button  Height="30" Margin="4 4"/>
-                                <Button  Height="30" Margin="4 4"/>
+                            <StackPanel VerticalAlignment="Center">
+                                <Button Content="Add" Style="{DynamicResource btnAdd}"/>
+                                <Button Content="Save" Style="{DynamicResource btnSave}"/>
+                                <Button Content="Edit" Style="{DynamicResource btnChange}"/>
+                                <Button Content="Cancel Changes" Style="{DynamicResource btnReject}"/>
+                                <Button Content="Delete" Style="{DynamicResource btnDelete}"/>
                             </StackPanel>
                         </Grid>
                     </StackPanel>
 
                 </Grid>
             </StackPanel>
-            <!--<ListView x:Name="MainList" Grid.Row="1" 
+            <ListView x:Name="MainList" Grid.Row="1" 
                       ItemsSource="{Binding Values}"
                       SelectedItem="{Binding SelectedValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
@@ -105,36 +110,50 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Name" Width="60">
-                            <GridViewColumn.CellTemplate>
+                            <!--<GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Path=Name}" />
                                 </DataTemplate>
-                            </GridViewColumn.CellTemplate>
+                            </GridViewColumn.CellTemplate>-->
                         </GridViewColumn>
                         <GridViewColumn Header="Birth Date" Width="70">
-                            <GridViewColumn.CellTemplate>
+                            <!--<GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Path=BirthDate, StringFormat='dd.MM.yyyy'}"  HorizontalAlignment="Center"/>
                                 </DataTemplate>
-                            </GridViewColumn.CellTemplate>
+                            </GridViewColumn.CellTemplate>-->
                         </GridViewColumn>
-                        <GridViewColumn Header="Nationality" Width="Auto">
-                            <GridViewColumn.CellTemplate>
+                        <GridViewColumn Header="Gender" Width="50">
+                            <!--<GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Path=Account.Email}" />
                                 </DataTemplate>
-                            </GridViewColumn.CellTemplate>
+                            </GridViewColumn.CellTemplate>-->
                         </GridViewColumn>
-                        <GridViewColumn Header="Note" Width="Auto">
-                            <GridViewColumn.CellTemplate>
+                        <GridViewColumn Header="PIN" Width="Auto">
+                            <!--<GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Path=LicenseNumber}"  HorizontalAlignment="Center"/>
                                 </DataTemplate>
-                            </GridViewColumn.CellTemplate>
+                            </GridViewColumn.CellTemplate>-->
+                        </GridViewColumn>
+                        <GridViewColumn Header="Phone number" Width="Auto">
+                            <!--<GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=LicenseNumber}"  HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>-->
+                        </GridViewColumn>
+                        <GridViewColumn Header="Address" Width="Auto">
+                            <!--<GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=LicenseNumber}"  HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>-->
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>
-            </ListView>-->
+            </ListView>
 
             <!--<Grid Grid.Row="2" Style="{StaticResource grdSearch}">
                 <DockPanel>

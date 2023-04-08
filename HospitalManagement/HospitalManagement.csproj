@@ -106,11 +106,17 @@
     <Compile Include="Commands\OtherEmployees\EditOtherEmployeeCommand.cs" />
     <Compile Include="Commands\OtherEmployees\RejectOtherEmployeeCommand.cs" />
     <Compile Include="Commands\OtherEmployees\SaveOtherEmployeeCommand.cs" />
+    <Compile Include="Commands\Patients\AddPatientCommand.cs" />
+    <Compile Include="Commands\Patients\DeletePatientCommand.cs" />
+    <Compile Include="Commands\Patients\EditPatientCommand.cs" />
+    <Compile Include="Commands\Patients\RejectPatientCommand.cs" />
+    <Compile Include="Commands\Patients\SavePatientCommand.cs" />
     <Compile Include="Enums\Situations.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\UserControls\DoctorsViewModel.cs" />
     <Compile Include="ViewModels\UserControls\NursesViewModel.cs" />
     <Compile Include="ViewModels\UserControls\OtherEmployeesViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\PatientsViewModel.cs" />
     <Compile Include="ViewModels\Windows\DashboardViewModel.cs" />
     <Compile Include="Views\Components\CustomDatePicker.xaml.cs">
       <DependentUpon>CustomDatePicker.xaml</DependentUpon>
@@ -168,5 +174,6 @@
       <Name>HospitalManagementCore</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
