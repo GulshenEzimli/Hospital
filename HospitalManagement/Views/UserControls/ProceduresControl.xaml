@@ -8,10 +8,10 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <Style x:Key="myTextBlock" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="White"/>
             <Setter Property="Height" Value="Auto"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Margin" Value="10 10"/>
+            <Setter Property="Width" Value="Auto"/>
         </Style>
         <Style x:Key="myTextBox" TargetType="TextBox">
             <Setter Property="Height" Value="Auto"/>
