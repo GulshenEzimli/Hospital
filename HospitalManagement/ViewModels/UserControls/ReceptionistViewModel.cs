@@ -1,4 +1,5 @@
 ﻿using HospitalManagement.Commands.Nurses;
+using HospitalManagement.Commands.Receptionists;
 using HospitalManagement.Enums;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,6 @@ namespace HospitalManagement.ViewModels.UserControls
             CurrentSituation = 1;
         }
 
-
         private int _currentSituation = (int)Situations.NORMAL;
         public int CurrentSituation
         {
@@ -27,10 +27,11 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
-        public AddNurseCommand Add => new AddNurseCommand(this);
-        public DeleteNurseCommand Delete => new DeleteNurseCommand(this);
-        public EditNurseCommand Edit => new EditNurseCommand(this);
-        public RejectNurseCommand Reject => new RejectNurseCommand(this);
-        public SaveNurseCommand Save => new SaveNurseCommand(this);
+        public AddReceptionistCommand Add => new AddReceptionistCommand(this);
+        public AddReceptionistCommand Delete => new AddReceptionistCommand(this);
+        public AddReceptionistCommand Edit => new AddReceptionistCommand(this);
+        public AddReceptionistCommand Reject => new AddReceptionistCommand(this);
+        public AddReceptionistCommand Save => new AddReceptionistCommand(this);
+
     }
 }
