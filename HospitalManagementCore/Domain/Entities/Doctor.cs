@@ -9,8 +9,8 @@ namespace HospitalManagementCore.Domain.Entities
     {
         public int Id { get; set; }
         public DoctorPosition Position { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public bool Gender { get; set; }
         public DateTime BirthDate { get; set; }
         public string PIN { get; set; }
