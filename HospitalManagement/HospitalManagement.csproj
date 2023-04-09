@@ -152,6 +152,7 @@
     <Compile Include="ViewModels\UserControls\DoctorsViewModel.cs" />
     <Compile Include="ViewModels\UserControls\NursesViewModel.cs" />
     <Compile Include="ViewModels\UserControls\OtherEmployeesViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\PatientProcedureViewModel.cs" />
     <Compile Include="ViewModels\UserControls\PatientsViewModel.cs" />
     <Compile Include="ViewModels\UserControls\ProceduresViewModel.cs" />
     <Compile Include="ViewModels\UserControls\QueuesViewModel.cs" />

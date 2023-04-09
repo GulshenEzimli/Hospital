@@ -1,4 +1,5 @@
-﻿using HospitalManagement.ViewModels.Windows;
+﻿using HospitalManagement.ViewModels.UserControls;
+using HospitalManagement.ViewModels.Windows;
 using HospitalManagement.Views.UserControls;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,12 @@ namespace HospitalManagement.Commands.Dashboard
         }
         public override void Execute(object parameter)
         {
-            PatientProcedureControl patientProcedure = new PatientProcedureControl();
+            PatientProcedureViewModel patientProcedureViewModel = new PatientProcedureViewModel();
+            PatientProcedureControl patientProcedureControl = new PatientProcedureControl();
 
+            patientProcedureControl.DataContext = patientProcedureViewModel;
             _viewModel.CenterGrid.Children.Clear();
-            _viewModel.CenterGrid.Children.Add(patientProcedure);
+            _viewModel.CenterGrid.Children.Add(patientProcedureControl);
         }
     }
 }
