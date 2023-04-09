@@ -29,7 +29,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <Style x:Key="EmployeesStack" TargetType="{x:Type StackPanel}">
             <Setter Property="Height" Value="0"/>
             <Setter Property="Visibility" Value="Collapsed"/>
@@ -66,17 +66,19 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <BitmapImage x:Key="LogoSource" UriSource="/Images/hospital.jpg"/>
-        
+
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1.5*"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="46*"/>
+            <ColumnDefinition Width="139*"/>
+            <ColumnDefinition Width="34*"/>
+            <ColumnDefinition Width="581*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" Style="{DynamicResource DashBoardBackColor}">
+        <Border Grid.Column="0" Style="{DynamicResource DashBoardBackColor}" Grid.ColumnSpan="2">
             <ScrollViewer>
                 <Grid>
                     <StackPanel>
@@ -89,7 +91,7 @@
                         </StackPanel>
                         <Button Name="btnPatients" Content="Patients" Style="{StaticResource btnMenu}" Command="{Binding Path=OpenPatients}"/>
                         <Button Name="btnOperations" Content="Operations" Style="{StaticResource btnMenu}"/>
-                        <Button Name="btnRooms" Content="Rooms" Style="{StaticResource btnMenu}"/>
+                        <Button Name="btnRooms" Content="Rooms" Style="{StaticResource btnMenu}" Command="{Binding Path=OpenRooms}"/>
                         <Button Name="btnQueues" Content="Queues" Style="{StaticResource btnMenu}"/>
                         <Button Name="btnProcedures" Content="Procedures" Style="{StaticResource btnMenu}" Command="{Binding Path=OpenProcedures}"/>
                         <Button Name="btnAdmins" Content="Admins" Style="{StaticResource btnMenu}"/>
@@ -99,7 +101,7 @@
             </ScrollViewer>
         </Border>
 
-        <Border Grid.Column="1">
+        <Border Grid.Column="2" Grid.ColumnSpan="2">
             <Grid Margin="0,0,0,0" Background="#f2f2f2"  Name="grdCenter">
                 <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="{StaticResource LogoSource}"/>
             </Grid>
