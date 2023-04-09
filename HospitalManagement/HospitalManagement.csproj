@@ -78,6 +78,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\PatientProcedureControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\ProceduresControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -166,6 +170,9 @@
     </Compile>
     <Compile Include="Views\UserControls\PatientControls.xaml.cs">
       <DependentUpon>PatientControls.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PatientProcedureControl.xaml.cs">
+      <DependentUpon>PatientProcedureControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ProceduresControl.xaml.cs">
       <DependentUpon>ProceduresControl.xaml</DependentUpon>

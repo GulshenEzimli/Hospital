@@ -79,7 +79,7 @@
 
             <ListView x:Name="MainList" Grid.Row="1" >
                 <ListView.View>
-                    <GridView >
+                    <GridView>
                         <GridViewColumn Header="No" Width="30" />
                         <GridViewColumn Header="Surname" Width="60">
                             <GridViewColumn.CellTemplate>
