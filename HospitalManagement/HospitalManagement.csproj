@@ -107,6 +107,7 @@
     <Compile Include="Commands\Dashboard\OpenDoctorsCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenNursesCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenOtherEmployeesCommand.cs" />
+    <Compile Include="Commands\Dashboard\OpenPatientProcedureCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenPatientsCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenProceduresCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenQueuesCommand.cs" />

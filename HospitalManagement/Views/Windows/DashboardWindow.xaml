@@ -93,7 +93,7 @@
                         <Button Name="btnQueues" Content="Queues" Style="{StaticResource btnMenu}" Command="{Binding Path=OpenQueues}"/>
                         <Button Name="btnProcedures" Content="Procedures" Style="{StaticResource btnMenu}" Command="{Binding Path=OpenProcedures}"/>
                         <Button Name="btnAdmins" Content="Admins" Style="{StaticResource btnMenu}"/>
-                        <Button Name="btnPatientProcedures" Content="PatientProcedures" Style="{StaticResource btnMenu}"/>
+                        <Button Name="btnPatientProcedures" Content="PatientProcedures" Style="{StaticResource btnMenu}" Command="{Binding Path=OpenPatientProcedures}"/>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
