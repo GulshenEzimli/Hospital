@@ -114,7 +114,7 @@
                             <GridViewColumn Header="Gender" Width="Auto">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock />
+                                        <TextBlock Text="{Binding Path=Gender}" Style="{StaticResource gridViewTextColumn}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -156,7 +156,7 @@
                             <GridViewColumn Header="ChiefDoctor" Width="Auto">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock />
+                                        <TextBlock Text="{Binding Path=IsChiefDoctor}" Style="{StaticResource gridViewTextColumn}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

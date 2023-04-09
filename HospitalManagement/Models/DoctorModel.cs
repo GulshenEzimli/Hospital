@@ -15,12 +15,12 @@ namespace HospitalManagement.Models
         public string DepartmentName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public bool Gender { get; set; }
+        public string Gender { get; set; }
         public DateTime BirthDate { get; set; }
         public string PIN { get; set; }
         public string Email { get; set; }
         public string Phonenumber { get; set; }
         public decimal Salary { get; set; }
-        public bool IsChiefDoctor { get; set; }
+        public string IsChiefDoctor { get; set; }
     }
 }
