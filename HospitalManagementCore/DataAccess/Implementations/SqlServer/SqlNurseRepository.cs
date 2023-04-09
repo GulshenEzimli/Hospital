@@ -1,6 +1,7 @@
 ﻿using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
 using HospitalManagementCore.Domain.Interfaces;
+using HospitalManagementCore.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -103,21 +104,21 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         private Nurse GetNurses(SqlDataReader reader)
         {
             Nurse nurse = new Nurse();
-            nurse.Id = reader.GetInt32(reader.GetOrdinal("Id"));
-            nurse.PositionId = reader.GetInt32(reader.GetOrdinal("PositionId"));
-            nurse.ModifierId = reader.GetInt32(reader.GetOrdinal("ModifierId"));
-            nurse.CreatorId = reader.GetInt32(reader.GetOrdinal("CreatorId"));
-            nurse.FirstName = reader.GetString(reader.GetOrdinal("FirstName"));
-            nurse.LastName = reader.GetString(reader.GetOrdinal("LastName"));
-            nurse.Gender = reader.GetBoolean(reader.GetOrdinal("Gender"));
-            nurse.PIN = reader.GetString(reader.GetOrdinal("PIN"));
-            nurse.Email = reader.GetString(reader.GetOrdinal("Email"));
-            nurse.Phonenumber = reader.GetString(reader.GetOrdinal("Phonenumber"));
-            nurse.BirthDate = reader.GetDateTime(reader.GetOrdinal("BirthDate"));
-            nurse.Salary = reader.GetDecimal(reader.GetOrdinal("Salary"));
-            nurse.CreationDate = reader.GetDateTime(reader.GetOrdinal("CreationDate"));
-            nurse.ModifiedDate = reader.GetDateTime(reader.GetOrdinal("ModifiedDate"));
-            nurse.IsDelete = reader.GetBoolean(reader.GetOrdinal("IsDelete"));
+            nurse.Id = reader.GetInt32("Id");
+            nurse.PositionId = reader.GetInt32("PositionId");
+            nurse.ModifierId = reader.GetInt32("ModifierId");
+            nurse.CreatorId = reader.GetInt32("CreatorId");
+            nurse.FirstName = reader.GetString("FirstName");
+            nurse.LastName = reader.GetString("LastName");
+            nurse.Gender = reader.GetBoolean("Gender");
+            nurse.PIN = reader.GetString("PIN");
+            nurse.Email = reader.GetString("Email");
+            nurse.Phonenumber = reader.GetString("Phonenumber");
+            nurse.BirthDate = reader.GetDateTime("BirthDate");
+            nurse.Salary = reader.GetDecimal("Salary");
+            nurse.CreationDate = reader.GetDateTime("CreationDate");
+            nurse.ModifiedDate = reader.GetDateTime("ModifiedDate");
+            nurse.IsDelete = reader.GetBoolean("IsDelete");
 
             return nurse;
         }
