@@ -209,7 +209,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\hospital.jpg" />
-    <Resource Include="Images\hospnew.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HospitalManagementCore\HospitalManagementCore.csproj">
