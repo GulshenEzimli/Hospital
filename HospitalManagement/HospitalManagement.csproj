@@ -132,6 +132,11 @@
     <Compile Include="Commands\OtherEmployees\EditOtherEmployeeCommand.cs" />
     <Compile Include="Commands\OtherEmployees\RejectOtherEmployeeCommand.cs" />
     <Compile Include="Commands\OtherEmployees\SaveOtherEmployeeCommand.cs" />
+    <Compile Include="Commands\PatientProcedures\AddPatientProcedureCommand.cs" />
+    <Compile Include="Commands\PatientProcedures\DeletePatientProcedureCommand.cs" />
+    <Compile Include="Commands\PatientProcedures\EditPatientProcedureCommand.cs" />
+    <Compile Include="Commands\PatientProcedures\RejectPatientProcedureCommand.cs" />
+    <Compile Include="Commands\PatientProcedures\SavePatientProcedureCommand.cs" />
     <Compile Include="Commands\Patients\AddPatientCommand.cs" />
     <Compile Include="Commands\Patients\DeletePatientCommand.cs" />
     <Compile Include="Commands\Patients\EditPatientCommand.cs" />

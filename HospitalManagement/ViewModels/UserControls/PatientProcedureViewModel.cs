@@ -1,4 +1,5 @@
-﻿using HospitalManagement.Enums;
+﻿using HospitalManagement.Commands.PatientProcedures;
+using HospitalManagement.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,5 +24,11 @@ namespace HospitalManagement.ViewModels.UserControls
                 OnPropertyChanged(nameof(CurrentSituation));
             }
         }
+
+        public AddPatientProcedureCommand Add => new AddPatientProcedureCommand(this);
+        public DeletePatientProcedureCommand Delete => new DeletePatientProcedureCommand(this);
+        public EditPatientProcedureCommand Edit => new EditPatientProcedureCommand(this);
+        public RejectPatientProcedureCommand Reject => new RejectPatientProcedureCommand(this);
+        public SavePatientProcedureCommand Save => new SavePatientProcedureCommand(this);
     }
 }

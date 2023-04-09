@@ -55,11 +55,11 @@
                     <StackPanel Grid.Column="1" Style="{DynamicResource ControlsButtonsBack}">
                         <Grid>
                             <StackPanel>
-                                <Button Content="Add" Style="{DynamicResource btnAdd}"/>
-                                <Button Content="Save" Style="{DynamicResource btnSave}"/>
-                                <Button Content="Edit" Style="{DynamicResource btnChange}"/>
-                                <Button Content="Cancel Changes" Style="{DynamicResource btnReject}"/>
-                                <Button Content="Delete" Style="{DynamicResource btnDelete}"/>
+                                <Button Content="Add" Style="{DynamicResource btnAdd}" Command="{Binding Path=Add}"/>
+                                <Button Content="Save" Style="{DynamicResource btnSave}" Command="{Binding Path=Save}"/>
+                                <Button Content="Edit" Style="{DynamicResource btnChange}" Command="{Binding Path=Edit}"/>
+                                <Button Content="Cancel Changes" Style="{DynamicResource btnReject}" Command="{Binding Path=Reject}"/>
+                                <Button Content="Delete" Style="{DynamicResource btnDelete}" Command="{Binding Path=Delete}"/>
                             </StackPanel>
                         </Grid>
                     </StackPanel>
