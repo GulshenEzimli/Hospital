@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HospitalManagementCore.DataAccess.Interfaces
 {
-    internal interface IUnitOfWork
+    public interface IUnitOfWork
     {
         IDoctorRepository DoctorRepository { get; }
     }
