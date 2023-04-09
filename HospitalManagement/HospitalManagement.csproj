@@ -80,6 +80,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\PatientProcedureControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\ProceduresControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -89,6 +93,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\ReceptionistControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\RoomControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -105,10 +113,12 @@
     <Compile Include="Commands\Dashboard\OpenDoctorsCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenNursesCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenOtherEmployeesCommand.cs" />
+    <Compile Include="Commands\Dashboard\OpenPatientProcedureCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenPatientsCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenProceduresCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenQueuesCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenReceptionistCommand.cs" />
+    <Compile Include="Commands\Dashboard\OpenRoomsCommand.cs" />
     <Compile Include="Commands\Doctors\AddDoctorCommand.cs" />
     <Compile Include="Commands\Doctors\DeleteDoctorCommand.cs" />
     <Compile Include="Commands\Doctors\EditDoctorCommand.cs" />
@@ -124,6 +134,11 @@
     <Compile Include="Commands\OtherEmployees\EditOtherEmployeeCommand.cs" />
     <Compile Include="Commands\OtherEmployees\RejectOtherEmployeeCommand.cs" />
     <Compile Include="Commands\OtherEmployees\SaveOtherEmployeeCommand.cs" />
+    <Compile Include="Commands\PatientProcedures\AddPatientProcedureCommand.cs" />
+    <Compile Include="Commands\PatientProcedures\DeletePatientProcedureCommand.cs" />
+    <Compile Include="Commands\PatientProcedures\EditPatientProcedureCommand.cs" />
+    <Compile Include="Commands\PatientProcedures\RejectPatientProcedureCommand.cs" />
+    <Compile Include="Commands\PatientProcedures\SavePatientProcedureCommand.cs" />
     <Compile Include="Commands\Patients\AddPatientCommand.cs" />
     <Compile Include="Commands\Patients\DeletePatientCommand.cs" />
     <Compile Include="Commands\Patients\EditPatientCommand.cs" />
@@ -144,6 +159,11 @@
     <Compile Include="Commands\Receptionists\EditReceptionistCommand.cs" />
     <Compile Include="Commands\Receptionists\RejectReceptionistCommand.cs" />
     <Compile Include="Commands\Receptionists\SaveReceptionistCommand.cs" />
+    <Compile Include="Commands\Rooms\AddRoomCommand.cs" />
+    <Compile Include="Commands\Rooms\DeleteRoomCommand.cs" />
+    <Compile Include="Commands\Rooms\EditRoomCommand.cs" />
+    <Compile Include="Commands\Rooms\RejectRoomCommand.cs" />
+    <Compile Include="Commands\Rooms\SaveRoomCommand.cs" />
     <Compile Include="Enums\Situations.cs" />
     <Compile Include="Mappers\Implementations\DoctorMapper.cs" />
     <Compile Include="Mappers\Interfaces\IDoctorMapper.cs" />
@@ -152,10 +172,12 @@
     <Compile Include="ViewModels\UserControls\DoctorsViewModel.cs" />
     <Compile Include="ViewModels\UserControls\NursesViewModel.cs" />
     <Compile Include="ViewModels\UserControls\OtherEmployeesViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\PatientProcedureViewModel.cs" />
     <Compile Include="ViewModels\UserControls\PatientsViewModel.cs" />
     <Compile Include="ViewModels\UserControls\ProceduresViewModel.cs" />
     <Compile Include="ViewModels\UserControls\QueuesViewModel.cs" />
     <Compile Include="ViewModels\UserControls\ReceptionistViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\RoomsViewModel.cs" />
     <Compile Include="ViewModels\Windows\DashboardViewModel.cs" />
     <Compile Include="Views\Components\CustomDatePicker.xaml.cs">
       <DependentUpon>CustomDatePicker.xaml</DependentUpon>
@@ -172,6 +194,9 @@
     <Compile Include="Views\UserControls\PatientControls.xaml.cs">
       <DependentUpon>PatientControls.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\PatientProcedureControl.xaml.cs">
+      <DependentUpon>PatientProcedureControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\ProceduresControl.xaml.cs">
       <DependentUpon>ProceduresControl.xaml</DependentUpon>
     </Compile>
@@ -180,6 +205,9 @@
     </Compile>
     <Compile Include="Views\UserControls\ReceptionistControl.xaml.cs">
       <DependentUpon>ReceptionistControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\RoomControl.xaml.cs">
+      <DependentUpon>RoomControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\DashboardWindow.xaml.cs">
       <DependentUpon>DashboardWindow.xaml</DependentUpon>
