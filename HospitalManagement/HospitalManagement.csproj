@@ -94,6 +94,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\RoomControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\DashboardWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -112,6 +116,7 @@
     <Compile Include="Commands\Dashboard\OpenProceduresCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenQueuesCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenReceptionistCommand.cs" />
+    <Compile Include="Commands\Dashboard\OpenRoomsCommand.cs" />
     <Compile Include="Commands\Doctors\AddDoctorCommand.cs" />
     <Compile Include="Commands\Doctors\DeleteDoctorCommand.cs" />
     <Compile Include="Commands\Doctors\EditDoctorCommand.cs" />
@@ -147,6 +152,11 @@
     <Compile Include="Commands\Receptionists\EditReceptionistCommand.cs" />
     <Compile Include="Commands\Receptionists\RejectReceptionistCommand.cs" />
     <Compile Include="Commands\Receptionists\SaveReceptionistCommand.cs" />
+    <Compile Include="Commands\Rooms\AddRoomCommand.cs" />
+    <Compile Include="Commands\Rooms\DeleteRoomCommand.cs" />
+    <Compile Include="Commands\Rooms\EditRoomCommand.cs" />
+    <Compile Include="Commands\Rooms\RejectRoomCommand.cs" />
+    <Compile Include="Commands\Rooms\SaveRoomCommand.cs" />
     <Compile Include="Enums\Situations.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\UserControls\DoctorsViewModel.cs" />
@@ -157,6 +167,7 @@
     <Compile Include="ViewModels\UserControls\ProceduresViewModel.cs" />
     <Compile Include="ViewModels\UserControls\QueuesViewModel.cs" />
     <Compile Include="ViewModels\UserControls\ReceptionistViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\RoomsViewModel.cs" />
     <Compile Include="ViewModels\Windows\DashboardViewModel.cs" />
     <Compile Include="Views\Components\CustomDatePicker.xaml.cs">
       <DependentUpon>CustomDatePicker.xaml</DependentUpon>
@@ -184,6 +195,9 @@
     </Compile>
     <Compile Include="Views\UserControls\ReceptionistControl.xaml.cs">
       <DependentUpon>ReceptionistControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\RoomControl.xaml.cs">
+      <DependentUpon>RoomControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\DashboardWindow.xaml.cs">
       <DependentUpon>DashboardWindow.xaml</DependentUpon>
