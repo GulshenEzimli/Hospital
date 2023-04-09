@@ -1,9 +1,14 @@
-﻿using HospitalManagement.ViewModels.Windows;
+﻿using HospitalManagement.Mappers.Implementations;
+using HospitalManagement.Mappers.Interfaces;
+using HospitalManagement.ViewModels.Windows;
 using HospitalManagement.Views.Windows;
+using HospitalManagementCore.DataAccess.Implementations.SqlServer;
+using HospitalManagementCore.DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,8 +22,16 @@ namespace HospitalManagement
     {
         public App()
         {
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+
+            builder.DataSource = "localhost";
+            builder.InitialCatalog = "Hospital";
+            builder.IntegratedSecurity = true;
+
+            IUnitOfWork db = new SqlUnitOfWork(builder.ConnectionString);
+            IDoctorMapper doctorMapper = new DoctorMapper();
             DashboardWindow dashboardWindow = new DashboardWindow();
-            DashboardViewModel viewModel = new DashboardViewModel();
+            DashboardViewModel viewModel = new DashboardViewModel(db, doctorMapper);
 
             dashboardWindow.DataContext = viewModel;
             viewModel.CenterGrid = dashboardWindow.grdCenter;

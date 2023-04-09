@@ -38,13 +38,15 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.5, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.8.5\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
@@ -143,6 +145,9 @@
     <Compile Include="Commands\Receptionists\RejectReceptionistCommand.cs" />
     <Compile Include="Commands\Receptionists\SaveReceptionistCommand.cs" />
     <Compile Include="Enums\Situations.cs" />
+    <Compile Include="Mappers\Implementations\DoctorMapper.cs" />
+    <Compile Include="Mappers\Interfaces\IDoctorMapper.cs" />
+    <Compile Include="Models\DoctorModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\UserControls\DoctorsViewModel.cs" />
     <Compile Include="ViewModels\UserControls\NursesViewModel.cs" />
@@ -199,6 +204,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

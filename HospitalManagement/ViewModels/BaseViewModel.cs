@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HospitalManagementCore.DataAccess.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,6 +10,12 @@ namespace HospitalManagement.ViewModels
 {
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
+        //protected readonly IUnitOfWork _db;
+        //public BaseViewModel(IUnitOfWork unitOfWork)
+        //{
+        //    _db = unitOfWork;
+        //}
+        //public IUnitOfWork Db => _db;
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)

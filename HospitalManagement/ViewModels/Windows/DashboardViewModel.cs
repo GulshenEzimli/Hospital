@@ -1,4 +1,6 @@
 ﻿using HospitalManagement.Commands.Dashboard;
+using HospitalManagement.Mappers.Interfaces;
+using HospitalManagementCore.DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +12,16 @@ namespace HospitalManagement.ViewModels.Windows
 {
     public class DashboardViewModel : BaseViewModel
     {
-        public DashboardViewModel()
+        #region update olunacaq
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IDoctorMapper _doctorMapper;
+        public DashboardViewModel(IUnitOfWork unitOfWork, IDoctorMapper doctorMapper)
         {
-            
+            _unitOfWork = unitOfWork;
+            _doctorMapper = doctorMapper;
         }
+        public IUnitOfWork Db => _unitOfWork;
+        #endregion
 
         private bool _employeeSituation = false;
         public bool EmployeeSituation
@@ -30,7 +38,7 @@ namespace HospitalManagement.ViewModels.Windows
 
         public DropDownEmloyeesCommand DropDown => new DropDownEmloyeesCommand(this);
 
-        public OpenDoctorsCommand OpenDoctors => new OpenDoctorsCommand(this);
+        public OpenDoctorsCommand OpenDoctors => new OpenDoctorsCommand(this, _doctorMapper);
         public OpenNursesCommand OpenNurses => new OpenNursesCommand(this);
         public OpenOtherEmployeesCommand OpenOtherEmployees => new OpenOtherEmployeesCommand(this);
         public OpenPatientsCommand OpenPatients => new OpenPatientsCommand(this);

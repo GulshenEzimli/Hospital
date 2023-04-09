@@ -8,7 +8,7 @@ using System.Text;
 
 namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 {
-    internal class SqlDoctorRepository : IDoctorRepository
+    public class SqlDoctorRepository : IDoctorRepository
     {
         private readonly string _connectionString;
         public SqlDoctorRepository(string connectionString)
@@ -17,11 +17,11 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         }
         public bool Delete(int id)
         {
-            using(SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 string cmdText = @"delete * from Doctors where Id = @id";
-                using(SqlCommand command = new SqlCommand(cmdText, connection))
+                using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     command.Parameters.AddWithValue("id", id);
                     return command.ExecuteNonQuery() == 1;
@@ -34,7 +34,8 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"select Doctors.Id as DoctorId, DoctorPositions.Id as PositionId, Departments.Id as DepartmentId, * 
+                string cmdText = @"select Doctors.Id as DoctorId, DoctorPositions.Id as PositionId, Departments.Id as DepartmentId, CreatorId, ModifierId, FirstName, LastName, Gender,
+                                   BirthDate, PIN, Email, Phonenumber, Salary, IsChiefDoctor, CreationDate, ModifiedDate, IsDelete, PositionName, DepartmentName
                                    from Doctors 
                                    inner join DoctorPositions on Doctors.PositionId = DoctorPositions.Id
                                    inner join Departments on DoctorPositions.DepartmentId = Departments.Id where IsDelete = 0";
@@ -111,7 +112,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             doctor.Id = reader.GetInt32("DoctorId");
             doctor.Position = new DoctorPosition();
             doctor.Position.Id = reader.GetInt32("PositionId");
-            doctor.Position.Name= reader.GetString("PositionName");
+            doctor.Position.Name = reader.GetString("PositionName");
             doctor.Position.Department = new Department();
             doctor.Position.Department.Id = reader.GetInt32("DepartmentId");
             doctor.Position.Department.Name = reader.GetString("DepartmentName");
@@ -147,7 +148,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             command.Parameters.AddWithValue("phonenumber", doctor.Phonenumber);
             command.Parameters.AddWithValue("salary", doctor.Salary);
             command.Parameters.AddWithValue("isdelete", doctor.IsDelete);
-            command.Parameters.AddWithValue("ischiefdoctor",doctor.IsChiefDoctor);
+            command.Parameters.AddWithValue("ischiefdoctor", doctor.IsChiefDoctor);
             command.Parameters.AddWithValue("creationdate", doctor.CreationDate);
             command.Parameters.AddWithValue("modifieddate", doctor.ModifiedDate);
             command.Parameters.AddWithValue("creatorid", doctor.CreatorId);
