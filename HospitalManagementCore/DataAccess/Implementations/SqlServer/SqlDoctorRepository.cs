@@ -59,13 +59,13 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"select Doctors.Id as DoctorId, DoctorPositions.Id as PositionId, Departments.Id as DepartmentId, * 
+                string cmdText = @"select Doctors.Id as DoctorId, DoctorPositions.Id as PositionId, Departments.Id as DepartmentId, CreatorId, ModifierId, FirstName, LastName, Gender,
+                                   BirthDate, PIN, Email, Phonenumber, Salary, IsChiefDoctor, CreationDate, ModifiedDate, IsDelete, PositionName, DepartmentName
                                    from Doctors 
                                    inner join DoctorPositions on Doctors.PositionId = DoctorPositions.Id
                                    inner join Departments on DoctorPositions.DepartmentId = Departments.Id where Id = @id and IsDelete = 0";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
-                    command.Parameters.AddWithValue("id", id);
                     SqlDataReader reader = command.ExecuteReader();
                     Doctor doctor = GetDoctor(reader);
                     return doctor;
