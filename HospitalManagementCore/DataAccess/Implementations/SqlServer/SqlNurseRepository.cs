@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
 
-namespace HospitalManagementCore.DataAccess.Implementations.Sql
+namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 {
     public class SqlNurseRepository : INurseRepository
     {

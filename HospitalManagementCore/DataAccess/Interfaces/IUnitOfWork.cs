@@ -6,5 +6,6 @@ namespace HospitalManagementCore.DataAccess.Interfaces
 {
     internal interface IUnitOfWork
     {
+        IDoctorRepository DoctorRepository { get; }
     }
 }

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HospitalManagementCore.DataAccess.Implementations.Sql
+namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 {
     public class SqlPatientProcedureRepository : IPatientProcedureRepository
     {
