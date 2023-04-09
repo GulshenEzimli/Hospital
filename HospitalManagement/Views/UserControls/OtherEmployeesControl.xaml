@@ -21,7 +21,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Column="0">
+                    <Grid Grid.Column="0" Style="{DynamicResource grdForm}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -63,7 +63,7 @@
                         </StackPanel>
                     </Grid>
 
-                    <StackPanel Grid.Column="1">
+                    <StackPanel Grid.Column="1" Style="{DynamicResource ControlsButtonsBack}">
                         <Grid>
                             <StackPanel>
                                 <Button Content="Add" Style="{DynamicResource btnAdd}" Command="{Binding Path=Add}"/>
@@ -79,7 +79,7 @@
 
             <ListView x:Name="MainList" Grid.Row="1" >
                 <ListView.View>
-                    <GridView >
+                    <GridView>
                         <GridViewColumn Header="No" Width="30" />
                         <GridViewColumn Header="Surname" Width="60">
                             <GridViewColumn.CellTemplate>

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="HospitalManagement.Views.UserControls.ProceduresControl"
+﻿<UserControl x:Class="HospitalManagement.Views.UserControls.QueuesControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,7 +11,11 @@
             <Setter Property="Height" Value="Auto"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Margin" Value="10 10"/>
-            <Setter Property="Width" Value="Auto"/>
+        </Style>
+        <Style x:Key="myRadioButton" TargetType="RadioButton">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Padding" Value="0 -5"/>
+
         </Style>
         <Style x:Key="myTextBox" TargetType="TextBox">
             <Setter Property="Height" Value="Auto"/>
@@ -37,25 +41,30 @@
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0" Style="{DynamicResource grdForm}" >
+
+                    <Grid Grid.Column="0" Style="{DynamicResource grdForm}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="4*"/>
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Column="0">
-                            <TextBlock Style="{StaticResource myTextBlock}" Text="Procedure"/>
-                            <TextBlock Style="{StaticResource myTextBlock}" Text="Cost"/>
+                        <StackPanel Grid.Column="0" >
+                            <TextBlock Style="{StaticResource myTextBlock}" Text="Patient PIN"/>
+                            <TextBlock Style="{StaticResource myTextBlock}" Text="Doctor PIN"/>
+                            <TextBlock Style="{StaticResource myTextBlock}" Text="Date"/>
+                            <TextBlock Style="{StaticResource myTextBlock}" Text="Queue"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">
                             <TextBox Style="{StaticResource myTextBox}" />
                             <TextBox Style="{StaticResource myTextBox}" />
+                            <DatePicker Margin="4" FontFamily="Times New Roman" Width="400" Height="25" RenderTransformOrigin="0.491,1.021"/>
+                            <TextBox Style="{StaticResource myTextBox}" />
                         </StackPanel>
                     </Grid>
                     <StackPanel Grid.Column="1" Style="{DynamicResource ControlsButtonsBack}">
                         <Grid>
-                            <StackPanel VerticalAlignment="Center">
+                            <StackPanel VerticalAlignment="Center" >
                                 <Button Content="Add" Style="{DynamicResource btnAdd}"/>
                                 <Button Content="Save" Style="{DynamicResource btnSave}"/>
                                 <Button Content="Edit" Style="{DynamicResource btnChange}"/>
@@ -64,6 +73,7 @@
                             </StackPanel>
                         </Grid>
                     </StackPanel>
+
                 </Grid>
             </StackPanel>
             <ListView Grid.Row="1">
@@ -73,17 +83,59 @@
                 <ListView.View>
                     <GridView >
                         <GridViewColumn DisplayMemberBinding="{Binding Path=No}" Header="No" Width="30" />
-                        <GridViewColumn Header="Procedure name" Width="Auto">
-                            <GridViewColumn.CellTemplate>
+                        <GridViewColumn Header="Patient Name" Width="Auto">
+                            <!--<GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Path=Surname}" />
                                 </DataTemplate>
-                            </GridViewColumn.CellTemplate>
+                            </GridViewColumn.CellTemplate>-->
                         </GridViewColumn>
-                        <GridViewColumn Header="Cost" Width="Auto">
+                        <GridViewColumn Header="Patient Surname" Width="Auto">
                             <!--<GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Path=Name}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>-->
+                        </GridViewColumn>
+                        <GridViewColumn Header="Doctor Name" Width="Auto">
+                            <!--<GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=BirthDate, StringFormat='dd.MM.yyyy'}"  HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>-->
+                        </GridViewColumn>
+                        <GridViewColumn Header="Doctor Surname" Width="Auto">
+                            <!--<GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Account.Email}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>-->
+                        </GridViewColumn>
+                        <GridViewColumn Header="PIN" Width="Auto">
+                            <!--<GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=LicenseNumber}"  HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>-->
+                        </GridViewColumn>
+                        <GridViewColumn Header="Profession" Width="Auto">
+                            <!--<GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=LicenseNumber}"  HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>-->
+                        </GridViewColumn>
+                        <GridViewColumn Header="Date" Width="Auto">
+                            <!--<GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=LicenseNumber}"  HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>-->
+                        </GridViewColumn>
+                        <GridViewColumn Header="Queue" Width="Auto">
+                            <!--<GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=LicenseNumber}"  HorizontalAlignment="Center"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>-->
                         </GridViewColumn>

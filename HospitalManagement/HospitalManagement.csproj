@@ -78,7 +78,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\PatientProcedureControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\ProceduresControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\QueuesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -105,6 +113,7 @@
     <Compile Include="Commands\Dashboard\OpenOtherEmployeesCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenPatientsCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenProceduresCommand.cs" />
+    <Compile Include="Commands\Dashboard\OpenQueuesCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenReceptionistCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenRoomsCommand.cs" />
     <Compile Include="Commands\Doctors\AddDoctorCommand.cs" />
@@ -132,6 +141,11 @@
     <Compile Include="Commands\Procedures\EditProcedureCommand.cs" />
     <Compile Include="Commands\Procedures\RejectProcedureCommand.cs" />
     <Compile Include="Commands\Procedures\SaveProcedureCommand.cs" />
+    <Compile Include="Commands\Queues\AddQueueCommand.cs" />
+    <Compile Include="Commands\Queues\DeleteQueueCommand.cs" />
+    <Compile Include="Commands\Queues\EditQueueCommand.cs" />
+    <Compile Include="Commands\Queues\RejectQueueCommand.cs" />
+    <Compile Include="Commands\Queues\SaveQueueCommand.cs" />
     <Compile Include="Commands\Receptionists\AddReceptionistCommand.cs" />
     <Compile Include="Commands\Receptionists\DeleteReceptionistCommand.cs" />
     <Compile Include="Commands\Receptionists\EditReceptionistCommand.cs" />
@@ -149,6 +163,7 @@
     <Compile Include="ViewModels\UserControls\OtherEmployeesViewModel.cs" />
     <Compile Include="ViewModels\UserControls\PatientsViewModel.cs" />
     <Compile Include="ViewModels\UserControls\ProceduresViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\QueuesViewModel.cs" />
     <Compile Include="ViewModels\UserControls\ReceptionistViewModel.cs" />
     <Compile Include="ViewModels\UserControls\RoomsViewModel.cs" />
     <Compile Include="ViewModels\Windows\DashboardViewModel.cs" />
@@ -167,8 +182,14 @@
     <Compile Include="Views\UserControls\PatientControls.xaml.cs">
       <DependentUpon>PatientControls.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\PatientProcedureControl.xaml.cs">
+      <DependentUpon>PatientProcedureControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\ProceduresControl.xaml.cs">
       <DependentUpon>ProceduresControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\QueuesControl.xaml.cs">
+      <DependentUpon>QueuesControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ReceptionistControl.xaml.cs">
       <DependentUpon>ReceptionistControl.xaml</DependentUpon>
@@ -209,7 +230,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\hospital.jpg" />
-    <Resource Include="Images\hospnew.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HospitalManagementCore\HospitalManagementCore.csproj">

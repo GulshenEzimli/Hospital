@@ -36,13 +36,13 @@
                 <!--<components:ControlHeader/>-->
                 <!--<components:ErrorDialog Height="0" x:Name="ErrorDialog"/>-->
 
-                <Grid Style="{DynamicResource FormGridStyle}" >
+                <Grid  >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Column="0" >
+                    <Grid Grid.Column="0" Style="{DynamicResource grdForm}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1.5*"/>
@@ -50,7 +50,7 @@
                             <ColumnDefinition Width="1.5*"/>
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Column="0">
+                        <StackPanel Grid.Column="0" >
                             <TextBlock Style="{StaticResource myTextBlock}" >Name</TextBlock>
                             <TextBlock Style="{StaticResource myTextBlock}" >Surname</TextBlock>
                             <TextBlock Style="{StaticResource myTextBlock}" >Birth date</TextBlock>
@@ -60,7 +60,7 @@
                         <StackPanel Grid.Column="1">
                             <TextBox Style="{StaticResource myTextBox}" />
                             <TextBox Style="{StaticResource myTextBox}" />
-                            <DatePicker Margin="4" FontFamily="Times New Roman" Width="200" Height="26" RenderTransformOrigin="0.491,1.021"></DatePicker>
+                            <DatePicker Margin="4" FontFamily="Times New Roman" Width="200" Height="26" RenderTransformOrigin="0.491,1.021"/>
                             <WrapPanel Margin="-50 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <RadioButton Style="{StaticResource myRadioButton}" Margin="8 8" >Woman</RadioButton>
                                 <RadioButton Style="{StaticResource myRadioButton}" Margin="9 8" >Man</RadioButton>
@@ -80,9 +80,9 @@
                             <TextBox Style="{StaticResource myTextBox}" />
                         </StackPanel>
                     </Grid>
-                    <StackPanel Grid.Column="1">
+                    <StackPanel Grid.Column="1" Style="{DynamicResource ControlsButtonsBack}">
                         <Grid>
-                            <StackPanel VerticalAlignment="Center">
+                            <StackPanel VerticalAlignment="Center" >
                                 <Button Content="Add" Style="{DynamicResource btnAdd}"/>
                                 <Button Content="Save" Style="{DynamicResource btnSave}"/>
                                 <Button Content="Edit" Style="{DynamicResource btnChange}"/>

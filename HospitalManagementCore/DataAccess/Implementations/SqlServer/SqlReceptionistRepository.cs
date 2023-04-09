@@ -4,31 +4,31 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HospitalManagementCore.DataAccess.Implementations.Sql
+namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 {
-    public class SqlPatientProcedureRepository : IPatientProcedureRepository
+    public class SqlReceptionistRepository : IReceptionistRepository
     {
         public bool Delete(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<PatientProcedure> Get()
+        public List<Receptionist> Get()
         {
             throw new NotImplementedException();
         }
 
-        public PatientProcedure GetById(int id)
+        public Receptionist GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public int Insert(PatientProcedure entity)
+        public int Insert(Receptionist entity)
         {
             throw new NotImplementedException();
         }
 
-        public bool Update(PatientProcedure entity)
+        public bool Update(Receptionist entity)
         {
             throw new NotImplementedException();
         }
