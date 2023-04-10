@@ -1,0 +1,108 @@
+﻿<UserControl x:Class="HospitalManagement.Views.UserControls.AdminControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HospitalManagement.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4.8*"/>
+                        <ColumnDefinition Width="1.2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" Style="{DynamicResource grdForm}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="1.2*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Height="25" FontSize="14" Margin="5 5" Text="Number"/>
+                            <TextBlock Height="25" FontSize="14" Margin="5 5" Text="Block Floor"/>
+
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <TextBox Height="25" FontSize="15" Margin="5 5"/>
+                            <TextBox Height="25" FontSize="15" Margin="5 5" />
+
+
+
+                        </StackPanel>
+
+
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Height="25" FontSize="14" Margin="20 5" Text="Room Type"/>
+                            <TextBlock Height="25" FontSize="14" Margin="20 5" Text="Available"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="3">
+                            <TextBox Height="25" FontSize="15" Margin="5 5"/>
+                            <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <RadioButton GroupName="Gender" Content="Yes" Margin="6"/>
+                                <RadioButton Content="No" GroupName="Gender" Margin=" 6"/>
+                            </WrapPanel>
+                        </StackPanel>
+
+                    </Grid>
+
+                    <StackPanel Grid.Column="1" Style="{DynamicResource ControlsButtonsBack}">
+                        <Grid>
+                            <StackPanel>
+                                <Button Content="Add" Style="{DynamicResource btnAdd}"/>
+                                <Button Content="Save" Style="{DynamicResource btnSave}"/>
+                                <Button Content="Edit" Style="{DynamicResource btnChange}"/>
+                                <Button Content="Cancel Changes" Style="{DynamicResource btnReject}"/>
+                                <Button Content="Delete" Style="{DynamicResource btnDelete}"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
+            <ListView x:Name="MainList" Grid.Row="1" >
+                <ListView.View>
+                    <GridView >
+                        <GridViewColumn Header="No" Width="30" />
+                        <GridViewColumn Header="Number" Width="60">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Block Floor" Width="70">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Room Tpye" Width="70">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+        </Grid>
+    </Border>
+</UserControl>

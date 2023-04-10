@@ -64,6 +64,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\AdminControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\DoctorControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -108,8 +112,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\Admins\AddAdminCommand.cs" />
+    <Compile Include="Commands\Admins\DeleteAdminCommand.cs" />
+    <Compile Include="Commands\Admins\EditAdminCommand.cs" />
+    <Compile Include="Commands\Admins\RejectAdminCommand.cs" />
+    <Compile Include="Commands\Admins\SaveAdminCommand.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\Dashboard\DropDownEmloyeesCommand.cs" />
+    <Compile Include="Commands\Dashboard\OpenAdminsCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenDoctorsCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenNursesCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenOtherEmployeesCommand.cs" />
@@ -169,6 +179,7 @@
     <Compile Include="Mappers\Interfaces\IDoctorMapper.cs" />
     <Compile Include="Models\DoctorModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\AdminsViewModel.cs" />
     <Compile Include="ViewModels\UserControls\DoctorsViewModel.cs" />
     <Compile Include="ViewModels\UserControls\NursesViewModel.cs" />
     <Compile Include="ViewModels\UserControls\OtherEmployeesViewModel.cs" />
@@ -181,6 +192,9 @@
     <Compile Include="ViewModels\Windows\DashboardViewModel.cs" />
     <Compile Include="Views\Components\CustomDatePicker.xaml.cs">
       <DependentUpon>CustomDatePicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\AdminControl.xaml.cs">
+      <DependentUpon>AdminControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\DoctorControl.xaml.cs">
       <DependentUpon>DoctorControl.xaml</DependentUpon>
