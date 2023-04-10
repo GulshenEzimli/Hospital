@@ -107,13 +107,14 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"update Nurses set PositionId=@positionid, FirstName=@firstname, LastName=@lastname,
+                string cmdText = @"update Nurses set PositionId=@(select Id from DoctorPositions where PositionName = @positionname), 
+                                 FirstName=@firstname, LastName=@lastname,
                                  Gender=@gender, BirthDate=@birthdate, PIN=@pin, Email=@email, PhoneNumber=@phonenumber,
                                  Salary=@salary, IsDelete=@isdelete, CreationDate=@creationdate, ModifiedDate=@modifieddate,
-                                 CreatorId=@creatorid, ModifierId=@modifierid where Id=@id";
+                                 CreatorId=@creatorid, ModifierId=@modifierid where PIN=@pin";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
-                    command.Parameters.AddWithValue("id", nurse.Id);
+                    command.Parameters.AddWithValue("pin", nurse.PIN);
                     AddParameters(command, nurse);
                     return command.ExecuteNonQuery() == 1;
                 }
