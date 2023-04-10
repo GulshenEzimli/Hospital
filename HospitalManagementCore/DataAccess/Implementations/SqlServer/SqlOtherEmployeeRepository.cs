@@ -113,7 +113,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             otherEmployee.Gender = reader.GetBoolean("Gender");
             otherEmployee.PIN = reader.GetString("PIN");
             otherEmployee.Email = reader.GetString("Email");
-            otherEmployee.Phonenumber = reader.GetString("Phonenumber");
+            otherEmployee.PhoneNumber = reader.GetString("Phonenumber");
             otherEmployee.BirthDate = reader.GetDateTime("BirthDate");
             otherEmployee.Salary = reader.GetDecimal("Salary");
             otherEmployee.CreationDate = reader.GetDateTime("CreationDate");
@@ -133,7 +133,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             command.Parameters.AddWithValue("birthdate", otherEmployee.BirthDate);
             command.Parameters.AddWithValue("pin", otherEmployee.PIN);
             command.Parameters.AddWithValue("email", otherEmployee.Email);
-            command.Parameters.AddWithValue("phonenumber", otherEmployee.Phonenumber);
+            command.Parameters.AddWithValue("phonenumber", otherEmployee.PhoneNumber);
             command.Parameters.AddWithValue("salary", otherEmployee.Salary);
             command.Parameters.AddWithValue("isdelete", otherEmployee.IsDelete);
             command.Parameters.AddWithValue("creationdate", otherEmployee.CreationDate);
