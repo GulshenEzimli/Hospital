@@ -79,7 +79,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             {
                 connection.Open();
                 string cmdText = @"insert into Doctors output inserted.id 
-                                   values(@id, @creatorid, @modifierid, @positionid = select Id from DoctorPositions where PositionName = @positionname,
+                                   values(@creatorid, @modifierid, @positionid = select Id from DoctorPositions where PositionName = @positionname,
                                    @firstname, @lastname, @gender, @birthdate, @pin, @email, @phonenumber, @salary, @ischiefdoctor, 
                                    @creationdate, @modifieddate, @isdelete)";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
@@ -101,6 +101,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                                  CreatorId=@creatorid, ModifierId=@modifierid where Id=@id";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
+                    command.Parameters.AddWithValue("id", doctor.Id);
                     AddParameters(command, doctor);
                     return command.ExecuteNonQuery() == 1;
                 }
@@ -110,11 +111,11 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         {
             Doctor doctor = new Doctor();
             doctor.Id = reader.GetInt32("DoctorId");
-            //doctor.PositionId = reader.GetInt32("PositionId");
+            doctor.PositionId = reader.GetInt32("PositionId");
             doctor.Position = new DoctorPosition();
             doctor.Position.Id = reader.GetInt32("PositionId");
             doctor.Position.Name = reader.GetString("PositionName");
-            //doctor.Position.DepartmentId = reader.GetInt32("DepartmentId");
+            doctor.Position.DepartmentId = reader.GetInt32("DepartmentId");
             doctor.Position.Department = new Department();
             doctor.Position.Department.Id = reader.GetInt32("DepartmentId");
             doctor.Position.Department.Name = reader.GetString("DepartmentName");
@@ -132,13 +133,13 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             doctor.ModifiedDate = reader.GetDateTime("ModifiedDate");
             doctor.IsDelete = reader.GetBoolean("IsDelete");
             doctor.IsChiefDoctor = reader.GetBoolean("IsChiefDoctor");
-            //doctor.Admin
+            doctor.Creator = new Admin() { Id = doctor.CreatorId };
+            doctor.Modifier = new Admin() { Id = doctor.ModifierId };
 
             return doctor;
         }
         private void AddParameters(SqlCommand command, Doctor doctor)
-        {
-            command.Parameters.AddWithValue("id", doctor.Id);
+        {            
             command.Parameters.AddWithValue("positionname", doctor.Position.Name);
             command.Parameters.AddWithValue("firstname", doctor.FirstName);
             command.Parameters.AddWithValue("lirstname", doctor.LastName);
