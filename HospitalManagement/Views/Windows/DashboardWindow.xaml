@@ -91,10 +91,10 @@
                         </StackPanel>
                         <Button Name="btnPatients" Content="Patients" Style="{StaticResource btnMenu}" Command="{Binding Path=OpenPatients}"/>
                         <Button Name="btnOperations" Content="Operations" Style="{StaticResource btnMenu}"/>
-                        <Button Name="btnRooms" Content="Rooms" Style="{StaticResource btnMenu}"/>
+                        <Button Name="btnRooms" Content="Rooms" Style="{StaticResource btnMenu}" Command="{Binding Path=OpenRooms}"/>
                         <Button Name="btnQueues" Content="Queues" Style="{StaticResource btnMenu}" Command="{Binding Path=OpenQueues}"/>
                         <Button Name="btnProcedures" Content="Procedures" Style="{StaticResource btnMenu}" Command="{Binding Path=OpenProcedures}"/>
-                        <Button Name="btnAdmins" Content="Admins" Style="{StaticResource btnMenu}"/>
+                        <Button Name="btnAdmins" Content="Admins" Style="{StaticResource btnMenu}" Command="{Binding Path=OpenAdmins}"/>
                         <Button Name="btnPatientProcedures" Content="PatientProcedures" Style="{StaticResource btnMenu}" Command="{Binding Path=OpenPatientProcedures}"/>
                     </StackPanel>
                 </Grid>
