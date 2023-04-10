@@ -8,6 +8,11 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 {
     public class SqlPatientProcedureRepository : IPatientProcedureRepository
     {
+        private readonly string _connectionString;
+        public SqlPatientProcedureRepository(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
         public bool Delete(int id)
         {
             throw new NotImplementedException();
