@@ -176,8 +176,11 @@
     <Compile Include="Commands\Rooms\SaveRoomCommand.cs" />
     <Compile Include="Enums\Situations.cs" />
     <Compile Include="Mappers\Implementations\DoctorMapper.cs" />
+    <Compile Include="Mappers\Implementations\NurseMapper.cs" />
     <Compile Include="Mappers\Interfaces\IDoctorMapper.cs" />
+    <Compile Include="Mappers\Interfaces\INurseMapper.cs" />
     <Compile Include="Models\DoctorModel.cs" />
+    <Compile Include="Models\NurseModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\UserControls\AdminsViewModel.cs" />
     <Compile Include="ViewModels\UserControls\DoctorsViewModel.cs" />
