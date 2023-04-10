@@ -43,7 +43,6 @@ namespace HospitalManagement.Mappers.Implementations
             nurse.Email = nurseModel.Email;
             nurse.PIN = nurseModel.PIN;
             nurse.Salary = nurseModel.Salary;
-            nurse.Position.Department.Name = nurseModel.DepartmentName;
             nurse.Gender = nurseModel.Gender;
 
             return nurse;

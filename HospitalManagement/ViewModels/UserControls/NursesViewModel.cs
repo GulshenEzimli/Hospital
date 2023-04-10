@@ -1,5 +1,6 @@
 ﻿using HospitalManagement.Commands.Nurses;
 using HospitalManagement.Enums;
+using HospitalManagement.Models;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,20 @@ namespace HospitalManagement.ViewModels.UserControls
                 OnPropertyChanged(nameof(CurrentSituation));
             }
         }
+
+        private NurseModel _currentValue;
+        public NurseModel CurrentValue 
+        { 
+            get => _currentValue;
+            set
+            {
+                _currentValue = value;
+                OnPropertyChanged(nameof(CurrentValue));
+            }
+        }
+
+        private List<NurseModel> _values;
+        public List<NurseModel> Values => _values ?? (_values = new List<NurseModel> { });
 
         public AddNurseCommand Add => new AddNurseCommand(this);
         public DeleteNurseCommand Delete => new DeleteNurseCommand(this);

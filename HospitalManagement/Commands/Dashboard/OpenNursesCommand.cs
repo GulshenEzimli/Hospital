@@ -1,4 +1,5 @@
-﻿using HospitalManagement.ViewModels.UserControls;
+﻿using HospitalManagement.Mappers.Interfaces;
+using HospitalManagement.ViewModels.UserControls;
 using HospitalManagement.ViewModels.Windows;
 using HospitalManagement.Views.UserControls;
 using System;
@@ -12,13 +13,23 @@ namespace HospitalManagement.Commands.Dashboard
     public class OpenNursesCommand : BaseCommand
     {
         private readonly DashboardViewModel _viewModel;
-        public OpenNursesCommand(DashboardViewModel viewModel)
+        private readonly INurseMapper _nurseMapper;
+        public OpenNursesCommand(DashboardViewModel viewModel,INurseMapper nurseMapper)
         {
             _viewModel = viewModel;
+            _nurseMapper = nurseMapper;
         }
         public override void Execute(object parameter)
         {
-            NursesViewModel nursesViewModel = new NursesViewModel();
+            NursesViewModel nursesViewModel = new NursesViewModel(_viewModel.Db);
+            var nurses = _viewModel.Db.NurseRepository.Get();
+            int no = 1;
+            foreach (var nurse in nurses)
+            {
+                var nurseModel = _nurseMapper.Map(nurse);
+                nurseModel.No = no++;
+                nursesViewModel.Values.Add(nurseModel);
+            }
             NurseControl nurseControl = new NurseControl();
 
             nurseControl.DataContext = nursesViewModel;
