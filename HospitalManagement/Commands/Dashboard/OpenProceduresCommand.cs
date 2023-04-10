@@ -19,7 +19,7 @@ namespace HospitalManagement.Commands.Dashboard
 
         public override void Execute(object parameter)
         {
-            ProceduresViewModel proceduresViewModel = new ProceduresViewModel();
+            ProceduresViewModel proceduresViewModel = new ProceduresViewModel(_viewModel.Db);
             ProceduresControl proceduresControl = new ProceduresControl();
 
             proceduresControl.DataContext = proceduresViewModel;

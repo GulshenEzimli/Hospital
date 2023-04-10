@@ -18,7 +18,7 @@ namespace HospitalManagement.Commands.Dashboard
         }
         public override void Execute(object parameter)
         {
-            ReceptionistViewModel receptionistViewModel = new ReceptionistViewModel();
+            ReceptionistViewModel receptionistViewModel = new ReceptionistViewModel(_viewModel.Db);
             ReceptionistControl receptionistControl = new ReceptionistControl();
 
             receptionistControl.DataContext = receptionistViewModel;

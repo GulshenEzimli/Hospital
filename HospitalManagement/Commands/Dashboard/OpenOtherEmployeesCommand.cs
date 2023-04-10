@@ -18,7 +18,7 @@ namespace HospitalManagement.Commands.Dashboard
         }
         public override void Execute(object parameter)
         {
-            OtherEmployeesViewModel otherEmployeesViewModel = new OtherEmployeesViewModel();
+            OtherEmployeesViewModel otherEmployeesViewModel = new OtherEmployeesViewModel(_viewModel.Db);
             OtherEmployeesControl otherEmployeesControl = new OtherEmployeesControl();
 
             otherEmployeesControl.DataContext = otherEmployeesViewModel;

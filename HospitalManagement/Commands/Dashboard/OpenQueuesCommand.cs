@@ -20,7 +20,7 @@ namespace HospitalManagement.Commands.Dashboard
 
         public override void Execute(object parameter)
         {
-            QueuesViewModel queuesViewModel = new QueuesViewModel();
+            QueuesViewModel queuesViewModel = new QueuesViewModel(_viewModel.Db);
             QueuesControl queuesControl = new QueuesControl();
 
             queuesControl.DataContext= queuesViewModel;

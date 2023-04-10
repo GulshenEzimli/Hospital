@@ -18,7 +18,7 @@ namespace HospitalManagement.Commands.Dashboard
         }
         public override void Execute(object parameter)
         {
-            RoomsViewModel roomsViewModel = new RoomsViewModel();
+            RoomsViewModel roomsViewModel = new RoomsViewModel(_viewModel.Db);
             RoomControl roomControl = new RoomControl();
 
             roomControl.DataContext = roomsViewModel;

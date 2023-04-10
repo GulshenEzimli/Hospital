@@ -19,7 +19,7 @@ namespace HospitalManagement.Commands.Dashboard
 
         public override void Execute(object parameter)
         {
-            PatientsViewModel patientsViewModel = new PatientsViewModel();
+            PatientsViewModel patientsViewModel = new PatientsViewModel(_viewModel.Db);
             PatientControls patientControl = new PatientControls();
 
             patientControl.DataContext = patientsViewModel;

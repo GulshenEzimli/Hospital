@@ -18,7 +18,7 @@ namespace HospitalManagement.Commands.Dashboard
         }
         public override void Execute(object parameter)
         {
-            AdminsViewModel adminsViewModel = new AdminsViewModel();
+            AdminsViewModel adminsViewModel = new AdminsViewModel(_viewModel.Db);
             AdminControl adminControl = new AdminControl();
 
             adminControl.DataContext = adminsViewModel;
