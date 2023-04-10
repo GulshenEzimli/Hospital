@@ -1,6 +1,7 @@
 ﻿using HospitalManagement.Commands.Patients;
 using HospitalManagement.Commands.Procedures;
 using HospitalManagement.Enums;
+using HospitalManagementCore.DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public class ProceduresViewModel:BaseViewModel
     {
-        public ProceduresViewModel()
+        public ProceduresViewModel(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
             CurrentSituation = 1;
         }

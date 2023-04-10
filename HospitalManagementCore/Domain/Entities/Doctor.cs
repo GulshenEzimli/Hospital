@@ -8,6 +8,7 @@ namespace HospitalManagementCore.Domain.Entities
     public class Doctor : IEntity
     {
         public int Id { get; set; }
+        //public int PositionId { get; set; }
         public DoctorPosition Position { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -21,10 +22,8 @@ namespace HospitalManagementCore.Domain.Entities
         public bool IsChiefDoctor { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime ModifiedDate { get; set; }
-        public int? CreatorId { get; set; }
-        public int? ModifierId { get; set; }
-
-        //TODO
+        public int CreatorId { get; set; }
+        public int ModifierId { get; set; }
         //public Admin Creator { get; set; }
         //public Admin Modifier { get; set; }
     }

@@ -110,9 +110,11 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         {
             Doctor doctor = new Doctor();
             doctor.Id = reader.GetInt32("DoctorId");
+            //doctor.PositionId = reader.GetInt32("PositionId");
             doctor.Position = new DoctorPosition();
             doctor.Position.Id = reader.GetInt32("PositionId");
             doctor.Position.Name = reader.GetString("PositionName");
+            //doctor.Position.DepartmentId = reader.GetInt32("DepartmentId");
             doctor.Position.Department = new Department();
             doctor.Position.Department.Id = reader.GetInt32("DepartmentId");
             doctor.Position.Department.Name = reader.GetString("DepartmentName");
@@ -130,8 +132,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             doctor.ModifiedDate = reader.GetDateTime("ModifiedDate");
             doctor.IsDelete = reader.GetBoolean("IsDelete");
             doctor.IsChiefDoctor = reader.GetBoolean("IsChiefDoctor");
-
-            // TODO Admin datas
+            //doctor.Admin
 
             return doctor;
         }

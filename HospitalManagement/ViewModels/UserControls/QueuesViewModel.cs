@@ -1,6 +1,7 @@
 ﻿using HospitalManagement.Commands.Doctors;
 using HospitalManagement.Commands.Queues;
 using HospitalManagement.Enums;
+using HospitalManagementCore.DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public class QueuesViewModel:BaseViewModel
     {
-        public QueuesViewModel()
+        public QueuesViewModel(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
             CurrentSituation = 1;
         }

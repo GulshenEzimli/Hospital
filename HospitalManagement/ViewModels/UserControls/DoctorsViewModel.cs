@@ -13,15 +13,10 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public class DoctorsViewModel : BaseViewModel
     {
-        #region update olunacaq
-        protected readonly IUnitOfWork _unitOfWork;
-        public DoctorsViewModel(IUnitOfWork unitOfWork)
+        public DoctorsViewModel(IUnitOfWork unitOfWork) :base(unitOfWork)
         {
             CurrentSituation = 1;
-            _unitOfWork = unitOfWork;
         }
-        public IUnitOfWork Db => _unitOfWork;
-        #endregion
 
 
         private int _currentSituation = (int)Situations.NORMAL;

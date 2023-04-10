@@ -11,17 +11,12 @@ using System.Windows.Controls;
 namespace HospitalManagement.ViewModels.Windows
 {
     public class DashboardViewModel : BaseViewModel
-    {
-        #region update olunacaq
-        private readonly IUnitOfWork _unitOfWork;
+    {        
         private readonly IDoctorMapper _doctorMapper;
-        public DashboardViewModel(IUnitOfWork unitOfWork, IDoctorMapper doctorMapper)
+        public DashboardViewModel(IUnitOfWork unitOfWork, IDoctorMapper doctorMapper) : base(unitOfWork)
         {
-            _unitOfWork = unitOfWork;
             _doctorMapper = doctorMapper;
         }
-        public IUnitOfWork Db => _unitOfWork;
-        #endregion
 
         private bool _employeeSituation = false;
         public bool EmployeeSituation

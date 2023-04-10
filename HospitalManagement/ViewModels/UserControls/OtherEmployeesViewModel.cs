@@ -1,5 +1,6 @@
 ﻿using HospitalManagement.Commands.OtherEmployees;
 using HospitalManagement.Enums;
+using HospitalManagementCore.DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public class OtherEmployeesViewModel : BaseViewModel
     {
-        public OtherEmployeesViewModel()
+        public OtherEmployeesViewModel(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
             CurrentSituation = 1;
         }
