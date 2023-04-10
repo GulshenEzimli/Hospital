@@ -13,5 +13,10 @@ namespace HospitalManagementCore.Domain.Entities
         public int NurseId { get; set; }
         public int ProcedureId { get; set; }
         public DateTime UseDate { get; set; }
+
+        //public Patient Patient { get; set; }
+        public Doctor Doctor { get; set; }
+        public Nurse Nurse { get; set; }
+        //public Procedure Procedure { get; set; }
     }
 }

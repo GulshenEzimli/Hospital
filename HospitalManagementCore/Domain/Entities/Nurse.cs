@@ -15,16 +15,16 @@ namespace HospitalManagementCore.Domain.Entities
         public DateTime BirthDate { get; set; }
         public string PIN { get; set; }
         public string Email { get; set; }
-        public string Phonenumber { get; set; }
+        public string PhoneNumber { get; set; }
         public decimal Salary { get; set; }
         public bool IsDelete { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime ModifiedDate { get; set; }
         public int CreatorId { get; set; }
         public int ModifierId { get; set; }
-
-        //public Admin Creator { get; set; }
-        //public Admin Modifier { get; set; }
+        public Admin Creator { get; set; }
+        public Admin Modifier { get; set; }
+        public DoctorPosition Position { get; set; }
 
     }
 }
