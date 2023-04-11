@@ -137,8 +137,8 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             doctor.ModifiedDate = reader.GetDateTime("ModifiedDate");
             doctor.IsDelete = reader.GetBoolean("IsDelete");
             doctor.IsChiefDoctor = reader.GetBoolean("IsChiefDoctor");
-            doctor.Creator = new Admin() { Id = doctor.CreatorId };
-            doctor.Modifier = new Admin() { Id = doctor.ModifierId };
+            doctor.Creator = new Admin() { Id = doctor.CreatorId ?? 0 };
+            doctor.Modifier = new Admin() { Id = doctor.ModifierId ?? 0 };
 
             return doctor;
         }
