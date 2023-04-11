@@ -17,7 +17,6 @@ namespace HospitalManagement.Models
         public string Email { get; set; }
         public string PIN { get; set; }
         public string JobName { get; set; }
-        public string DepartmentName { get; set; }
         public decimal Salary { get; set; }
         public bool Gender { get; set; }
     }
