@@ -181,6 +181,7 @@
     <Compile Include="Mappers\Interfaces\INurseMapper.cs" />
     <Compile Include="Models\DoctorModel.cs" />
     <Compile Include="Models\NurseModel.cs" />
+    <Compile Include="Models\PatientModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\UserControls\AdminsViewModel.cs" />
     <Compile Include="ViewModels\UserControls\DoctorsViewModel.cs" />

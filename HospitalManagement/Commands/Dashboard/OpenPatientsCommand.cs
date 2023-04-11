@@ -1,4 +1,5 @@
-﻿using HospitalManagement.ViewModels.UserControls;
+﻿using HospitalManagement.Models;
+using HospitalManagement.ViewModels.UserControls;
 using HospitalManagement.ViewModels.Windows;
 using HospitalManagement.Views.UserControls;
 using System;
@@ -19,10 +20,25 @@ namespace HospitalManagement.Commands.Dashboard
 
         public override void Execute(object parameter)
         {
-            PatientsViewModel patientsViewModel = new PatientsViewModel(_viewModel.Db);
-            PatientControls patientControl = new PatientControls();
+            var controlViewModel = new PatientsViewModel(_viewModel.Db);
+            var patientControl = new PatientControls();
+            int no = 1;
+            var patients = _viewModel.Db.PatientRepository.Get();
+            foreach( var patient in patients)
+            {
+                var patientModel = new PatientModel();
+                patientModel.Id = patient.Id;
+                patientModel.FirstName = patient.Name;
+                patientModel.LastName = patient.Surname;
+                patientModel.PhoneNumber = patient.PhoneNumber;
+                patientModel.Gender = patient.Gender;
+                patientModel.BirthDate = patient.BirthDate;
+                patientModel.No = no++;
 
-            patientControl.DataContext = patientsViewModel;
+                controlViewModel.Values.Add(patientModel);
+
+            }
+            patientControl.DataContext = controlViewModel;
             _viewModel.CenterGrid.Children.Clear();
             _viewModel.CenterGrid.Children.Add(patientControl);
         }

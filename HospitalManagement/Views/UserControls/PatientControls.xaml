@@ -94,23 +94,24 @@
 
                 </Grid>
             </StackPanel>
-            <ListView Grid.Row="1"><!--x:Name="MainList"  
-                      ItemsSource="{Binding Values}"
-                      SelectedItem="{Binding SelectedValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"-->
+            <ListView Grid.Row="1" x:Name="MainList"  
+                      ItemsSource="{Binding Values}">
+
+                <!--SelectedItem="{Binding SelectedValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"-->
                 <ListView.View>
                     <GridView >
                         <GridViewColumn DisplayMemberBinding="{Binding Path=No}" Header="No" Width="30" />
                         <GridViewColumn Header="Name" Width="60">
                             <!--<GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=Surname}" />
+                                    <TextBlock Text="{Binding Path=FirstName}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>-->
                         </GridViewColumn>
                         <GridViewColumn Header="Surname" Width="60">
                             <!--<GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=Name}" />
+                                    <TextBlock Text="{Binding Path=LastName}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>-->
                         </GridViewColumn>
@@ -124,28 +125,21 @@
                         <GridViewColumn Header="Gender" Width="50">
                             <!--<GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=Account.Email}" />
+                                    <TextBlock Text="{Binding Path=Gender}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>-->
                         </GridViewColumn>
                         <GridViewColumn Header="PIN" Width="Auto">
                             <!--<GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=LicenseNumber}"  HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Path=PIN}"  HorizontalAlignment="Center"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>-->
                         </GridViewColumn>
                         <GridViewColumn Header="Phone number" Width="Auto">
                             <!--<GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=LicenseNumber}"  HorizontalAlignment="Center"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>-->
-                        </GridViewColumn>
-                        <GridViewColumn Header="Address" Width="Auto">
-                            <!--<GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Path=LicenseNumber}"  HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Path=PhoneNumber}"  HorizontalAlignment="Center"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>-->
                         </GridViewColumn>
