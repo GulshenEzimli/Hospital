@@ -35,14 +35,10 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"select Nurses.Id,DoctorPositions.Id as PositionId, PositionName,Departments.Id as DepartmentId,
-                                DepartmentName, FirstName,LastName,Gender, BirthDate, PIN,Email,Phonenumber, Salary,CreationDate,
-                                ModifiedDate,IsDelete, CreatorAdmin.Id  as CreatorAdminId,CreatorAdmin.Password as CreatorPassword, 
-                                CreatorAdmin.Username as CreatorUserName, ModifierAdmin.Id as ModifierAdminId,ModifierAdmin.Password 
-                                as  ModifierPassword, ModifierAdmin.Username  as ModifierUserName from Nurses 
-                                inner join Admins as CreatorAdmin on Nurses.CreatorId = CreatorAdmin.Id 
-                                inner join Admins as ModifierAdmin on Nurses.ModifierId = ModifierAdmin.Id
-                                inner join DoctorPositions on Nurses.PositionId = DoctorPositions.Id
+                string cmdText = @"select Nurses.Id as NurseId,DoctorPositions.Id as PositionId,Departments.Id as  
+                                DepartmentId, CreatorId, ModifierId, FirstName,LastName,Gender, BirthDate, PIN,
+                                Email,Phonenumber, Salary,CreationDate, ModifiedDate,IsDelete,PositionName, DepartmentName 
+                                from Nurses inner join DoctorPositions on Nurses.PositionId = DoctorPositions.Id
                                 inner join Departments on DoctorPositions.DepartmentId= Departments.Id where IsDelete = 0";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
@@ -51,7 +47,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 
                     while (reader.Read())
                     {
-                        Nurse nurse = GetNurses(reader);
+                        Nurse nurse = GetNurse(reader);
                         nurses.Add(nurse);
                     }
                     return nurses;
@@ -64,21 +60,17 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"select Nurses.Id,DoctorPositions.Id as PositionId, PositionName,Departments.Id as DepartmentId,
-                                DepartmentName, FirstName,LastName,Gender, BirthDate, PIN,Email,Phonenumber, Salary,CreationDate,
-                                ModifiedDate,IsDelete, CreatorAdmin.Id  as CreatorAdminId,CreatorAdmin.Password as CreatorPassword, 
-                                CreatorAdmin.Username as CreatorUserName, ModifierAdmin.Id as ModifierAdminId,ModifierAdmin.Password 
-                                as  ModifierPassword, ModifierAdmin.Username  as ModifierUserName from Nurses 
-                                inner join Admins as CreatorAdmin on Nurses.CreatorId = CreatorAdmin.Id 
-                                inner join Admins as ModifierAdmin on Nurses.ModifierId = ModifierAdmin.Id
-                                inner join DoctorPositions on Nurses.PositionId = DoctorPositions.Id
-                                inner join Departments on DoctorPositions.DepartmentId= Departments.Id
+                string cmdText = @"select Nurses.Id as NurseId,DoctorPositions.Id as PositionId,Departments.Id as  
+                                DepartmentId, CreatorId, ModifierId, FirstName,LastName,Gender, BirthDate, PIN,
+                                Email,Phonenumber, Salary,CreationDate, ModifiedDate,IsDelete,PositionName, DepartmentName 
+                                from Nurses inner join DoctorPositions on Nurses.PositionId = DoctorPositions.Id
+                                inner join Departments on DoctorPositions.DepartmentId= Departments.Id 
                                 where Id=@id and IsDelete = 0";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     command.Parameters.AddWithValue("id", id);
                     SqlDataReader reader = command.ExecuteReader();
-                    Nurse nurse = GetNurses(reader);
+                    Nurse nurse = GetNurse(reader);
                     return nurse;
                 }
             }
@@ -107,27 +99,27 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"update Nurses set PositionId=@(select Id from DoctorPositions where PositionName = @positionname), 
+                string cmdText = @"update Nurses set PositionId=(select Id from DoctorPositions where PositionName = @positionname), 
                                  FirstName=@firstname, LastName=@lastname,
                                  Gender=@gender, BirthDate=@birthdate, PIN=@pin, Email=@email, PhoneNumber=@phonenumber,
                                  Salary=@salary, IsDelete=@isdelete, CreationDate=@creationdate, ModifiedDate=@modifieddate,
-                                 CreatorId=@creatorid, ModifierId=@modifierid where PIN=@pin";
+                                 CreatorId=@creatorid, ModifierId=@modifierid where Id=@id";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
-                    command.Parameters.AddWithValue("pin", nurse.PIN);
+                    command.Parameters.AddWithValue("id", nurse.Id);
                     AddParameters(command, nurse);
                     return command.ExecuteNonQuery() == 1;
                 }
             }
         }
 
-        private Nurse GetNurses(SqlDataReader reader)
+        private Nurse GetNurse(SqlDataReader reader)
         {
             Nurse nurse = new Nurse();
-            nurse.Id = reader.GetInt32("Id");
+            nurse.Id = reader.GetInt32("NurseId");
             nurse.PositionId = reader.GetInt32("PositionId");
-            nurse.ModifierId = reader.GetInt32("ModifierAdminId");
-            nurse.CreatorId = reader.GetInt32("CreatorAdminId");
+            nurse.ModifierId = reader.GetInt32("ModifierId");
+            nurse.CreatorId = reader.GetInt32("CreatorId");
             nurse.Position = new DoctorPosition()
             {
                 Id = reader.GetInt32("PositionId"),
@@ -140,16 +132,12 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             };
             nurse.Creator = new Admin()
             {
-                Id = reader.GetInt32("CreatorAdminId"),
-                UserName = reader.GetString("CreatorUserName"),
-                Password = reader.GetString("CreatorPassword"),
+                Id = reader.GetInt32("CreatorAdminId")
             };
 
             nurse.Modifier = new Admin
             {
-                Id = reader.GetInt32("ModifierAdminId"),
-                UserName = reader.GetString("ModifierUserName"),
-                Password = reader.GetString("ModifierPassword"),
+                Id = reader.GetInt32("ModifierAdminId")
             };
             nurse.FirstName = reader.GetString("FirstName");
             nurse.LastName = reader.GetString("LastName");
