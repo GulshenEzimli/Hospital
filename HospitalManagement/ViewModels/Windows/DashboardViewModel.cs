@@ -14,10 +14,13 @@ namespace HospitalManagement.ViewModels.Windows
     {        
         private readonly IDoctorMapper _doctorMapper;
         private readonly INurseMapper _nurseMapper;
-        public DashboardViewModel(IUnitOfWork unitOfWork, IDoctorMapper doctorMapper,INurseMapper nurseMapper) : base(unitOfWork)
+        private readonly IPatientMapper _patientMapper;
+
+        public DashboardViewModel(IUnitOfWork unitOfWork, IDoctorMapper doctorMapper,INurseMapper nurseMapper,IPatientMapper patientMapper) : base(unitOfWork)
         {
             _doctorMapper = doctorMapper;
             _nurseMapper = nurseMapper;
+            _patientMapper = patientMapper;
         }
 
         private bool _employeeSituation = false;
@@ -39,7 +42,7 @@ namespace HospitalManagement.ViewModels.Windows
         public OpenNursesCommand OpenNurses => new OpenNursesCommand(this,_nurseMapper);
         public OpenOtherEmployeesCommand OpenOtherEmployees => new OpenOtherEmployeesCommand(this);
         public OpenPatientProcedureCommand OpenPatientProcedures => new OpenPatientProcedureCommand(this);
-        public OpenPatientsCommand OpenPatients => new OpenPatientsCommand(this);
+        public OpenPatientsCommand OpenPatients => new OpenPatientsCommand(this,_patientMapper);
         public OpenProceduresCommand OpenProcedures => new OpenProceduresCommand(this);
         public OpenReceptionistCommand OpenReceptionists => new OpenReceptionistCommand(this);
         public OpenQueuesCommand OpenQueues => new OpenQueuesCommand(this);

@@ -112,6 +112,8 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             patient.ModifiedDate = reader.GetDateTime("ModifiedDate");
             patient.IsDelete = reader.GetBoolean("IsDelete");
 
+            patient.Creator = new Admin { Id = patient.CreatorId };
+            patient.Modifier=new Admin { Id = patient.ModifierId };
             return patient;
             //TODO Admin data`s
         }

@@ -1,7 +1,9 @@
-﻿using HospitalManagement.Models;
+﻿using HospitalManagement.Mappers.Interfaces;
+using HospitalManagement.Models;
 using HospitalManagement.ViewModels.UserControls;
 using HospitalManagement.ViewModels.Windows;
 using HospitalManagement.Views.UserControls;
+using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +15,12 @@ namespace HospitalManagement.Commands.Dashboard
     public class OpenPatientsCommand : BaseCommand
     {
         private readonly DashboardViewModel _viewModel;
-        public OpenPatientsCommand(DashboardViewModel viewModel)
+        private readonly IPatientMapper _patientMapper;
+        public OpenPatientsCommand(DashboardViewModel viewModel,IPatientMapper patientMapper)
         {
             _viewModel = viewModel;
+            _patientMapper=patientMapper;
+
         }   
 
         public override void Execute(object parameter)
@@ -26,15 +31,9 @@ namespace HospitalManagement.Commands.Dashboard
             var patients = _viewModel.Db.PatientRepository.Get();
             foreach( var patient in patients)
             {
-                var patientModel = new PatientModel();
-                patientModel.Id = patient.Id;
-                patientModel.FirstName = patient.Name;
-                patientModel.LastName = patient.Surname;
-                patientModel.PhoneNumber = patient.PhoneNumber;
-                patientModel.Gender = patient.Gender;
-                patientModel.BirthDate = patient.BirthDate;
-                patientModel.No = no++;
 
+                var patientModel=_patientMapper.Map(patient);
+                patientModel.No = no++;
                 controlViewModel.Values.Add(patientModel);
 
             }

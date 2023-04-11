@@ -10,8 +10,8 @@ namespace HospitalManagement.Models
     {
         public int Id { get; set; }
         public int No { get;set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
         public bool Gender { get; set; }
         public DateTime BirthDate { get; set; }
         public string PIN { get; set; }

@@ -31,8 +31,9 @@ namespace HospitalManagement
             IUnitOfWork db = new SqlUnitOfWork(builder.ConnectionString);
             IDoctorMapper doctorMapper = new DoctorMapper();
             INurseMapper nurseMapper = new NurseMapper();
+            IPatientMapper patientMapper = new PatientMapper();
             DashboardWindow dashboardWindow = new DashboardWindow();
-            DashboardViewModel viewModel = new DashboardViewModel(db, doctorMapper,nurseMapper);
+            DashboardViewModel viewModel = new DashboardViewModel(db, doctorMapper,nurseMapper, patientMapper);
 
             dashboardWindow.DataContext = viewModel;
             viewModel.CenterGrid = dashboardWindow.grdCenter;
