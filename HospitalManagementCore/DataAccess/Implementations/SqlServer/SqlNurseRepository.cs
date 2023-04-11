@@ -132,12 +132,12 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             };
             nurse.Creator = new Admin()
             {
-                Id = reader.GetInt32("CreatorAdminId")
+                Id = reader.GetInt32("CreatorId")
             };
 
             nurse.Modifier = new Admin
             {
-                Id = reader.GetInt32("ModifierAdminId")
+                Id = reader.GetInt32("ModifierId")
             };
             nurse.FirstName = reader.GetString("FirstName");
             nurse.LastName = reader.GetString("LastName");
