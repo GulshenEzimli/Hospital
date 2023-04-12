@@ -1,6 +1,8 @@
 ﻿using HospitalManagement.Commands.PatientProcedures;
 using HospitalManagement.Enums;
+using HospitalManagement.Models;
 using HospitalManagementCore.DataAccess.Interfaces;
+using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,21 @@ namespace HospitalManagement.ViewModels.UserControls
                 OnPropertyChanged(nameof(CurrentSituation));
             }
         }
+
+        private PatientProcedureModel _currentPatientProcedure;
+        public PatientProcedureModel CurrentPatientProcedure
+        {
+            get => _currentPatientProcedure;
+            set
+            {
+                _currentPatientProcedure = value;
+                OnPropertyChanged(nameof(CurrentPatientProcedure));
+            }
+        }
+        
+
+        private List<PatientProcedureModel> _patientProcedureValues;
+        public List<PatientProcedureModel> PatientProcedureValues => _patientProcedureValues ?? (_patientProcedureValues = new List<PatientProcedureModel>());
 
         public AddPatientProcedureCommand Add => new AddPatientProcedureCommand(this);
         public DeletePatientProcedureCommand Delete => new DeletePatientProcedureCommand(this);

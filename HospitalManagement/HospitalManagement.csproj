@@ -179,9 +179,11 @@
     <Compile Include="Mappers\Implementations\NurseMapper.cs" />
     <Compile Include="Mappers\Implementations\OtherEmployeeMapper.cs" />
     <Compile Include="Mappers\Implementations\PatientMapper.cs" />
+    <Compile Include="Mappers\Implementations\PatientProcedureMapper.cs" />
     <Compile Include="Mappers\Implementations\PositionMapper.cs" />
     <Compile Include="Mappers\Implementations\ProcedureMapper.cs" />
     <Compile Include="Mappers\Interfaces\IDoctorMapper.cs" />
+    <Compile Include="Mappers\Interfaces\IPatientProcedureMapper.cs" />
     <Compile Include="Mappers\Interfaces\IPositionMapper.cs" />
     <Compile Include="Mappers\Interfaces\IProcedureMapper.cs" />
     <Compile Include="Mappers\Interfaces\INurseMapper.cs" />
@@ -191,6 +193,7 @@
     <Compile Include="Models\NurseModel.cs" />
     <Compile Include="Models\OtherEmployeeModel.cs" />
     <Compile Include="Models\PatientModel.cs" />
+    <Compile Include="Models\PatientProcedureModel.cs" />
     <Compile Include="Models\ProcedureModel.cs" />
     <Compile Include="Models\PositionModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
