@@ -9,6 +9,7 @@ namespace HospitalManagement.Models
     public class PatientProcedureModel
     {
         public int Id { get; set; }
+        public int No { get; set; }
         public string PatientName { get; set; }
         public string PatientSurname { get; set; }
         public string PatientPIN { get; set; }
