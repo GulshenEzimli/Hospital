@@ -34,15 +34,15 @@ namespace HospitalManagement.Commands.Dashboard
                 doctorsViewModel.Values.Add(doctorModel);
             }
 
-            //List<DoctorPosition> positions = _viewModel.Db.PositionRepository.Get();
-            //foreach(DoctorPosition position in positions)
-            //{
-            //    PositionModel positionModel = new PositionModel();
-            //    positionModel.Id = position.Id;
-            //    positionModel.Name = position.Name;
-            //    positionModel.DepartmentName = position.Department.Name;
-            //    doctorsViewModel.PositionValues.Add(position.Name);
-            //}
+            List<DoctorPosition> positions = _viewModel.Db.PositionRepository.Get();
+            foreach (DoctorPosition position in positions)
+            {
+                PositionModel positionModel = new PositionModel();
+                positionModel.Id = position.Id;
+                positionModel.Name = position.Name;
+                positionModel.DepartmentName = position.Department.Name;
+                doctorsViewModel.PositionValues.Add(position.Name);
+            }
 
             DoctorControl doctorControl = new DoctorControl();
 
