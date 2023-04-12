@@ -18,10 +18,9 @@ namespace HospitalManagement.ViewModels.Windows
         private readonly IPatientMapper _patientMapper;
         private readonly IProcedureMapper _procedureMapper;
         private readonly IPositionMapper _positionMapper;
-        public DashboardViewModel(IUnitOfWork unitOfWork, IDoctorMapper doctorMapper,INurseMapper nurseMapper, IOtherEmployeeMapper otherEmployeeMapper, IPatientMapper patientMapper, IProcedureMapper procedureMapper, IPositionMapper positionMapper) : base(unitOfWork)
         private readonly IPatientProcedureMapper _patientProcedureMapper;
 
-        public DashboardViewModel(IUnitOfWork unitOfWork, IDoctorMapper doctorMapper,INurseMapper nurseMapper, IOtherEmployeeMapper otherEmployeeMapper, IPatientMapper patientMapper, IProcedureMapper procedureMapper, IPatientProcedureMapper patientProcedureMapper) : base(unitOfWork)
+        public DashboardViewModel(IUnitOfWork unitOfWork, IDoctorMapper doctorMapper,INurseMapper nurseMapper, IOtherEmployeeMapper otherEmployeeMapper, IPatientMapper patientMapper, IProcedureMapper procedureMapper, IPatientProcedureMapper patientProcedureMapper, IPositionMapper positionMapper) : base(unitOfWork)
         {
             _doctorMapper = doctorMapper;
             _nurseMapper = nurseMapper;
