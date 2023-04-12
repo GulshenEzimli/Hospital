@@ -2,6 +2,7 @@
 using HospitalManagement.Enums;
 using HospitalManagement.Models;
 using HospitalManagementCore.DataAccess.Interfaces;
+using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,16 +28,17 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
-        private PatientProcedureModel _patientProcedureModel;
-        public PatientProcedureModel PatientProcedureModel
+        private PatientProcedureModel _currentPatientProcedure;
+        public PatientProcedureModel CurrentPatientProcedure
         {
-            get => _patientProcedureModel;
+            get => _currentPatientProcedure;
             set
             {
-                _patientProcedureModel = value;
-                OnPropertyChanged(nameof(PatientProcedure));
+                _currentPatientProcedure = value;
+                OnPropertyChanged(nameof(CurrentPatientProcedure));
             }
         }
+        
 
         private List<PatientProcedureModel> _patientProcedureValues;
         public List<PatientProcedureModel> PatientProcedureValues => _patientProcedureValues ?? (_patientProcedureValues = new List<PatientProcedureModel>());
