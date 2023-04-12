@@ -36,9 +36,9 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">
-                            <TextBox Height="25" FontSize="15" Margin="5 5"/>
-                            <TextBox Height="25" FontSize="15" Margin="5 5" />
-                            <TextBox Height="25" FontSize="15" Margin="5 5" />
+                            <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding Path=PatientProcedureModel.PatientPIN}"/>
+                            <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding Path=PatientProcedureModel.DoctorPIN}"/>
+                            <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding Path=PatientProcedureModel.NursePIN}"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="2">
@@ -47,8 +47,8 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="3">
-                            <components:CustomDatePicker Margin="5 5" Height="25"/>
-                            <ComboBox Height="25" FontSize="15" Margin="5 5" />
+                            <components:CustomDatePicker Margin="5 5" Height="25" DataContext="{Binding Path=PatientProcedureModel.UseDate}"/>
+                            <ComboBox Height="25" FontSize="15" Margin="5 5"/>
                         </StackPanel>
                     </Grid>
 
@@ -70,62 +70,84 @@
                 <ListView.View>
                     <GridView >
                         <GridViewColumn Header="No" Width="30" />
-                        <GridViewColumn Header="Name" Width="60">
+                        <GridViewColumn Header="Patient Name" Width="60">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="SurName" Width="60">
+                        <GridViewColumn Header="Patient SurName" Width="60">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Birth Date" Width="70">
+                        <GridViewColumn Header="Patient PIN" Width="70">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock HorizontalAlignment="Center"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Phone Number" Width="Auto">
+                        <GridViewColumn Header="Doctor Name" Width="60">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Email" Width="Auto">
+                        <GridViewColumn Header="Doctor SurName" Width="60">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Position" Width="auto">
+                        <GridViewColumn Header="Doctor PIN" Width="70">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Nurse Name" Width="60">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="PIN" Width="auto">
+                        <GridViewColumn Header="Nurse SurName" Width="60">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Gender" Width="auto">
+                        <GridViewColumn Header="Nurse PIN" Width="70">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Procedure" Width="60">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
+                        <GridViewColumn Header="Cost" Width="70">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
                     </GridView>
                 </ListView.View>
             </ListView>
