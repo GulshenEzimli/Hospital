@@ -21,6 +21,5 @@ namespace HospitalManagementCore.Domain.Entities
         public int ModifierId { get; set; }
         public Admin Creator { get; set; }
         public Admin Modifier { get; set; }
-        public object FirstName { get; set; }
     }
 }
