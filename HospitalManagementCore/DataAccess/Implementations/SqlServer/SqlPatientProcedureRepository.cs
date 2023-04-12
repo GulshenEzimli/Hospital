@@ -34,7 +34,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"select PatientProcedures.Id as PatientProceduresId,Patients.Id as PatientId,
+                string cmdText = @"select PatientProcedures.Id as PatientProceduresId,UseDate,Patients.Id as PatientId,
                                 Patients.FirstName as PatientName,Patients.LastName as PatientSurname,
                                 Patients.PIN as PatientPIN,Doctors.Id as DoctorId, Doctors.FirstName as DoctorName, 
                                 Doctors.LastName as DoctorSurname,Doctors.PIN as DoctorPIN,
@@ -64,7 +64,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection())
             {
                 connection.Open();
-                string cmdText = @"select PatientProcedures.Id as PatientProceduresId,Patients.Id as PatientId,
+                string cmdText = @"select PatientProcedures.Id as PatientProceduresId,UseDate,Patients.Id as PatientId,
                                 Patients.FirstName as PatientName,Patients.LastName as PatientSurname,
                                 Patients.PIN as PatientPIN,Doctors.Id as DoctorId, Doctors.FirstName as DoctorName, 
                                 Doctors.LastName as DoctorSurname,Doctors.PIN as DoctorPIN,
@@ -84,35 +84,41 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                     return patientProcedure;
                 }
             }
-            throw new NotImplementedException();
         }
 
-        public int Insert(PatientProcedure entity)
+        public int Insert(PatientProcedure patientProcedure)
         {
             using (SqlConnection connection = new SqlConnection())
             {
                 connection.Open();
-                string cmdText = @"insert into PatientProcedures output inserted.id values()";
+                string cmdText = @"insert into PatientProcedures (PatientId,DoctorId,NurseId,ProcedureId,UseDate) 
+                                values((select Id from Patients where Patients.PIN=@patientPin),
+                                (select Id from Doctors where Doctors.PIN=@doctorPin),
+                                (select Id from Nurses where Nurses.PIN=@nursePin),
+                                (select Id from Procedures where Procedures.Name=@procedureName),@usedate)";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
-
+                    AddParameters(command, patientProcedure);
+                    return (int)command.ExecuteScalar();
                 }
             }
-            throw new NotImplementedException();
         }
 
-        public bool Update(PatientProcedure entity)
+        public bool Update(PatientProcedure patientProcedure)
         {
             using (SqlConnection connection = new SqlConnection())
             {
                 connection.Open();
-                string cmdText = @"";
+                string cmdText = @"update PatientProcedures set PatientId=(select Id from Patients where Patients.PIN=@patientPin), 
+                                DoctorId = (select Id from Doctors where Doctors.PIN=@doctorPin),
+                                NurseId = (select Id from Nurses where Nurses.PIN=@nursePin),
+                                ProcedureId=(select Id from Procedures where Procedures.Name=@procedureName), UseDate=@usedate";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
-
+                    AddParameters(command, patientProcedure);
+                    return command.ExecuteNonQuery() == 1;
                 }
             }
-            throw new NotImplementedException();
         }
 
         private PatientProcedure GetPatientProcedure(SqlDataReader reader)
@@ -155,12 +161,17 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 Name = reader.GetString("ProcedureName"),
                 Cost = reader.GetDecimal("Cost")
             };
+            patientProcedure.UseDate = reader.GetDateTime("UseDate");
 
             return patientProcedure;
         }
         private void AddParameters(SqlCommand command, PatientProcedure patientProcedure)
         {
-            
+            command.Parameters.AddWithValue("patientPin",patientProcedure.Patient.PIN);
+            command.Parameters.AddWithValue("doctorPin",patientProcedure.Doctor.PIN);
+            command.Parameters.AddWithValue("nursePin",patientProcedure.Nurse.PIN); 
+            command.Parameters.AddWithValue("procedureName",patientProcedure.Procedure.Name); 
+            command.Parameters.AddWithValue("usedate",patientProcedure.UseDate); 
         }
     }
 }
