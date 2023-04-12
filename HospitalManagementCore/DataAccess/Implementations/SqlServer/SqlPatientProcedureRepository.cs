@@ -92,7 +92,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection())
             {
                 connection.Open();
-                string cmdText = @"";
+                string cmdText = @"insert into PatientProcedures output inserted.id values()";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
 
