@@ -13,9 +13,9 @@ namespace HospitalManagement.Commands.Dashboard
     public class OpenProceduresCommand:BaseCommand
     {
         private readonly DashboardViewModel _viewModel;
-        private readonly IProcedureMapper _procedureMapper;
+        private readonly IPatientProcedureMapper _procedureMapper;
 
-        public OpenProceduresCommand(DashboardViewModel viewModel,IProcedureMapper procedureMapper)
+        public OpenProceduresCommand(DashboardViewModel viewModel,IPatientProcedureMapper procedureMapper)
         {
             _viewModel = viewModel;
             _procedureMapper = procedureMapper;

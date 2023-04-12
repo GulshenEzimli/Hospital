@@ -24,7 +24,7 @@ namespace HospitalManagement
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
 
-            builder.DataSource = "localhost";
+            builder.DataSource = "GULSHAN\\SQLEXPRESS";
             builder.InitialCatalog = "Hospital";
             builder.IntegratedSecurity = true;
 
@@ -34,7 +34,7 @@ namespace HospitalManagement
             INurseMapper nurseMapper = new NurseMapper();
             IOtherEmployeeMapper otherEmployeeMapper = new OtherEmployeeMapper();
             IPatientMapper patientMapper = new PatientMapper();
-            IProcedureMapper procedureMapper=new ProcedureMapper();
+            IPatientProcedureMapper procedureMapper=new ProcedureMapper();
 
             DashboardWindow dashboardWindow = new DashboardWindow();
             DashboardViewModel viewModel = new DashboardViewModel(db, doctorMapper,nurseMapper, otherEmployeeMapper, patientMapper,procedureMapper);
