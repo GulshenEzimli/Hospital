@@ -45,6 +45,9 @@ namespace HospitalManagement.ViewModels.UserControls
         public List<DoctorModel> Values => _values ?? (_values = new List<DoctorModel>());
 
 
+        private List<string> _positionValues;
+        public List<string> PositionValues => _positionValues ?? (_positionValues = new List<string>());
+
         public AddDoctorCommand Add => new AddDoctorCommand(this);
         public DeleteDoctorCommand Delete => new DeleteDoctorCommand(this);
         public EditDoctorCommand Edit => new EditDoctorCommand(this);
