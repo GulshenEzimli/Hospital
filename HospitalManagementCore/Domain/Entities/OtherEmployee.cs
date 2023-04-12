@@ -8,7 +8,7 @@ namespace HospitalManagementCore.Domain.Entities
     public class OtherEmployee : IEntity
     {
         public int Id { get; set; }
-        public int PositionId { get; set; }
+        public int JobId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool Gender { get; set; }

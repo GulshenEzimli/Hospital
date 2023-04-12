@@ -34,7 +34,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"select * from OtherEmployees where IsDelete = 0";
+                string cmdText = @"select * from OtherEmployees where IsDelete=0";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     SqlDataReader reader = command.ExecuteReader();
@@ -42,7 +42,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 
                     while (reader.Read())
                     {
-                        OtherEmployee otherEmployee = GetOtherEmployees(reader);
+                        OtherEmployee otherEmployee = GetOtherEmployee(reader);
                         otherEmployees.Add(otherEmployee);
                     }
                     return otherEmployees;
@@ -60,7 +60,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 {
                     command.Parameters.AddWithValue("id", id);
                     SqlDataReader reader = command.ExecuteReader();
-                    OtherEmployee otherEmployee = GetOtherEmployees(reader);
+                    OtherEmployee otherEmployee = GetOtherEmployee(reader);
                     return otherEmployee;
                 }
             }
@@ -71,7 +71,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"insert into OtherEmployees output inserted.id values(@id,@positionid,@firstname,@lastname,@gender,
+                string cmdText = @"insert into OtherEmployees output inserted.id values(@id,@jobid,@firstname,@lastname,@gender,
                                  @birthdate,@pin,@email,@phonenumber,@salary,@isdelete,@creationdate,@modifieddate
                                  @creatorid,@modifierid)";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
@@ -87,7 +87,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"update OtherEmployees set PositionId=@positionid, FirstName=@firstname, LastName=@lastname,
+                string cmdText = @"update OtherEmployees set JobId=@jobid, FirstName=@firstname, LastName=@lastname,
                                  Gender=@gender, BirthDate=@birthdate, PIN=@pin, Email=@email, PhoneNumber=@phonenumber,
                                  Salary=@salary, IsDelete=@isdelete, CreationDate=@creationdate, ModifiedDate=@modifieddate,
                                  CreatorId=@creatorid, ModifierId=@modifierid where Id=@id";
@@ -100,14 +100,22 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             }
         }
 
-        private OtherEmployee GetOtherEmployees(SqlDataReader reader)
+        private OtherEmployee GetOtherEmployee(SqlDataReader reader)
         {
             OtherEmployee otherEmployee = new OtherEmployee();
 
             otherEmployee.Id = reader.GetInt32("Id");
-            otherEmployee.PositionId = reader.GetInt32("PositionId");
+            otherEmployee.JobId = reader.GetInt32("JobId");
             otherEmployee.ModifierId = reader.GetInt32("ModifierId");
+            otherEmployee.Modifier = new Admin()
+            {
+                Id = reader.GetInt32("ModifierId")
+            };
             otherEmployee.CreatorId = reader.GetInt32("CreatorId");
+            otherEmployee.Creator = new Admin()
+            {
+                Id = reader.GetInt32("CreatorId")
+            };
             otherEmployee.FirstName = reader.GetString("FirstName");
             otherEmployee.LastName = reader.GetString("LastName");
             otherEmployee.Gender = reader.GetBoolean("Gender");
@@ -125,8 +133,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 
         private void AddParameters(SqlCommand command, OtherEmployee otherEmployee)
         {
-            command.Parameters.AddWithValue("id", otherEmployee.Id);
-            command.Parameters.AddWithValue("positionid", otherEmployee.PositionId);
+            command.Parameters.AddWithValue("jobid", otherEmployee.JobId);
             command.Parameters.AddWithValue("firstname", otherEmployee.FirstName);
             command.Parameters.AddWithValue("lirstname", otherEmployee.LastName);
             command.Parameters.AddWithValue("gender", otherEmployee.Gender);

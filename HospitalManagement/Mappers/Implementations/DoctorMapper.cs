@@ -20,14 +20,14 @@ namespace HospitalManagement.Mappers.Implementations
             doctorModel.DepartmentName = doctor.Position.Department.Name;
             doctorModel.FirstName = doctor.FirstName;
             doctorModel.LastName = doctor.LastName;
-            doctorModel.Gender = doctor.Gender ? "Kişi" : "Qadın";
+            doctorModel.Gender = doctor.Gender;
             doctorModel.BirthDate = doctor.BirthDate;
             doctorModel.PIN = doctor.PIN;
             doctorModel.Email = doctor.Email;
             doctorModel.Phonenumber = doctor.Phonenumber;
             doctorModel.Salary = doctor.Salary;
-            doctorModel.IsChiefDoctor = doctor.IsChiefDoctor? "Baş həkim" : "Həkim";
-
+            doctorModel.IsChiefDoctor = doctor.IsChiefDoctor;
+            
             return doctorModel;
         }
 

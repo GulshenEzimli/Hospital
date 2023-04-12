@@ -177,12 +177,15 @@
     <Compile Include="Enums\Situations.cs" />
     <Compile Include="Mappers\Implementations\DoctorMapper.cs" />
     <Compile Include="Mappers\Implementations\NurseMapper.cs" />
+    <Compile Include="Mappers\Implementations\OtherEmployeeMapper.cs" />
     <Compile Include="Mappers\Implementations\PatientMapper.cs" />
     <Compile Include="Mappers\Interfaces\IDoctorMapper.cs" />
     <Compile Include="Mappers\Interfaces\INurseMapper.cs" />
+    <Compile Include="Mappers\Interfaces\IOtherEmployeeMapper.cs" />
     <Compile Include="Mappers\Interfaces\IPatientMapper.cs" />
     <Compile Include="Models\DoctorModel.cs" />
     <Compile Include="Models\NurseModel.cs" />
+    <Compile Include="Models\OtherEmployeeModel.cs" />
     <Compile Include="Models\PatientModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\UserControls\AdminsViewModel.cs" />

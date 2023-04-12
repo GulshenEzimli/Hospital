@@ -1,5 +1,6 @@
 ﻿using HospitalManagement.Commands.OtherEmployees;
 using HospitalManagement.Enums;
+using HospitalManagement.Models;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,20 @@ namespace HospitalManagement.ViewModels.UserControls
                 OnPropertyChanged(nameof(CurrentSituation));
             }
         }
+
+        private OtherEmployeeModel _currentOtherEmployeeValue; 
+        public OtherEmployeeModel CurrentOtherEmployeeValue
+        {
+            get => _currentOtherEmployeeValue;
+            set
+            {
+                _currentOtherEmployeeValue = value;
+                OnPropertyChanged(nameof(CurrentOtherEmployeeValue));
+            }
+        }
+
+        private List<OtherEmployeeModel> _otherEmployeeValues;
+        public List<OtherEmployeeModel> OtherEmployeeValues => _otherEmployeeValues ?? (_otherEmployeeValues = new List<OtherEmployeeModel>());
 
         public AddOtherEmployeeCommand Add => new AddOtherEmployeeCommand(this);
         public DeleteOtherEmployeeCommand Delete => new DeleteOtherEmployeeCommand(this);
