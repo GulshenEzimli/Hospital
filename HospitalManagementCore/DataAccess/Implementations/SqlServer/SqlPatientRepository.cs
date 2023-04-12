@@ -36,9 +36,8 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 string cmdText = @"select * from Patients where IsDelete = 0";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
-                    SqlDataReader reader = command.ExecuteReader();
                     List<Patient> patients = new List<Patient>();
-
+                    SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
                         Patient patient = GetPatient(reader);

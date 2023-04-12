@@ -31,7 +31,6 @@ namespace HospitalManagement.Commands.Dashboard
             var patients = _viewModel.Db.PatientRepository.Get();
             foreach( var patient in patients)
             {
-
                 var patientModel=_patientMapper.Map(patient);
                 patientModel.No = no++;
                 controlViewModel.Values.Add(patientModel);
