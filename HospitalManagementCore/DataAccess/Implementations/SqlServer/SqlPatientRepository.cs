@@ -19,7 +19,8 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         {
             using (SqlConnection connection = new SqlConnection())
             {
-                string cmdText = @"Delete from Patients where Id=@Id";
+                connection.Open();
+                string cmdText = @"Delete from Patients where Id=@id";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     command.Parameters.AddWithValue("Id", id);
@@ -85,7 +86,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             {
                 connection.Open();
                 string cmdText = @"Update Patients set FirstName=@firstName,LastName=@lastName,
-                                  Gender=@gender,irthDate=@birthDate,PIN=@pin,Phonenumber=@phoneNumber,
+                                  Gender=@gender,BirthDate=@birthDate,PIN=@pin,Phonenumber=@phoneNumber,
                                   CreatorId=@creatorId,ModifiedId=@modifiedId,CreationDate=@creationDate,
                                   ModifiedDate=@modifiedDate,IsDelete=@isDelete where Id=@id";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
@@ -99,6 +100,8 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         private Patient GetPatient(SqlDataReader reader)
         {
             Patient patient = new Patient();
+
+            patient.Id = reader.GetInt32("Id");
             patient.Name = reader.GetString("FirstName");
             patient.Surname = reader.GetString("LastName");
             patient.Gender = reader.GetBoolean("Gender");
@@ -114,7 +117,6 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             patient.Creator = new Admin { Id = patient.CreatorId };
             patient.Modifier=new Admin { Id = patient.ModifierId };
             return patient;
-            //TODO Admin data`s
         }
         #endregion
         #region AddParameters
