@@ -14,7 +14,6 @@ namespace HospitalManagement.ViewModels.UserControls
     {
         public QueuesViewModel(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            CurrentSituation = 1;
         }
         private int _currentSituation = (int)Situations.NORMAL;
         public int CurrentSituation

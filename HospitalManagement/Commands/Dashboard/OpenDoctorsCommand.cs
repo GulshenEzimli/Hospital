@@ -16,10 +16,12 @@ namespace HospitalManagement.Commands.Dashboard
     {
         private readonly DashboardViewModel _viewModel;
         private readonly IDoctorMapper _doctorMapper;
-        public OpenDoctorsCommand(DashboardViewModel viewModel, IDoctorMapper doctorMapper)
+        private readonly IPositionMapper _positionMapper;
+        public OpenDoctorsCommand(DashboardViewModel viewModel, IDoctorMapper doctorMapper, IPositionMapper positionMapper)
         {
             _viewModel = viewModel;
             _doctorMapper = doctorMapper;
+            _positionMapper = positionMapper;
         }
         public override void Execute(object parameter)
         {
@@ -37,10 +39,7 @@ namespace HospitalManagement.Commands.Dashboard
             List<DoctorPosition> positions = _viewModel.Db.PositionRepository.Get();
             foreach (DoctorPosition position in positions)
             {
-                PositionModel positionModel = new PositionModel();
-                positionModel.Id = position.Id;
-                positionModel.Name = position.Name;
-                positionModel.DepartmentName = position.Department.Name;
+                PositionModel positionModel = _positionMapper.Map(position);                
                 doctorsViewModel.PositionValues.Add(position.Name);
             }
 

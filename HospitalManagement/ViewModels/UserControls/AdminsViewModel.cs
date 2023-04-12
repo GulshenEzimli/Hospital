@@ -14,7 +14,6 @@ namespace HospitalManagement.ViewModels.UserControls
     {
         public AdminsViewModel(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            CurrentSituation = 1;
         }
 
         private int _currentSituation = (int)Situations.NORMAL;

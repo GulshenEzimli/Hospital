@@ -35,9 +35,10 @@ namespace HospitalManagement
             IOtherEmployeeMapper otherEmployeeMapper = new OtherEmployeeMapper();
             IPatientMapper patientMapper = new PatientMapper();
             IProcedureMapper procedureMapper=new ProcedureMapper();
+            IPositionMapper positionMapper = new PositionMapper();
 
             DashboardWindow dashboardWindow = new DashboardWindow();
-            DashboardViewModel viewModel = new DashboardViewModel(db, doctorMapper,nurseMapper, otherEmployeeMapper, patientMapper,procedureMapper);
+            DashboardViewModel viewModel = new DashboardViewModel(db, doctorMapper, nurseMapper, otherEmployeeMapper, patientMapper, procedureMapper, positionMapper);
 
             dashboardWindow.DataContext = viewModel;
             viewModel.CenterGrid = dashboardWindow.grdCenter;

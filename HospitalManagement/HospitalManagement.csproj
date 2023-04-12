@@ -179,8 +179,10 @@
     <Compile Include="Mappers\Implementations\NurseMapper.cs" />
     <Compile Include="Mappers\Implementations\OtherEmployeeMapper.cs" />
     <Compile Include="Mappers\Implementations\PatientMapper.cs" />
+    <Compile Include="Mappers\Implementations\PositionMapper.cs" />
     <Compile Include="Mappers\Implementations\ProcedureMapper.cs" />
     <Compile Include="Mappers\Interfaces\IDoctorMapper.cs" />
+    <Compile Include="Mappers\Interfaces\IPositionMapper.cs" />
     <Compile Include="Mappers\Interfaces\IProcedureMapper.cs" />
     <Compile Include="Mappers\Interfaces\INurseMapper.cs" />
     <Compile Include="Mappers\Interfaces\IOtherEmployeeMapper.cs" />
