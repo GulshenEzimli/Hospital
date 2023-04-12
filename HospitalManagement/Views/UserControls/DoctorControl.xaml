@@ -42,7 +42,8 @@
                             <StackPanel Grid.Column="1">
                                 <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.FirstName,Mode=TwoWay}"/>
                                 <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.LastName,Mode=TwoWay}"/>
-                                <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.PositionName,Mode=TwoWay}"/>
+                                <ComboBox Height="25" FontSize="15" Margin="5 5" ItemsSource="{Binding Path=PositionValues}"/>
+                                <!--<TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.PositionName,Mode=TwoWay}"/>-->
                                 <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.Salary,Mode=TwoWay}"/>
                                 <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 3 0 0">
                                     <RadioButton GroupName="Gender" Content="Male" Margin="6"/>

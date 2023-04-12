@@ -1,5 +1,7 @@
 ﻿using HospitalManagement.Enums;
+using HospitalManagement.Models;
 using HospitalManagement.ViewModels.UserControls;
+using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -14,6 +14,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         }
 
         public IDoctorRepository DoctorRepository => new SqlDoctorRepository(_connectionString);
+        public IPositionRepoitory PositionRepository => new SqlPositionRepository(_connectionString);
 
         public INurseRepository NurseRepository => new SqlNurseRepository(_connectionString);
 
