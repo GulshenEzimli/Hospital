@@ -29,12 +29,15 @@ namespace HospitalManagement
             builder.IntegratedSecurity = true;
 
             IUnitOfWork db = new SqlUnitOfWork(builder.ConnectionString);
+
             IDoctorMapper doctorMapper = new DoctorMapper();
             INurseMapper nurseMapper = new NurseMapper();
             IOtherEmployeeMapper otherEmployeeMapper = new OtherEmployeeMapper();
             IPatientMapper patientMapper = new PatientMapper();
+            IProcedureMapper procedureMapper=new ProcedureMapper();
+
             DashboardWindow dashboardWindow = new DashboardWindow();
-            DashboardViewModel viewModel = new DashboardViewModel(db, doctorMapper,nurseMapper, otherEmployeeMapper, patientMapper);
+            DashboardViewModel viewModel = new DashboardViewModel(db, doctorMapper,nurseMapper, otherEmployeeMapper, patientMapper,procedureMapper);
 
             dashboardWindow.DataContext = viewModel;
             viewModel.CenterGrid = dashboardWindow.grdCenter;

@@ -16,6 +16,7 @@ namespace HospitalManagement.Commands.Dashboard
     {
         private readonly DashboardViewModel _viewModel;
         private readonly IPatientMapper _patientMapper;
+
         public OpenPatientsCommand(DashboardViewModel viewModel,IPatientMapper patientMapper)
         {
             _viewModel = viewModel;
@@ -29,12 +30,12 @@ namespace HospitalManagement.Commands.Dashboard
             var patientControl = new PatientControls();
             int no = 1;
             var patients = _viewModel.Db.PatientRepository.Get();
+
             foreach( var patient in patients)
             {
                 var patientModel=_patientMapper.Map(patient);
                 patientModel.No = no++;
                 controlViewModel.Values.Add(patientModel);
-
             }
             patientControl.DataContext = controlViewModel;
             _viewModel.CenterGrid.Children.Clear();

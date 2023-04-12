@@ -24,5 +24,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         public IReceptionistRepository ReceptionistRepository => throw new NotImplementedException();
 
         public IPatientRepository PatientRepository=>new SqlPatientRepository(_connectionString);
+
+        public IProcedureRepository ProcedureRepository => new SqlProcedureRepository(_connectionString);
     }
 }
