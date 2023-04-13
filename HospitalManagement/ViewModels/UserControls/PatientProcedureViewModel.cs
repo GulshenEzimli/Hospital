@@ -16,9 +16,10 @@ namespace HospitalManagement.ViewModels.UserControls
     {
         public PatientProcedureViewModel(IUnitOfWork unitOfWork, ErrorDialog errorDialog) : base(unitOfWork, errorDialog)
         {
+            SetDefaultValues();
         }
         public override string Header => "Patients and Procedures";
-        private int _currentSituation = (int)Situations.NORMAL;
+        private int _currentSituation;
         public int CurrentSituation
         {
             get => _currentSituation;
@@ -49,5 +50,11 @@ namespace HospitalManagement.ViewModels.UserControls
         public EditPatientProcedureCommand Edit => new EditPatientProcedureCommand(this);
         public RejectPatientProcedureCommand Reject => new RejectPatientProcedureCommand(this);
         public SavePatientProcedureCommand Save => new SavePatientProcedureCommand(this);
+
+        public void SetDefaultValues()
+        {
+            CurrentSituation = (int)Situations.NORMAL;
+            CurrentPatientProcedure = new PatientProcedureModel();
+        }
     }
 }

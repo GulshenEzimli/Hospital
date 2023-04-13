@@ -18,10 +18,11 @@ namespace HospitalManagement.ViewModels.UserControls
         public NursesViewModel(IUnitOfWork unitOfWork, INurseMapper nurseMapper,ErrorDialog errorDialog) : base(unitOfWork,errorDialog)
         {
             _nurseMapper = nurseMapper;
+            SetDefaultValues();
         }
         public override string Header => "Nurses";
 
-        private int _currentSituation = (int)Situations.NORMAL;
+        private int _currentSituation;
         public int CurrentSituation
         {
             get => _currentSituation;
@@ -52,5 +53,10 @@ namespace HospitalManagement.ViewModels.UserControls
         public RejectNurseCommand Reject => new RejectNurseCommand(this);
         public SaveNurseCommand Save => new SaveNurseCommand(this, _nurseMapper);
 
+        public void SetDefaultValues()
+        {
+            CurrentSituation = (int)Situations.NORMAL;
+            CurrentValue = new NurseModel();
+        }
     }
 }

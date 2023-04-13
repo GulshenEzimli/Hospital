@@ -15,10 +15,11 @@ namespace HospitalManagement.ViewModels.UserControls
     {
         public OtherEmployeesViewModel(IUnitOfWork unitOfWork, ErrorDialog errorDialog) : base(unitOfWork, errorDialog)
         {
+            SetDefaultValues();
         }
         public override string Header => "Other Employees";
 
-        private int _currentSituation = (int)Situations.NORMAL;
+        private int _currentSituation;
         public int CurrentSituation
         {
             get { return _currentSituation; }
@@ -49,5 +50,10 @@ namespace HospitalManagement.ViewModels.UserControls
         public RejectOtherEmployeeCommand Reject => new RejectOtherEmployeeCommand(this);
         public SaveOtherEmployeeCommand Save => new SaveOtherEmployeeCommand(this);
 
+        public void SetDefaultValues()
+        {
+            CurrentSituation = (int)Situations.NORMAL;
+            CurrentOtherEmployeeValue = new OtherEmployeeModel();
+        }
     }
 }
