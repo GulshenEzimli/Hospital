@@ -25,6 +25,12 @@ namespace HospitalManagement.Commands.Nurses
             //TO DO ...
             if(IsValid(_nursesViewModel.CurrentValue,out string message) == false)
             {
+                _nursesViewModel.Message = new MessageModel
+                {
+                    IsSuccess = false,
+                    Message = message
+                };
+                DoAnimation(_nursesViewModel.ErrorDialog);
                 return;
             }
 
@@ -38,7 +44,8 @@ namespace HospitalManagement.Commands.Nurses
             {
                 _nursesViewModel.Db.NurseRepository.Update(nurse);
             }
-            _nursesViewModel.CurrentSituation = (int)Situations.NORMAL;
+
+            _nursesViewModel.SetDefaultValues();
         }
 
         private bool IsValid(NurseModel nurseModel,out string message)
