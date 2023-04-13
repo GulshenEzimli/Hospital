@@ -21,7 +21,7 @@ namespace HospitalManagement.Commands.Dashboard
         }
         public override void Execute(object parameter)
         {
-            NursesViewModel nursesViewModel = new NursesViewModel(_viewModel.Db);
+            NursesViewModel nursesViewModel = new NursesViewModel(_viewModel.Db, _nurseMapper);
             var nurses = _viewModel.Db.NurseRepository.Get();
             int no = 1;
             foreach (var nurse in nurses)
