@@ -203,6 +203,7 @@
     <Compile Include="Utils\ValidationMessageProvider.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\UserControls\AdminsViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\BaseControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\DoctorsViewModel.cs" />
     <Compile Include="ViewModels\UserControls\NursesViewModel.cs" />
     <Compile Include="ViewModels\UserControls\OtherEmployeesViewModel.cs" />

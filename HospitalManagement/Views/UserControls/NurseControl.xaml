@@ -16,7 +16,8 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0">
-                <Grid >
+                <components:ControlHeader/>
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="4.8*"/>
                         <ColumnDefinition Width="1.2*"/>

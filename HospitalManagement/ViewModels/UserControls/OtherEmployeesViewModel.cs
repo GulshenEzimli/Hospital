@@ -10,11 +10,12 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.ViewModels.UserControls
 {
-    public class OtherEmployeesViewModel : BaseViewModel
+    public class OtherEmployeesViewModel : BaseControlViewModel
     {
         public OtherEmployeesViewModel(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
+        public override string Header => "Other Employees";
 
         private int _currentSituation = (int)Situations.NORMAL;
         public int CurrentSituation
