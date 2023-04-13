@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HospitalManagement.Views.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             Height="0" DataContext="{Binding Message}">
+    <Border Background="AntiqueWhite" BorderThickness="3">
+        <TextBlock  Height="25" Foreground="{Binding Path=TextColor}" FontSize="22" TextAlignment="Center" FontWeight="Bold" Text="{Binding Message}"/>
+    </Border>
 </UserControl>
