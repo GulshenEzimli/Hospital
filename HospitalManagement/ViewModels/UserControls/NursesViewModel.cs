@@ -2,6 +2,7 @@
 using HospitalManagement.Enums;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace HospitalManagement.ViewModels.UserControls
     public class NursesViewModel : BaseControlViewModel
     {
         private readonly INurseMapper _nurseMapper;
-        public NursesViewModel(IUnitOfWork unitOfWork, INurseMapper nurseMapper) : base(unitOfWork)
+        public NursesViewModel(IUnitOfWork unitOfWork, INurseMapper nurseMapper,ErrorDialog errorDialog) : base(unitOfWork,errorDialog)
         {
             _nurseMapper = nurseMapper;
         }

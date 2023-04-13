@@ -1,6 +1,7 @@
 ﻿using HospitalManagement.Commands.PatientProcedures;
 using HospitalManagement.Enums;
 using HospitalManagement.Models;
+using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
 using System;
@@ -13,7 +14,7 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public class PatientProcedureViewModel : BaseControlViewModel
     {
-        public PatientProcedureViewModel(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public PatientProcedureViewModel(IUnitOfWork unitOfWork, ErrorDialog errorDialog) : base(unitOfWork, errorDialog)
         {
         }
         public override string Header => "Patients and Procedures";

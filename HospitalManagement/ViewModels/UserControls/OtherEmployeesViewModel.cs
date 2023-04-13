@@ -1,6 +1,7 @@
 ﻿using HospitalManagement.Commands.OtherEmployees;
 using HospitalManagement.Enums;
 using HospitalManagement.Models;
+using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public class OtherEmployeesViewModel : BaseControlViewModel
     {
-        public OtherEmployeesViewModel(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public OtherEmployeesViewModel(IUnitOfWork unitOfWork, ErrorDialog errorDialog) : base(unitOfWork, errorDialog)
         {
         }
         public override string Header => "Other Employees";
