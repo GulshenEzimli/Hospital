@@ -23,7 +23,9 @@ namespace HospitalManagement.Commands.Dashboard
         }
         public override void Execute(object parameter)
         {
-            OtherEmployeesViewModel otherEmployeesViewModel = new OtherEmployeesViewModel(_viewModel.Db);
+            OtherEmployeesControl otherEmployeesControl = new OtherEmployeesControl();
+
+            OtherEmployeesViewModel otherEmployeesViewModel = new OtherEmployeesViewModel(_viewModel.Db,otherEmployeesControl.ErrorDialog);
 
             List<OtherEmployee> otherEmployees = _viewModel.Db.OtherEmployeeRepository.Get();
             int no = 1;
@@ -33,8 +35,6 @@ namespace HospitalManagement.Commands.Dashboard
                 otherEmployeeModel.No = no++;
                 otherEmployeesViewModel.OtherEmployeeValues.Add(otherEmployeeModel);
             }
-
-            OtherEmployeesControl otherEmployeesControl = new OtherEmployeesControl();
 
             otherEmployeesControl.DataContext = otherEmployeesViewModel;
             _viewModel.CenterGrid.Children.Clear();

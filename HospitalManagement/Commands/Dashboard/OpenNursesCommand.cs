@@ -21,7 +21,9 @@ namespace HospitalManagement.Commands.Dashboard
         }
         public override void Execute(object parameter)
         {
-            NursesViewModel nursesViewModel = new NursesViewModel(_viewModel.Db, _nurseMapper);
+            NurseControl nurseControl = new NurseControl();
+
+            NursesViewModel nursesViewModel = new NursesViewModel(_viewModel.Db, _nurseMapper,nurseControl.ErrorDialog);
             var nurses = _viewModel.Db.NurseRepository.Get();
             int no = 1;
             foreach (var nurse in nurses)
@@ -30,7 +32,6 @@ namespace HospitalManagement.Commands.Dashboard
                 nurseModel.No = no++;
                 nursesViewModel.Values.Add(nurseModel);
             }
-            NurseControl nurseControl = new NurseControl();
 
             nurseControl.DataContext = nursesViewModel;
             _viewModel.CenterGrid.Children.Clear();

@@ -23,7 +23,9 @@ namespace HospitalManagement.Commands.Dashboard
         }
         public override void Execute(object parameter)
         {
-            PatientProcedureViewModel patientProcedureViewModel = new PatientProcedureViewModel(_viewModel.Db);
+            PatientProcedureControl patientProcedureControl = new PatientProcedureControl();
+
+            PatientProcedureViewModel patientProcedureViewModel = new PatientProcedureViewModel(_viewModel.Db,patientProcedureControl.ErrorDialog);
 
             List<PatientProcedure> patientProcedures = _viewModel.Db.PatientProcedureRepository.Get();
             int no = 1;
@@ -33,7 +35,6 @@ namespace HospitalManagement.Commands.Dashboard
                 patientProcedureModel.No = no++;
                 patientProcedureViewModel.PatientProcedureValues.Add(patientProcedureModel);
             }
-            PatientProcedureControl patientProcedureControl = new PatientProcedureControl();
 
             patientProcedureControl.DataContext = patientProcedureViewModel;
             _viewModel.CenterGrid.Children.Clear();
