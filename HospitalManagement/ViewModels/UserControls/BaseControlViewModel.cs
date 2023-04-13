@@ -1,4 +1,5 @@
-﻿using HospitalManagementCore.DataAccess.Interfaces;
+﻿using HospitalManagement.Models;
+using HospitalManagementCore.DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,15 @@ namespace HospitalManagement.ViewModels.UserControls
         {
         }
         public abstract string Header { get; }
+        private MessageModel _message = new MessageModel();
+        public MessageModel Message {
+            get => _message;
+            set
+            {
+                _message = value;
+                OnPropertyChanged(nameof(Message)); 
+            }      
+        }
 
     }
 }

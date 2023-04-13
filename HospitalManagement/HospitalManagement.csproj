@@ -68,6 +68,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Components\ErrorDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\AdminControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -194,6 +198,7 @@
     <Compile Include="Mappers\Interfaces\IOtherEmployeeMapper.cs" />
     <Compile Include="Mappers\Interfaces\IPatientMapper.cs" />
     <Compile Include="Models\DoctorModel.cs" />
+    <Compile Include="Models\MessageModel.cs" />
     <Compile Include="Models\NurseModel.cs" />
     <Compile Include="Models\OtherEmployeeModel.cs" />
     <Compile Include="Models\PatientModel.cs" />
@@ -219,6 +224,9 @@
     </Compile>
     <Compile Include="Views\Components\CustomDatePicker.xaml.cs">
       <DependentUpon>CustomDatePicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\ErrorDialog.xaml.cs">
+      <DependentUpon>ErrorDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\AdminControl.xaml.cs">
       <DependentUpon>AdminControl.xaml</DependentUpon>
