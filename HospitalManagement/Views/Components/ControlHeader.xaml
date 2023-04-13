@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:HospitalManagement.Views.Components"
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="800">
-    <Border Background="GhostWhite" BorderThickness="2">
-        <TextBlock Height="25" FontSize="15" Background="WhiteSmoke" Foreground="Black" TextAlignment="Left" FontWeight="Medium" Text="{Binding Header}"/>
+    <Border BorderBrush="White" BorderThickness="0 0 0 3">
+        <TextBlock Height="25" FontSize="15" Background="#4EA8DE" Foreground="Black" TextAlignment="Center" FontWeight="DemiBold" Text="{Binding Header}"/>
     </Border>
 </UserControl>
