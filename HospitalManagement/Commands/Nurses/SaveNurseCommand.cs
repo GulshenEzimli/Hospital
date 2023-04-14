@@ -3,6 +3,7 @@ using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
 using HospitalManagement.Utils;
 using HospitalManagement.ViewModels.UserControls;
+using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,14 @@ namespace HospitalManagement.Commands.Nurses
             }
 
             var nurse = _nurseMapper.Map(_nursesViewModel.CurrentValue);
-
+            nurse.CreationDate = DateTime.Now;
+            nurse.ModifiedDate = DateTime.Now;
+            nurse.IsDelete= false;
+            nurse.Creator = new Admin() { Id=2 };
+            nurse.Modifier = new Admin() { Id = 2 };
+            nurse.Position = new DoctorPosition() { Id = 3};
+            nurse.Gender = false;
+            
             if (nurse.Id == 0)
             {
                 _nursesViewModel.Db.NurseRepository.Insert(nurse);
@@ -45,6 +53,8 @@ namespace HospitalManagement.Commands.Nurses
                 _nursesViewModel.Db.NurseRepository.Update(nurse);
             }
 
+            _nursesViewModel.CurrentValue.No = _nursesViewModel.Values.LastOrDefault()?.No+1 ?? 1;
+            _nursesViewModel.Values.Add(_nursesViewModel.CurrentValue);
             _nursesViewModel.SetDefaultValues();
         }
 
@@ -81,7 +91,7 @@ namespace HospitalManagement.Commands.Nurses
                 message = ValidationMessageProvider.GetSpecificLength("PhoneNumber",13);
                 return false;
             }
-            if (string.IsNullOrWhiteSpace(nurseModel.PIN))
+            if (string.IsNullOrEmpty(nurseModel.PIN))
             {
                 message = ValidationMessageProvider.GetRequiredMessage("PIN");
                 return false;

@@ -37,7 +37,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 connection.Open();
                 string cmdText = @"select Nurses.Id as NurseId,DoctorPositions.Id as PositionId,Departments.Id as  
                                 DepartmentId, CreatorId, ModifierId, FirstName,LastName,Gender, BirthDate, PIN,
-                                Email,Phonenumber, Salary,CreationDate, ModifiedDate,IsDelete,PositionName, DepartmentName 
+                                Email,PhoneNumber, Salary,CreationDate, ModifiedDate,IsDelete,PositionName, DepartmentName 
                                 from Nurses inner join DoctorPositions on Nurses.PositionId = DoctorPositions.Id
                                 inner join Departments on DoctorPositions.DepartmentId= Departments.Id where IsDelete = 0";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
@@ -62,7 +62,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 connection.Open();
                 string cmdText = @"select Nurses.Id as NurseId,DoctorPositions.Id as PositionId,Departments.Id as  
                                 DepartmentId, CreatorId, ModifierId, FirstName,LastName,Gender, BirthDate, PIN,
-                                Email,Phonenumber, Salary,CreationDate, ModifiedDate,IsDelete,PositionName, DepartmentName 
+                                Email,PhoneNumber, Salary,CreationDate, ModifiedDate,IsDelete,PositionName, DepartmentName 
                                 from Nurses inner join DoctorPositions on Nurses.PositionId = DoctorPositions.Id
                                 inner join Departments on DoctorPositions.DepartmentId= Departments.Id 
                                 where Id=@id and IsDelete = 0";
@@ -82,10 +82,10 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             {
                 connection.Open();
                 string cmdText = @"insert into Nurses output inserted.id values(
-                                 Positionid = (select Id from DoctorPositions where PositionName = @positionname),
-                                 @firstname,@lastname,@gender,
-                                 @birthdate,@pin,@email,@phonenumber,@salary,@isdelete,@creationdate,@modifieddate
-                                 @creatorid,@modifierid)";
+                                 PositionId = (select Id from DoctorPositions where PositionName = @positionName),
+                                 @firstName,@lastName,@gender,
+                                 @birthDate,@pin,@email,@phoneNumber,@salary,@isDelete,@creationDate,@modifiedDate
+                                 @creatorId,@modifierId)";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     AddParameters(command, nurse);
@@ -99,11 +99,11 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"update Nurses set PositionId=(select Id from DoctorPositions where PositionName = @positionname), 
-                                 FirstName=@firstname, LastName=@lastname,
-                                 Gender=@gender, BirthDate=@birthdate, PIN=@pin, Email=@email, PhoneNumber=@phonenumber,
-                                 Salary=@salary, IsDelete=@isdelete, CreationDate=@creationdate, ModifiedDate=@modifieddate,
-                                 CreatorId=@creatorid, ModifierId=@modifierid where Id=@id";
+                string cmdText = @"update Nurses set PositionId=(select Id from DoctorPositions where PositionName = @positionName), 
+                                 FirstName=@firstName, LastName=@lastName,
+                                 Gender=@gender, BirthDate=@birthDate, PIN=@pin, Email=@email, PhoneNumber=@phoneNumber,
+                                 Salary=@salary, IsDelete=@isDelete, CreationDate=@creationDate, ModifiedDate=@modifiedDate,
+                                 CreatorId=@creatorId, ModifierId=@modifierId where Id=@id";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     command.Parameters.AddWithValue("id", nurse.Id);
@@ -117,9 +117,6 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         {
             Nurse nurse = new Nurse();
             nurse.Id = reader.GetInt32("NurseId");
-            nurse.PositionId = reader.GetInt32("PositionId");
-            nurse.ModifierId = reader.GetInt32("ModifierId");
-            nurse.CreatorId = reader.GetInt32("CreatorId");
             nurse.Position = new DoctorPosition()
             {
                 Id = reader.GetInt32("PositionId"),
@@ -144,7 +141,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             nurse.Gender = reader.GetBoolean("Gender");
             nurse.PIN = reader.GetString("PIN");
             nurse.Email = reader.GetString("Email");
-            nurse.PhoneNumber = reader.GetString("Phonenumber");
+            nurse.PhoneNumber = reader.GetString("PhoneNumber");
             nurse.BirthDate = reader.GetDateTime("BirthDate");
             nurse.Salary = reader.GetDecimal("Salary");
             nurse.CreationDate = reader.GetDateTime("CreationDate");
@@ -156,20 +153,20 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 
         private void AddParameters(SqlCommand command, Nurse nurse)
         {
-            command.Parameters.AddWithValue("positionname", nurse.Position.Name);
-            command.Parameters.AddWithValue("firstname", nurse.FirstName);
-            command.Parameters.AddWithValue("lirstname", nurse.LastName);
+            command.Parameters.AddWithValue("positionName", nurse.Position.Name);
+            command.Parameters.AddWithValue("firstName", nurse.FirstName);
+            command.Parameters.AddWithValue("lastName", nurse.LastName);
             command.Parameters.AddWithValue("gender", nurse.Gender);
-            command.Parameters.AddWithValue("birthdate", nurse.BirthDate);
+            command.Parameters.AddWithValue("birthDate", nurse.BirthDate);
             command.Parameters.AddWithValue("pin", nurse.PIN);
             command.Parameters.AddWithValue("email", nurse.Email);
-            command.Parameters.AddWithValue("phonenumber", nurse.PhoneNumber);
+            command.Parameters.AddWithValue("phoneNumber", nurse.PhoneNumber);
             command.Parameters.AddWithValue("salary", nurse.Salary);
-            command.Parameters.AddWithValue("isdelete", nurse.IsDelete);
-            command.Parameters.AddWithValue("creationdate", nurse.CreationDate);
-            command.Parameters.AddWithValue("modifieddate", nurse.ModifiedDate);
-            command.Parameters.AddWithValue("creatorid", nurse.CreatorId);
-            command.Parameters.AddWithValue("modifierid", nurse.ModifierId);
+            command.Parameters.AddWithValue("isDelete", nurse.IsDelete);
+            command.Parameters.AddWithValue("creationDate", nurse.CreationDate);
+            command.Parameters.AddWithValue("modifiedDate", nurse.ModifiedDate);
+            command.Parameters.AddWithValue("creatorId", nurse.CreatorId);
+            command.Parameters.AddWithValue("modifierId", nurse.ModifierId);
         }
     }
 }
