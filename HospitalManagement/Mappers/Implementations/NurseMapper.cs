@@ -39,6 +39,7 @@ namespace HospitalManagement.Mappers.Implementations
             nurse.LastName = nurseModel.LastName;
             nurse.BirthDate = nurseModel.BirthDate;
             nurse.PhoneNumber = nurseModel.PhoneNumber;
+            nurse.Position = new DoctorPosition();
             nurse.Position.Name = nurseModel.PositionName;
             nurse.Email = nurseModel.Email;
             nurse.PIN = nurseModel.PIN;

@@ -24,7 +24,7 @@ namespace HospitalManagement.Commands.Nurses
         public override void Execute(object parameter)
         {
             //TO DO ...
-            if(IsValid(_nursesViewModel.CurrentValue,out string message) == false)
+            if (IsValid(_nursesViewModel.CurrentValue, out string message) == false)
             {
                 _nursesViewModel.Message = new MessageModel
                 {
@@ -38,12 +38,12 @@ namespace HospitalManagement.Commands.Nurses
             var nurse = _nurseMapper.Map(_nursesViewModel.CurrentValue);
             nurse.CreationDate = DateTime.Now;
             nurse.ModifiedDate = DateTime.Now;
-            nurse.IsDelete= false;
-            nurse.Creator = new Admin() { Id=2 };
+            nurse.IsDelete = false;
+            nurse.Creator = new Admin() { Id = 2 };
             nurse.Modifier = new Admin() { Id = 2 };
-            nurse.Position = new DoctorPosition() { Id = 3};
+            nurse.Position = new DoctorPosition() { Name = _nursesViewModel.CurrentValue.PositionName };
             nurse.Gender = false;
-            
+
             if (nurse.Id == 0)
             {
                 _nursesViewModel.Db.NurseRepository.Insert(nurse);
@@ -53,21 +53,21 @@ namespace HospitalManagement.Commands.Nurses
                 _nursesViewModel.Db.NurseRepository.Update(nurse);
             }
 
-            _nursesViewModel.CurrentValue.No = _nursesViewModel.Values.LastOrDefault()?.No+1 ?? 1;
+            _nursesViewModel.CurrentValue.No = _nursesViewModel.Values.LastOrDefault()?.No + 1 ?? 1;
             _nursesViewModel.Values.Add(_nursesViewModel.CurrentValue);
             _nursesViewModel.SetDefaultValues();
         }
 
-        private bool IsValid(NurseModel nurseModel,out string message)
+        private bool IsValid(NurseModel nurseModel, out string message)
         {
             if (string.IsNullOrWhiteSpace(nurseModel.FirstName))
             {
                 message = ValidationMessageProvider.GetRequiredMessage("Name");
                 return false;
             }
-            if(nurseModel.FirstName.Length > 25)
+            if (nurseModel.FirstName.Length > 25)
             {
-                message = ValidationMessageProvider.GetLengthMessage("Name",25);
+                message = ValidationMessageProvider.GetLengthMessage("Name", 25);
                 return false;
             }
             if (string.IsNullOrWhiteSpace(nurseModel.LastName))
@@ -86,9 +86,9 @@ namespace HospitalManagement.Commands.Nurses
                 message = ValidationMessageProvider.GetRequiredMessage("PhoneNumber");
                 return false;
             }
-            if(nurseModel.PhoneNumber.Length != 13)
+            if (nurseModel.PhoneNumber.Length != 13)
             {
-                message = ValidationMessageProvider.GetSpecificLength("PhoneNumber",13);
+                message = ValidationMessageProvider.GetSpecificLength("PhoneNumber", 13);
                 return false;
             }
             if (string.IsNullOrEmpty(nurseModel.PIN))
@@ -113,9 +113,9 @@ namespace HospitalManagement.Commands.Nurses
                 return false;
             }
 
-            if(nurseModel.Salary < 0)
+            if (nurseModel.Salary < 0)
             {
-                message = ValidationMessageProvider.GetSalaryMessage(); 
+                message = ValidationMessageProvider.GetSalaryMessage();
                 return false;
             }
             if (nurseModel.Salary > 10000)
