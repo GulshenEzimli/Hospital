@@ -16,8 +16,8 @@ namespace HospitalManagement.ViewModels.UserControls
         {
         }
 
-        private int _currentSituation = (int)Situations.NORMAL;
-        public int CurrentSituation
+        private Situations _currentSituation = Situations.NORMAL;
+        public Situations CurrentSituation
         {
             get => _currentSituation;
             set

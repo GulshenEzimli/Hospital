@@ -19,7 +19,7 @@ namespace HospitalManagement.Commands.Procedures
         }
         public override void Execute(object parameter)
         {
-            _procedureViewModel.CurrentSituation = (int)Situations.ADD;
+            _procedureViewModel.CurrentSituation = Situations.ADD;
         }
     }
 }

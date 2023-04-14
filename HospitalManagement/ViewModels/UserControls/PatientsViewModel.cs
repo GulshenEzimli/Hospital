@@ -17,8 +17,8 @@ namespace HospitalManagement.ViewModels.UserControls
         public PatientsViewModel(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
-        private int _currentSituation = (int)Situations.NORMAL;
-        public int CurrentSituation
+        private Situations _currentSituation = Situations.NORMAL;
+        public Situations CurrentSituation
         {
             get { return _currentSituation; }
             
