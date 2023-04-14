@@ -2,6 +2,7 @@
 using HospitalManagement.ViewModels.UserControls;
 using HospitalManagement.ViewModels.Windows;
 using HospitalManagement.Views.UserControls;
+using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,11 @@ namespace HospitalManagement.Commands.Dashboard
                 var nurseModel = _nurseMapper.Map(nurse);
                 nurseModel.No = no++;
                 nursesViewModel.Values.Add(nurseModel);
+            }
+            List<DoctorPosition> positions = _viewModel.Db.PositionRepository.Get();
+            foreach (var position in positions)
+            {
+                nursesViewModel.PositionNames.Add(position.Name);
             }
 
             nurseControl.DataContext = nursesViewModel;
