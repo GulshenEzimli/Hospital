@@ -18,7 +18,7 @@ namespace HospitalManagement.Commands.Queues
 
         public override void Execute(object parameter)
         {
-            _queueViewModel.CurrentSituation = (int)Situations.EDIT;
+            _queueViewModel.CurrentSituation = Situations.EDIT;
         }
     }
 }

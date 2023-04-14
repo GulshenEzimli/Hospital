@@ -20,7 +20,7 @@ namespace HospitalManagement.Commands.Doctors
         {
             //TO DO : implement save
 
-            _doctorsViewModel.CurrentSituation = (int)Situations.NORMAL;
+            _doctorsViewModel.CurrentSituation = Situations.NORMAL;
         }
     }
 }

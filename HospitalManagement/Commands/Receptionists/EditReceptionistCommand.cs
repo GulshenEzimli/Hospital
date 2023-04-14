@@ -18,7 +18,7 @@ namespace HospitalManagement.Commands.Receptionists
             }
             public override void Execute(object parameter)
             {
-                _receptionistViewModel.CurrentSituation = (int)Situations.EDIT;
+                _receptionistViewModel.CurrentSituation = Situations.EDIT;
             }
         
     }

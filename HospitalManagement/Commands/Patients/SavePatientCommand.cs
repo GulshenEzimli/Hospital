@@ -19,7 +19,7 @@ namespace HospitalManagement.Commands.Patients
         public override void Execute(object parameter)
         {
             //TO DO:IMPLEMENT SAVE
-            _patientViewModel.CurrentSituation = (int)Situations.NORMAL;
+            _patientViewModel.CurrentSituation = Situations.NORMAL;
         }
     }
 }
