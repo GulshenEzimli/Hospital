@@ -48,6 +48,15 @@ namespace HospitalManagement.Commands.Doctors
                 _doctorsViewModel.Db.DoctorRepository.Update(doctor);
             }
 
+            _doctorsViewModel.Values.Clear();
+            List<Doctor> doctors = _doctorsViewModel.Db.DoctorRepository.Get();
+            int no = 1;
+            foreach (Doctor doctorItem in doctors)
+            {
+                DoctorModel doctorModel = _doctorMapper.Map(doctorItem);
+                doctorModel.No = no++;
+                _doctorsViewModel.Values.Add(doctorModel);
+            }
 
             _doctorsViewModel.SetDefaultValues();
         }
