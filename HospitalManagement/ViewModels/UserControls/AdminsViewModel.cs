@@ -1,6 +1,7 @@
 ﻿using HospitalManagement.Commands.Admins;
 using HospitalManagement.Commands.Nurses;
 using HospitalManagement.Enums;
+using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;

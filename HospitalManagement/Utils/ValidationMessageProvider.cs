@@ -30,6 +30,10 @@ namespace HospitalManagement.Utils
         {
             return $"Salary should be less than {salary}.";
         }
+        public static string GetPINMessage()
+        {
+            return $"PIN should be 7.";
+        }
 
     }
 }
