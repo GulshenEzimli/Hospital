@@ -8,7 +8,6 @@ namespace HospitalManagementCore.Domain.Entities
     public class OtherEmployee : IEntity
     {
         public int Id { get; set; }
-        public int JobId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool Gender { get; set; }
@@ -20,8 +19,10 @@ namespace HospitalManagementCore.Domain.Entities
         public bool IsDelete { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime ModifiedDate { get; set; }
-        public int CreatorId { get; set; }
-        public int ModifierId { get; set; }
+        public int CreatorId => Creator?.Id ?? 0;
+        public int ModifierId => Modifier?.Id ?? 0;
+        public int JobId => Job?.Id ?? 0;
+        public Job Job { get; set; }
         public Admin Creator { get; set; }
         public Admin Modifier { get; set; }
     }
