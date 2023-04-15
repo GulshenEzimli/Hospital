@@ -34,18 +34,16 @@ namespace HospitalManagement.Mappers.Implementations
         public Doctor Map(DoctorModel doctorModel)
         {
             Doctor doctor = new Doctor();
-            doctor.Id = doctorModel.Id;
             doctor.Position.Name = doctorModel.PositionName;
-            doctor.Position.Department.Name = doctorModel.DepartmentName;
             doctor.FirstName = doctorModel.FirstName;
             doctor.LastName = doctorModel.LastName;
-            //doctor.Gender = doctorModel.Gender;
+            doctor.Gender = doctorModel.Gender;
             doctor.BirthDate = doctorModel.BirthDate;
             doctor.PIN = doctorModel.PIN;
             doctor.Email = doctorModel.Email;
             doctor.Phonenumber = doctorModel.Phonenumber;
             doctor.Salary = doctorModel.Salary;
-            //doctor.IsChiefDoctor = doctorModel.IsChiefDoctor;
+            doctor.IsChiefDoctor = doctorModel.IsChiefDoctor;
 
             return doctor;
         }
