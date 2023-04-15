@@ -42,7 +42,10 @@ namespace HospitalManagement.Mappers.Implementations
             otherEmployee.BirthDate = model.BirthDate;
             otherEmployee.PIN = model.PIN;
             otherEmployee.Gender = model.Gender;
-            otherEmployee.Job.Name = model.JobName;
+            otherEmployee.Job = new Job()
+            {
+                Name = model.JobName,
+            };
 
             return otherEmployee;
         }

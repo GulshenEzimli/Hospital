@@ -25,7 +25,7 @@ namespace HospitalManagement.Commands.Dashboard
         {
             OtherEmployeesControl otherEmployeesControl = new OtherEmployeesControl();
 
-            OtherEmployeesViewModel otherEmployeesViewModel = new OtherEmployeesViewModel(_viewModel.Db,otherEmployeesControl.ErrorDialog);
+            OtherEmployeesViewModel otherEmployeesViewModel = new OtherEmployeesViewModel(_viewModel.Db, _otherEmployeeMapper,otherEmployeesControl.ErrorDialog);
 
             List<OtherEmployee> otherEmployees = _viewModel.Db.OtherEmployeeRepository.Get();
             int no = 1;

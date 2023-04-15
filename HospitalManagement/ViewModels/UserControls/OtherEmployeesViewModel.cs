@@ -1,5 +1,6 @@
 ﻿using HospitalManagement.Commands.OtherEmployees;
 using HospitalManagement.Enums;
+using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
@@ -14,8 +15,10 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public class OtherEmployeesViewModel : BaseControlViewModel
     {
-        public OtherEmployeesViewModel(IUnitOfWork unitOfWork, ErrorDialog errorDialog) : base(unitOfWork, errorDialog)
+        private readonly IOtherEmployeeMapper _otherEmployeeMapper;
+        public OtherEmployeesViewModel(IUnitOfWork unitOfWork, IOtherEmployeeMapper otherEmployeeMapper, ErrorDialog errorDialog) : base(unitOfWork, errorDialog)
         {
+            _otherEmployeeMapper = otherEmployeeMapper;
             SetDefaultValues();
         }
         public override string Header => "Other Employees";
@@ -52,7 +55,7 @@ namespace HospitalManagement.ViewModels.UserControls
         public DeleteOtherEmployeeCommand Delete => new DeleteOtherEmployeeCommand(this);
         public EditOtherEmployeeCommand Edit => new EditOtherEmployeeCommand(this); 
         public RejectOtherEmployeeCommand Reject => new RejectOtherEmployeeCommand(this);
-        public SaveOtherEmployeeCommand Save => new SaveOtherEmployeeCommand(this);
+        public SaveOtherEmployeeCommand Save => new SaveOtherEmployeeCommand(this, _otherEmployeeMapper);
 
         public void SetDefaultValues()
         {
