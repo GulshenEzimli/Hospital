@@ -17,7 +17,7 @@
 
                 <StackPanel Grid.Row="0">
                     <components:ControlHeader/>
-                    <!--<components:ErrorDialog x:Name="ErrorDialog"/>-->
+                    <components:ErrorDialog x:Name="ErrorDialog"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="5*"/>
