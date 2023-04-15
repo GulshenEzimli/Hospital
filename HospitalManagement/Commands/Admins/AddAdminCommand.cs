@@ -17,7 +17,7 @@ namespace HospitalManagement.Commands.Admins
         }
         public override void Execute(object parameter)
         {
-            _adminsViewModel.CurrentSituation = Situations.ADD;
+            _adminsViewModel.CurrentSituation = (int)Situations.ADD;
         }
     }
 }
