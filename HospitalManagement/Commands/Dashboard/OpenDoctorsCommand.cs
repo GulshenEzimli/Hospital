@@ -40,7 +40,7 @@ namespace HospitalManagement.Commands.Dashboard
             foreach (DoctorPosition position in positions)
             {
                 PositionModel positionModel = _positionMapper.Map(position);                
-                doctorsViewModel.PositionValues.Add(position.Name);
+                doctorsViewModel.PositionValues.Add(positionModel.Name);
             }
 
             DoctorControl doctorControl = new DoctorControl();

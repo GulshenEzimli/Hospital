@@ -18,7 +18,7 @@ namespace HospitalManagement.Commands.Doctors
 
         public override void Execute(object parameter)
         {
-            _doctorsViewModel.CurrentSituation = (int)Situations.EDIT;
+            _doctorsViewModel.CurrentSituation = Situations.EDIT;
         }
     }
 }

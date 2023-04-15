@@ -18,7 +18,7 @@ namespace HospitalManagement.Commands.OtherEmployees
 
         public override void Execute(object parameter)
         {
-            _viewModel.CurrentSituation = (int)Situations.NORMAL;
+            _viewModel.CurrentSituation = Situations.NORMAL;
         }
     }
 }

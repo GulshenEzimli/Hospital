@@ -81,11 +81,10 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"insert into Nurses output inserted.id values(
-                                 PositionId = (select Id from DoctorPositions where PositionName = @positionName),
+                string cmdText = @"insert into Nurses output inserted.id values(@creatorId,@modifierId,
+                                 (select Id from DoctorPositions where PositionName = @positionName),
                                  @firstName,@lastName,@gender,
-                                 @birthDate,@pin,@email,@phoneNumber,@salary,@isDelete,@creationDate,@modifiedDate
-                                 @creatorId,@modifierId)";
+                                 @birthDate,@pin,@email,@phoneNumber,@salary,@creationDate,@modifiedDate,@isDelete)";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     AddParameters(command, nurse);
@@ -153,6 +152,8 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 
         private void AddParameters(SqlCommand command, Nurse nurse)
         {
+            command.Parameters.AddWithValue("creatorId", nurse.Creator.Id);
+            command.Parameters.AddWithValue("modifierId", nurse.Modifier.Id);
             command.Parameters.AddWithValue("positionName", nurse.Position.Name);
             command.Parameters.AddWithValue("firstName", nurse.FirstName);
             command.Parameters.AddWithValue("lastName", nurse.LastName);
@@ -165,8 +166,6 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             command.Parameters.AddWithValue("isDelete", nurse.IsDelete);
             command.Parameters.AddWithValue("creationDate", nurse.CreationDate);
             command.Parameters.AddWithValue("modifiedDate", nurse.ModifiedDate);
-            command.Parameters.AddWithValue("creatorId", nurse.CreatorId);
-            command.Parameters.AddWithValue("modifierId", nurse.ModifierId);
         }
     }
 }

@@ -23,8 +23,8 @@ namespace HospitalManagement.ViewModels.UserControls
         }
         public override string Header => "Nurses";
 
-        private int _currentSituation;
-        public int CurrentSituation
+        private Situations _currentSituation;
+        public Situations CurrentSituation
         {
             get => _currentSituation;
             set
@@ -59,7 +59,7 @@ namespace HospitalManagement.ViewModels.UserControls
 
         public void SetDefaultValues()
         {
-            CurrentSituation = (int)Situations.NORMAL;
+            CurrentSituation = Situations.NORMAL;
             CurrentValue = new NurseModel();
         }
     }
