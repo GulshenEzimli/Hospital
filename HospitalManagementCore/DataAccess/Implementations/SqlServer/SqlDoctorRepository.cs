@@ -123,8 +123,6 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                     Name = reader.GetString("DepartmentName")
                 }
             };
-            doctor.ModifierId = reader.GetInt32("ModifierId");
-            doctor.CreatorId = reader.GetInt32("CreatorId");
             doctor.FirstName = reader.GetString("FirstName");
             doctor.LastName = reader.GetString("LastName");
             doctor.Gender = reader.GetBoolean("Gender");
@@ -137,8 +135,14 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             doctor.ModifiedDate = reader.GetDateTime("ModifiedDate");
             doctor.IsDelete = reader.GetBoolean("IsDelete");
             doctor.IsChiefDoctor = reader.GetBoolean("IsChiefDoctor");
-            doctor.Creator = new Admin() { Id = doctor.CreatorId };
-            doctor.Modifier = new Admin() { Id = doctor.ModifierId };
+            doctor.Creator = new Admin() 
+            { 
+                Id = reader.GetInt32("CreatorId") 
+            };
+            doctor.Modifier = new Admin() 
+            { 
+                Id = reader.GetInt32("ModifierId") 
+            };
 
             return doctor;
         }
