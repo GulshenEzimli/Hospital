@@ -1,6 +1,7 @@
 ﻿using HospitalManagement.Commands.Doctors;
 using HospitalManagement.Commands.Nurses;
 using HospitalManagement.Enums;
+using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
@@ -11,11 +12,15 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.ViewModels.UserControls
 {
-    public class DoctorsViewModel : BaseViewModel
+    public class DoctorsViewModel : BaseControlViewModel
     {
-        public DoctorsViewModel(IUnitOfWork unitOfWork) :base(unitOfWork)
+        private readonly IDoctorMapper _doctorMapper;
+        public DoctorsViewModel(IUnitOfWork unitOfWork, IDoctorMapper doctorMapper) :base(unitOfWork)
         {
+            _doctorMapper = doctorMapper;
         }
+        public override string Header => "Doctors";
+
 
         private Situations _currentSituation = Situations.NORMAL;
         public Situations CurrentSituation
@@ -50,6 +55,7 @@ namespace HospitalManagement.ViewModels.UserControls
         public DeleteDoctorCommand Delete => new DeleteDoctorCommand(this);
         public EditDoctorCommand Edit => new EditDoctorCommand(this);
         public RejectDoctorCommand Reject => new RejectDoctorCommand(this);
-        public SaveDoctorCommand Save => new SaveDoctorCommand(this);
+        public SaveDoctorCommand Save => new SaveDoctorCommand(this, _doctorMapper);
+
     }
 }
