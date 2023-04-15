@@ -25,7 +25,7 @@ namespace HospitalManagement.Commands.Dashboard
         }
         public override void Execute(object parameter)
         {
-            DoctorsViewModel doctorsViewModel = new DoctorsViewModel(_viewModel.Db);
+            DoctorsViewModel doctorsViewModel = new DoctorsViewModel(_viewModel.Db,_doctorMapper);
 
             List<Doctor> doctors = _viewModel.Db.DoctorRepository.Get();
             int no = 1;
