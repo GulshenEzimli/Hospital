@@ -79,9 +79,9 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             {
                 connection.Open();
                 string cmdText = @"insert into Doctors output inserted.id 
-                                   values(@creatorid, @modifierid, @positionid = select Id from DoctorPositions where PositionName = @positionname,
-                                   @firstname, @lastname, @gender, @birthdate, @pin, @email, @phonenumber, @salary, @ischiefdoctor, 
-                                   @creationdate, @modifieddate, @isdelete)";
+                                   values(@creatorId, @modifierId, (select Id from DoctorPositions where PositionName = @positionName),
+                                   @firstName, @lastName, @gender, @birthDate, @pin, @email, @phoneNumber, @salary, @isChiefDoctor, 
+                                   @creationDate, @modifiedDate, @isDelete)";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     AddParameters(command, doctor);
@@ -148,21 +148,21 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         }
         private void AddParameters(SqlCommand command, Doctor doctor)
         {            
-            command.Parameters.AddWithValue("positionname", doctor.Position.Name);
-            command.Parameters.AddWithValue("firstname", doctor.FirstName);
-            command.Parameters.AddWithValue("lirstname", doctor.LastName);
+            command.Parameters.AddWithValue("positionName", doctor.Position.Name);
+            command.Parameters.AddWithValue("firstName", doctor.FirstName);
+            command.Parameters.AddWithValue("lirstName", doctor.LastName);
             command.Parameters.AddWithValue("gender", doctor.Gender);
-            command.Parameters.AddWithValue("birthdate", doctor.BirthDate);
+            command.Parameters.AddWithValue("birthDate", doctor.BirthDate);
             command.Parameters.AddWithValue("pin", doctor.PIN);
             command.Parameters.AddWithValue("email", doctor.Email);
-            command.Parameters.AddWithValue("phonenumber", doctor.Phonenumber);
+            command.Parameters.AddWithValue("phoneNumber", doctor.Phonenumber);
             command.Parameters.AddWithValue("salary", doctor.Salary);
-            command.Parameters.AddWithValue("isdelete", doctor.IsDelete);
-            command.Parameters.AddWithValue("ischiefdoctor", doctor.IsChiefDoctor);
-            command.Parameters.AddWithValue("creationdate", doctor.CreationDate);
-            command.Parameters.AddWithValue("modifieddate", doctor.ModifiedDate);
-            command.Parameters.AddWithValue("creatorid", doctor.CreatorId);
-            command.Parameters.AddWithValue("modifierid", doctor.ModifierId);
+            command.Parameters.AddWithValue("isDelete", doctor.IsDelete);
+            command.Parameters.AddWithValue("isChiefDoctor", doctor.IsChiefDoctor);
+            command.Parameters.AddWithValue("creationDate", doctor.CreationDate);
+            command.Parameters.AddWithValue("modifiedDate", doctor.ModifiedDate);
+            command.Parameters.AddWithValue("creatorId", doctor.CreatorId);
+            command.Parameters.AddWithValue("modifierId", doctor.ModifierId);
         }
     }
 }
