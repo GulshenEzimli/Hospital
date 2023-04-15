@@ -22,9 +22,9 @@ namespace HospitalManagementCore.Domain.Entities
         public bool IsChiefDoctor { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime ModifiedDate { get; set; }
-        public int CreatorId { get; set; }
-        public int ModifierId { get; set; }
         public Admin Creator { get; set; }
         public Admin Modifier { get; set; }
+        public int CreatorId => Creator?.Id ?? 0;
+        public int ModifierId => Modifier?.Id ?? 0;
     }
 }
