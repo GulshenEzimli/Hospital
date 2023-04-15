@@ -24,11 +24,10 @@ namespace HospitalManagement.ViewModels.UserControls
 
             SetDefaultValues();
         }
-        private int _currentSituation;
-
 
         public override string Header => "Patients";
 
+        private int _currentSituation;
         public int CurrentSituation
         {
             get { return _currentSituation; }
@@ -50,6 +49,7 @@ namespace HospitalManagement.ViewModels.UserControls
                 OnPropertyChanged(nameof(CurrentValue));
             }
         }
+
         private List<PatientModel> _values;
         public List<PatientModel> Values => _values ?? (_values = new List<PatientModel>());
 

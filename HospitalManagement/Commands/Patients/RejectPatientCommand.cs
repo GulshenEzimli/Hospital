@@ -20,7 +20,6 @@ namespace HospitalManagement.Commands.Patients
         public override void Execute(object parameter)
         {
             _patientViewModel.SetDefaultValues();
-            _patientViewModel.CurrentSituation = (int)Situations.NORMAL;
         }
 
        
