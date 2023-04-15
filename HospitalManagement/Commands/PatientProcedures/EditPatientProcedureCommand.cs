@@ -10,14 +10,14 @@ namespace HospitalManagement.Commands.PatientProcedures
 {
     public class EditPatientProcedureCommand : BaseCommand
     {
-        private readonly PatientProcedureViewModel _viewModel;
-        public EditPatientProcedureCommand(PatientProcedureViewModel viewModel)
+        private readonly PatientProcedureViewModel _patientProcedureViewModel;
+        public EditPatientProcedureCommand(PatientProcedureViewModel patientProcedureViewModel)
         {
-            _viewModel = viewModel;
+            _patientProcedureViewModel = patientProcedureViewModel;
         }
         public override void Execute(object parameter)
         {
-            _viewModel.CurrentSituation = Situations.EDIT;
+            _patientProcedureViewModel.CurrentSituation = Situations.EDIT;
         }
     }
 }

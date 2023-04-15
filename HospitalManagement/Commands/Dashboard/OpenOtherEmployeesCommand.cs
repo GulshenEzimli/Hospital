@@ -36,6 +36,12 @@ namespace HospitalManagement.Commands.Dashboard
                 otherEmployeesViewModel.OtherEmployeeValues.Add(otherEmployeeModel);
             }
 
+            List<Job> jobs = _viewModel.Db.JobRepository.Get();
+            foreach (var job in jobs)
+            {
+                otherEmployeesViewModel.JobNames.Add(job.Name);
+            }
+
             otherEmployeesControl.DataContext = otherEmployeesViewModel;
             _viewModel.CenterGrid.Children.Clear();
             _viewModel.CenterGrid.Children.Add(otherEmployeesControl);

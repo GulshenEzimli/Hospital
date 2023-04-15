@@ -9,10 +9,10 @@ namespace HospitalManagement.Commands.OtherEmployees
 {
     public class DeleteOtherEmployeeCommand : BaseCommand
     {
-        private readonly OtherEmployeesViewModel _viewModel;
-        public DeleteOtherEmployeeCommand(OtherEmployeesViewModel viewModel)
+        private readonly OtherEmployeesViewModel _otherEmployeesViewModel;
+        public DeleteOtherEmployeeCommand(OtherEmployeesViewModel otherEmployeesViewModel)
         {
-            _viewModel = viewModel;
+            _otherEmployeesViewModel = otherEmployeesViewModel;
         }
 
         public override void Execute(object parameter)

@@ -34,8 +34,8 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
-        private ObservableCollection<string> _positionNames;
-        public ObservableCollection<string> PositionNames => _positionNames ?? (_positionNames = new ObservableCollection<string>());
+        private List<string> _positionNames;
+        public List<string> PositionNames => _positionNames ?? (_positionNames = new List<string>());
 
         private NurseModel _currentValue;
         public NurseModel CurrentValue 

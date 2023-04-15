@@ -10,15 +10,15 @@ namespace HospitalManagement.Commands.OtherEmployees
 {
     public class RejectOtherEmployeeCommand : BaseCommand
     {
-        private readonly OtherEmployeesViewModel _viewModel;
-        public RejectOtherEmployeeCommand(OtherEmployeesViewModel viewModel)
+        private readonly OtherEmployeesViewModel _otherEmployeesViewModel;
+        public RejectOtherEmployeeCommand(OtherEmployeesViewModel otherEmployeesViewModel)
         {
-            this._viewModel = viewModel;
+            this._otherEmployeesViewModel = otherEmployeesViewModel;
         }
 
         public override void Execute(object parameter)
         {
-            _viewModel.CurrentSituation = Situations.NORMAL;
+            _otherEmployeesViewModel.CurrentSituation = Situations.NORMAL;
         }
     }
 }

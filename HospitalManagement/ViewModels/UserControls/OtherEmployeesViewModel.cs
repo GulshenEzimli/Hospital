@@ -42,11 +42,11 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
-        private List<OtherEmployeeModel> _otherEmployeeValues;
-        public List<OtherEmployeeModel> OtherEmployeeValues => _otherEmployeeValues ?? (_otherEmployeeValues = new List<OtherEmployeeModel>());
+        private ObservableCollection<OtherEmployeeModel> _otherEmployeeValues;
+        public ObservableCollection<OtherEmployeeModel> OtherEmployeeValues => _otherEmployeeValues ?? (_otherEmployeeValues = new ObservableCollection<OtherEmployeeModel>());
 
-        private ObservableCollection<string> _jobNames;
-        public ObservableCollection<string> JobNames => _jobNames ?? (_jobNames = new ObservableCollection<string>());
+        private List<string> _jobNames;
+        public List<string> JobNames => _jobNames ?? (_jobNames = new List<string>());
 
         public AddOtherEmployeeCommand Add => new AddOtherEmployeeCommand(this);
         public DeleteOtherEmployeeCommand Delete => new DeleteOtherEmployeeCommand(this);
