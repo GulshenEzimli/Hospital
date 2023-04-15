@@ -20,6 +20,7 @@ namespace HospitalManagement.ViewModels.UserControls
         public ErrorDialog ErrorDialog { get; }
 
         private MessageModel _message = new MessageModel();
+
         public MessageModel Message {
             get => _message;
             set

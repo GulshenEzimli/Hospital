@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace HospitalManagement.Commands.Patients
 {
@@ -27,7 +28,14 @@ namespace HospitalManagement.Commands.Patients
         {
             if(IsValid(_patientViewModel.CurrentValue,out var message) == false)
             {
+                _patientViewModel.Message = new MessageModel()
+                {
+                    IsSuccess = false,
+                    Message = message
+                };
+                DoAnimation(_patientViewModel.ErrorDialog);
                 return;
+
             }
 
 

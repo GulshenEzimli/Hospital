@@ -14,7 +14,7 @@ namespace HospitalManagement.ViewModels
         protected readonly IUnitOfWork _db;
         private IUnitOfWork unitOfWork;
 
-        public BaseViewModel(IUnitOfWork unitOfWork,ErrorDialog errorDialog)
+        public BaseViewModel(IUnitOfWork unitOfWork)
         {
             _db = unitOfWork;
         }

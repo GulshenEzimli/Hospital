@@ -39,6 +39,7 @@ namespace HospitalManagement.ViewModels.UserControls
                 OnPropertyChanged(nameof(CurrentSituation));
             }
         }
+
         private PatientModel _currentValue;
         public PatientModel CurrentValue
         {
