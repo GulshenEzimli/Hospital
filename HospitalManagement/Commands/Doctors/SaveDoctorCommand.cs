@@ -1,5 +1,7 @@
 ﻿using HospitalManagement.Enums;
 using HospitalManagement.Mappers.Interfaces;
+using HospitalManagement.Models;
+using HospitalManagement.Validations;
 using HospitalManagement.ViewModels.UserControls;
 using HospitalManagementCore.Domain.Entities;
 using System;
@@ -22,10 +24,19 @@ namespace HospitalManagement.Commands.Doctors
 
         public override void Execute(object parameter)
         {
+            if (DoctorValidation.IsValid(_doctorsViewModel.CurrentValue, out string message) == false)
+            {
+                _doctorsViewModel.Message = new MessageModel
+                {
+                    IsSuccess = false,
+                    Message = message
+                };
+                DoAnimation(_doctorsViewModel.ErrorDialog);
+                return;
+            }
             Doctor doctor = _doctorMapper.Map(_doctorsViewModel.CurrentValue);
             doctor.CreationDate = DateTime.Now;
             doctor.ModifiedDate = DateTime.Now;
-            doctor.IsDelete = false;
             doctor.Creator = new Admin() { Id = 1 };
             doctor.Modifier = new Admin() { Id = 1 };
             if (doctor.Id==0)
