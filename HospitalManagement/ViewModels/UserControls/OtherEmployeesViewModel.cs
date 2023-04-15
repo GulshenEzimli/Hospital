@@ -5,6 +5,7 @@ using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,6 +44,9 @@ namespace HospitalManagement.ViewModels.UserControls
 
         private List<OtherEmployeeModel> _otherEmployeeValues;
         public List<OtherEmployeeModel> OtherEmployeeValues => _otherEmployeeValues ?? (_otherEmployeeValues = new List<OtherEmployeeModel>());
+
+        private ObservableCollection<string> _jobNames;
+        public ObservableCollection<string> JobNames => _jobNames ?? (_jobNames = new ObservableCollection<string>());
 
         public AddOtherEmployeeCommand Add => new AddOtherEmployeeCommand(this);
         public DeleteOtherEmployeeCommand Delete => new DeleteOtherEmployeeCommand(this);

@@ -54,14 +54,14 @@
                             <TextBlock Height="25" FontSize="14" TextAlignment="Center" Margin="5 5" Text="Birth Date"/>
                             <TextBlock Height="25" FontSize="14" TextAlignment="Center" Margin="5 5" Text="PIN"/>
                             <TextBlock Height="25" FontSize="14" TextAlignment="Center" Margin="5 5" Text="Salary"/>
-                            <TextBlock Height="25" FontSize="14" TextAlignment="Center" Margin="5 5" Text="Position"/>
+                            <TextBlock Height="25" FontSize="14" TextAlignment="Center" Margin="5 5" Text="Job Name"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="3">
                             <components:CustomDatePicker Margin="5 5" Height="25" DataContext="{Binding Path=CurrentOtherEmployeeValue.BirthDate,Mode=TwoWay}"/>
                             <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding Path=CurrentOtherEmployeeValue.PIN,Mode=TwoWay}"/>
                             <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding Path=CurrentOtherEmployeeValue.Salary,Mode=TwoWay}"/>
-                            <ComboBox Height="25" FontSize="15" Margin="5 5" Text="{Binding Path=CurrentOtherEmployeeValue.PositionName,Mode=TwoWay}"/>
+                            <ComboBox Height="25" FontSize="15" Margin="5 5" Text="{Binding Path=CurrentOtherEmployeeValue.JobName,Mode=TwoWay}"/>
                         </StackPanel>
                     </Grid>
 
@@ -120,10 +120,10 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Position" Width="auto">
+                        <GridViewColumn Header="Job" Width="auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=Position}" Style="{DynamicResource gridViewTextColumn}"/>
+                                    <TextBlock Text="{Binding Path=JobName}" Style="{DynamicResource gridViewTextColumn}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

@@ -34,7 +34,11 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"select * from OtherEmployees where IsDelete=0";
+                string cmdText = @"select OtherEmployees.Id as Id, CreatorId,ModifierId,OtherJobs.Id as 
+                                JobId,OtherJobs.JobName as JobName,FirstName,LastName,Gender,BirthDate,
+                                PIN,Email,PhoneNumber,Salary,
+                                CreationDate,ModifiedDate,IsDelete from OtherEmployees  inner join 
+                                OtherJobs on OtherEmployees.JobId = OtherJobs.Id where IsDelete=0";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     SqlDataReader reader = command.ExecuteReader();
@@ -55,7 +59,11 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"select * from OtherEmployees where Id = @id and IsDelete = 0";
+                string cmdText = @"select OtherEmployees.Id as Id, CreatorId,ModifierId,OtherJobs.Id as 
+                                JobId,OtherJobs.JobName as JobName,FirstName,LastName,Gender,BirthDate,
+                                PIN,Email,PhoneNumber,Salary,CreationDate,ModifiedDate,IsDelete from 
+                                OtherEmployees  inner join OtherJobs on OtherEmployees.JobId = OtherJobs.Id 
+                                where OtherEmployees.Id=@id and IsDelete=0";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     command.Parameters.AddWithValue("id", id);
@@ -71,9 +79,9 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"insert into OtherEmployees output inserted.id values(@id,@jobid,@firstname,@lastname,@gender,
-                                 @birthdate,@pin,@email,@phonenumber,@salary,@isdelete,@creationdate,@modifieddate
-                                 @creatorid,@modifierid)";
+                string cmdText = @"insert into OtherEmployees output inserted.id values(@creatorId,
+                                 @modifierId,(select Id from OtherJobs where OtherJobs.JobName=@jobName),
+                                 @firstName,@lastName,@gender,@birthDate,@pin,@email,@phoneNumber,@salary,@creationDate,@modifiedDate,@isDelete)";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     AddParameters(command, otherEmployee);
@@ -87,10 +95,11 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"update OtherEmployees set JobId=@jobid, FirstName=@firstname, LastName=@lastname,
-                                 Gender=@gender, BirthDate=@birthdate, PIN=@pin, Email=@email, PhoneNumber=@phonenumber,
-                                 Salary=@salary, IsDelete=@isdelete, CreationDate=@creationdate, ModifiedDate=@modifieddate,
-                                 CreatorId=@creatorid, ModifierId=@modifierid where Id=@id";
+                string cmdText = @"update OtherEmployees set JobId=(select Id from OtherJobs where 
+                                 OtherJobs.JobName = @jobName), FirstName=@firstName, LastName=@lastName,
+                                 Gender=@gender, BirthDate=@birthDate, PIN=@pin, Email=@email, PhoneNumber=@phoneNumber,
+                                 Salary=@salary, CreationDate=@creationDate, ModifiedDate=@modifiedDate,IsDelete=@isDelete,
+                                 CreatorId=@creatorId, ModifierId=@modifierId where Id=@id";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     command.Parameters.AddWithValue("id", otherEmployee.Id);
@@ -105,13 +114,15 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             OtherEmployee otherEmployee = new OtherEmployee();
 
             otherEmployee.Id = reader.GetInt32("Id");
-            otherEmployee.JobId = reader.GetInt32("JobId");
-            otherEmployee.ModifierId = reader.GetInt32("ModifierId");
+            otherEmployee.Job = new Job()
+            {
+                Id = reader.GetInt32("JobId"),
+                Name = reader.GetString("JobName"),
+            };
             otherEmployee.Modifier = new Admin()
             {
                 Id = reader.GetInt32("ModifierId")
             };
-            otherEmployee.CreatorId = reader.GetInt32("CreatorId");
             otherEmployee.Creator = new Admin()
             {
                 Id = reader.GetInt32("CreatorId")
@@ -121,7 +132,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             otherEmployee.Gender = reader.GetBoolean("Gender");
             otherEmployee.PIN = reader.GetString("PIN");
             otherEmployee.Email = reader.GetString("Email");
-            otherEmployee.PhoneNumber = reader.GetString("Phonenumber");
+            otherEmployee.PhoneNumber = reader.GetString("PhoneNumber");
             otherEmployee.BirthDate = reader.GetDateTime("BirthDate");
             otherEmployee.Salary = reader.GetDecimal("Salary");
             otherEmployee.CreationDate = reader.GetDateTime("CreationDate");
@@ -133,20 +144,20 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 
         private void AddParameters(SqlCommand command, OtherEmployee otherEmployee)
         {
-            command.Parameters.AddWithValue("jobid", otherEmployee.JobId);
-            command.Parameters.AddWithValue("firstname", otherEmployee.FirstName);
-            command.Parameters.AddWithValue("lirstname", otherEmployee.LastName);
+            command.Parameters.AddWithValue("creatorId", otherEmployee.Creator.Id);
+            command.Parameters.AddWithValue("modifierId", otherEmployee.Modifier.Id);
+            command.Parameters.AddWithValue("jobName", otherEmployee.Job.Name);
+            command.Parameters.AddWithValue("firstName", otherEmployee.FirstName);
+            command.Parameters.AddWithValue("lastName", otherEmployee.LastName);
             command.Parameters.AddWithValue("gender", otherEmployee.Gender);
-            command.Parameters.AddWithValue("birthdate", otherEmployee.BirthDate);
+            command.Parameters.AddWithValue("birthDate", otherEmployee.BirthDate);
             command.Parameters.AddWithValue("pin", otherEmployee.PIN);
             command.Parameters.AddWithValue("email", otherEmployee.Email);
-            command.Parameters.AddWithValue("phonenumber", otherEmployee.PhoneNumber);
+            command.Parameters.AddWithValue("phoneNumber", otherEmployee.PhoneNumber);
             command.Parameters.AddWithValue("salary", otherEmployee.Salary);
-            command.Parameters.AddWithValue("isdelete", otherEmployee.IsDelete);
-            command.Parameters.AddWithValue("creationdate", otherEmployee.CreationDate);
-            command.Parameters.AddWithValue("modifieddate", otherEmployee.ModifiedDate);
-            command.Parameters.AddWithValue("creatorid", otherEmployee.CreatorId);
-            command.Parameters.AddWithValue("modifierid", otherEmployee.ModifierId);
+            command.Parameters.AddWithValue("creationDate", otherEmployee.CreationDate);
+            command.Parameters.AddWithValue("modifiedDate", otherEmployee.ModifiedDate);
+            command.Parameters.AddWithValue("isDelete", otherEmployee.IsDelete);
         }
     }
 }
