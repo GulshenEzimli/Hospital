@@ -150,7 +150,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         {            
             command.Parameters.AddWithValue("positionName", doctor.Position.Name);
             command.Parameters.AddWithValue("firstName", doctor.FirstName);
-            command.Parameters.AddWithValue("lirstName", doctor.LastName);
+            command.Parameters.AddWithValue("lastName", doctor.LastName);
             command.Parameters.AddWithValue("gender", doctor.Gender);
             command.Parameters.AddWithValue("birthDate", doctor.BirthDate);
             command.Parameters.AddWithValue("pin", doctor.PIN);

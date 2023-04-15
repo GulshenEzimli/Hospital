@@ -35,7 +35,10 @@ namespace HospitalManagement.Mappers.Implementations
         {
             Doctor doctor = new Doctor();
             doctor.Id = doctorModel.Id;
-            doctor.Position.Name = doctorModel.PositionName;
+            doctor.Position = new DoctorPosition()
+            {
+                Name = doctorModel.PositionName
+            };
             doctor.FirstName = doctorModel.FirstName;
             doctor.LastName = doctorModel.LastName;
             doctor.Gender = doctorModel.Gender;
