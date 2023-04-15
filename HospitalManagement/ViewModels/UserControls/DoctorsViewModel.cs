@@ -19,11 +19,12 @@ namespace HospitalManagement.ViewModels.UserControls
         public DoctorsViewModel(IUnitOfWork unitOfWork, IDoctorMapper doctorMapper, ErrorDialog errorDialog) :base(unitOfWork, errorDialog)
         {
             _doctorMapper = doctorMapper;
+            SetDefaultValues();
         }
         public override string Header => "Doctors";
 
 
-        private Situations _currentSituation = Situations.NORMAL;
+        private Situations _currentSituation;
         public Situations CurrentSituation
         {
             get => _currentSituation;
@@ -57,6 +58,12 @@ namespace HospitalManagement.ViewModels.UserControls
         public EditDoctorCommand Edit => new EditDoctorCommand(this);
         public RejectDoctorCommand Reject => new RejectDoctorCommand(this);
         public SaveDoctorCommand Save => new SaveDoctorCommand(this, _doctorMapper);
+
+        private void SetDefaultValues()
+        {
+            CurrentSituation = Situations.NORMAL;
+            CurrentValue = new DoctorModel();
+        }
 
     }
 }
