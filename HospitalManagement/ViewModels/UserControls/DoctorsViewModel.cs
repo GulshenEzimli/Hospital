@@ -59,7 +59,7 @@ namespace HospitalManagement.ViewModels.UserControls
         public RejectDoctorCommand Reject => new RejectDoctorCommand(this);
         public SaveDoctorCommand Save => new SaveDoctorCommand(this, _doctorMapper);
 
-        private void SetDefaultValues()
+        public void SetDefaultValues()
         {
             CurrentSituation = Situations.NORMAL;
             CurrentValue = new DoctorModel();
