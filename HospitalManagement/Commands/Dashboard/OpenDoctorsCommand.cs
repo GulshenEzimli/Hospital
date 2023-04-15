@@ -25,7 +25,9 @@ namespace HospitalManagement.Commands.Dashboard
         }
         public override void Execute(object parameter)
         {
-            DoctorsViewModel doctorsViewModel = new DoctorsViewModel(_viewModel.Db,_doctorMapper);
+
+            DoctorControl doctorControl = new DoctorControl();
+            DoctorsViewModel doctorsViewModel = new DoctorsViewModel(_viewModel.Db,_doctorMapper, doctorControl.ErrorDialog);
 
             List<Doctor> doctors = _viewModel.Db.DoctorRepository.Get();
             int no = 1;
@@ -42,8 +44,6 @@ namespace HospitalManagement.Commands.Dashboard
                 PositionModel positionModel = _positionMapper.Map(position);                
                 doctorsViewModel.PositionValues.Add(positionModel.Name);
             }
-
-            DoctorControl doctorControl = new DoctorControl();
 
             doctorControl.DataContext = doctorsViewModel;
             _viewModel.CenterGrid.Children.Clear();
