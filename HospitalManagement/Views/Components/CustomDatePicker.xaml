@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HospitalManagement.Views.Components"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+            mc:Ignorable="d" 
+             DataContextChanged="WindowDataContextChanged"
+             d:DesignHeight="23" d:DesignWidth="100"  LostFocus="UserControlLostFocus">
     <Grid>
         <TextBox VerticalContentAlignment="Center" TextChanged="txtTextChanged" MouseDoubleClick="txtMouseDoubleClick" GotFocus="txtGotFocus"  x:Name="txt" ></TextBox>
         <Popup x:Name="pop" PopupAnimation="Slide">

@@ -20,14 +20,16 @@ namespace HospitalManagement.Mappers.Implementations
             doctorModel.DepartmentName = doctor.Position.Department.Name;
             doctorModel.FirstName = doctor.FirstName;
             doctorModel.LastName = doctor.LastName;
-            doctorModel.Gender = doctor.Gender;
+            if (doctor.Gender) doctorModel.Gender[0] = doctor.Gender;
+            else doctorModel.Gender[1] = !doctor.Gender;
             doctorModel.BirthDate = doctor.BirthDate;
             doctorModel.PIN = doctor.PIN;
             doctorModel.Email = doctor.Email;
             doctorModel.Phonenumber = doctor.Phonenumber;
             doctorModel.Salary = doctor.Salary;
-            doctorModel.IsChiefDoctor = doctor.IsChiefDoctor;
-            
+            if (doctor.IsChiefDoctor) doctorModel.IsChiefDoctor[0] = doctor.IsChiefDoctor;
+            else doctorModel.IsChiefDoctor[1] = !doctor.IsChiefDoctor;
+
             return doctorModel;
         }
 
@@ -41,13 +43,13 @@ namespace HospitalManagement.Mappers.Implementations
             };
             doctor.FirstName = doctorModel.FirstName;
             doctor.LastName = doctorModel.LastName;
-            doctor.Gender = doctorModel.Gender;
+            doctor.Gender = doctorModel.Gender[0] ? true : false;
             doctor.BirthDate = doctorModel.BirthDate;
             doctor.PIN = doctorModel.PIN;
             doctor.Email = doctorModel.Email;
             doctor.Phonenumber = doctorModel.Phonenumber;
             doctor.Salary = doctorModel.Salary;
-            doctor.IsChiefDoctor = doctorModel.IsChiefDoctor;
+            doctor.IsChiefDoctor = doctorModel.IsChiefDoctor[0] ? true : false;
 
             return doctor;
         }

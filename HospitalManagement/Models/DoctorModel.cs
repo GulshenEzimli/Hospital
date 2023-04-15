@@ -15,12 +15,17 @@ namespace HospitalManagement.Models
         public string DepartmentName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public bool Gender { get; set; }
-        public string GenderValue 
+
+        private bool[] _gender = { false, false };
+        public bool[] Gender
+        {
+            get { return _gender; }
+        }
+        public string GenderValue
         {
             get
             {
-                return Gender ? "Kişi" : "Qadın";
+                return _gender[0] ? "Kişi" : "Qadın";
             }
         }
         public DateTime BirthDate { get; set; }
@@ -28,12 +33,17 @@ namespace HospitalManagement.Models
         public string Email { get; set; }
         public string Phonenumber { get; set; }
         public decimal Salary { get; set; }
-        public bool IsChiefDoctor { get; set; }
+
+        private bool[] _isChiefDoctor = { false, false };
+        public bool[] IsChiefDoctor
+        {
+            get { return _isChiefDoctor; }
+        }
         public string IsChiefDoctorValue
         {
             get
             {
-                return IsChiefDoctor ? "Baş həkim" : "Həkim";
+                return IsChiefDoctor[0] ? "Baş həkim" : "Həkim";
             }
         }
     }

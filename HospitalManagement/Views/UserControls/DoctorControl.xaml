@@ -47,8 +47,8 @@
                                 <ComboBox Height="25" FontSize="15" Margin="5 5" FontFamily="Times New Roman" ItemsSource="{Binding Path=PositionValues}" SelectedItem="{Binding CurrentValue.PositionName}"/>
                                 <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.Salary,Mode=TwoWay}"/>
                                 <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 3 0 0">
-                                    <RadioButton IsChecked="{Binding CurrentValue.Gender}" GroupName="Gender" Content="Male" Margin="6"/>
-                                    <RadioButton IsChecked="{Binding CurrentValue.Gender}" GroupName="Gender" Content="Female" Margin=" 6"/>
+                                    <RadioButton IsChecked="{Binding CurrentValue.Gender[0]}" GroupName="Gender" Content="Male" Margin="6"/>
+                                    <RadioButton IsChecked="{Binding CurrentValue.Gender[1]}" GroupName="Gender" Content="Female" Margin=" 6"/>
                                 </WrapPanel>
                             </StackPanel>
 
@@ -64,10 +64,10 @@
                                 <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.Email,Mode=TwoWay}"/>
                                 <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.PIN,Mode=TwoWay}"/>
                                 <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.Phonenumber,Mode=TwoWay}"/>
-                                <components:CustomDatePicker Margin="5 5" Height="25" DataContext="{Binding CurrentValue.BirthDate,Mode=TwoWay}"/>                                
+                                <components:CustomDatePicker Margin="5 5" DataContext="{Binding CurrentValue.BirthDate,Mode=TwoWay}" Height="25"/>                                
                                 <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 3 0 0">
-                                    <RadioButton GroupName="ChiefDoctor" Content="Yes" Margin="6" IsChecked="{Binding Path = CurrentValue.IsChiefDoctor}"/>
-                                    <RadioButton GroupName="ChiefDoctor" Content="No" Margin="6" IsChecked="{Binding Path = CurrentValue.IsChiefDoctor}"/>
+                                    <RadioButton GroupName="ChiefDoctor" Content="Yes" Margin="6" IsChecked="{Binding CurrentValue.IsChiefDoctor[0]}"/>
+                                    <RadioButton GroupName="ChiefDoctor" Content="No" Margin="6" IsChecked="{Binding CurrentValue.IsChiefDoctor[1]}"/>
                                 </WrapPanel>                                
                             </StackPanel>
                         </Grid>
