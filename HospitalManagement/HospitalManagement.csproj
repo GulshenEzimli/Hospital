@@ -205,7 +205,8 @@
     <Compile Include="Models\PatientProcedureModel.cs" />
     <Compile Include="Models\ProcedureModel.cs" />
     <Compile Include="Models\PositionModel.cs" />
-    <Compile Include="Utils\ValidationMessageProvider.cs" />
+    <Compile Include="Validations\Utils\ValidationMessageProvider.cs" />
+    <Compile Include="Validations\DoctorValidation.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\UserControls\AdminsViewModel.cs" />
     <Compile Include="ViewModels\UserControls\BaseControlViewModel.cs" />
@@ -299,8 +300,6 @@
       <Name>HospitalManagementCore</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Validations\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
