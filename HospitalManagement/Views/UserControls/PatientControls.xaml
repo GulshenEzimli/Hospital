@@ -61,7 +61,7 @@
                             <TextBox Style="{StaticResource myTextBox}" />
                             <TextBox Style="{StaticResource myTextBox}" />
                             <DatePicker Margin="4" FontFamily="Times New Roman" Width="200" Height="26" RenderTransformOrigin="0.491,1.021"/>
-                            <WrapPanel Margin="-50 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <WrapPanel Margin="-5 7 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <RadioButton Style="{StaticResource myRadioButton}" Margin="8 8" >Woman</RadioButton>
                                 <RadioButton Style="{StaticResource myRadioButton}" Margin="9 8" >Man</RadioButton>
                             </WrapPanel>
@@ -70,12 +70,10 @@
                         <StackPanel Grid.Column="2">
                             <TextBlock Style="{StaticResource myTextBlock}" >PIN</TextBlock>
                             <TextBlock Style="{StaticResource myTextBlock}" >Phone Number</TextBlock>
-                            <TextBlock Style="{StaticResource myTextBlock}" >Address</TextBlock>
                         </StackPanel>
 
                         <StackPanel Grid.Column="3">
                             
-                            <TextBox Style="{StaticResource myTextBox}" />
                             <TextBox Style="{StaticResource myTextBox}" />
                             <TextBox Style="{StaticResource myTextBox}" />
                         </StackPanel>
