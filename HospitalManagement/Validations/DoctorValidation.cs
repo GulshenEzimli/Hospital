@@ -83,7 +83,7 @@ namespace HospitalManagement.Validations
             }
             if (doctorModel.Email.Length > 50)
             {
-                message = ValidationMessageProvider.GetLengthMessage("Email", 50);
+                message = ValidationMessageProvider.GetMaxLengthMessage("Email", 50);
                 return false;
             }
             

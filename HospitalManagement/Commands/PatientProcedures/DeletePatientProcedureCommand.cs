@@ -13,7 +13,7 @@ namespace HospitalManagement.Commands.PatientProcedures
         private readonly PatientProcedureViewModel _patientProcedureViewModel;
         public DeletePatientProcedureCommand(PatientProcedureViewModel patientProcedureViewModel)
         {
-            _patientProcedureViewModel = _patientProcedureViewModel;
+            _patientProcedureViewModel = patientProcedureViewModel;
         }
         public override void Execute(object parameter)
         {
