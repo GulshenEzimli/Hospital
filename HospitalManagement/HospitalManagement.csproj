@@ -84,6 +84,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\OperationControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\OtherEmployeesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -239,6 +243,9 @@
     </Compile>
     <Compile Include="Views\UserControls\NurseControl.xaml.cs">
       <DependentUpon>NurseControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\OperationControl.xaml.cs">
+      <DependentUpon>OperationControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\OtherEmployeesControl.xaml.cs">
       <DependentUpon>OtherEmployeesControl.xaml</DependentUpon>

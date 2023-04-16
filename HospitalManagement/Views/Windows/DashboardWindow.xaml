@@ -90,7 +90,7 @@
                             <Button Name="btnOtherEmployees" Content="OtherEmployees" Style="{StaticResource btnEmployeesMenu}" Command="{Binding Path=OpenOtherEmployees}"/>
                         </StackPanel>
                         <Button Name="btnPatients" Content="Patients" Style="{StaticResource btnMenu}" Command="{Binding Path=OpenPatients}"/>
-                        <Button Name="btnOperations" Content="Operations" Style="{StaticResource btnMenu}"/>
+                        <Button Name="btnOperations" Content="Operations" Style="{StaticResource btnMenu}" Command="{Binding Path=OpenOperations}"/>
                         <Button Name="btnRooms" Content="Rooms" Style="{StaticResource btnMenu}" Command="{Binding Path=OpenRooms}"/>
                         <Button Name="btnQueues" Content="Queues" Style="{StaticResource btnMenu}" Command="{Binding Path=OpenQueues}"/>
                         <Button Name="btnProcedures" Content="Procedures" Style="{StaticResource btnMenu}" Command="{Binding Path=OpenProcedures}"/>
