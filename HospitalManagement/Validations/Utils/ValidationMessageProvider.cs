@@ -12,10 +12,18 @@ namespace HospitalManagement.Validations.Utils
         {
             return $"{propName} is required.";
         }
-
-        public static string GetLengthMessage(string propName,int length)
+        public static string GetCorrectMessage(string propName)
         {
-            return $"{propName} length should be less than {length}";
+            return $"{propName} is incorrect.";
+        }
+
+        public static string GetMaxLengthMessage(string propName, int maxLength)
+        {
+            return $"{propName} length should be less than {maxLength}";
+        }
+        public static string GetMinLengthMessage(string propName, int minLength)
+        {
+            return $"{propName} length should be more than {minLength}";
         }
 
         public static string GetSpecificLength(string propName, int length)

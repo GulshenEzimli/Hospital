@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace HospitalManagement.Validations
@@ -19,9 +20,15 @@ namespace HospitalManagement.Validations
             }
             if (doctorModel.FirstName.Length > 25)
             {
-                message = ValidationMessageProvider.GetLengthMessage("Name", 25);
+                message = ValidationMessageProvider.GetMaxLengthMessage("Name", 26);
                 return false;
             }
+            if (doctorModel.FirstName.Length < 3)
+            {
+                message = ValidationMessageProvider.GetMinLengthMessage("Name", 2);
+                return false;
+            }
+
             if (string.IsNullOrWhiteSpace(doctorModel.LastName))
             {
                 message = ValidationMessageProvider.GetRequiredMessage("Surname");
@@ -29,20 +36,27 @@ namespace HospitalManagement.Validations
             }
             if (doctorModel.LastName.Length > 25)
             {
-                message = ValidationMessageProvider.GetLengthMessage("Surname", 25);
+                message = ValidationMessageProvider.GetMaxLengthMessage("Surname", 26);
+                return false;
+            }
+            if (doctorModel.LastName.Length > 25)
+            {
+                message = ValidationMessageProvider.GetMinLengthMessage("Surname", 2);
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(doctorModel.Phonenumber))
+            if (doctorModel.Gender[0] && doctorModel.Gender[1])
             {
-                message = ValidationMessageProvider.GetRequiredMessage("PhoneNumber");
+                message = ValidationMessageProvider.GetRequiredMessage("Gender");
                 return false;
             }
-            if (doctorModel.Phonenumber.Length != 13)
+
+            if (doctorModel.IsChiefDoctor[0] && doctorModel.IsChiefDoctor[1])
             {
-                message = ValidationMessageProvider.GetSpecificLength("PhoneNumber", 13);
+                message = ValidationMessageProvider.GetRequiredMessage("ChiefDoctor");
                 return false;
             }
+
             if (string.IsNullOrEmpty(doctorModel.PIN))
             {
                 message = ValidationMessageProvider.GetRequiredMessage("PIN");
@@ -52,6 +66,14 @@ namespace HospitalManagement.Validations
             {
                 message = ValidationMessageProvider.GetSpecificLength("PIN", 7);
                 return false;
+            }
+            foreach (char item in doctorModel.PIN)
+            {
+                if (item < 48 || (item > 57 && item < 65) || (item > 90 && item < 97) || item > 122)
+                {
+                    message = ValidationMessageProvider.GetCorrectMessage("Pin");
+                    return false;
+                }
             }
 
             if (string.IsNullOrWhiteSpace(doctorModel.Email))
@@ -64,7 +86,18 @@ namespace HospitalManagement.Validations
                 message = ValidationMessageProvider.GetLengthMessage("Email", 50);
                 return false;
             }
-
+            
+            if (string.IsNullOrWhiteSpace(doctorModel.Phonenumber))
+            {
+                message = ValidationMessageProvider.GetRequiredMessage("PhoneNumber");
+                return false;
+            }
+            if (doctorModel.Phonenumber.Length != 13)
+            {
+                message = ValidationMessageProvider.GetSpecificLength("PhoneNumber", 13);
+                return false;
+            }            
+                        
             if (doctorModel.Salary < 0)
             {
                 message = ValidationMessageProvider.GetSalaryMessage();
