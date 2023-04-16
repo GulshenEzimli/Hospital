@@ -134,6 +134,7 @@
     <Compile Include="Commands\Dashboard\OpenAdminsCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenDoctorsCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenNursesCommand.cs" />
+    <Compile Include="Commands\Dashboard\OpenOperationsCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenOtherEmployeesCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenPatientProcedureCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenPatientsCommand.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="ViewModels\UserControls\BaseControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\DoctorsViewModel.cs" />
     <Compile Include="ViewModels\UserControls\NursesViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\OperationsViewModel.cs" />
     <Compile Include="ViewModels\UserControls\OtherEmployeesViewModel.cs" />
     <Compile Include="ViewModels\UserControls\PatientProcedureViewModel.cs" />
     <Compile Include="ViewModels\UserControls\PatientsViewModel.cs" />
