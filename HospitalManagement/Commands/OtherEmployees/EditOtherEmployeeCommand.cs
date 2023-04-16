@@ -10,14 +10,14 @@ namespace HospitalManagement.Commands.OtherEmployees
 {
     public class EditOtherEmployeeCommand : BaseCommand
     {
-        private readonly OtherEmployeesViewModel _viewModel;
-        public EditOtherEmployeeCommand(OtherEmployeesViewModel viewModel)
+        private readonly OtherEmployeesViewModel _otherEmployeesViewModel;
+        public EditOtherEmployeeCommand(OtherEmployeesViewModel otherEmployeesViewModel)
         {
-            _viewModel = viewModel;
+            _otherEmployeesViewModel = otherEmployeesViewModel;
         }
         public override void Execute(object parameter)
         {
-            _viewModel.CurrentSituation = Situations.EDIT;
+            _otherEmployeesViewModel.CurrentSituation = Situations.EDIT;
         }
     }
 }

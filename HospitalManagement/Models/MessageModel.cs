@@ -11,6 +11,6 @@ namespace HospitalManagement.Models
     {
         public string Message { get; set; }
         public bool IsSuccess { get; set; }
-        public Brush TextColor => IsSuccess ? Brushes.Red : Brushes.Blue;
+        public Brush TextColor => IsSuccess ? Brushes.Blue : Brushes.Red;
     }
 }

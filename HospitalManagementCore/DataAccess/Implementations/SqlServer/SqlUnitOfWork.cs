@@ -17,15 +17,12 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         public IPositionRepoitory PositionRepository => new SqlPositionRepository(_connectionString);
 
         public INurseRepository NurseRepository => new SqlNurseRepository(_connectionString);
-
         public IOtherEmployeeRepository OtherEmployeeRepository =>new SqlOtherEmployeeRepository(_connectionString);
-
         public IPatientProcedureRepository PatientProcedureRepository => new SqlPatientProcedureRepository(_connectionString);
+        public IJobRepository JobRepository => new SqlJobRepository(_connectionString);
 
         public IReceptionistRepository ReceptionistRepository => throw new NotImplementedException();
-
         public IPatientRepository PatientRepository=>new SqlPatientRepository(_connectionString);
-
         public IProcedureRepository ProcedureRepository => new SqlProcedureRepository(_connectionString);
     }
 }

@@ -25,7 +25,7 @@ namespace HospitalManagement.Commands.Dashboard
         {
             OtherEmployeesControl otherEmployeesControl = new OtherEmployeesControl();
 
-            OtherEmployeesViewModel otherEmployeesViewModel = new OtherEmployeesViewModel(_viewModel.Db,otherEmployeesControl.ErrorDialog);
+            OtherEmployeesViewModel otherEmployeesViewModel = new OtherEmployeesViewModel(_viewModel.Db, _otherEmployeeMapper,otherEmployeesControl.ErrorDialog);
 
             List<OtherEmployee> otherEmployees = _viewModel.Db.OtherEmployeeRepository.Get();
             int no = 1;
@@ -34,6 +34,12 @@ namespace HospitalManagement.Commands.Dashboard
                 OtherEmployeeModel otherEmployeeModel = _otherEmployeeMapper.Map(otherEmployee);
                 otherEmployeeModel.No = no++;
                 otherEmployeesViewModel.OtherEmployeeValues.Add(otherEmployeeModel);
+            }
+
+            List<Job> jobs = _viewModel.Db.JobRepository.Get();
+            foreach (var job in jobs)
+            {
+                otherEmployeesViewModel.JobNames.Add(job.Name);
             }
 
             otherEmployeesControl.DataContext = otherEmployeesViewModel;

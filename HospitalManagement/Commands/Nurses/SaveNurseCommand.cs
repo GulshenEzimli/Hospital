@@ -1,7 +1,6 @@
-﻿using HospitalManagement.Enums;
-using HospitalManagement.Mappers.Interfaces;
+﻿using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
-using HospitalManagement.Utils;
+using HospitalManagement.Validations;
 using HospitalManagement.ViewModels.UserControls;
 using HospitalManagementCore.Domain.Entities;
 using System;
@@ -24,7 +23,7 @@ namespace HospitalManagement.Commands.Nurses
         public override void Execute(object parameter)
         {
             //TO DO ...
-            if (IsValid(_nursesViewModel.CurrentValue, out string message) == false)
+            if (NurseValidation.IsValid(_nursesViewModel.CurrentValue, out string message) == false)
             {
                 _nursesViewModel.Message = new MessageModel
                 {
@@ -56,76 +55,6 @@ namespace HospitalManagement.Commands.Nurses
             _nursesViewModel.CurrentValue.No = _nursesViewModel.Values.LastOrDefault()?.No + 1 ?? 1;
             _nursesViewModel.Values.Add(_nursesViewModel.CurrentValue);
             _nursesViewModel.SetDefaultValues();
-        }
-
-        private bool IsValid(NurseModel nurseModel, out string message)
-        {
-            if (string.IsNullOrWhiteSpace(nurseModel.FirstName))
-            {
-                message = ValidationMessageProvider.GetRequiredMessage("Name");
-                return false;
-            }
-            if (nurseModel.FirstName.Length > 25)
-            {
-                message = ValidationMessageProvider.GetLengthMessage("Name", 25);
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(nurseModel.LastName))
-            {
-                message = ValidationMessageProvider.GetRequiredMessage("Surname");
-                return false;
-            }
-            if (nurseModel.LastName.Length > 25)
-            {
-                message = ValidationMessageProvider.GetLengthMessage("Surname", 25);
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(nurseModel.PhoneNumber))
-            {
-                message = ValidationMessageProvider.GetRequiredMessage("PhoneNumber");
-                return false;
-            }
-            if (nurseModel.PhoneNumber.Length != 13)
-            {
-                message = ValidationMessageProvider.GetSpecificLength("PhoneNumber", 13);
-                return false;
-            }
-            if (string.IsNullOrEmpty(nurseModel.PIN))
-            {
-                message = ValidationMessageProvider.GetRequiredMessage("PIN");
-                return false;
-            }
-            if (nurseModel.PIN.Length != 7)
-            {
-                message = ValidationMessageProvider.GetSpecificLength("PIN", 7);
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(nurseModel.Email))
-            {
-                message = ValidationMessageProvider.GetRequiredMessage("Email");
-                return false;
-            }
-            if (nurseModel.Email.Length > 50)
-            {
-                message = ValidationMessageProvider.GetLengthMessage("Email", 50);
-                return false;
-            }
-
-            if (nurseModel.Salary < 0)
-            {
-                message = ValidationMessageProvider.GetSalaryMessage();
-                return false;
-            }
-            if (nurseModel.Salary > 10000)
-            {
-                message = ValidationMessageProvider.GetSalaryMessage(10000);
-                return false;
-            }
-
-            message = null;
-            return true;
         }
     }
 }

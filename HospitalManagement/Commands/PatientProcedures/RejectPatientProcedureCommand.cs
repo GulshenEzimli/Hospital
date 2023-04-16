@@ -10,14 +10,14 @@ namespace HospitalManagement.Commands.PatientProcedures
 {
     public class RejectPatientProcedureCommand : BaseCommand
     {
-        private readonly PatientProcedureViewModel _viewModel;
-        public RejectPatientProcedureCommand(PatientProcedureViewModel viewModel)
+        private readonly PatientProcedureViewModel _patientProcedureViewModel;
+        public RejectPatientProcedureCommand(PatientProcedureViewModel patientProcedureViewModel)
         {
-            _viewModel = viewModel;
+            _patientProcedureViewModel = patientProcedureViewModel;
         }
         public override void Execute(object parameter)
         {
-            _viewModel.CurrentSituation = Situations.NORMAL;
+            _patientProcedureViewModel.CurrentSituation = Situations.NORMAL;
         }
     }
 }

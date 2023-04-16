@@ -1,7 +1,7 @@
 ﻿using HospitalManagement.Enums;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
-using HospitalManagement.Utils;
+using HospitalManagement.Validations.Utils;
 using HospitalManagement.ViewModels.UserControls;
 using HospitalManagementCore.Domain.Entities;
 using System;
