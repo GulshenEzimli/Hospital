@@ -19,7 +19,7 @@ namespace HospitalManagement.Validations
             }
             if(otherEmployeeModel.FirstName.Length > 25)
             {
-                message = ValidationMessageProvider.GetLengthMessage("Name", 25);
+                message = ValidationMessageProvider.GetMaxLengthMessage("Name", 25);
                 return false;
             }
             if (string.IsNullOrWhiteSpace(otherEmployeeModel.LastName))
@@ -29,7 +29,7 @@ namespace HospitalManagement.Validations
             }
             if (otherEmployeeModel.LastName.Length > 25)
             {
-                message = ValidationMessageProvider.GetLengthMessage("Surname", 25);
+                message = ValidationMessageProvider.GetMaxLengthMessage("Surname", 25);
                 return false;
             }
             if (string.IsNullOrWhiteSpace(otherEmployeeModel.PhoneNumber))
@@ -59,7 +59,7 @@ namespace HospitalManagement.Validations
             }
             if (otherEmployeeModel.Email.Length > 50)
             {
-                message = ValidationMessageProvider.GetLengthMessage("Email", 50);
+                message = ValidationMessageProvider.GetMaxLengthMessage("Email", 50);
                 return false;
             }
             if (otherEmployeeModel.Salary < 0)

@@ -19,7 +19,7 @@ namespace HospitalManagement.Validations
             }
             if (nurseModel.FirstName.Length > 25)
             {
-                message = ValidationMessageProvider.GetLengthMessage("Name", 25);
+                message = ValidationMessageProvider.GetMaxLengthMessage("Name", 25);
                 return false;
             }
             if (string.IsNullOrWhiteSpace(nurseModel.LastName))
@@ -29,7 +29,7 @@ namespace HospitalManagement.Validations
             }
             if (nurseModel.LastName.Length > 25)
             {
-                message = ValidationMessageProvider.GetLengthMessage("Surname", 25);
+                message = ValidationMessageProvider.GetMaxLengthMessage("Surname", 25);
                 return false;
             }
 
@@ -61,7 +61,7 @@ namespace HospitalManagement.Validations
             }
             if (nurseModel.Email.Length > 50)
             {
-                message = ValidationMessageProvider.GetLengthMessage("Email", 50);
+                message = ValidationMessageProvider.GetMaxLengthMessage("Email", 50);
                 return false;
             }
 
