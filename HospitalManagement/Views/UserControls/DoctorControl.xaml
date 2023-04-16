@@ -26,10 +26,10 @@
 
                         <Grid Grid.Column="0" Style="{DynamicResource grdForm}">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.7*"/>
+                                <ColumnDefinition Width="1.4*"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="1.4*"/>
                             </Grid.ColumnDefinitions>
 
                             <StackPanel Grid.Column="0">
