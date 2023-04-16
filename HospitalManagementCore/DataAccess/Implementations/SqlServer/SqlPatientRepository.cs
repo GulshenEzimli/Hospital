@@ -108,14 +108,18 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             patient.PIN = reader.GetString("PIN");
             patient.BirthDate = reader.GetDateTime("BirthDate");
             patient.PhoneNumber = reader.GetString("Phonenumber");
-            patient.CreatorId = reader.GetInt32("CreatorId");
-            patient.ModifierId = reader.GetInt32("ModifierId");
             patient.CreationDate = reader.GetDateTime("CreationDate");
             patient.ModifiedDate = reader.GetDateTime("ModifiedDate");
             patient.IsDelete = reader.GetBoolean("IsDelete");
 
-            patient.Creator = new Admin { Id = patient.CreatorId };
-            patient.Modifier=new Admin { Id = patient.ModifierId };
+            patient.Creator = new Admin
+            {
+                Id = reader.GetInt32("CreatorId")
+            };
+            patient.Modifier = new Admin
+            {
+                Id = reader.GetInt32("ModifierId")
+            };
             return patient;
         }
         #endregion
