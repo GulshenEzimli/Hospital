@@ -23,10 +23,10 @@ namespace HospitalManagement.Models
         public int RoomFloor { get; set; }
         public byte RoomType { get; set; }
 
-        private ObservableCollection<DoctorModel> _operationDoctors;
-        public ObservableCollection<DoctorModel> OperationDoctors => _operationDoctors ?? (_operationDoctors = new ObservableCollection<DoctorModel>());
+        private ObservableCollection<OperationDoctorModel> _operationDoctors;
+        public ObservableCollection<OperationDoctorModel> OperationDoctors => _operationDoctors ?? (_operationDoctors = new ObservableCollection<OperationDoctorModel>());
 
-        private ObservableCollection<NurseModel> _operationNurses;
-        public ObservableCollection<NurseModel> OperationNurses => _operationNurses ?? (_operationNurses = new ObservableCollection<NurseModel>());
+        private ObservableCollection<OperationNurseModel> _operationNurses;
+        public ObservableCollection<OperationNurseModel> OperationNurses => _operationNurses ?? (_operationNurses = new ObservableCollection<OperationNurseModel>());
     }
 }
