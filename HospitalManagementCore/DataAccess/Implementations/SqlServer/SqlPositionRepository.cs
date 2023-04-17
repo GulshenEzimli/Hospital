@@ -63,7 +63,6 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             DoctorPosition position = new DoctorPosition();
             position.Id = reader.GetInt32("PositionId");
             position.Name = reader.GetString("PositionName");
-            position.DepartmentId = reader.GetInt32("DepartmentId");
             position.Department = new Department()
             {
                 Id = reader.GetInt32("DepartmentId"),

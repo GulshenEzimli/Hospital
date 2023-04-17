@@ -8,7 +8,7 @@ namespace HospitalManagementCore.Domain.Entities
     public class Doctor : IEntity
     {
         public int Id { get; set; }
-        public int PositionId { get; set; }
+        public int PositionId => Position?.Id ?? 0;
         public DoctorPosition Position { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
