@@ -93,7 +93,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 Id = reader.GetInt32("RoomId"),
                 Number = reader.GetInt32("Number"),
                 BlockFloor = reader.GetInt32("BlockFloor"),
-                Type = reader.GetInt32("Type"),
+                Type = reader.GetByte("Type"),
                 IsAvailable = reader.GetBoolean("IsAvailable")
             };
             return operation;
