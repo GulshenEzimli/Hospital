@@ -27,24 +27,6 @@ namespace HospitalManagement.Mappers.Implementations
             operationModel.RoomType = operation.Room.Type;
             return operationModel;
         }
-        public OperationModel Map(OperationDoctor operationDoctor, OperationModel operationModel)
-        {
-            DoctorModel doctorModel = new DoctorModel();
-            doctorModel.FirstName = operationDoctor.Doctor.FirstName;
-            doctorModel.LastName = operationDoctor.Doctor.LastName;
-            doctorModel.PIN = operationDoctor.Doctor.PIN;
-            operationModel.OperationDoctors.Add(doctorModel);
-            return operationModel;
-        }
-        public OperationModel Map(OperationNurse operationNurse, OperationModel operationModel)
-        {
-            NurseModel nurseModel = new NurseModel();
-            nurseModel.FirstName = operationNurse.Nurse.FirstName;
-            nurseModel.LastName = operationNurse.Nurse.LastName;
-            nurseModel.PIN = operationNurse.Nurse.PIN;
-            operationModel.OperationNurses.Add(nurseModel);
-            return operationModel;
-        }
 
         public Operation Map(OperationModel operationModel)
         {

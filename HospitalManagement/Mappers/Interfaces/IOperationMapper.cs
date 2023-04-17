@@ -11,8 +11,6 @@ namespace HospitalManagement.Mappers.Interfaces
     public interface IOperationMapper
     {
         OperationModel Map(Operation operation);
-        OperationModel Map(OperationDoctor operationDoctor, OperationModel operationModel);
-        OperationModel Map(OperationNurse operationNurse, OperationModel operationModel);
         Operation Map(OperationModel operationModel);
     }
 }
