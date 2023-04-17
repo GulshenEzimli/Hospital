@@ -159,21 +159,21 @@
                                                     <GridViewColumn Header="DoctorName" Width="Auto">
                                                         <GridViewColumn.CellTemplate>
                                                             <DataTemplate>
-                                                                <TextBlock Text="{Binding Path=FirstName}" Style="{StaticResource gridViewTextColumn}"/>
+                                                                <TextBlock Text="{Binding Path=DoctorName}" Style="{StaticResource gridViewTextColumn}"/>
                                                             </DataTemplate>
                                                         </GridViewColumn.CellTemplate>
                                                     </GridViewColumn>
                                                     <GridViewColumn Header="DoctorSurname" Width="Auto">
                                                         <GridViewColumn.CellTemplate>
                                                             <DataTemplate>
-                                                                <TextBlock Text="{Binding Path=LastName}" Style="{StaticResource gridViewTextColumn}"/>
+                                                                <TextBlock Text="{Binding Path=DoctorSurname}" Style="{StaticResource gridViewTextColumn}"/>
                                                             </DataTemplate>
                                                         </GridViewColumn.CellTemplate>
                                                     </GridViewColumn>
                                                     <GridViewColumn Header="DoctorPIN" Width="Auto">
                                                         <GridViewColumn.CellTemplate>
                                                             <DataTemplate>
-                                                                <TextBlock Text="{Binding Path=PIN}" Style="{StaticResource gridViewTextColumn}"/>
+                                                                <TextBlock Text="{Binding Path=DoctorPIN}" Style="{StaticResource gridViewTextColumn}"/>
                                                             </DataTemplate>
                                                         </GridViewColumn.CellTemplate>
                                                     </GridViewColumn>
@@ -193,21 +193,21 @@
                                                     <GridViewColumn Header="NurseName" Width="Auto">
                                                         <GridViewColumn.CellTemplate>
                                                             <DataTemplate>
-                                                                <TextBlock Text="{Binding Path=FirstName}" Style="{StaticResource gridViewTextColumn}"/>
+                                                                <TextBlock Text="{Binding Path=NurseName}" Style="{StaticResource gridViewTextColumn}"/>
                                                             </DataTemplate>
                                                         </GridViewColumn.CellTemplate>
                                                     </GridViewColumn>
                                                     <GridViewColumn Header="NurseSurname" Width="Auto">
                                                         <GridViewColumn.CellTemplate>
                                                             <DataTemplate>
-                                                                <TextBlock Text="{Binding Path=LastName}" Style="{StaticResource gridViewTextColumn}"/>
+                                                                <TextBlock Text="{Binding Path=NurseSurname}" Style="{StaticResource gridViewTextColumn}"/>
                                                             </DataTemplate>
                                                         </GridViewColumn.CellTemplate>
                                                     </GridViewColumn>
                                                     <GridViewColumn Header="NursePIN" Width="Auto">
                                                         <GridViewColumn.CellTemplate>
                                                             <DataTemplate>
-                                                                <TextBlock Text="{Binding Path=PIN}" Style="{StaticResource gridViewTextColumn}"/>
+                                                                <TextBlock Text="{Binding Path=NursePIN}" Style="{StaticResource gridViewTextColumn}"/>
                                                             </DataTemplate>
                                                         </GridViewColumn.CellTemplate>
                                                     </GridViewColumn>

@@ -17,10 +17,14 @@ namespace HospitalManagement.Commands.Dashboard
     {
         private readonly DashboardViewModel _viewModel;
         private readonly IOperationMapper _operationMapper;
-        public OpenOperationsCommand(DashboardViewModel viewModel, IOperationMapper operationMapper)
+        private readonly IOperationDoctorMapper _operationDoctorMapper;
+        private readonly IOperationNurseMapper _operationNurseMapper;
+        public OpenOperationsCommand(DashboardViewModel viewModel, IOperationMapper operationMapper, IOperationDoctorMapper operationDoctorMapper, IOperationNurseMapper operationNurseMapper)
         {
             _viewModel = viewModel;
             _operationMapper = operationMapper;
+            _operationDoctorMapper = operationDoctorMapper;
+            _operationNurseMapper = operationNurseMapper;
         }
         public override void Execute(object parameter)
         {
@@ -34,18 +38,22 @@ namespace HospitalManagement.Commands.Dashboard
             foreach (Operation operation in operations)
             {
                 OperationModel operationModel = _operationMapper.Map(operation);
+
                 foreach (OperationDoctor operationDoctor in operationDoctors)
                 {
                     if (operationDoctor.OperationId == operation.Id)
                     {
-                        operationModel = _operationMapper.Map(operationDoctor, operationModel);
+                        OperationDoctorModel operationDoctorModel = _operationDoctorMapper.Map(operationDoctor);
+                        operationModel.OperationDoctors.Add(operationDoctorModel);
                     }
                 }
+
                 foreach (OperationNurse operationNurse in operationNurses)
                 {
                     if (operationNurse.OperationId == operation.Id)
                     {
-                        operationModel = _operationMapper.Map(operationNurse, operationModel);
+                        OperationNurseModel operationNurseModel = _operationNurseMapper.Map(operationNurse);
+                        operationModel.OperationNurses.Add(operationNurseModel);
                     }
                 }
                 operationModel.No = no++;
