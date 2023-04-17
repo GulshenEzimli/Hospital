@@ -15,6 +15,9 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 
         public IDoctorRepository DoctorRepository => new SqlDoctorRepository(_connectionString);
         public IPositionRepoitory PositionRepository => new SqlPositionRepository(_connectionString);
+        public IOperationRepository OperationRepository => new SqlOperationRepository(_connectionString);
+        public IOperationDoctorRepository OperationDoctorRepository => new SqlOperationDoctorRepository(_connectionString);
+        public IOperationNurseRepository OperationNurseRepository => new SqlOperationNurseRepository(_connectionString);
 
         public INurseRepository NurseRepository => new SqlNurseRepository(_connectionString);
         public IOtherEmployeeRepository OtherEmployeeRepository =>new SqlOtherEmployeeRepository(_connectionString);
@@ -24,5 +27,6 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         public IReceptionistRepository ReceptionistRepository => throw new NotImplementedException();
         public IPatientRepository PatientRepository=>new SqlPatientRepository(_connectionString);
         public IProcedureRepository ProcedureRepository => new SqlProcedureRepository(_connectionString);
+
     }
 }
