@@ -205,6 +205,7 @@
     <Compile Include="Models\DoctorModel.cs" />
     <Compile Include="Models\MessageModel.cs" />
     <Compile Include="Models\NurseModel.cs" />
+    <Compile Include="Models\OperationModel.cs" />
     <Compile Include="Models\OtherEmployeeModel.cs" />
     <Compile Include="Models\PatientModel.cs" />
     <Compile Include="Models\PatientProcedureModel.cs" />

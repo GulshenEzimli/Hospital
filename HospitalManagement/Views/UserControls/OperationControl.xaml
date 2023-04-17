@@ -73,91 +73,147 @@
                     </Grid>
                 </StackPanel>
 
-                <ListView x:Name="MainList" Grid.Row="1" Style="{StaticResource listViewCustom}">
+                <ListView x:Name="MainList" Grid.Row="1" Style="{StaticResource listViewCustom}"
+                          ItemsSource="{Binding Values}"
+                          SelectedItem="{Binding SelectedValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                     <ListView.View>
                         <GridView >
-                            <GridViewColumn Header="No" Width="Auto" />
+                            <GridViewColumn DisplayMemberBinding="{Binding Path=No}" Header="No" Width="Auto" />
                             <GridViewColumn Header="PatientName" Width="Auto">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Style="{StaticResource gridViewTextColumn}"/>
+                                        <TextBlock Text="{Binding Path=PatientName}" Style="{StaticResource gridViewTextColumn}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="PatientSurname" Width="Auto">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Style="{StaticResource gridViewTextColumn}"/>
+                                        <TextBlock Text="{Binding Path=PatientSurname}" Style="{StaticResource gridViewTextColumn}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="PatientPIN" Width="Auto">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Style="{StaticResource gridViewTextColumn}"/>
+                                        <TextBlock Text="{Binding Path=PatientPIN}" Style="{StaticResource gridViewTextColumn}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="PatientPhoneNumber" Width="Auto">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Style="{StaticResource gridViewTextColumn}"/>
+                                        <TextBlock Text="{Binding Path=PatientPhoneNumber}" Style="{StaticResource gridViewTextColumn}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="RoomNumber" Width="Auto">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Style="{StaticResource gridViewTextColumn}"/>
+                                        <TextBlock Text="{Binding Path=RoomNumber}" Style="{StaticResource gridViewTextColumn}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="RoomFloor" Width="Auto">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Style="{StaticResource gridViewTextColumn}"/>
+                                        <TextBlock Text="{Binding Path=RoomFloor}" Style="{StaticResource gridViewTextColumn}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="RoomType" Width="Auto">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Style="{StaticResource gridViewTextColumn}"/>
+                                        <TextBlock Text="{Binding Path=RoomType}" Style="{StaticResource gridViewTextColumn}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="OperationDate" Width="Auto">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Style="{StaticResource gridViewTextColumn}" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding Path=OperationDate}" Style="{StaticResource gridViewTextColumn}" HorizontalAlignment="Center"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="OperationCost" Width="Auto">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Style="{StaticResource gridViewTextColumn}"/>
+                                        <TextBlock Text="{Binding Path=OperationCost}" Style="{StaticResource gridViewTextColumn}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="OperationReason" Width="Auto">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Style="{StaticResource gridViewTextColumn}"/>
+                                        <TextBlock Text="{Binding Path=OperationReason}" Style="{StaticResource gridViewTextColumn}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="Doctors" Width="Auto">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Style="{StaticResource gridViewTextColumn}"/>
+                                        <ListView x:Name="DoctorList" Style="{StaticResource listViewCustom}"
+                                                  ItemsSource="{Binding OperationDoctors}">
+                                            <ListView.View>
+                                                <GridView >
+                                                    <GridViewColumn Header="DoctorName" Width="Auto">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Path=FirstName}" Style="{StaticResource gridViewTextColumn}"/>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Header="DoctorSurname" Width="Auto">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Path=LastName}" Style="{StaticResource gridViewTextColumn}"/>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Header="DoctorPIN" Width="Auto">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Path=PIN}" Style="{StaticResource gridViewTextColumn}"/>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="Nurses" Width="Auto">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Style="{StaticResource gridViewTextColumn}"/>
+                                        <ListView x:Name="NurseList" Style="{StaticResource listViewCustom}"
+                                                  ItemsSource="{Binding OperationNurses}">
+                                            <ListView.View>
+                                                <GridView >
+                                                    <GridViewColumn Header="NurseName" Width="Auto">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Path=FirstName}" Style="{StaticResource gridViewTextColumn}"/>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Header="NurseSurname" Width="Auto">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Path=LastName}" Style="{StaticResource gridViewTextColumn}"/>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Header="NursePIN" Width="Auto">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Path=PIN}" Style="{StaticResource gridViewTextColumn}"/>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
