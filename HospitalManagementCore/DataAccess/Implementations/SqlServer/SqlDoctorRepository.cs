@@ -115,7 +115,6 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             {
                 Id = reader.GetInt32("PositionId"),
                 Name = reader.GetString("PositionName"),
-                DepartmentId = reader.GetInt32("DepartmentId"),
                 Department = new Department()
                 {
                     Id = reader.GetInt32("DepartmentId"),
