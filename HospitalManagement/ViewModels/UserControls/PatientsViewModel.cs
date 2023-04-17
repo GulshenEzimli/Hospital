@@ -7,6 +7,7 @@ using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,8 +51,8 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
-        private List<PatientModel> _values;
-        public List<PatientModel> Values => _values ?? (_values = new List<PatientModel>());
+        private ObservableCollection<PatientModel> _values;
+        public ObservableCollection<PatientModel> Values => _values ?? (_values = new ObservableCollection<PatientModel>());
 
         #region Commands
         public AddPatientCommand Add => new AddPatientCommand(this);

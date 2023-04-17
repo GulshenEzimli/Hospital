@@ -1,6 +1,7 @@
 ﻿using HospitalManagement.Enums;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Validations;
 using HospitalManagement.Validations.Utils;
 using HospitalManagement.ViewModels.UserControls;
 using HospitalManagementCore.Domain.Entities;
@@ -26,7 +27,7 @@ namespace HospitalManagement.Commands.Patients
 
         public override void Execute(object parameter)
         {
-            if(IsValid(_patientViewModel.CurrentValue,out var message) == false)
+            if(PatientValidation.IsValid(_patientViewModel.CurrentValue,out string message) == false)
             {
                 _patientViewModel.Message = new MessageModel()
                 {
@@ -38,8 +39,13 @@ namespace HospitalManagement.Commands.Patients
 
             }
 
-
             var patient = _patientMapper.Map(_patientViewModel.CurrentValue);
+
+            patient.Creator = new Admin() { Id = 1 };
+            patient.Modifier= new Admin() { Id = 2 };
+            patient.CreationDate = DateTime.Now;
+            patient.ModifiedDate=DateTime.Now;
+
             if (patient.Id == 0)
             {
                 _patientViewModel.Db.PatientRepository.Insert(patient);
@@ -49,35 +55,11 @@ namespace HospitalManagement.Commands.Patients
                 _patientViewModel.Db.PatientRepository.Update(patient);
             }
 
+            _patientViewModel.CurrentValue.No = _patientViewModel.Values.LastOrDefault()?.No ?? 1;
+            _patientViewModel.Values.Add(_patientViewModel.CurrentValue);
             _patientViewModel.SetDefaultValues(); 
         }
         
-        #region IsValid
-        private bool IsValid(PatientModel patientModel, out string message)
-        {
-            if (string.IsNullOrWhiteSpace(patientModel.PIN))
-            {
-                message = ValidationMessageProvider.GetRequiredMessage("PIN");
-                return false;
-            }
-            if ((patientModel.PIN.Length < 7) || (patientModel.PIN.Length > 7))
-            {
-                message = ValidationMessageProvider.GetPINMessage();
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(patientModel.Name))
-            {
-                message = ValidationMessageProvider.GetRequiredMessage("Name");
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(patientModel.Surname))
-            {
-                message = ValidationMessageProvider.GetRequiredMessage("Surname");
-                return false;
-            }
-            message = null;
-            return true;
-        }
-        #endregion
+        
     }
 }
