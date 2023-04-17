@@ -16,9 +16,11 @@ namespace HospitalManagement.Commands.Dashboard
     public class OpenOperationsCommand : BaseCommand
     {
         private readonly DashboardViewModel _viewModel;
-        public OpenOperationsCommand(DashboardViewModel viewModel)
+        private readonly IOperationMapper _operationMapper;
+        public OpenOperationsCommand(DashboardViewModel viewModel, IOperationMapper operationMapper)
         {
             _viewModel = viewModel;
+            _operationMapper = operationMapper;
         }
         public override void Execute(object parameter)
         {
@@ -31,41 +33,22 @@ namespace HospitalManagement.Commands.Dashboard
             int no = 1;
             foreach (Operation operation in operations)
             {
-                OperationModel operationModel = new OperationModel();
-                operationModel.Id = operation.Id;
-                operationModel.OperationDate = operation.OperationDate;
-                operationModel.OperationCost = operation.OperationCost;
-                operationModel.OperationReason = operation.OperationReason;
-                operationModel.PatientName = operation.Patient.Name;
-                operationModel.PatientSurname = operation.Patient.Surname;
-                operationModel.PatientPIN = operation.Patient.PIN;
-                operationModel.PatientPhoneNumber = operation.Patient.PhoneNumber;
-                operationModel.RoomNumber = operation.Room.Number;
-                operationModel.RoomFloor = operation.Room.BlockFloor;
-                operationModel.RoomType = operation.Room.Type;
-                operationModel.No = no++;
+                OperationModel operationModel = _operationMapper.Map(operation);
                 foreach (OperationDoctor operationDoctor in operationDoctors)
                 {
-                    if(operationDoctor.OperationId == operation.Id) 
+                    if (operationDoctor.OperationId == operation.Id)
                     {
-                        DoctorModel doctorModel = new DoctorModel();
-                        doctorModel.FirstName = operationDoctor.Doctor.FirstName;
-                        doctorModel.LastName = operationDoctor.Doctor.LastName;
-                        doctorModel.PIN = operationDoctor.Doctor.PIN;
-                        operationModel.OperationDoctors.Add(doctorModel);
+                        operationModel = _operationMapper.Map(operationDoctor, operationModel);
                     }
                 }
                 foreach (OperationNurse operationNurse in operationNurses)
                 {
                     if (operationNurse.OperationId == operation.Id)
                     {
-                        NurseModel nurseModel = new NurseModel();
-                        nurseModel.FirstName = operationNurse.Nurse.FirstName;
-                        nurseModel.LastName = operationNurse.Nurse.LastName;
-                        nurseModel.PIN = operationNurse.Nurse.PIN;
-                        operationModel.OperationNurses.Add(nurseModel);
+                        operationModel = _operationMapper.Map(operationNurse, operationModel);
                     }
                 }
+                operationModel.No = no++;
                 operationsViewModel.Values.Add(operationModel);
             }
 
