@@ -152,6 +152,11 @@
     <Compile Include="Commands\Nurses\EditNurseCommand.cs" />
     <Compile Include="Commands\Nurses\RejectNurseCommand.cs" />
     <Compile Include="Commands\Nurses\SaveNurseCommand.cs" />
+    <Compile Include="Commands\Operations\AddOperationCommand.cs" />
+    <Compile Include="Commands\Operations\DeleteOperationCommand.cs" />
+    <Compile Include="Commands\Operations\EditOperationCommand.cs" />
+    <Compile Include="Commands\Operations\RejectOperationCommand.cs" />
+    <Compile Include="Commands\Operations\SaveOperationCommand.cs" />
     <Compile Include="Commands\OtherEmployees\AddOtherEmployeeCommand.cs" />
     <Compile Include="Commands\OtherEmployees\DeleteOtherEmployeeCommand.cs" />
     <Compile Include="Commands\OtherEmployees\EditOtherEmployeeCommand.cs" />
