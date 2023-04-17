@@ -9,15 +9,15 @@ namespace HospitalManagement.Commands.Operations
 {
     public class RejectOperationCommand : BaseCommand
     {
-        private readonly DoctorsViewModel _doctorsViewModel;
-        public RejectOperationCommand(DoctorsViewModel doctorsViewModel)
+        private readonly OperationsViewModel _operationsViewModel;
+        public RejectOperationCommand(OperationsViewModel operationsViewModel)
         {
-            _doctorsViewModel = doctorsViewModel;
+            _operationsViewModel = operationsViewModel;
         }
 
         public override void Execute(object parameter)
         {
-            _doctorsViewModel.SetDefaultValues();
+            _operationsViewModel.SetDefaultValues();
         }
     }
 }

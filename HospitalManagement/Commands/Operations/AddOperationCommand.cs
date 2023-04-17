@@ -10,15 +10,15 @@ namespace HospitalManagement.Commands.Operations
 {
     public class AddOperationCommand : BaseCommand
     {
-        private readonly DoctorsViewModel _doctorsViewModel;
-        public AddOperationCommand(DoctorsViewModel doctorsViewModel)
+        private readonly OperationsViewModel _operationsViewModel;
+        public AddOperationCommand(OperationsViewModel operationsViewModel)
         {
-            _doctorsViewModel = doctorsViewModel;
+            _operationsViewModel = operationsViewModel;
         }
 
         public override void Execute(object parameter)
         {
-            _doctorsViewModel.CurrentSituation = Situations.ADD;
+            _operationsViewModel.CurrentSituation = Situations.ADD;
         }
     }
 }

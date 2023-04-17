@@ -9,10 +9,10 @@ namespace HospitalManagement.Commands.Operations
 {
     public class DeleteOperationCommand : BaseCommand
     {
-        private readonly DoctorsViewModel _doctorsViewModel;
-        public DeleteOperationCommand(DoctorsViewModel doctorsViewModel)
+        private readonly OperationsViewModel _operationsViewModel;
+        public DeleteOperationCommand(OperationsViewModel operationsViewModel)
         {
-            _doctorsViewModel = doctorsViewModel;
+            _operationsViewModel = operationsViewModel;
         }
 
         public override void Execute(object parameter)

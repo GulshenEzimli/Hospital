@@ -1,4 +1,6 @@
-﻿using HospitalManagement.Enums;
+﻿using HospitalManagement.Commands.Doctors;
+using HospitalManagement.Commands.Operations;
+using HospitalManagement.Enums;
 using HospitalManagement.Models;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
@@ -32,6 +34,12 @@ namespace HospitalManagement.ViewModels.UserControls
 
         private ObservableCollection<OperationModel> _values;
         public ObservableCollection<OperationModel> Values => _values ?? (_values = new ObservableCollection<OperationModel>());
+
+        public AddOperationCommand Add => new AddOperationCommand(this);
+        public DeleteOperationCommand Delete => new DeleteOperationCommand(this);
+        public EditOperationCommand Edit => new EditOperationCommand(this);
+        public RejectOperationCommand Reject => new RejectOperationCommand(this);
+        public SaveOperationCommand Save => new SaveOperationCommand(this);
         public void SetDefaultValues()
         {
             CurrentSituation = Situations.NORMAL;
