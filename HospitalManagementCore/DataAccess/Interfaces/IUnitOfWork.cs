@@ -15,5 +15,8 @@ namespace HospitalManagementCore.DataAccess.Interfaces
         IReceptionistRepository ReceptionistRepository { get; }
         IPatientRepository PatientRepository { get; }
         IProcedureRepository ProcedureRepository { get; }
+        IOperationRepository OperationRepository { get; }
+        IOperationDoctorRepository OperationDoctorRepository { get; }
+        IOperationNurseRepository OperationNurseRepository { get; }
     }
 }
