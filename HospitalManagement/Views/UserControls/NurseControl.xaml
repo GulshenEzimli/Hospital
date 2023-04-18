@@ -46,8 +46,8 @@
                             <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding Path=CurrentValue.PhoneNumber,Mode=TwoWay}"/>
                             <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding Path=CurrentValue.Email,Mode=TwoWay}"/>
                             <WrapPanel Height="25" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <RadioButton GroupName="Gender" Content="Male" Margin="0 8 40 0"/>
-                                <RadioButton Content="Female" GroupName="Gender" Margin="10 8 0 0"/>
+                                <RadioButton GroupName="Gender" Content="Male" Margin="0 8 40 0" IsChecked="{Binding CurrentValue.Gender[0]}"/>
+                                <RadioButton Content="Female" GroupName="Gender" Margin="10 8 0 0" IsChecked="{Binding CurrentValue.Gender[1]}"/>
                             </WrapPanel>
                         </StackPanel>
 
@@ -138,7 +138,7 @@
                         <GridViewColumn Header="Gender" Width="auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=Gender}" Style="{DynamicResource gridViewTextColumn}"/>
+                                    <TextBlock Text="{Binding Path=GenderValue}" Style="{DynamicResource gridViewTextColumn}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

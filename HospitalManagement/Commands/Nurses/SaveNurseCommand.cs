@@ -38,10 +38,9 @@ namespace HospitalManagement.Commands.Nurses
             nurse.CreationDate = DateTime.Now;
             nurse.ModifiedDate = DateTime.Now;
             nurse.IsDelete = false;
-            nurse.Creator = new Admin() { Id = 2 };
-            nurse.Modifier = new Admin() { Id = 2 };
+            nurse.Creator = new Admin() { Id = 3 };
+            nurse.Modifier = new Admin() { Id = 3 };
             nurse.Position = new DoctorPosition() { Name = _nursesViewModel.CurrentValue.PositionName };
-            nurse.Gender = false;
 
             if (nurse.Id == 0)
             {

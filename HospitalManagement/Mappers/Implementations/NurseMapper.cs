@@ -25,8 +25,9 @@ namespace HospitalManagement.Mappers.Implementations
             nurseModel.PIN = nurse.PIN;
             nurseModel.Salary = nurse.Salary;
             nurseModel.DepartmentName = nurse.Position.Department.Name;
-            nurseModel.Gender = nurse.Gender;
-
+            if (nurse.Gender) nurseModel.Gender[0] = nurse.Gender;
+            else nurseModel.Gender[1] = !nurse.Gender;
+         
             return nurseModel;
         }
 
@@ -44,7 +45,7 @@ namespace HospitalManagement.Mappers.Implementations
             nurse.Email = nurseModel.Email;
             nurse.PIN = nurseModel.PIN;
             nurse.Salary = nurseModel.Salary;
-            nurse.Gender = nurseModel.Gender;
+            nurse.Gender = nurseModel.Gender[0] ? true : false;
 
             return nurse;
         }
