@@ -37,13 +37,13 @@ namespace HospitalManagement.Commands.OtherEmployees
             }
 
             OtherEmployee otherEmployee = _otherEmployeeMapper.Map(_otherEmployeesViewModel.CurrentOtherEmployeeValue);
-            otherEmployee.Creator = new Admin() { Id = 2 };
-            otherEmployee.Modifier = new Admin() { Id = 2 };
+            otherEmployee.Creator = new Admin() { Id = 3 };
+            otherEmployee.Modifier = new Admin() { Id = 3 };
             otherEmployee.CreationDate = DateTime.Now;
             otherEmployee.ModifiedDate = DateTime.Now;
             otherEmployee.IsDelete = false;
             otherEmployee.Job = new Job() { Name = _otherEmployeesViewModel.CurrentOtherEmployeeValue.JobName };
-            otherEmployee.Gender = true;
+            
             if(otherEmployee.Id == 0)
             {
                 _otherEmployeesViewModel.Db.OtherEmployeeRepository.Insert(otherEmployee);

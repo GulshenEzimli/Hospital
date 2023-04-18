@@ -4,6 +4,7 @@ using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,7 +24,8 @@ namespace HospitalManagement.Mappers.Implementations
             model.PhoneNumber = otherEmployee.PhoneNumber; 
             model.BirthDate = otherEmployee.BirthDate;
             model.PIN = otherEmployee.PIN;
-            model.Gender = otherEmployee.Gender;
+            if(otherEmployee.Gender) model.Gender[0] = otherEmployee.Gender;
+            else model.Gender[1] = !otherEmployee.Gender;
             model.JobName = otherEmployee.Job.Name;
 
             return model;
@@ -41,7 +43,7 @@ namespace HospitalManagement.Mappers.Implementations
             otherEmployee.PhoneNumber = model.PhoneNumber;
             otherEmployee.BirthDate = model.BirthDate;
             otherEmployee.PIN = model.PIN;
-            otherEmployee.Gender = model.Gender;
+            otherEmployee.Gender = model.Gender[0] ? true : false;
             otherEmployee.Job = new Job()
             {
                 Name = model.JobName,

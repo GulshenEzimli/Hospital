@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Packaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,17 @@ namespace HospitalManagement.Models
         public string PIN { get; set; }
         public string JobName { get; set; }
         public decimal Salary { get; set; }
-        public bool Gender { get; set; }
+        private bool[] _gender = { false, false };
+        public bool[] Gender 
+        {
+            get { return _gender; }
+        }
+        public string GenderValue
+        {
+            get
+            {
+                return _gender[0] ? "Kişi" : "Qadın";
+            }
+        }
     }
 }
