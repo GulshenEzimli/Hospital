@@ -4,13 +4,7 @@ using HospitalManagement.ViewModels.Windows;
 using HospitalManagement.Views.Windows;
 using HospitalManagementCore.DataAccess.Implementations.SqlServer;
 using HospitalManagementCore.DataAccess.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace HospitalManagement
@@ -24,7 +18,7 @@ namespace HospitalManagement
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
 
-            builder.DataSource = "GULSHAN\\SQLEXPRESS";
+            builder.DataSource = "localhost";
             builder.InitialCatalog = "Hospital";
             builder.IntegratedSecurity = true;
 

@@ -13,5 +13,7 @@ namespace HospitalManagement.Models
         public string DoctorName { get; set; }
         public string DoctorSurname { get; set; }
         public string DoctorPIN { get; set; }
+
+        public string DisplayValue => $"{DoctorName} {DoctorSurname} {DoctorPIN}";
     }
 }
