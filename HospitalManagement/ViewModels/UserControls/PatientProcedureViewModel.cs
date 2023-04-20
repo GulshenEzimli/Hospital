@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace HospitalManagement.ViewModels.UserControls
 {
@@ -46,13 +45,11 @@ namespace HospitalManagement.ViewModels.UserControls
         private List<PatientProcedureModel> _patientProcedureValues;
         public List<PatientProcedureModel> PatientProcedureValues => _patientProcedureValues ?? (_patientProcedureValues = new List<PatientProcedureModel>());
 
-        public Grid AddProcedureObjects { get; set; }
-        //public AddPatientProcedureCommand Add => new AddPatientProcedureCommand(this);
-        //public DeletePatientProcedureCommand Delete => new DeletePatientProcedureCommand(this);
-        //public EditPatientProcedureCommand Edit => new EditPatientProcedureCommand(this);
-        //public RejectPatientProcedureCommand Reject => new RejectPatientProcedureCommand(this);
-        //public SavePatientProcedureCommand Save => new SavePatientProcedureCommand(this);
-        public FromPatientToDoctor AddDoctor => new FromPatientToDoctor(this);
+        public AddPatientProcedureCommand Add => new AddPatientProcedureCommand(this);
+        public DeletePatientProcedureCommand Delete => new DeletePatientProcedureCommand(this);
+        public EditPatientProcedureCommand Edit => new EditPatientProcedureCommand(this);
+        public RejectPatientProcedureCommand Reject => new RejectPatientProcedureCommand(this);
+        public SavePatientProcedureCommand Save => new SavePatientProcedureCommand(this);
 
         public void SetDefaultValues()
         {

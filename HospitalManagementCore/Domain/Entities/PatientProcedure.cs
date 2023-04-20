@@ -8,10 +8,10 @@ namespace HospitalManagementCore.Domain.Entities
     public class PatientProcedure : IEntity
     {
         public int Id { get; set; }
-        public int PatientId => Patient?.Id ?? 0;
-        public int DoctorId => Doctor?.Id ?? 0;
-        public int NurseId => Nurse?.Id ?? 0;
-        public int ProcedureId => Procedure?.Id ?? 0;
+        public int PatientId { get; set; }
+        public int DoctorId { get; set; }
+        public int NurseId { get; set; }
+        public int ProcedureId { get; set; }
         public DateTime UseDate { get; set; }
 
         public Patient Patient { get; set; }

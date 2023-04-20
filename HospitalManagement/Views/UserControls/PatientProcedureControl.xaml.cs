@@ -22,16 +22,10 @@ namespace HospitalManagement.Views.UserControls
     {
         public PatientProcedureControl()
         {
-               
             InitializeComponent();
         }
 
         private void MainList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }

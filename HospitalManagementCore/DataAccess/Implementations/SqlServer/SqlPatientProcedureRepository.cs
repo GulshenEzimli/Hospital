@@ -127,33 +127,37 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 
             patientProcedure.Id = reader.GetInt32("PatientProceduresId");
 
+            patientProcedure.PatientId = reader.GetInt32("PatientId");
             patientProcedure.Patient = new Patient()
             {
-                Id = reader.GetInt32("PatientId"),
+                Id = patientProcedure.PatientId,
                 Name = reader.GetString("PatientName"),
                 Surname = reader.GetString("PatientSurname"),
                 PIN = reader.GetString("PatientPIN"),
             };
 
+            patientProcedure.DoctorId = reader.GetInt32("DoctorId");
             patientProcedure.Doctor = new Doctor()
             {
-                Id = reader.GetInt32("DoctorId"),
+                Id = patientProcedure.DoctorId,
                 FirstName = reader.GetString("DoctorName"),
                 LastName = reader.GetString("DoctorSurname"),
                 PIN = reader.GetString("DoctorPIN"),
             };
 
+            patientProcedure.NurseId = reader.GetInt32("NurseId");
             patientProcedure.Nurse = new Nurse()
             {
-                Id = reader.GetInt32("NurseId"),
+                Id = patientProcedure.NurseId,
                 FirstName = reader.GetString("NurseName"),
                 LastName = reader.GetString("NurseSurname"),
                 PIN = reader.GetString("NursePIN"),
             };
 
+            patientProcedure.ProcedureId = reader.GetInt32("ProcedureId");
             patientProcedure.Procedure = new Procedure()
             {
-                Id = reader.GetInt32("ProcedureId"),
+                Id = patientProcedure.ProcedureId,
                 Name = reader.GetString("ProcedureName"),
                 Cost = reader.GetDecimal("Cost")
             };

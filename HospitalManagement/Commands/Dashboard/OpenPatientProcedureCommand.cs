@@ -26,19 +26,17 @@ namespace HospitalManagement.Commands.Dashboard
             PatientProcedureControl patientProcedureControl = new PatientProcedureControl();
 
             PatientProcedureViewModel patientProcedureViewModel = new PatientProcedureViewModel(_viewModel.Db,patientProcedureControl.ErrorDialog);
-            
-           
-            //List<PatientProcedure> patientProcedures = _viewModel.Db.PatientProcedureRepository.Get();
-            //int no = 1;
-            //foreach (var patientProcedure in patientProcedures)
-            //{
-            //    var patientProcedureModel = _patientProcedureMapper.Map(patientProcedure);
-            //    patientProcedureModel.No = no++;
-            //    patientProcedureViewModel.PatientProcedureValues.Add(patientProcedureModel);
-            //}
+
+            List<PatientProcedure> patientProcedures = _viewModel.Db.PatientProcedureRepository.Get();
+            int no = 1;
+            foreach (var patientProcedure in patientProcedures)
+            {
+                var patientProcedureModel = _patientProcedureMapper.Map(patientProcedure);
+                patientProcedureModel.No = no++;
+                patientProcedureViewModel.PatientProcedureValues.Add(patientProcedureModel);
+            }
 
             patientProcedureControl.DataContext = patientProcedureViewModel;
-            patientProcedureViewModel.AddProcedureObjects = patientProcedureControl.grdPatientProcedureAdded;
             _viewModel.CenterGrid.Children.Clear();
             _viewModel.CenterGrid.Children.Add(patientProcedureControl);
         }
