@@ -24,5 +24,10 @@ namespace HospitalManagement.Views.UserControls
         {
             InitializeComponent();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

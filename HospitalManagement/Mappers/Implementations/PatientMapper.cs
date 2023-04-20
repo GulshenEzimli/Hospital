@@ -22,6 +22,7 @@ namespace HospitalManagement.Mappers.Implementations
             patientModel.Gender = patient.Gender ;
             patientModel.BirthDate = patient.BirthDate;
             patientModel.PIN = patient.PIN;
+            patientModel.IsDelete = patient.IsDelete;
             return patientModel;
         }
 
@@ -35,7 +36,7 @@ namespace HospitalManagement.Mappers.Implementations
             patient.Gender = patientModel.Gender;
             patient.BirthDate = patientModel.BirthDate;
             patient.PIN=patientModel.PIN;
-
+            patient.IsDelete = patientModel.IsDelete;
             return patient;
         }
     }

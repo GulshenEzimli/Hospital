@@ -69,9 +69,9 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"Insert into Patients output inserted.id values (@CreatorId,@ModifierId,
-                                 @FirstName,@LastName,@Gender,@BirthDate,@PIN,@PhoneNumber,
-                                 @CreationDate,@ModifiedDate,@IsDelete)";
+                string cmdText = @"Insert into Patients output inserted.id values (@creatorId,@modifierId,
+                                 @firstName,@lastName,@gender,@birthDate,@pin,@phoneNumber,
+                                 @creationDate,@modifiedDate,@isDelete)";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     AddParameters(command, patient);

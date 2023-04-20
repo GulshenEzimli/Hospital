@@ -21,7 +21,6 @@ namespace HospitalManagement.Commands.Dashboard
         {
             _viewModel = viewModel;
             _patientMapper=patientMapper;
-
         }   
 
         public override void Execute(object parameter)
@@ -29,7 +28,6 @@ namespace HospitalManagement.Commands.Dashboard
             var patientControl = new PatientControls();
             var controlViewModel = new PatientsViewModel(_viewModel.Db,_patientMapper, patientControl.ErrorDialog);
             
-
             int no = 1;
             var patients = _viewModel.Db.PatientRepository.Get();
 
@@ -39,6 +37,7 @@ namespace HospitalManagement.Commands.Dashboard
                 patientModel.No = no++;
                 controlViewModel.Values.Add(patientModel);
             }
+
             patientControl.DataContext = controlViewModel;
             _viewModel.CenterGrid.Children.Clear();
             _viewModel.CenterGrid.Children.Add(patientControl);

@@ -16,6 +16,7 @@ namespace HospitalManagement.Models
         public DateTime BirthDate { get; set; }
         public string PIN { get; set; }
         public string PhoneNumber { get; set; }
+        public bool IsDelete { get; set; }
 
     }
 }

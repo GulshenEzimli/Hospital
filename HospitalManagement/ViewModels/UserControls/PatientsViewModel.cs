@@ -56,10 +56,10 @@ namespace HospitalManagement.ViewModels.UserControls
 
         #region Commands
         public AddPatientCommand Add => new AddPatientCommand(this);
+        public SavePatientCommand Save => new SavePatientCommand(this, _patientMapper);
         public DeletePatientCommand Delete => new DeletePatientCommand(this);
         public EditPatientCommand Edit=> new EditPatientCommand(this);
         public RejectPatientCommand Reject=>new RejectPatientCommand(this);
-        public SavePatientCommand Save => new SavePatientCommand(this,_patientMapper);
         #endregion
 
         public void SetDefaultValues()

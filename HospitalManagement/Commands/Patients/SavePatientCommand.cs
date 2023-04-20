@@ -34,6 +34,7 @@ namespace HospitalManagement.Commands.Patients
                     IsSuccess = false,
                     Message = message
                 };
+
                 DoAnimation(_patientViewModel.ErrorDialog);
                 return;
 
@@ -41,11 +42,12 @@ namespace HospitalManagement.Commands.Patients
 
             var patient = _patientMapper.Map(_patientViewModel.CurrentValue);
 
-            patient.Creator = new Admin() { Id = 1 };
-            patient.Modifier= new Admin() { Id = 2 };
+            patient.Creator = new Admin() { Id = 2 };
+            patient.Modifier = new Admin() { Id = 2 };
             patient.CreationDate = DateTime.Now;
             patient.ModifiedDate=DateTime.Now;
-
+            patient.IsDelete = false;
+            patient.Gender = true;
             if (patient.Id == 0)
             {
                 _patientViewModel.Db.PatientRepository.Insert(patient);

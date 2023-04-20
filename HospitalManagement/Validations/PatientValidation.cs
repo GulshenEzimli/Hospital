@@ -23,6 +23,11 @@ namespace HospitalManagement.Validations
                 message = ValidationMessageProvider.GetRequiredMessage("Surname");
                 return false;
             }
+            if (string.IsNullOrWhiteSpace(patientModel.PhoneNumber))
+            {
+                message=ValidationMessageProvider.GetRequiredMessage("PhoneNumber");
+                return false;
+            }
             if (string.IsNullOrWhiteSpace(patientModel.PIN))
             {
                 message = ValidationMessageProvider.GetRequiredMessage("PIN");
@@ -30,7 +35,7 @@ namespace HospitalManagement.Validations
             }
             if ((patientModel.PIN.Length < 7) || (patientModel.PIN.Length > 7))
             {
-                message = ValidationMessageProvider.GetCorrectMessage("PIN");
+                message = ValidationMessageProvider.GetSpecificLength("PIN",7);
                 return false;
             }
 

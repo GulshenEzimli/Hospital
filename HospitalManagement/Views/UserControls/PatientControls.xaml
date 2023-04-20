@@ -59,12 +59,12 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">
-                            <TextBox Style="{StaticResource myTextBox}" />
-                            <TextBox Style="{StaticResource myTextBox}" />
-                            <DatePicker Margin="4" FontFamily="Times New Roman" Width="200" Height="26" RenderTransformOrigin="0.491,1.021"/>
-                            <WrapPanel Margin="-5 7 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <RadioButton Style="{StaticResource myRadioButton}" Margin="8 8" >Woman</RadioButton>
-                                <RadioButton Style="{StaticResource myRadioButton}" Margin="9 8" >Man</RadioButton>
+                            <TextBox Style="{StaticResource myTextBox}" Text="{Binding Path=CurrentValue.Name,Mode=TwoWay}" />
+                            <TextBox Style="{StaticResource myTextBox}" Text="{Binding Path=CurrentValue.Surname,Mode=TwoWay}" />
+                            <components:CustomDatePicker Margin="5 5" Height="25" DataContext="{Binding Path=CurrentValue.BirthDate,Mode=TwoWay}"/>
+                            <WrapPanel Height="25" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <RadioButton GroupName="Gender" Content="Male" Margin="0 8 8 0" IsChecked="{Binding CurrentValue.Gender[0]}"/>
+                                <RadioButton Content="Female" GroupName="Gender" Margin="10 8 8 0" IsChecked="{Binding CurrentValue.Gender[1]}"/>
                             </WrapPanel>
                         </StackPanel>
 
@@ -75,8 +75,8 @@
 
                         <StackPanel Grid.Column="3">
                             
-                            <TextBox Style="{StaticResource myTextBox}" />
-                            <TextBox Style="{StaticResource myTextBox}" />
+                            <TextBox Style="{StaticResource myTextBox}" Text="{Binding Path=CurrentValue.PIN,Mode=TwoWay}" />
+                            <TextBox Style="{StaticResource myTextBox}" Text="{Binding Path=CurrentValue.PhoneNumber,Mode=TwoWay}"/>
                         </StackPanel>
                     </Grid>
                     <StackPanel Grid.Column="1" Style="{DynamicResource ControlsButtonsBack}">
@@ -90,7 +90,6 @@
                             </StackPanel>
                         </Grid>
                     </StackPanel>
-
                 </Grid>
             </StackPanel>
             <ListView Grid.Row="1" x:Name="MainList"  
