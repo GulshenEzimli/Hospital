@@ -16,24 +16,13 @@ using System.Windows.Shapes;
 namespace HospitalManagement.Views.UserControls
 {
     /// <summary>
-    /// Interaction logic for PatientProcedureControl.xaml
+    /// Interaction logic for ProcedureDoctorControl.xaml
     /// </summary>
-    public partial class PatientProcedureControl : UserControl
+    public partial class ProcedureDoctorControl : UserControl
     {
-        public PatientProcedureControl()
+        public ProcedureDoctorControl()
         {
-               
             InitializeComponent();
-        }
-
-        private void MainList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }

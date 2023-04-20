@@ -100,6 +100,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\ProcedureDoctorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\ProceduresControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -165,6 +169,7 @@
     <Compile Include="Commands\PatientProcedures\AddPatientProcedureCommand.cs" />
     <Compile Include="Commands\PatientProcedures\DeletePatientProcedureCommand.cs" />
     <Compile Include="Commands\PatientProcedures\EditPatientProcedureCommand.cs" />
+    <Compile Include="Commands\PatientProcedures\FromPatientToDoctor.cs" />
     <Compile Include="Commands\PatientProcedures\RejectPatientProcedureCommand.cs" />
     <Compile Include="Commands\PatientProcedures\SavePatientProcedureCommand.cs" />
     <Compile Include="Commands\Patients\AddPatientCommand.cs" />
@@ -222,8 +227,11 @@
     <Compile Include="Models\OtherEmployeeModel.cs" />
     <Compile Include="Models\PatientModel.cs" />
     <Compile Include="Models\PatientProcedureModel.cs" />
+    <Compile Include="Models\ProcedureDoctorModel.cs" />
     <Compile Include="Models\ProcedureModel.cs" />
     <Compile Include="Models\PositionModel.cs" />
+    <Compile Include="Models\ProcedureNurseModel.cs" />
+    <Compile Include="Models\ProcedurePatientModel.cs" />
     <Compile Include="Validations\NurseValidation.cs" />
     <Compile Include="Validations\OtherEmployeeValidation.cs" />
     <Compile Include="Validations\PatientValidation.cs" />
@@ -238,6 +246,7 @@
     <Compile Include="ViewModels\UserControls\OtherEmployeesViewModel.cs" />
     <Compile Include="ViewModels\UserControls\PatientProcedureViewModel.cs" />
     <Compile Include="ViewModels\UserControls\PatientsViewModel.cs" />
+    <Compile Include="ViewModels\UserControls\ProcedureDoctorViewModel.cs" />
     <Compile Include="ViewModels\UserControls\ProceduresViewModel.cs" />
     <Compile Include="ViewModels\UserControls\QueuesViewModel.cs" />
     <Compile Include="ViewModels\UserControls\ReceptionistViewModel.cs" />
@@ -272,6 +281,9 @@
     </Compile>
     <Compile Include="Views\UserControls\PatientProcedureControl.xaml.cs">
       <DependentUpon>PatientProcedureControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ProcedureDoctorControl.xaml.cs">
+      <DependentUpon>ProcedureDoctorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ProceduresControl.xaml.cs">
       <DependentUpon>ProceduresControl.xaml</DependentUpon>
