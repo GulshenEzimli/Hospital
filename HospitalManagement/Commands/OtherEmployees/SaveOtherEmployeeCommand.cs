@@ -42,7 +42,6 @@ namespace HospitalManagement.Commands.OtherEmployees
             otherEmployee.CreationDate = DateTime.Now;
             otherEmployee.ModifiedDate = DateTime.Now;
             otherEmployee.IsDelete = false;
-            otherEmployee.Job = new Job() { Name = _otherEmployeesViewModel.CurrentOtherEmployeeValue.JobName };
             
             if(otherEmployee.Id == 0)
             {

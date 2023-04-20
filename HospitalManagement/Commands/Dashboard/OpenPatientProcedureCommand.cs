@@ -36,6 +36,30 @@ namespace HospitalManagement.Commands.Dashboard
                 patientProcedureViewModel.PatientProcedureValues.Add(patientProcedureModel);
             }
 
+            List<Patient> patients = _viewModel.Db.PatientRepository.Get();
+            foreach (var patient in patients)
+            {
+                patientProcedureViewModel.Patients.Add($"{patient.Name} {patient.Surname} {patient.PIN}");
+            }
+
+            List<Doctor> doctors = _viewModel.Db.DoctorRepository.Get();
+            foreach (var doctor in doctors)
+            {
+                patientProcedureViewModel.Doctors.Add($"{doctor.FirstName} {doctor.LastName} {doctor.PIN}");
+            }
+
+            List<Nurse> nurses = _viewModel.Db.NurseRepository.Get();
+            foreach(var nurse in nurses)
+            {
+                patientProcedureViewModel.Nurses.Add($"{nurse.FirstName} {nurse.LastName} {nurse.PIN}");
+            }
+
+            List<Procedure> procedures = _viewModel.Db.ProcedureRepository.Get();
+            foreach (var procedure in procedures)
+            {
+                patientProcedureViewModel.Procedures.Add($"{procedure.Name} {procedure.Cost}");
+            }
+
             patientProcedureControl.DataContext = patientProcedureViewModel;
             _viewModel.CenterGrid.Children.Clear();
             _viewModel.CenterGrid.Children.Add(patientProcedureControl);
