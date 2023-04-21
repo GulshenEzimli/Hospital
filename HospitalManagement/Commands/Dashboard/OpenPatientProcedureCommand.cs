@@ -25,7 +25,7 @@ namespace HospitalManagement.Commands.Dashboard
         {
             PatientProcedureControl patientProcedureControl = new PatientProcedureControl();
 
-            PatientProcedureViewModel patientProcedureViewModel = new PatientProcedureViewModel(_viewModel.Db,patientProcedureControl.ErrorDialog);
+            PatientProcedureViewModel patientProcedureViewModel = new PatientProcedureViewModel(_viewModel.Db,patientProcedureControl.ErrorDialog, _patientProcedureMapper);
 
             List<PatientProcedure> patientProcedures = _viewModel.Db.PatientProcedureRepository.Get();
             int no = 1;

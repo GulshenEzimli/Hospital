@@ -1,5 +1,7 @@
 ﻿using HospitalManagement.Commands.PatientProcedures;
 using HospitalManagement.Enums;
+using HospitalManagement.Mappers.Implementations;
+using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
@@ -14,8 +16,10 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public class PatientProcedureViewModel : BaseControlViewModel
     {
-        public PatientProcedureViewModel(IUnitOfWork unitOfWork, ErrorDialog errorDialog) : base(unitOfWork, errorDialog)
+        private readonly IPatientProcedureMapper _patientProcedureMapper;
+        public PatientProcedureViewModel(IUnitOfWork unitOfWork, ErrorDialog errorDialog, IPatientProcedureMapper patientProcedureMapper) : base(unitOfWork, errorDialog)
         {
+            _patientProcedureMapper = patientProcedureMapper;
             SetDefaultValues();
         }
         public override string Header => "Patients and Procedures";
@@ -61,7 +65,7 @@ namespace HospitalManagement.ViewModels.UserControls
         public DeletePatientProcedureCommand Delete => new DeletePatientProcedureCommand(this);
         public EditPatientProcedureCommand Edit => new EditPatientProcedureCommand(this);
         public RejectPatientProcedureCommand Reject => new RejectPatientProcedureCommand(this);
-        public SavePatientProcedureCommand Save => new SavePatientProcedureCommand(this);
+        public SavePatientProcedureCommand Save => new SavePatientProcedureCommand(this,_patientProcedureMapper);
 
         public void SetDefaultValues()
         {

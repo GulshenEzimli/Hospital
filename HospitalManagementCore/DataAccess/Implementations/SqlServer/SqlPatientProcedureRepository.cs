@@ -17,7 +17,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         }
         public bool Delete(int id)
         {
-            using(SqlConnection connection = new SqlConnection())
+            using(SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 string cmdText = @"delete * from PatientProcedures where Id = @id";
@@ -61,7 +61,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 
         public PatientProcedure GetById(int id)
         {
-            using (SqlConnection connection = new SqlConnection())
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 string cmdText = @"select PatientProcedures.Id as PatientProceduresId,UseDate,Patients.Id as PatientId,
@@ -88,7 +88,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 
         public int Insert(PatientProcedure patientProcedure)
         {
-            using (SqlConnection connection = new SqlConnection())
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 string cmdText = @"insert into PatientProcedures (PatientId,DoctorId,NurseId,ProcedureId,UseDate) 
@@ -99,14 +99,14 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     AddParameters(command, patientProcedure);
-                    return (int)command.ExecuteScalar();
+                    return (int) command.ExecuteScalar();
                 }
             }
         }
 
         public bool Update(PatientProcedure patientProcedure)
         {
-            using (SqlConnection connection = new SqlConnection())
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
                 string cmdText = @"update PatientProcedures set PatientId=(select Id from Patients where Patients.PIN=@patientPin), 
