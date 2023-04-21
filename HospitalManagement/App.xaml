@@ -127,7 +127,7 @@
                 <DataTrigger Binding="{Binding CurrentSituation}" Value="1">
                     <Setter Property="IsEnabled" Value="False"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding CurrentSituation}" Value="3">
+                <DataTrigger Binding="{Binding CurrentSituation}" Value="4">
                     <Setter Property="IsEnabled" Value="False"/>
                 </DataTrigger>
             </Style.Triggers>
