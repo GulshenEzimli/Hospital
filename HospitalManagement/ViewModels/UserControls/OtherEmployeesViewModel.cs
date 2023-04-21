@@ -45,6 +45,26 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
+        private OtherEmployeeModel _selectedValue;
+        public OtherEmployeeModel SelectedValue
+        {
+            get => _selectedValue;
+            set
+            {
+                SetSelectedValue(value);
+                if(value == null)
+                {
+                    SetDefaultValues();
+                }
+                else
+                {
+                    CurrentOtherEmployeeValue = SelectedValue.Clone();
+                    CurrentSituation = Situations.SELECTED;
+                }
+                OnPropertyChanged(nameof(SelectedValue));
+            }
+        }
+
         private ObservableCollection<OtherEmployeeModel> _otherEmployeeValues;
         public ObservableCollection<OtherEmployeeModel> OtherEmployeeValues => _otherEmployeeValues ?? (_otherEmployeeValues = new ObservableCollection<OtherEmployeeModel>());
 
@@ -61,6 +81,14 @@ namespace HospitalManagement.ViewModels.UserControls
         {
             CurrentSituation = Situations.NORMAL;
             CurrentOtherEmployeeValue = new OtherEmployeeModel();
+
+            SetSelectedValue(null);
+        }
+
+        private void SetSelectedValue(OtherEmployeeModel otherEmployeeModel)
+        {
+            _selectedValue = otherEmployeeModel;
+            OnPropertyChanged(nameof(SelectedValue));
         }
     }
 }

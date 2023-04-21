@@ -36,23 +36,33 @@ namespace HospitalManagement.Commands.OtherEmployees
                 return;
             }
 
-            OtherEmployee otherEmployee = _otherEmployeeMapper.Map(_otherEmployeesViewModel.CurrentOtherEmployeeValue);
-            otherEmployee.Creator = new Admin() { Id = 3 };
-            otherEmployee.Modifier = new Admin() { Id = 3 };
-            otherEmployee.CreationDate = DateTime.Now;
-            otherEmployee.ModifiedDate = DateTime.Now;
-            otherEmployee.IsDelete = false;
+            OtherEmployee toSavedOtherEmployee = _otherEmployeeMapper.Map(_otherEmployeesViewModel.CurrentOtherEmployeeValue);
             
-            if(otherEmployee.Id == 0)
+            toSavedOtherEmployee.Modifier = new Admin() { Id = 3 };
+            toSavedOtherEmployee.ModifiedDate = DateTime.Now;
+            
+            if(toSavedOtherEmployee.Id == 0)
             {
-                _otherEmployeesViewModel.Db.OtherEmployeeRepository.Insert(otherEmployee);
+                toSavedOtherEmployee.Creator = new Admin() { Id = 3 }; 
+                toSavedOtherEmployee.CreationDate = DateTime.Now;
+                toSavedOtherEmployee.IsDelete = false;
+                _otherEmployeesViewModel.Db.OtherEmployeeRepository.Insert(toSavedOtherEmployee);
+                _otherEmployeesViewModel.CurrentOtherEmployeeValue.No = _otherEmployeesViewModel.OtherEmployeeValues.LastOrDefault()?.No + 1 ?? 1;
+                _otherEmployeesViewModel.OtherEmployeeValues.Add(_otherEmployeesViewModel.CurrentOtherEmployeeValue);
             }
             else
             {
-                _otherEmployeesViewModel.Db.OtherEmployeeRepository.Update(otherEmployee);
+                var existingOtherEmployee = _otherEmployeesViewModel.Db.OtherEmployeeRepository.GetById(_otherEmployeesViewModel.CurrentOtherEmployeeValue.Id);
+                toSavedOtherEmployee.Creator = existingOtherEmployee.Creator;
+                toSavedOtherEmployee.CreationDate = existingOtherEmployee.CreationDate;
+                toSavedOtherEmployee.IsDelete = existingOtherEmployee.IsDelete;
+                _otherEmployeesViewModel.Db.OtherEmployeeRepository.Update(toSavedOtherEmployee);
+
+                var existingValue = _otherEmployeesViewModel.OtherEmployeeValues.FirstOrDefault(x => x.Id == existingOtherEmployee.Id);
+                var existingValueIndex = _otherEmployeesViewModel.OtherEmployeeValues.IndexOf(existingValue);
+                _otherEmployeesViewModel.OtherEmployeeValues[existingValueIndex] = _otherEmployeesViewModel.CurrentOtherEmployeeValue;
             }
-            _otherEmployeesViewModel.CurrentOtherEmployeeValue.No = _otherEmployeesViewModel.OtherEmployeeValues.LastOrDefault()?.No + 1 ?? 1;
-            _otherEmployeesViewModel.OtherEmployeeValues.Add(_otherEmployeesViewModel.CurrentOtherEmployeeValue);
+            
             _otherEmployeesViewModel.SetDefaultValues();
         }
     }
