@@ -19,13 +19,13 @@ namespace HospitalManagement.Mappers.Implementations
             patientProcedure.Patient.PIN = model.Patient.Substring(model.Patient.LastIndexOf(' ') + 1);
 
             patientProcedure.Doctor = new Doctor();
-            patientProcedure.Doctor.PIN = model.Doctor.Substring(model.Doctor.LastIndexOf(' ') +1);
+            patientProcedure.Doctor.PIN = model.Doctor.Substring(model.Doctor.LastIndexOf(' ') + 1);
 
-            patientProcedure.Nurse = new Nurse();;
-            patientProcedure.Nurse.PIN = model.Nurse.Substring(model.Nurse.LastIndexOf(' ') +1);
+            patientProcedure.Nurse = new Nurse(); ;
+            patientProcedure.Nurse.PIN = model.Nurse.Substring(model.Nurse.LastIndexOf(' ') + 1);
 
             patientProcedure.Procedure = new Procedure();
-            patientProcedure.Procedure.Name = model.Procedure.Substring(0,model.Procedure.LastIndexOf(' '));
+            patientProcedure.Procedure.Name = model.Procedure.Substring(0, model.Procedure.LastIndexOf(' '));
 
             return patientProcedure;
         }
@@ -34,11 +34,33 @@ namespace HospitalManagement.Mappers.Implementations
         {
             PatientProcedureModel patientProcedureModel = new PatientProcedureModel();
             patientProcedureModel.Id = patientProcedure.Id;
-            patientProcedureModel.Patient = $"{patientProcedure.Patient.Name} {patientProcedure.Patient.Surname} {patientProcedure.Patient.PIN}";
-            patientProcedureModel.Doctor = $"{patientProcedure.Doctor.FirstName} {patientProcedure.Doctor.LastName} {patientProcedure.Doctor.PIN}";
-            patientProcedureModel.Nurse = $"{patientProcedure.Nurse.FirstName} {patientProcedure.Nurse.LastName} {patientProcedure.Nurse.PIN}";
-            patientProcedureModel.ProcedureName = patientProcedure.Procedure.Name;
-            patientProcedureModel.Cost = patientProcedure.Procedure.Cost;
+            patientProcedureModel.Patient = new PatientModel()
+            {
+                Id = patientProcedure.Patient.Id,
+                Name = patientProcedure.Patient.Name,
+                Surname = patientProcedure.Patient.Surname,
+                PIN = patientProcedure.Patient.PIN,
+            };
+            patientProcedureModel.Doctor = new DoctorModel()
+            {
+                Id = patientProcedure.Doctor.Id,
+                FirstName = patientProcedure.Doctor.FirstName,
+                LastName = patientProcedure.Doctor.LastName,
+                PIN = patientProcedure.Doctor.PIN,
+            };
+            patientProcedureModel.Nurse = new NurseModel()
+            {
+                Id = patientProcedure.Nurse.Id,
+                FirstName = patientProcedure.Nurse.FirstName,
+                LastName= patientProcedure.Nurse.LastName,
+                PIN= patientProcedure.Nurse.PIN,
+            };
+            patientProcedureModel.Procedure = new ProcedureModel()
+            {
+                Id = patientProcedure.Procedure.Id,
+                Name = patientProcedure.Procedure.Name,
+                Cost = patientProcedure.Procedure.Cost,
+            };
             patientProcedureModel.UseDate = patientProcedure.UseDate;
 
             return patientProcedureModel;

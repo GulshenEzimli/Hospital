@@ -50,17 +50,17 @@ namespace HospitalManagement.ViewModels.UserControls
         private ObservableCollection<PatientProcedureModel> _patientProcedureValues;
         public ObservableCollection<PatientProcedureModel> PatientProcedureValues => _patientProcedureValues ?? (_patientProcedureValues = new ObservableCollection<PatientProcedureModel>());
 
-        private List<string> _patients;
-        public List<string> Patients => _patients ?? (_patients = new List<string>());
+        private List<PatientModel> _patients;
+        public List<PatientModel> Patients => _patients ?? (_patients = new List<PatientModel>());
 
-        private List<string> _doctors;
-        public List<string> Doctors => _doctors ?? (_doctors = new List<string>());
+        private List<DoctorModel> _doctors;
+        public List<DoctorModel> Doctors => _doctors ?? (_doctors = new List<DoctorModel>());
 
-        private List<string> _nurses;
-        public List<string> Nurses => _nurses ?? (_nurses = new List<string>());
+        private List<NurseModel> _nurses;
+        public List<NurseModel> Nurses => _nurses ?? (_nurses = new List<NurseModel>());
 
-        private List<string> _procedures;
-        public List<string> Procedures => _procedures ?? (_procedures = new List<string>());
+        private List<ProcedureModel> _procedures;
+        public List<ProcedureModel> Procedures => _procedures ?? (_procedures = new List<ProcedureModel>());
 
         public AddPatientProcedureCommand Add => new AddPatientProcedureCommand(this);
         public DeletePatientProcedureCommand Delete => new DeletePatientProcedureCommand(this);

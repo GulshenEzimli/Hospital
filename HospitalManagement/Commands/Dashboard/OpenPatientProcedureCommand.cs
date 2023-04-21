@@ -16,10 +16,19 @@ namespace HospitalManagement.Commands.Dashboard
     {
         private readonly DashboardViewModel _viewModel;
         private readonly IPatientProcedureMapper _patientProcedureMapper;
-        public OpenPatientProcedureCommand(DashboardViewModel viewModel, IPatientProcedureMapper patientProcedureMapper)
+        private readonly IPatientMapper _patientMapper;
+        private readonly IDoctorMapper _doctorMapper;
+        private readonly INurseMapper _nurseMapper;
+        private readonly IProcedureMapper _procedureMapper;
+        public OpenPatientProcedureCommand(DashboardViewModel viewModel, IPatientProcedureMapper patientProcedureMapper,
+            IPatientMapper patientMapper,IDoctorMapper doctorMapper, INurseMapper nurseMapper, IProcedureMapper procedureMapper)
         {
             _viewModel = viewModel;
             _patientProcedureMapper = patientProcedureMapper;
+            _patientMapper = patientMapper;
+            _doctorMapper = doctorMapper;
+            _nurseMapper = nurseMapper;
+            _procedureMapper = procedureMapper;
         }
         public override void Execute(object parameter)
         {
@@ -39,25 +48,25 @@ namespace HospitalManagement.Commands.Dashboard
             List<Patient> patients = _viewModel.Db.PatientRepository.Get();
             foreach (var patient in patients)
             {
-                patientProcedureViewModel.Patients.Add($"{patient.Name} {patient.Surname} {patient.PIN}");
+                patientProcedureViewModel.Patients.Add(_patientMapper.Map(patient));
             }
 
             List<Doctor> doctors = _viewModel.Db.DoctorRepository.Get();
             foreach (var doctor in doctors)
             {
-                patientProcedureViewModel.Doctors.Add($"{doctor.FirstName} {doctor.LastName} {doctor.PIN}");
+                patientProcedureViewModel.Doctors.Add(_doctorMapper.Map(doctor));
             }
 
             List<Nurse> nurses = _viewModel.Db.NurseRepository.Get();
             foreach(var nurse in nurses)
             {
-                patientProcedureViewModel.Nurses.Add($"{nurse.FirstName} {nurse.LastName} {nurse.PIN}");
+                patientProcedureViewModel.Nurses.Add(_nurseMapper.Map(nurse));
             }
 
             List<Procedure> procedures = _viewModel.Db.ProcedureRepository.Get();
             foreach (var procedure in procedures)
             {
-                patientProcedureViewModel.Procedures.Add($"{procedure.Name} {procedure.Cost}");
+                patientProcedureViewModel.Procedures.Add(_procedureMapper.Map(procedure));
             }
 
             patientProcedureControl.DataContext = patientProcedureViewModel;
