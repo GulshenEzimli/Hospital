@@ -12,11 +12,22 @@ namespace HospitalManagement.Models
         public int No { get;set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public bool Gender { get; set; }
         public DateTime BirthDate { get; set; }
         public string PIN { get; set; }
         public string PhoneNumber { get; set; }
         public bool IsDelete { get; set; }
+        private bool[] _gender = { false, false };
+        public bool[] Gender
+        {
+            get { return _gender; }
+        }
+        public string GenderValue
+        {
+            get
+            {
+                return _gender[0] ? "Kişi" : "Qadın";
+            }
+        }
 
     }
 }

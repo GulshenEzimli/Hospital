@@ -19,10 +19,11 @@ namespace HospitalManagement.Mappers.Implementations
             patientModel.Name = patient.Name;
             patientModel.Surname = patient.Surname;
             patientModel.PhoneNumber = patient.PhoneNumber;
-            patientModel.Gender = patient.Gender ;
             patientModel.BirthDate = patient.BirthDate;
             patientModel.PIN = patient.PIN;
             patientModel.IsDelete = patient.IsDelete;
+            if (patient.Gender) patientModel.Gender[0] = patient.Gender;
+            else patientModel.Gender[1] = !patient.Gender;
             return patientModel;
         }
 
@@ -33,10 +34,10 @@ namespace HospitalManagement.Mappers.Implementations
             patient.Name = patientModel.Name;
             patient.Surname = patientModel.Surname;
             patient.PhoneNumber = patientModel.PhoneNumber;
-            patient.Gender = patientModel.Gender;
             patient.BirthDate = patientModel.BirthDate;
             patient.PIN=patientModel.PIN;
             patient.IsDelete = patientModel.IsDelete;
+            patient.Gender = patientModel.Gender[0] ? true: false;
             return patient;
         }
     }
