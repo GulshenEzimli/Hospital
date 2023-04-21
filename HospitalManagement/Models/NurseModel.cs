@@ -23,6 +23,7 @@ namespace HospitalManagement.Models
         public bool[] Gender
         {
             get { return _gender; }
+            set { _gender = value; }
         }
         public string GenderValue
         {
@@ -30,6 +31,24 @@ namespace HospitalManagement.Models
             {
                 return _gender[0] ? "Kişi" : "Qadın";
             }
+        }
+
+        public NurseModel Clone()
+        {
+            return new NurseModel()
+            {
+                Id = Id,
+                FirstName = FirstName,
+                LastName = LastName,
+                BirthDate = BirthDate,
+                PhoneNumber = PhoneNumber,
+                Email = Email,
+                PIN = PIN,
+                PositionName = PositionName,
+                DepartmentName = DepartmentName,
+                Salary = Salary,
+                Gender = Gender,
+            };
         }
     }
 }

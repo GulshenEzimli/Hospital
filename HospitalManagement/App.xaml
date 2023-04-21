@@ -107,7 +107,7 @@
         </Style>
 
         <Style TargetType="{x:Type Grid}" x:Key="grdForm">
-            <Setter Property="IsEnabled" Value="True"/>
+            <Setter Property="IsEnabled" Value="False"/>
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -197,7 +197,7 @@
             <Setter Property="Command" Value="{Binding Delete}"/>
             <Setter Property="IsEnabled" Value="False"/>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding CurrentSituation}" Value="3">
+                <DataTrigger Binding="{Binding CurrentSituation}" Value="4">
                     <Setter Property="IsEnabled" Value="True"/>
                 </DataTrigger>
             </Style.Triggers>

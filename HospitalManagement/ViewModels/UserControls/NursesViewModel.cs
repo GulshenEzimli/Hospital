@@ -48,8 +48,36 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
+        private NurseModel _selectedValue;
+        public NurseModel SelectedValue
+        {
+            get => _selectedValue;
+            set
+            {
+                SetSelectedValue(value);
+                if (value == null)
+                {
+                    SetDefaultValues();
+                }
+                else
+                {
+                    CurrentValue = SelectedValue.Clone();
+                    CurrentSituation = Situations.SELECTED;
+                }
+                OnPropertyChanged(nameof(_selectedValue));
+            }
+        }
+
         private ObservableCollection<NurseModel> _values;
-        public ObservableCollection<NurseModel> Values => _values ?? (_values = new ObservableCollection<NurseModel> { });
+        public ObservableCollection<NurseModel> Values
+        {
+            get => _values ?? (_values = new ObservableCollection<NurseModel>());
+            set
+            {
+                _values = value;
+                OnPropertyChanged(nameof(Values));
+            }
+        }
 
         public AddNurseCommand Add => new AddNurseCommand(this);
         public DeleteNurseCommand Delete => new DeleteNurseCommand(this);
@@ -61,6 +89,14 @@ namespace HospitalManagement.ViewModels.UserControls
         {
             CurrentSituation = Situations.NORMAL;
             CurrentValue = new NurseModel();
+
+            SetSelectedValue(null);
+        }
+
+        public void SetSelectedValue(NurseModel nurseModel)
+        {
+            _selectedValue = nurseModel;
+            OnPropertyChanged(nameof(SelectedValue));
         }
     }
 }

@@ -81,8 +81,8 @@
             </StackPanel>
 
             <ListView x:Name="MainList" Grid.Row="1" Style="{DynamicResource listViewCustom}" 
-                      ItemsSource="{Binding Path=Values}" >
-                  <!--SelectedItem="{Binding SelectedValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">-->
+                      ItemsSource="{Binding Path=Values}"
+                      SelectedItem="{Binding SelectedValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
                     <GridView >
                         <GridViewColumn Header="No" Width="auto" DisplayMemberBinding="{Binding Path=No}"/>

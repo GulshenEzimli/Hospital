@@ -34,24 +34,33 @@ namespace HospitalManagement.Commands.Nurses
                 return;
             }
 
-            var nurse = _nurseMapper.Map(_nursesViewModel.CurrentValue);
-            nurse.CreationDate = DateTime.Now;
-            nurse.ModifiedDate = DateTime.Now;
-            nurse.IsDelete = false;
-            nurse.Creator = new Admin() { Id = 3 };
-            nurse.Modifier = new Admin() { Id = 3 };
+            var toBeSavedNurse = _nurseMapper.Map(_nursesViewModel.CurrentValue);
+            toBeSavedNurse.ModifiedDate = DateTime.Now;
+            toBeSavedNurse.Modifier = new Admin() { Id = 3 };
 
-            if (nurse.Id == 0)
+            if (toBeSavedNurse.Id == 0)
             {
-                _nursesViewModel.Db.NurseRepository.Insert(nurse);
+                toBeSavedNurse.CreationDate = DateTime.Now;
+                toBeSavedNurse.Creator = new Admin() { Id = 3 };
+                toBeSavedNurse.IsDelete = false;
+                _nursesViewModel.Db.NurseRepository.Insert(toBeSavedNurse);
+                _nursesViewModel.CurrentValue.No = _nursesViewModel.Values.LastOrDefault()?.No + 1 ?? 1;
+                _nursesViewModel.Values.Add(_nursesViewModel.CurrentValue);
             }
             else
             {
-                _nursesViewModel.Db.NurseRepository.Update(nurse);
+                var existingNurse = _nursesViewModel.Db.NurseRepository.GetById(_nursesViewModel.CurrentValue.Id);
+                toBeSavedNurse.Creator = existingNurse.Creator;
+                toBeSavedNurse.CreationDate = existingNurse.CreationDate;
+                toBeSavedNurse.IsDelete = existingNurse.IsDelete;
+                _nursesViewModel.Db.NurseRepository.Update(toBeSavedNurse);
+
+                var existingValue = _nursesViewModel.Values.FirstOrDefault(x=>x.Id==existingNurse.Id);
+                var existValueIndex = _nursesViewModel.Values.IndexOf(existingValue);
+                _nursesViewModel.Values[existValueIndex] = _nursesViewModel.CurrentValue;
             }
 
-            _nursesViewModel.CurrentValue.No = _nursesViewModel.Values.LastOrDefault()?.No + 1 ?? 1;
-            _nursesViewModel.Values.Add(_nursesViewModel.CurrentValue);
+           
             _nursesViewModel.SetDefaultValues();
         }
     }

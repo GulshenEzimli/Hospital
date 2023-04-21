@@ -91,7 +91,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"insert into PatientProcedures (PatientId,DoctorId,NurseId,ProcedureId,UseDate) 
+                string cmdText = @"insert into PatientProcedures output inserted.Id (PatientId,DoctorId,NurseId,ProcedureId,UseDate) 
                                 values((select Id from Patients where Patients.PIN=@patientPin),
                                 (select Id from Doctors where Doctors.PIN=@doctorPin),
                                 (select Id from Nurses where Nurses.PIN=@nursePin),
