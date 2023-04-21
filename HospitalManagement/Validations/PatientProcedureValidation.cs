@@ -36,11 +36,6 @@ namespace HospitalManagement.Validations
                 return false;
             }
 
-            if (string.IsNullOrEmpty(patientProcedureModel.UseDate.ToString()))
-            {
-                message = ValidationMessageProvider.GetRequiredMessage("Usedate");
-                return false;
-            }
             message = null;
             return true;
         }
