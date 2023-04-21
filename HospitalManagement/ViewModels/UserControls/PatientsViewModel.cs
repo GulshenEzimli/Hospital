@@ -50,6 +50,27 @@ namespace HospitalManagement.ViewModels.UserControls
                 OnPropertyChanged(nameof(CurrentValue));
             }
         }
+        private PatientModel _selectValue;
+        public PatientModel SelectValue
+        {
+            get => _selectValue;
+            set
+            {
+                _selectValue = value;
+
+                if (value == null)
+                {
+                    SetDefaultValues();
+                }
+                else
+                {
+                    CurrentValue = SelectValue.Clone();
+                    CurrentSituation =(int) Situations.SELECTED;
+                }
+
+                OnPropertyChanged(nameof(SelectValue));
+            }
+        }
 
         private ObservableCollection<PatientModel> _values;
         public ObservableCollection<PatientModel> Values => _values ?? (_values = new ObservableCollection<PatientModel>());
@@ -66,6 +87,13 @@ namespace HospitalManagement.ViewModels.UserControls
         {
             CurrentSituation = (int)Situations.NORMAL;
             CurrentValue = new PatientModel();
+            SetDefaultSelectValue();
+        }
+        private void SetDefaultSelectValue()
+        {
+            _selectValue = null;
+            OnPropertyChanged(nameof(SelectValue));
+
         }
     }
 }

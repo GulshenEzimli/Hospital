@@ -57,9 +57,14 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 string cmdText = @"select * from Patients where Id = @id and IsDelete = 0";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
+                    command.Parameters.AddWithValue("@id", id);
+
                     SqlDataReader reader = command.ExecuteReader();
-                    Patient patient = GetPatient(reader);
-                    return patient;
+
+                    if (reader.Read() == false)
+                        return null;
+
+                    return GetPatient(reader);
                 }
             }
         }
@@ -85,12 +90,12 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"Update Patients set FirstName=@firstName,LastName=@lastName,
-                                  Gender=@gender,BirthDate=@birthDate,PIN=@pin,Phonenumber=@phoneNumber,
-                                  CreatorId=@creatorId,ModifiedId=@modifiedId,CreationDate=@creationDate,
-                                  ModifiedDate=@modifiedDate,IsDelete=@isDelete where Id=@id";
+                string cmdText = @"Update Patients set CreatorId=@creatorId,ModifierId=@modifierId,FirstName=@firstName,
+                                   LastName=@lastName,Gender=@gender,BirthDate=@birthDate,PIN=@pin,Phonenumber=@phoneNumber,
+                                  CreationDate=@creationDate,ModifiedDate=@modifiedDate,IsDelete=@isDelete where Id=@id";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
+                    command.Parameters.AddWithValue("@id",patient.Id);
                     AddParameters(command, patient);
                     return command.ExecuteNonQuery() == 1;
                 }

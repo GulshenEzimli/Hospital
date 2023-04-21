@@ -9,7 +9,7 @@ namespace HospitalManagement.Models
     public class PatientModel
     {
         public int Id { get; set; }
-        public int No { get;set; }
+        public int No { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime BirthDate { get; set; }
@@ -28,6 +28,21 @@ namespace HospitalManagement.Models
                 return _gender[0] ? "Kişi" : "Qadın";
             }
         }
-
+        public PatientModel Clone()
+        {
+            return new PatientModel()
+            {
+                No = No,
+                Id = Id,
+                Name = Name,
+                Surname = Surname,
+                BirthDate = BirthDate,
+                PIN = PIN,
+                PhoneNumber = PhoneNumber,
+                _gender= Gender,
+            };
+        }
     }
 }
+    
+

@@ -100,7 +100,7 @@
                 <DataTrigger Binding="{Binding CurrentSituation}" Value="2">
                     <Setter Property="IsEnabled" Value="False"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding CurrentSituation}" Value="4">
+                <DataTrigger Binding="{Binding CurrentSituation}" Value="3">
                     <Setter Property="IsEnabled" Value="False"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -124,11 +124,11 @@
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
-                <DataTrigger Binding="{Binding CurrentSituation}" Value="1">
-                    <Setter Property="IsEnabled" Value="False"/>
+                <DataTrigger Binding="{Binding CurrentSituation}" Value="2">
+                    <Setter Property="IsEnabled" Value="True"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding CurrentSituation}" Value="3">
-                    <Setter Property="IsEnabled" Value="False"/>
+                    <Setter Property="IsEnabled" Value="True"/>
                 </DataTrigger>
             </Style.Triggers>
 
@@ -160,7 +160,7 @@
                 <DataTrigger Binding="{Binding CurrentSituation}" Value="2">
                     <Setter Property="Visibility" Value="Visible"/>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding CurrentSituation}" Value="4">
+                <DataTrigger Binding="{Binding CurrentSituation}" Value="3">
                     <Setter Property="Visibility" Value="Visible"/>
                 </DataTrigger>
             </Style.Triggers>

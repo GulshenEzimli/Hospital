@@ -40,26 +40,37 @@ namespace HospitalManagement.Commands.Patients
 
             }
 
-            var patient = _patientMapper.Map(_patientViewModel.CurrentValue);
+            var savePatient = _patientMapper.Map(_patientViewModel.CurrentValue);
 
-            patient.Creator = new Admin() { Id = 2 };
-            patient.Modifier = new Admin() { Id = 2 };
-            patient.CreationDate = DateTime.Now;
-            patient.ModifiedDate=DateTime.Now;
-            patient.IsDelete = false;
-            patient.Gender = true;
-            if (patient.Id == 0)
+            savePatient.Creator = new Admin() { Id = 2 };
+            savePatient.CreationDate = DateTime.Now;
+            savePatient.IsDelete = false;
+            savePatient.Gender = true;
+            if (savePatient.Id == 0)
             {
-                _patientViewModel.Db.PatientRepository.Insert(patient);
+
+                savePatient.Modifier = new Admin() { Id = 2 };
+                savePatient.ModifiedDate = DateTime.Now;
+                _patientViewModel.Db.PatientRepository.Insert(savePatient);
+
+                _patientViewModel.CurrentValue.No = _patientViewModel.Values.LastOrDefault()?.No ?? 1;
+                _patientViewModel.Values.Add(_patientViewModel.CurrentValue);
             }
             else
             {
-                _patientViewModel.Db.PatientRepository.Update(patient);
+                var existPatient = _patientViewModel.Db.PatientRepository.GetById(_patientViewModel.CurrentValue.Id);
+
+                savePatient.Creator = existPatient.Creator;
+                savePatient.CreationDate = existPatient.CreationDate;
+
+                _patientViewModel.Db.PatientRepository.Update(savePatient);
+
+                var existingValue=_patientViewModel.Values.FirstOrDefault(x => x.Id == existPatient.Id);
+                var existingValueIndex=_patientViewModel.Values.IndexOf(existingValue);
+                _patientViewModel.Values[existingValueIndex]=_patientViewModel.CurrentValue;
             }
 
-            _patientViewModel.CurrentValue.No = _patientViewModel.Values.LastOrDefault()?.No ?? 1;
-            _patientViewModel.Values.Add(_patientViewModel.CurrentValue);
-            _patientViewModel.SetDefaultValues(); 
+            _patientViewModel.SetDefaultValues();
         }
         
         
