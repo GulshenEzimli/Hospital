@@ -39,6 +39,7 @@ namespace HospitalManagement.Commands.PatientProcedures
 
             if (patientProcedure.Id == 0)
             {
+                patientProcedure.UseDate = DateTime.Now;
                 _patientProcedureViewModel.Db.PatientProcedureRepository.Insert(patientProcedure);
             }
             else

@@ -8,6 +8,7 @@ using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,8 +47,8 @@ namespace HospitalManagement.ViewModels.UserControls
         }
         
 
-        private List<PatientProcedureModel> _patientProcedureValues;
-        public List<PatientProcedureModel> PatientProcedureValues => _patientProcedureValues ?? (_patientProcedureValues = new List<PatientProcedureModel>());
+        private ObservableCollection<PatientProcedureModel> _patientProcedureValues;
+        public ObservableCollection<PatientProcedureModel> PatientProcedureValues => _patientProcedureValues ?? (_patientProcedureValues = new ObservableCollection<PatientProcedureModel>());
 
         private List<string> _patients;
         public List<string> Patients => _patients ?? (_patients = new List<string>());

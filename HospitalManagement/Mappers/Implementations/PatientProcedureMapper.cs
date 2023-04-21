@@ -27,7 +27,6 @@ namespace HospitalManagement.Mappers.Implementations
             patientProcedure.Procedure = new Procedure();
             patientProcedure.Procedure.Name = model.Procedure.Substring(0,model.Procedure.LastIndexOf(' '));
 
-            patientProcedure.UseDate = model.UseDate;
             return patientProcedure;
         }
 
