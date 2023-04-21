@@ -60,6 +60,7 @@ namespace HospitalManagement.ViewModels.UserControls
 
                 if (value == null)
                 {
+                    SetSelectValue(value);
                     SetDefaultValues();
                 }
                 else
@@ -87,11 +88,11 @@ namespace HospitalManagement.ViewModels.UserControls
         {
             CurrentSituation = (int)Situations.NORMAL;
             CurrentValue = new PatientModel();
-            SetDefaultSelectValue();
+            SetSelectValue(null);
         }
-        private void SetDefaultSelectValue()
+        private void SetSelectValue(PatientModel patientModel)
         {
-            _selectValue = null;
+            _selectValue = patientModel;
             OnPropertyChanged(nameof(SelectValue));
 
         }
