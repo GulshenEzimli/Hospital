@@ -226,6 +226,7 @@
     <Compile Include="Models\PositionModel.cs" />
     <Compile Include="Validations\NurseValidation.cs" />
     <Compile Include="Validations\OtherEmployeeValidation.cs" />
+    <Compile Include="Validations\PatientProcedureValidation.cs" />
     <Compile Include="Validations\PatientValidation.cs" />
     <Compile Include="Validations\Utils\ValidationMessageProvider.cs" />
     <Compile Include="Validations\DoctorValidation.cs" />

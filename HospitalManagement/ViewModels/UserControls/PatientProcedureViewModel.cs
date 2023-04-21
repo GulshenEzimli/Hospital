@@ -1,11 +1,14 @@
 ﻿using HospitalManagement.Commands.PatientProcedures;
 using HospitalManagement.Enums;
+using HospitalManagement.Mappers.Implementations;
+using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,8 +17,10 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public class PatientProcedureViewModel : BaseControlViewModel
     {
-        public PatientProcedureViewModel(IUnitOfWork unitOfWork, ErrorDialog errorDialog) : base(unitOfWork, errorDialog)
+        private readonly IPatientProcedureMapper _patientProcedureMapper;
+        public PatientProcedureViewModel(IUnitOfWork unitOfWork, ErrorDialog errorDialog, IPatientProcedureMapper patientProcedureMapper) : base(unitOfWork, errorDialog)
         {
+            _patientProcedureMapper = patientProcedureMapper;
             SetDefaultValues();
         }
         public override string Header => "Patients and Procedures";
@@ -42,14 +47,26 @@ namespace HospitalManagement.ViewModels.UserControls
         }
         
 
-        private List<PatientProcedureModel> _patientProcedureValues;
-        public List<PatientProcedureModel> PatientProcedureValues => _patientProcedureValues ?? (_patientProcedureValues = new List<PatientProcedureModel>());
+        private ObservableCollection<PatientProcedureModel> _patientProcedureValues;
+        public ObservableCollection<PatientProcedureModel> PatientProcedureValues => _patientProcedureValues ?? (_patientProcedureValues = new ObservableCollection<PatientProcedureModel>());
+
+        private List<string> _patients;
+        public List<string> Patients => _patients ?? (_patients = new List<string>());
+
+        private List<string> _doctors;
+        public List<string> Doctors => _doctors ?? (_doctors = new List<string>());
+
+        private List<string> _nurses;
+        public List<string> Nurses => _nurses ?? (_nurses = new List<string>());
+
+        private List<string> _procedures;
+        public List<string> Procedures => _procedures ?? (_procedures = new List<string>());
 
         public AddPatientProcedureCommand Add => new AddPatientProcedureCommand(this);
         public DeletePatientProcedureCommand Delete => new DeletePatientProcedureCommand(this);
         public EditPatientProcedureCommand Edit => new EditPatientProcedureCommand(this);
         public RejectPatientProcedureCommand Reject => new RejectPatientProcedureCommand(this);
-        public SavePatientProcedureCommand Save => new SavePatientProcedureCommand(this);
+        public SavePatientProcedureCommand Save => new SavePatientProcedureCommand(this,_patientProcedureMapper);
 
         public void SetDefaultValues()
         {

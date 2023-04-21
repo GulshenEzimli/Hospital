@@ -40,7 +40,6 @@ namespace HospitalManagement.Commands.Nurses
             nurse.IsDelete = false;
             nurse.Creator = new Admin() { Id = 3 };
             nurse.Modifier = new Admin() { Id = 3 };
-            nurse.Position = new DoctorPosition() { Name = _nursesViewModel.CurrentValue.PositionName };
 
             if (nurse.Id == 0)
             {
