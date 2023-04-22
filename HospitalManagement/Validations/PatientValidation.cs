@@ -38,6 +38,11 @@ namespace HospitalManagement.Validations
                 message = ValidationMessageProvider.GetSpecificLength("PIN",7);
                 return false;
             }
+            if((patientModel.PhoneNumber.Length < 13)|| (patientModel.PhoneNumber.Length > 13))
+            {
+                message = ValidationMessageProvider.GetSpecificLength("Phonenumber", 13);
+                return false;
+            }
 
             message = null;
             return true;
