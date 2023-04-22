@@ -18,7 +18,7 @@ namespace HospitalManagement
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
 
-            builder.DataSource = "GULSHAN\\SQLEXPRESS";
+            builder.DataSource = "localhost";
             builder.InitialCatalog = "Hospital";
             builder.IntegratedSecurity = true;
 
