@@ -91,11 +91,8 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"insert into PatientProcedures output inserted.Id (PatientId,DoctorId,NurseId,ProcedureId,UseDate) 
-                                values((select Id from Patients where Patients.PIN=@patientPin),
-                                (select Id from Doctors where Doctors.PIN=@doctorPin),
-                                (select Id from Nurses where Nurses.PIN=@nursePin),
-                                (select Id from Procedures where Procedures.Name=@procedureName),@useDate)";
+                string cmdText = @"insert into PatientProcedures output inserted.Id 
+                                    values (@patientId,@doctorId,@nurseId,@procedureId,@useDate)";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     AddParameters(command, patientProcedure);
@@ -109,10 +106,8 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"update PatientProcedures set PatientId=(select Id from Patients where Patients.PIN=@patientPin), 
-                                DoctorId = (select Id from Doctors where Doctors.PIN=@doctorPin),
-                                NurseId = (select Id from Nurses where Nurses.PIN=@nursePin),
-                                ProcedureId=(select Id from Procedures where Procedures.Name=@procedureName), UseDate=@usedate";
+                string cmdText = @"update PatientProcedures set PatientId=@patientId, DoctorId = @doctorId,
+                                NurseId = @nurseId, ProcedureId= @procedureId, UseDate=@useDate";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     AddParameters(command, patientProcedure);
@@ -163,10 +158,10 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         }
         private void AddParameters(SqlCommand command, PatientProcedure patientProcedure)
         {
-            command.Parameters.AddWithValue("patientPin",patientProcedure.Patient.PIN);
-            command.Parameters.AddWithValue("doctorPin",patientProcedure.Doctor.PIN);
-            command.Parameters.AddWithValue("nursePin",patientProcedure.Nurse.PIN); 
-            command.Parameters.AddWithValue("procedureName",patientProcedure.Procedure.Name); 
+            command.Parameters.AddWithValue("patientId",patientProcedure.Patient.Id);
+            command.Parameters.AddWithValue("doctorId",patientProcedure.Doctor.Id);
+            command.Parameters.AddWithValue("nurseID",patientProcedure.Nurse.Id); 
+            command.Parameters.AddWithValue("procedureId",patientProcedure.Procedure.Id); 
             command.Parameters.AddWithValue("useDate",patientProcedure.UseDate); 
         }
     }

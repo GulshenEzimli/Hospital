@@ -11,21 +11,29 @@ namespace HospitalManagement.Mappers.Implementations
 {
     public class PatientProcedureMapper : IPatientProcedureMapper
     {
-        public PatientProcedure Map(PatientProcedureModel model)
+        public PatientProcedure Map(PatientProcedureModel patientProcedureModel)
         {
             PatientProcedure patientProcedure = new PatientProcedure();
-            patientProcedure.Id = model.Id;
-            patientProcedure.Patient = new Patient();
-            patientProcedure.Patient.PIN = model.Patient.Substring(model.Patient.LastIndexOf(' ') + 1);
+            patientProcedure.Id = patientProcedureModel.Id;
+            patientProcedure.Patient = new Patient()
+            {
+                Id = patientProcedureModel.Patient.Id,
+            };
 
-            patientProcedure.Doctor = new Doctor();
-            patientProcedure.Doctor.PIN = model.Doctor.Substring(model.Doctor.LastIndexOf(' ') + 1);
+            patientProcedure.Doctor = new Doctor()
+            {
+                Id= patientProcedureModel.Doctor.Id,
+            };
 
-            patientProcedure.Nurse = new Nurse(); ;
-            patientProcedure.Nurse.PIN = model.Nurse.Substring(model.Nurse.LastIndexOf(' ') + 1);
+            patientProcedure.Nurse = new Nurse()
+            {
+                Id = patientProcedureModel.Nurse.Id,
+            };
 
-            patientProcedure.Procedure = new Procedure();
-            patientProcedure.Procedure.Name = model.Procedure.Substring(0, model.Procedure.LastIndexOf(' '));
+            patientProcedure.Procedure = new Procedure()
+            {
+                Id = patientProcedureModel.Procedure.Id,
+            };
 
             return patientProcedure;
         }
@@ -33,6 +41,7 @@ namespace HospitalManagement.Mappers.Implementations
         public PatientProcedureModel Map(PatientProcedure patientProcedure)
         {
             PatientProcedureModel patientProcedureModel = new PatientProcedureModel();
+
             patientProcedureModel.Id = patientProcedure.Id;
             patientProcedureModel.Patient = new PatientModel()
             {
@@ -52,8 +61,8 @@ namespace HospitalManagement.Mappers.Implementations
             {
                 Id = patientProcedure.Nurse.Id,
                 FirstName = patientProcedure.Nurse.FirstName,
-                LastName= patientProcedure.Nurse.LastName,
-                PIN= patientProcedure.Nurse.PIN,
+                LastName = patientProcedure.Nurse.LastName,
+                PIN = patientProcedure.Nurse.PIN,
             };
             patientProcedureModel.Procedure = new ProcedureModel()
             {

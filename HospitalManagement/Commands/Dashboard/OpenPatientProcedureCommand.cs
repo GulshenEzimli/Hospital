@@ -29,6 +29,7 @@ namespace HospitalManagement.Commands.Dashboard
             _doctorMapper = doctorMapper;
             _nurseMapper = nurseMapper;
             _procedureMapper = procedureMapper;
+           
         }
         public override void Execute(object parameter)
         {
