@@ -72,6 +72,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Dialogs\SureDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\AdminControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -231,6 +235,7 @@
     <Compile Include="Validations\Utils\ValidationMessageProvider.cs" />
     <Compile Include="Validations\DoctorValidation.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\SureDialogViewModel.cs" />
     <Compile Include="ViewModels\UserControls\AdminsViewModel.cs" />
     <Compile Include="ViewModels\UserControls\BaseControlViewModel.cs" />
     <Compile Include="ViewModels\UserControls\DoctorsViewModel.cs" />
@@ -252,6 +257,9 @@
     </Compile>
     <Compile Include="Views\Components\ErrorDialog.xaml.cs">
       <DependentUpon>ErrorDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\SureDialog.xaml.cs">
+      <DependentUpon>SureDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\AdminControl.xaml.cs">
       <DependentUpon>AdminControl.xaml</DependentUpon>

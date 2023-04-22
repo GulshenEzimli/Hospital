@@ -23,10 +23,10 @@ namespace HospitalManagement.ViewModels.Windows
         private readonly IOperationDoctorMapper _operationDoctorMapper;
         private readonly IOperationNurseMapper _operationNurseMapper;
 
-        public DashboardViewModel(IUnitOfWork unitOfWork, IDoctorMapper doctorMapper,INurseMapper nurseMapper, 
+        public DashboardViewModel(IDoctorMapper doctorMapper,INurseMapper nurseMapper, 
             IOtherEmployeeMapper otherEmployeeMapper, IPatientMapper patientMapper, IProcedureMapper procedureMapper, 
             IPatientProcedureMapper patientProcedureMapper, IPositionMapper positionMapper, IOperationMapper operationMapper, 
-            IOperationDoctorMapper operationDoctorMapper, IOperationNurseMapper operationNurseMapper) : base(unitOfWork)
+            IOperationDoctorMapper operationDoctorMapper, IOperationNurseMapper operationNurseMapper) 
         {
             _doctorMapper = doctorMapper;
             _nurseMapper = nurseMapper;

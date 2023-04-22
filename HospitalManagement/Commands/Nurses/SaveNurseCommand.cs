@@ -1,6 +1,7 @@
 ﻿using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
 using HospitalManagement.Validations;
+using HospitalManagement.Validations.Utils;
 using HospitalManagement.ViewModels.UserControls;
 using HospitalManagementCore.Domain.Entities;
 using System;
@@ -62,6 +63,12 @@ namespace HospitalManagement.Commands.Nurses
 
            
             _nursesViewModel.SetDefaultValues();
+            _nursesViewModel.Message = new MessageModel
+            {
+                IsSuccess = true,
+                Message = ValidationMessageProvider.GetOperationSuccessMessage(),
+            };
+            DoAnimation(_nursesViewModel.ErrorDialog);
         }
     }
 }

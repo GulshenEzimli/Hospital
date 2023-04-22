@@ -11,7 +11,7 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public abstract class BaseControlViewModel : BaseViewModel
     {
-        protected BaseControlViewModel(IUnitOfWork unitOfWork,ErrorDialog errorDialog) : base(unitOfWork)
+        protected BaseControlViewModel(ErrorDialog errorDialog)
         {
             ErrorDialog = errorDialog;
         }
