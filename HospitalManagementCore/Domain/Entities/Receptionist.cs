@@ -7,20 +7,13 @@ namespace HospitalManagementCore.Domain.Entities
 {
     public class Receptionist : IEntity
     {
-        public int Id { get ; set; }
-        public int JobId { get; set; }
+        // demeli birinci kateqoriyalara ayirim daha rahat anlasilsin id hec yazdiq 
+        public int Id { get; set; }
+
+        // Receptionist main data
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool Gender { get; set; }
-        public DateTime BirthDate { get; set; }
-        public string PIN { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public decimal Salary { get; set; }
-        public bool IsDelete { get; set; }
-        public DateTime CreationDate { get; set; }
-        public DateTime ModifiedDate { get; set; }
-        public int CreatorId { get; set; }
-        public int ModifierId { get; set; }
     }
 }
