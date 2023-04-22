@@ -42,15 +42,16 @@ namespace HospitalManagement.Commands.Patients
 
             var savePatient = _patientMapper.Map(_patientViewModel.CurrentValue);
 
-            savePatient.Creator = new Admin() { Id = 2 };
-            savePatient.CreationDate = DateTime.Now;
+            
             savePatient.IsDelete = false;
             savePatient.Gender = true;
+            savePatient.Modifier = new Admin() { Id = 2 };
+            savePatient.ModifiedDate = DateTime.Now;
             if (savePatient.Id == 0)
             {
+                savePatient.Creator = new Admin() { Id = 2 };
+                savePatient.CreationDate = DateTime.Now;
 
-                savePatient.Modifier = new Admin() { Id = 2 };
-                savePatient.ModifiedDate = DateTime.Now;
                 _patientViewModel.Db.PatientRepository.Insert(savePatient);
 
                 _patientViewModel.CurrentValue.No = _patientViewModel.Values.LastOrDefault()?.No ?? 1;
