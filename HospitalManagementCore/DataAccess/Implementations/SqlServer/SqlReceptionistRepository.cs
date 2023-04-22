@@ -2,16 +2,33 @@
 using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Text;
 
 namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 {
     public class SqlReceptionistRepository : IReceptionistRepository
     {
+        private string _connectionString;
+        public SqlReceptionistRepository( string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection= new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string cmdText = @"Deleted * from Receptionist where Id=@id";
+                using (SqlCommand command= new SqlCommand(cmdText,connection))
+                {
+                    command.Parameters.AddWithValue("id", id);
+                    return command.ExecuteNonQuery() == 1;
+                }
+            }
         }
+      
 
         public List<Receptionist> Get()
         {
