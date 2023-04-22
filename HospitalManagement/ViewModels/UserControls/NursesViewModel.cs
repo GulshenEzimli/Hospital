@@ -2,6 +2,7 @@
 using HospitalManagement.Enums;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Services.Interfaces;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
@@ -15,10 +16,11 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public class NursesViewModel : BaseControlViewModel
     {
-        private readonly INurseMapper _nurseMapper;
-        public NursesViewModel(IUnitOfWork unitOfWork, INurseMapper nurseMapper,ErrorDialog errorDialog) : base(unitOfWork,errorDialog)
+        private readonly INurseService _nurseService;
+        public NursesViewModel(INurseService nurseService, ErrorDialog errorDialog) : base(errorDialog)
         {
-            _nurseMapper = nurseMapper;
+            _nurseService = nurseService;
+            AllValues = new List<NurseModel>();
             SetDefaultValues();
         }
         public override string Header => "Nurses";
@@ -79,11 +81,12 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
+        public List<NurseModel> AllValues { get; set; }
         public AddNurseCommand Add => new AddNurseCommand(this);
         public DeleteNurseCommand Delete => new DeleteNurseCommand(this);
         public EditNurseCommand Edit => new EditNurseCommand(this);
         public RejectNurseCommand Reject => new RejectNurseCommand(this);
-        public SaveNurseCommand Save => new SaveNurseCommand(this, _nurseMapper);
+        public SaveNurseCommand Save => new SaveNurseCommand(this, _nurseService);
 
         public void SetDefaultValues()
         {
@@ -97,6 +100,11 @@ namespace HospitalManagement.ViewModels.UserControls
         {
             _selectedValue = nurseModel;
             OnPropertyChanged(nameof(SelectedValue));
+        }
+
+        protected override void OnSearchTextChanged()
+        {
+            throw new NotImplementedException();
         }
     }
 }

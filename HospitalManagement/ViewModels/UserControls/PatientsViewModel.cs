@@ -19,7 +19,7 @@ namespace HospitalManagement.ViewModels.UserControls
     {
         private readonly IPatientMapper _patientMapper;
 
-        public PatientsViewModel(IUnitOfWork unitOfWork,IPatientMapper patientMapper,ErrorDialog errorDialog) : base(unitOfWork,errorDialog)
+        public PatientsViewModel(IUnitOfWork unitOfWork,IPatientMapper patientMapper,ErrorDialog errorDialog) : base(errorDialog)
         {
             _patientMapper = patientMapper;
 
@@ -95,6 +95,11 @@ namespace HospitalManagement.ViewModels.UserControls
             _selectValue = patientModel;
             OnPropertyChanged(nameof(SelectValue));
 
+        }
+
+        protected override void OnSearchTextChanged()
+        {
+            throw new NotImplementedException();
         }
     }
 }

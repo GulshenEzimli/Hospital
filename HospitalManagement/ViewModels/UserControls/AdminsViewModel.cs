@@ -13,7 +13,7 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public class AdminsViewModel:BaseViewModel
     {
-        public AdminsViewModel(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public AdminsViewModel(IUnitOfWork unitOfWork)
         {
         }
 

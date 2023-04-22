@@ -2,6 +2,7 @@
 using HospitalManagement.Commands.Procedures;
 using HospitalManagement.Enums;
 using HospitalManagement.Models;
+using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.ViewModels.UserControls
 {
-    public class ProceduresViewModel:BaseViewModel
+    public class ProceduresViewModel:BaseControlViewModel
     {
-        public ProceduresViewModel(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public ProceduresViewModel(IUnitOfWork unitOfWork,ErrorDialog errorDialog) : base(errorDialog)
         {
         }
         private Situations _currentSituation = Situations.NORMAL;
@@ -35,5 +36,12 @@ namespace HospitalManagement.ViewModels.UserControls
         public EditProcedureCommand Edit => new EditProcedureCommand(this);
         public RejectProcedureCommand Reject => new RejectProcedureCommand(this);
         public SaveProcedureCommand Save=> new SaveProcedureCommand(this);
+
+        public override string Header => throw new NotImplementedException();
+
+        protected override void OnSearchTextChanged()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

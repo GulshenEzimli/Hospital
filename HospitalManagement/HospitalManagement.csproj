@@ -228,6 +228,12 @@
     <Compile Include="Models\PatientProcedureModel.cs" />
     <Compile Include="Models\ProcedureModel.cs" />
     <Compile Include="Models\PositionModel.cs" />
+    <Compile Include="Services\Implementations\NurseService.cs" />
+    <Compile Include="Services\Implementations\OtherEmployeeService.cs" />
+    <Compile Include="Services\Implementations\PatientProcedureService.cs" />
+    <Compile Include="Services\Interfaces\INurseService.cs" />
+    <Compile Include="Services\Interfaces\IOtherEmployeeService.cs" />
+    <Compile Include="Services\Interfaces\IPatientProcedureService.cs" />
     <Compile Include="Validations\NurseValidation.cs" />
     <Compile Include="Validations\OtherEmployeeValidation.cs" />
     <Compile Include="Validations\PatientProcedureValidation.cs" />

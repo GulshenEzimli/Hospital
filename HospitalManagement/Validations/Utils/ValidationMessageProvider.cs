@@ -8,6 +8,10 @@ namespace HospitalManagement.Validations.Utils
 {
     public static class ValidationMessageProvider
     {
+        public static string GetDeleteOperationSureQuestion()
+        {
+            return "Are you sure that you want to delete selected item?";
+        }
         public static string GetOperationSuccessMessage()
         {
             return "Operation finished successfully.";
