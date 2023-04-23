@@ -33,7 +33,7 @@ namespace HospitalManagement.Commands.Doctors
             sureDialogViewModel.DialogText = ValidationMessageProvider.GetDeleteOperationSureQuestion();
             sureDialog.DataContext = sureDialogViewModel;
             bool? isSure =  sureDialog.ShowDialog();
-            if(isSure != false)
+            if(isSure == false)
                 return;
 
             int id = _doctorsViewModel.CurrentValue.Id;

@@ -63,10 +63,13 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                                    BirthDate, PIN, Email, Phonenumber, Salary, IsChiefDoctor, CreationDate, ModifiedDate, IsDelete, PositionName, DepartmentName
                                    from Doctors 
                                    inner join DoctorPositions on Doctors.PositionId = DoctorPositions.Id
-                                   inner join Departments on DoctorPositions.DepartmentId = Departments.Id where Id = @id and IsDelete = 0";
+                                   inner join Departments on DoctorPositions.DepartmentId = Departments.Id where Doctors.Id = @id and IsDelete = 0";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
+                    command.Parameters.AddWithValue("id", id);
                     SqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read() == false)
+                        return null;
                     Doctor doctor = GetDoctor(reader);
                     return doctor;
                 }
@@ -95,7 +98,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"update Doctors set PositionId=@positionid, FirstName=@firstname, LastName=@lastname,
+                string cmdText = @"update Doctors set PositionId=(select Id from DoctorPositions where PositionName = @positionName), FirstName=@firstname, LastName=@lastname,
                                  Gender=@gender, BirthDate=@birthdate, PIN=@pin, Email=@email, PhoneNumber=@phonenumber,
                                  Salary=@salary, IsChiefDoctor= @ischiefdoctor, IsDelete=@isdelete, CreationDate=@creationdate, ModifiedDate=@modifieddate,
                                  CreatorId=@creatorid, ModifierId=@modifierid where Id=@id";
