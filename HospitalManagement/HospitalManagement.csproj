@@ -198,6 +198,7 @@
     <Compile Include="Commands\Rooms\SaveRoomCommand.cs" />
     <Compile Include="Enums\Situations.cs" />
     <Compile Include="Mappers\Implementations\DoctorMapper.cs" />
+    <Compile Include="Mappers\Implementations\MapperUnitOfWork.cs" />
     <Compile Include="Mappers\Implementations\NurseMapper.cs" />
     <Compile Include="Mappers\Implementations\OperationDoctorMapper.cs" />
     <Compile Include="Mappers\Implementations\OperationMapper.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="Mappers\Implementations\PositionMapper.cs" />
     <Compile Include="Mappers\Implementations\ProcedureMapper.cs" />
     <Compile Include="Mappers\Interfaces\IDoctorMapper.cs" />
+    <Compile Include="Mappers\Interfaces\IMapperUnitOfWork.cs" />
     <Compile Include="Mappers\Interfaces\IOperationDoctorMapper.cs" />
     <Compile Include="Mappers\Interfaces\IOperationMapper.cs" />
     <Compile Include="Mappers\Interfaces\IOperationNurseMapper.cs" />
@@ -231,9 +233,11 @@
     <Compile Include="Services\Implementations\NurseService.cs" />
     <Compile Include="Services\Implementations\OtherEmployeeService.cs" />
     <Compile Include="Services\Implementations\PatientProcedureService.cs" />
+    <Compile Include="Services\Implementations\ServiceUnitOfWork.cs" />
     <Compile Include="Services\Interfaces\INurseService.cs" />
     <Compile Include="Services\Interfaces\IOtherEmployeeService.cs" />
     <Compile Include="Services\Interfaces\IPatientProcedureService.cs" />
+    <Compile Include="Services\Interfaces\IServiceUnitOfWork.cs" />
     <Compile Include="Validations\NurseValidation.cs" />
     <Compile Include="Validations\OtherEmployeeValidation.cs" />
     <Compile Include="Validations\PatientProcedureValidation.cs" />

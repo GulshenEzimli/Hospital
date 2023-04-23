@@ -14,29 +14,29 @@ namespace HospitalManagement.Services.Implementations
 {
     public class NurseService : INurseService
     {
-        private readonly IUnitOfWork _db;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly INurseMapper _nurseMapper;
         public NurseService(IUnitOfWork unitOfWork,INurseMapper nurseMapper)
         {
-            _db = unitOfWork;
+            _unitOfWork = unitOfWork;
             _nurseMapper = nurseMapper;
         }
         public bool Delete(int id)
         {
             
-            var nurse = _db.NurseRepository.GetById(id);
+            var nurse = _unitOfWork.NurseRepository.GetById(id);
 
             nurse.IsDelete = true;
             nurse.ModifiedDate = DateTime.Now;
             nurse.Modifier = new Admin() { Id = 3 };
 
-            return _db.NurseRepository.Update(nurse);
+            return _unitOfWork.NurseRepository.Update(nurse);
         }
 
         public List<NurseModel> GetAll()
         {
             var nurseModels = new List<NurseModel>();
-            var nurses = _db.NurseRepository.Get();
+            var nurses = _unitOfWork.NurseRepository.Get();
             int no = 1;
 
             foreach (var nurse in nurses)
@@ -60,15 +60,15 @@ namespace HospitalManagement.Services.Implementations
                 toBeSavedNurse.CreationDate = DateTime.Now;
                 toBeSavedNurse.Creator = new Admin() { Id = 3 };
                 toBeSavedNurse.IsDelete = false;
-                return _db.NurseRepository.Insert(toBeSavedNurse);
+                return _unitOfWork.NurseRepository.Insert(toBeSavedNurse);
             }
             else
             {
-                var existingNurse = _db.NurseRepository.GetById(nurseModel.Id);
+                var existingNurse = _unitOfWork.NurseRepository.GetById(nurseModel.Id);
                 toBeSavedNurse.Creator = existingNurse.Creator;
                 toBeSavedNurse.CreationDate = existingNurse.CreationDate;
                 toBeSavedNurse.IsDelete = existingNurse.IsDelete;
-                _db.NurseRepository.Update(toBeSavedNurse);
+                _unitOfWork.NurseRepository.Update(toBeSavedNurse);
                 return toBeSavedNurse.Id;
             }
         }

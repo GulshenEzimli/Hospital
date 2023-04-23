@@ -12,6 +12,5 @@ namespace HospitalManagement.Services.Interfaces
         List<OtherEmployeeModel> GetAll();
         int Save(OtherEmployeeModel otherEmployeeModel);
         bool Delete(int id);
-        bool IsValid(OtherEmployeeModel otherEmployeeModel, out string message);
     }
 }
