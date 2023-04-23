@@ -2,10 +2,13 @@
 using HospitalManagement.Mappers.Implementations;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Services.Interfaces;
 using HospitalManagement.Validations;
+using HospitalManagement.Validations.Utils;
 using HospitalManagement.ViewModels.UserControls;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,11 +18,11 @@ namespace HospitalManagement.Commands.PatientProcedures
     public class SavePatientProcedureCommand : BaseCommand
     {
         private readonly PatientProcedureViewModel _patientProcedureViewModel;
-        private readonly IPatientProcedureMapper _patientProcedureMapper;
-        public SavePatientProcedureCommand(PatientProcedureViewModel patientProcedureViewModel, IPatientProcedureMapper patientProcedureMapper)
+        private readonly IPatientProcedureService _patientProcedureService;
+        public SavePatientProcedureCommand(PatientProcedureViewModel patientProcedureViewModel, IPatientProcedureService patientProcedureService)
         {
             _patientProcedureViewModel = patientProcedureViewModel;
-            _patientProcedureMapper = patientProcedureMapper;
+            _patientProcedureService = patientProcedureService;
         }
         public override void Execute(object parameter)
         {
@@ -35,21 +38,20 @@ namespace HospitalManagement.Commands.PatientProcedures
                 return;
             }
 
-            var patientProcedure = _patientProcedureMapper.Map(_patientProcedureViewModel.CurrentPatientProcedure);
+            _patientProcedureService.Save(_patientProcedureViewModel.CurrentPatientProcedure);
 
-            if (patientProcedure.Id == 0)
-            {
-                patientProcedure.UseDate = DateTime.Now;
-                _patientProcedureViewModel.Db.PatientProcedureRepository.Insert(patientProcedure);
-            }
-            else
-            {
-                _patientProcedureViewModel.Db.PatientProcedureRepository.Update(patientProcedure);
-            }
-            _patientProcedureViewModel.CurrentPatientProcedure.No = _patientProcedureViewModel.PatientProcedureValues.LastOrDefault()?.No + 1 ?? 1;
-            _patientProcedureViewModel.PatientProcedureValues.Add(_patientProcedureViewModel.CurrentPatientProcedure);
+            var patientProcedureModels = _patientProcedureService.GetAll();
+            _patientProcedureViewModel.AllValues = patientProcedureModels;
+            _patientProcedureViewModel.PatientProcedureValues = new ObservableCollection<PatientProcedureModel>(patientProcedureModels);
 
             _patientProcedureViewModel.SetDefaultValues();
+
+            _patientProcedureViewModel.Message = new MessageModel()
+            {
+                Message = ValidationMessageProvider.GetOperationSuccessMessage(),
+                IsSuccess = true,
+            };
+            DoAnimation(_patientProcedureViewModel.ErrorDialog);
         }
     }
 }

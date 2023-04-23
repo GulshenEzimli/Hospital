@@ -3,6 +3,7 @@ using HospitalManagement.Enums;
 using HospitalManagement.Mappers.Implementations;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Services.Interfaces;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
@@ -17,10 +18,10 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public class PatientProcedureViewModel : BaseControlViewModel
     {
-        private readonly IPatientProcedureMapper _patientProcedureMapper;
-        public PatientProcedureViewModel(IUnitOfWork unitOfWork, ErrorDialog errorDialog, IPatientProcedureMapper patientProcedureMapper) : base(errorDialog)
+        private readonly IPatientProcedureService _patientProcedureService;
+        public PatientProcedureViewModel(IPatientProcedureService patientProcedureService, ErrorDialog errorDialog) : base(errorDialog)
         {
-            _patientProcedureMapper = patientProcedureMapper;
+            _patientProcedureService = patientProcedureService;
             SetDefaultValues();
         }
         public override string Header => "Patients and Procedures";
@@ -46,9 +47,19 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
         
+        public List<PatientProcedureModel> AllValues { get; set; }
 
         private ObservableCollection<PatientProcedureModel> _patientProcedureValues;
-        public ObservableCollection<PatientProcedureModel> PatientProcedureValues => _patientProcedureValues ?? (_patientProcedureValues = new ObservableCollection<PatientProcedureModel>());
+        public ObservableCollection<PatientProcedureModel> PatientProcedureValues
+        {
+            get => _patientProcedureValues ?? (_patientProcedureValues = new ObservableCollection<PatientProcedureModel>());
+            set
+            {
+                _patientProcedureValues = value;
+                OnPropertyChanged(nameof(PatientProcedureValues));
+            }
+
+        }
 
         private List<PatientModel> _patients;
         public List<PatientModel> Patients => _patients ?? (_patients = new List<PatientModel>());
@@ -63,10 +74,10 @@ namespace HospitalManagement.ViewModels.UserControls
         public List<ProcedureModel> Procedures => _procedures ?? (_procedures = new List<ProcedureModel>());
 
         public AddPatientProcedureCommand Add => new AddPatientProcedureCommand(this);
-        public DeletePatientProcedureCommand Delete => new DeletePatientProcedureCommand(this);
+        public DeletePatientProcedureCommand Delete => new DeletePatientProcedureCommand(this, _patientProcedureService);
         public EditPatientProcedureCommand Edit => new EditPatientProcedureCommand(this);
         public RejectPatientProcedureCommand Reject => new RejectPatientProcedureCommand(this);
-        public SavePatientProcedureCommand Save => new SavePatientProcedureCommand(this,_patientProcedureMapper);
+        public SavePatientProcedureCommand Save => new SavePatientProcedureCommand(this,_patientProcedureService);
 
         public void SetDefaultValues()
         {

@@ -41,7 +41,6 @@ namespace HospitalManagement.Commands.Nurses
             _nurseService.Delete(id);
 
             var nurseModels = _nurseService.GetAll();
-
             _nursesViewModel.AllValues = nurseModels;
             _nursesViewModel.Values = new ObservableCollection<NurseModel>(nurseModels);
 

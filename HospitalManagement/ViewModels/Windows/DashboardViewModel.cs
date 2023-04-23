@@ -14,6 +14,7 @@ namespace HospitalManagement.ViewModels.Windows
     public class DashboardViewModel : BaseViewModel
     {        
         private readonly INurseService _nurseService;
+        private readonly IDoctorMapper _doctorMapper;
         private readonly IOtherEmployeeMapper _otherEmployeeMapper;
         private readonly IPatientMapper _patientMapper;
         private readonly IProcedureMapper _procedureMapper;
@@ -24,11 +25,16 @@ namespace HospitalManagement.ViewModels.Windows
         private readonly IOperationNurseMapper _operationNurseMapper;
         private readonly IServiceUnitOfWork _serviceUnitOfWork;
 
-        public DashboardViewModel(INurseService nurseService, 
+        private readonly IServiceUnitOfWork _serviceUnitOfWork;
+
+        public DashboardViewModel(IDoctorMapper doctorMapper, IServiceUnitOfWork serviceUnitOfWork,
             IOtherEmployeeMapper otherEmployeeMapper, IPatientMapper patientMapper, IProcedureMapper procedureMapper, 
             IPatientProcedureMapper patientProcedureMapper, IPositionMapper positionMapper, IOperationMapper operationMapper, 
             IOperationDoctorMapper operationDoctorMapper, IOperationNurseMapper operationNurseMapper, IServiceUnitOfWork serviceUnitOfWork) 
         {
+            _doctorMapper = doctorMapper;
+            _nurseService = nurseService;
+            _nurseService = nurseService;
             _nurseService = nurseService;
             _otherEmployeeMapper = otherEmployeeMapper;
             _patientMapper = patientMapper;
@@ -56,10 +62,10 @@ namespace HospitalManagement.ViewModels.Windows
 
         public DropDownEmloyeesCommand DropDown => new DropDownEmloyeesCommand(this);
 
-        public OpenDoctorsCommand OpenDoctors => new OpenDoctorsCommand(this, _serviceUnitOfWork);
-        public OpenNursesCommand OpenNurses => new OpenNursesCommand(this,_nurseService);
-        public OpenOtherEmployeesCommand OpenOtherEmployees => new OpenOtherEmployeesCommand(this, _otherEmployeeMapper);
-        public OpenPatientProcedureCommand OpenPatientProcedures => new OpenPatientProcedureCommand(this, _patientProcedureMapper,_patientMapper,_doctorMapper, _nurseService, _procedureMapper);
+        public OpenDoctorsCommand OpenDoctors => new OpenDoctorsCommand(this, _doctorMapper, _positionMapper);
+        public OpenNursesCommand OpenNurses => new OpenNursesCommand(this, _serviceUnitOfWork.nurseService);
+        public OpenOtherEmployeesCommand OpenOtherEmployees => new OpenOtherEmployeesCommand(this, _serviceUnitOfWork.otherEmployeeService);
+        public OpenPatientProcedureCommand OpenPatientProcedures => new OpenPatientProcedureCommand(this, _serviceUnitOfWork.patientProcedureService);
         public OpenPatientsCommand OpenPatients => new OpenPatientsCommand(this,_patientMapper);
         public OpenProceduresCommand OpenProcedures => new OpenProceduresCommand(this,_procedureMapper);
         public OpenReceptionistCommand OpenReceptionists => new OpenReceptionistCommand(this);
