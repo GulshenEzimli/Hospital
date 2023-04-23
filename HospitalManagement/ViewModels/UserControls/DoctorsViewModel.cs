@@ -75,7 +75,7 @@ namespace HospitalManagement.ViewModels.UserControls
         public List<string> PositionValues => _positionValues ?? (_positionValues = new List<string>());
 
         public AddDoctorCommand Add => new AddDoctorCommand(this);
-        public DeleteDoctorCommand Delete => new DeleteDoctorCommand(this);
+        public DeleteDoctorCommand Delete => new DeleteDoctorCommand(this, _doctorMapper);
         public EditDoctorCommand Edit => new EditDoctorCommand(this);
         public RejectDoctorCommand Reject => new RejectDoctorCommand(this);
         public SaveDoctorCommand Save => new SaveDoctorCommand(this, _doctorMapper);

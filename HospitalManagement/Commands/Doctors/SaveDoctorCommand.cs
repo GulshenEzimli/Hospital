@@ -2,6 +2,7 @@
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
 using HospitalManagement.Validations;
+using HospitalManagement.Validations.Utils;
 using HospitalManagement.ViewModels.UserControls;
 using HospitalManagementCore.Domain.Entities;
 using System;
@@ -63,6 +64,13 @@ namespace HospitalManagement.Commands.Doctors
             }
 
             _doctorsViewModel.SetDefaultValues();
+
+            _doctorsViewModel.Message = new MessageModel
+            {
+                IsSuccess = true,
+                Message = ValidationMessageProvider.GetOperationSuccessMessage()
+            };
+            DoAnimation(_doctorsViewModel.ErrorDialog);
         }
     }
 }
