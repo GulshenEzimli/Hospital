@@ -8,6 +8,10 @@ namespace HospitalManagementCore.Utils
 {
     internal static class SqlDataReaderExtensions
     {
+        internal static bool IsDbNull(this SqlDataReader reader, string columnName)
+        {
+            return reader.IsDBNull(reader.GetOrdinal(columnName));
+        }
         internal static int GetInt32(this SqlDataReader reader,string columnName)
         {
             return reader.GetInt32(reader.GetOrdinal(columnName));
