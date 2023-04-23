@@ -20,6 +20,7 @@ namespace HospitalManagement.Models
         public bool[] Gender
         {
             get { return _gender; }
+            set { _gender = value; }
         }
         public string GenderValue
         {
@@ -38,6 +39,7 @@ namespace HospitalManagement.Models
         public bool[] IsChiefDoctor
         {
             get { return _isChiefDoctor; }
+            set { _isChiefDoctor= value; }
         }
         public string IsChiefDoctorValue
         {
@@ -45,6 +47,25 @@ namespace HospitalManagement.Models
             {
                 return IsChiefDoctor[0] ? "Baş həkim" : "Həkim";
             }
+        }
+        public DoctorModel Clone()
+        {
+            return new DoctorModel()
+            {
+                BirthDate = BirthDate,
+                DepartmentName = DepartmentName,
+                Email = Email,
+                FirstName = FirstName,
+                LastName = LastName,
+                Id = Id,
+                Phonenumber = Phonenumber,
+                PIN = PIN,
+                PositionName = PositionName,
+                Salary = Salary,
+                No = No,
+                Gender = Gender,
+                IsChiefDoctor = IsChiefDoctor
+            };
         }
     }
 }

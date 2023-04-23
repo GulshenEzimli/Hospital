@@ -17,7 +17,7 @@ namespace HospitalManagement.ViewModels.UserControls
     public class DoctorsViewModel : BaseControlViewModel
     {
         private readonly IDoctorMapper _doctorMapper;
-        public DoctorsViewModel(IUnitOfWork unitOfWork, IDoctorMapper doctorMapper, ErrorDialog errorDialog) :base(errorDialog)
+        public DoctorsViewModel(IUnitOfWork unitOfWork, IDoctorMapper doctorMapper, ErrorDialog errorDialog) : base(errorDialog)
         {
             _doctorMapper = doctorMapper;
             SetDefaultValues();
@@ -47,6 +47,26 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
+        private DoctorModel _selectedValue;
+        public DoctorModel SelectedValue
+        {
+            get => _selectedValue;
+            set
+            {
+                SetSelectedValue(value);
+
+                if (value == null)
+                {
+                    SetDefaultValues();
+                }
+                else
+                {
+                    CurrentValue = SelectedValue.Clone();
+                    CurrentSituation = Situations.SELECTED;
+                }
+            }
+        }
+
         private ObservableCollection<DoctorModel> _values;
         public ObservableCollection<DoctorModel> Values => _values ?? (_values = new ObservableCollection<DoctorModel>());
 
@@ -64,7 +84,15 @@ namespace HospitalManagement.ViewModels.UserControls
         {
             CurrentSituation = Situations.NORMAL;
             CurrentValue = new DoctorModel();
+
+            SetSelectedValue(null);
         }
+
+        private void SetSelectedValue(DoctorModel doctorModel)
+        {
+            _selectedValue = doctorModel;
+            OnPropertyChanged(nameof(SelectedValue));
+        } 
 
         protected override void OnSearchTextChanged()
         {

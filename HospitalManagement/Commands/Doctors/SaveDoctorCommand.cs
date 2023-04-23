@@ -34,18 +34,22 @@ namespace HospitalManagement.Commands.Doctors
                 DoAnimation(_doctorsViewModel.ErrorDialog);
                 return;
             }
-            Doctor doctor = _doctorMapper.Map(_doctorsViewModel.CurrentValue);
-            doctor.CreationDate = DateTime.Now;
-            doctor.ModifiedDate = DateTime.Now;
-            doctor.Creator = new Admin() { Id = 1 };
-            doctor.Modifier = new Admin() { Id = 1 };
-            if (doctor.Id==0)
+            Doctor toBeSavedDoctor = _doctorMapper.Map(_doctorsViewModel.CurrentValue);
+            toBeSavedDoctor.ModifiedDate = DateTime.Now;
+            toBeSavedDoctor.Modifier = new Admin() { Id = 1 };
+
+            if (toBeSavedDoctor.Id==0)
             {
-                _doctorsViewModel.Db.DoctorRepository.Insert(doctor);
+                toBeSavedDoctor.CreationDate = DateTime.Now;
+                toBeSavedDoctor.Creator = new Admin() { Id = 1 };
+                _doctorsViewModel.Db.DoctorRepository.Insert(toBeSavedDoctor);
             }
             else
             {
-                _doctorsViewModel.Db.DoctorRepository.Update(doctor);
+                Doctor existingDoctor = _doctorsViewModel.Db.DoctorRepository.GetById(_doctorsViewModel.CurrentValue.Id);
+                toBeSavedDoctor.CreationDate = existingDoctor.CreationDate;
+                toBeSavedDoctor.Creator = existingDoctor.Creator;
+                _doctorsViewModel.Db.DoctorRepository.Update(toBeSavedDoctor);
             }
 
             _doctorsViewModel.Values.Clear();
