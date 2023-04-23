@@ -1,6 +1,7 @@
 ﻿using HospitalManagement.Mappers.Implementations;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Services.Interfaces;
 using HospitalManagement.Validations.Utils;
 using HospitalManagement.ViewModels;
 using HospitalManagement.ViewModels.UserControls;
@@ -8,6 +9,7 @@ using HospitalManagement.Views.Dialogs;
 using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,16 +19,16 @@ namespace HospitalManagement.Commands.Doctors
     public class DeleteDoctorCommand : BaseCommand
     {
         private readonly DoctorsViewModel _doctorsViewModel;
-        private readonly DoctorMapper _doctorMapper;
-        public DeleteDoctorCommand(DoctorsViewModel doctorsViewModel, IDoctorMapper doctorMapper)
+        private readonly IServiceUnitOfWork _serviceUnitOfWork;
+        public DeleteDoctorCommand(DoctorsViewModel doctorsViewModel, IServiceUnitOfWork serviceUnitOfWork)
         {
             _doctorsViewModel = doctorsViewModel;
-            _doctorMapper = doctorMapper;
+            _serviceUnitOfWork = serviceUnitOfWork;
         }
 
         public override void Execute(object parameter)
         {
-            SureDialogViewModel sureDialogViewModel = new SureDialogViewModel(_doctorsViewModel.Db);
+            SureDialogViewModel sureDialogViewModel = new SureDialogViewModel();
             SureDialog sureDialog = new SureDialog();
             sureDialogViewModel.DialogText = ValidationMessageProvider.GetDeleteOperationSureQuestion();
             sureDialog.DataContext = sureDialogViewModel;
@@ -35,20 +37,12 @@ namespace HospitalManagement.Commands.Doctors
                 return;
 
             int id = _doctorsViewModel.CurrentValue.Id;
-            Doctor doctor = _doctorsViewModel.Db.DoctorRepository.GetById(id);
-            doctor.IsDelete = true;
-            doctor.ModifiedDate = DateTime.Now;
-            doctor.Modifier = new Admin { Id = 1 };
-            _doctorsViewModel.Db.DoctorRepository.Update(doctor);
-            List<Doctor> doctors = _doctorsViewModel.Db.DoctorRepository.Get();
-            int no = 1;
-            foreach (Doctor doctorItem in doctors)
-            {
-                DoctorModel doctorModel = _doctorMapper.Map(doctorItem);
-                doctorModel.No = no++;
-                _doctorsViewModel.Values.Add(doctorModel);
-            }
+            _serviceUnitOfWork.doctorService.DeleteDoctor(id);
 
+            List<DoctorModel> doctorModels = _serviceUnitOfWork.doctorService.GetAll();
+            _doctorsViewModel.AllValues = doctorModels;
+            _doctorsViewModel.Values = new ObservableCollection<DoctorModel>(doctorModels);
+            
             _doctorsViewModel.SetDefaultValues();
 
             _doctorsViewModel.Message = new MessageModel

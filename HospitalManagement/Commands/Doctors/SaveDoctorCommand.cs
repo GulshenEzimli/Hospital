@@ -1,12 +1,14 @@
 ﻿using HospitalManagement.Enums;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Services.Interfaces;
 using HospitalManagement.Validations;
 using HospitalManagement.Validations.Utils;
 using HospitalManagement.ViewModels.UserControls;
 using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,11 +18,11 @@ namespace HospitalManagement.Commands.Doctors
     public class SaveDoctorCommand : BaseCommand
     {
         private readonly DoctorsViewModel _doctorsViewModel;
-        private readonly IDoctorMapper _doctorMapper;
-        public SaveDoctorCommand(DoctorsViewModel doctorsViewModel, IDoctorMapper doctorMapper)
+        private readonly IServiceUnitOfWork _serviceUnitOfWork;
+        public SaveDoctorCommand(DoctorsViewModel doctorsViewModel, IServiceUnitOfWork serviceUnitOfWork)
         {
             _doctorsViewModel = doctorsViewModel;
-            _doctorMapper = doctorMapper;
+            _serviceUnitOfWork = serviceUnitOfWork;
         }
 
         public override void Execute(object parameter)
@@ -35,33 +37,12 @@ namespace HospitalManagement.Commands.Doctors
                 DoAnimation(_doctorsViewModel.ErrorDialog);
                 return;
             }
-            Doctor toBeSavedDoctor = _doctorMapper.Map(_doctorsViewModel.CurrentValue);
-            toBeSavedDoctor.ModifiedDate = DateTime.Now;
-            toBeSavedDoctor.Modifier = new Admin() { Id = 1 };
 
-            if (toBeSavedDoctor.Id==0)
-            {
-                toBeSavedDoctor.CreationDate = DateTime.Now;
-                toBeSavedDoctor.Creator = new Admin() { Id = 1 };
-                _doctorsViewModel.Db.DoctorRepository.Insert(toBeSavedDoctor);
-            }
-            else
-            {
-                Doctor existingDoctor = _doctorsViewModel.Db.DoctorRepository.GetById(_doctorsViewModel.CurrentValue.Id);
-                toBeSavedDoctor.CreationDate = existingDoctor.CreationDate;
-                toBeSavedDoctor.Creator = existingDoctor.Creator;
-                _doctorsViewModel.Db.DoctorRepository.Update(toBeSavedDoctor);
-            }
+            _serviceUnitOfWork.doctorService.SaveDoctor(_doctorsViewModel.CurrentValue);
 
-            _doctorsViewModel.Values.Clear();
-            List<Doctor> doctors = _doctorsViewModel.Db.DoctorRepository.Get();
-            int no = 1;
-            foreach (Doctor doctorItem in doctors)
-            {
-                DoctorModel doctorModel = _doctorMapper.Map(doctorItem);
-                doctorModel.No = no++;
-                _doctorsViewModel.Values.Add(doctorModel);
-            }
+            List<DoctorModel> doctorModels = _serviceUnitOfWork.doctorService.GetAll();
+            _doctorsViewModel.AllValues = doctorModels;
+            _doctorsViewModel.Values = new ObservableCollection<DoctorModel>(doctorModels);
 
             _doctorsViewModel.SetDefaultValues();
 
