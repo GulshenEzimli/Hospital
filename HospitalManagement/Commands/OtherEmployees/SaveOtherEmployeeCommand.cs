@@ -1,12 +1,15 @@
 ﻿using HospitalManagement.Enums;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Services.Interfaces;
 using HospitalManagement.Validations;
+using HospitalManagement.Validations.Utils;
 using HospitalManagement.ViewModels.UserControls;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -17,11 +20,11 @@ namespace HospitalManagement.Commands.OtherEmployees
     public class SaveOtherEmployeeCommand : BaseCommand
     {
         private readonly OtherEmployeesViewModel _otherEmployeesViewModel;
-        private readonly IOtherEmployeeMapper _otherEmployeeMapper;
-        public SaveOtherEmployeeCommand(OtherEmployeesViewModel otherEmployeesViewModel, IOtherEmployeeMapper otherEmployeeMapper)
+        private readonly IOtherEmployeeService _otherEmployeeService;
+        public SaveOtherEmployeeCommand(OtherEmployeesViewModel otherEmployeesViewModel, IOtherEmployeeService otherEmployeeService)
         {
             _otherEmployeesViewModel = otherEmployeesViewModel;
-            _otherEmployeeMapper = otherEmployeeMapper;
+            _otherEmployeeService = otherEmployeeService;
         }
         public override void Execute(object parameter)
         {
@@ -36,34 +39,21 @@ namespace HospitalManagement.Commands.OtherEmployees
                 return;
             }
 
-            OtherEmployee toSavedOtherEmployee = _otherEmployeeMapper.Map(_otherEmployeesViewModel.CurrentOtherEmployeeValue);
-            
-            toSavedOtherEmployee.Modifier = new Admin() { Id = 3 };
-            toSavedOtherEmployee.ModifiedDate = DateTime.Now;
-            
-            if(toSavedOtherEmployee.Id == 0)
-            {
-                toSavedOtherEmployee.Creator = new Admin() { Id = 3 }; 
-                toSavedOtherEmployee.CreationDate = DateTime.Now;
-                toSavedOtherEmployee.IsDelete = false;
-                _otherEmployeesViewModel.Db.OtherEmployeeRepository.Insert(toSavedOtherEmployee);
-                _otherEmployeesViewModel.CurrentOtherEmployeeValue.No = _otherEmployeesViewModel.OtherEmployeeValues.LastOrDefault()?.No + 1 ?? 1;
-                _otherEmployeesViewModel.OtherEmployeeValues.Add(_otherEmployeesViewModel.CurrentOtherEmployeeValue);
-            }
-            else
-            {
-                var existingOtherEmployee = _otherEmployeesViewModel.Db.OtherEmployeeRepository.GetById(_otherEmployeesViewModel.CurrentOtherEmployeeValue.Id);
-                toSavedOtherEmployee.Creator = existingOtherEmployee.Creator;
-                toSavedOtherEmployee.CreationDate = existingOtherEmployee.CreationDate;
-                toSavedOtherEmployee.IsDelete = existingOtherEmployee.IsDelete;
-                _otherEmployeesViewModel.Db.OtherEmployeeRepository.Update(toSavedOtherEmployee);
+            _otherEmployeeService.Save(_otherEmployeesViewModel.CurrentOtherEmployeeValue);
 
-                var existingValue = _otherEmployeesViewModel.OtherEmployeeValues.FirstOrDefault(x => x.Id == existingOtherEmployee.Id);
-                var existingValueIndex = _otherEmployeesViewModel.OtherEmployeeValues.IndexOf(existingValue);
-                _otherEmployeesViewModel.OtherEmployeeValues[existingValueIndex] = _otherEmployeesViewModel.CurrentOtherEmployeeValue;
-            }
-            
+            var otherEmployeeModels = _otherEmployeeService.GetAll();
+            _otherEmployeesViewModel.AllValues = otherEmployeeModels;
+            _otherEmployeesViewModel.OtherEmployeeValues = new ObservableCollection<OtherEmployeeModel>(otherEmployeeModels);
+
             _otherEmployeesViewModel.SetDefaultValues();
+
+            _otherEmployeesViewModel.Message = new MessageModel()
+            {
+                Message = ValidationMessageProvider.GetOperationSuccessMessage(),
+                IsSuccess = true,
+            };
+            DoAnimation(_otherEmployeesViewModel.ErrorDialog);
+            return;
         }
     }
 }

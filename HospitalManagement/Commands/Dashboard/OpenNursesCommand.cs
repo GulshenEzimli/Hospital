@@ -26,13 +26,10 @@ namespace HospitalManagement.Commands.Dashboard
         public override void Execute(object parameter)
         {
             NurseControl nurseControl = new NurseControl();
-
             NursesViewModel nursesViewModel = new NursesViewModel(_nurseService,nurseControl.ErrorDialog);
 
             var nurseModels = _nurseService.GetAll();
-
             nursesViewModel.AllValues = nurseModels;
-
             nursesViewModel.Values = new ObservableCollection<NurseModel>(nursesViewModel.AllValues);
             
             nurseControl.DataContext = nursesViewModel;

@@ -2,6 +2,7 @@
 using HospitalManagement.Enums;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Services.Interfaces;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
@@ -15,10 +16,11 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public class OtherEmployeesViewModel : BaseControlViewModel
     {
-        private readonly IOtherEmployeeMapper _otherEmployeeMapper;
-        public OtherEmployeesViewModel(IUnitOfWork unitOfWork, IOtherEmployeeMapper otherEmployeeMapper, ErrorDialog errorDialog) : base( errorDialog)
+        private readonly IOtherEmployeeService _otherEmployeeService;
+        public OtherEmployeesViewModel(IOtherEmployeeService otherEmployeeService, ErrorDialog errorDialog) : base( errorDialog)
         {
-            _otherEmployeeMapper = otherEmployeeMapper;
+            _otherEmployeeService = otherEmployeeService;
+            AllValues = new List<OtherEmployeeModel>();
             SetDefaultValues();
         }
         public override string Header => "Other Employees";
@@ -66,16 +68,26 @@ namespace HospitalManagement.ViewModels.UserControls
         }
 
         private ObservableCollection<OtherEmployeeModel> _otherEmployeeValues;
-        public ObservableCollection<OtherEmployeeModel> OtherEmployeeValues => _otherEmployeeValues ?? (_otherEmployeeValues = new ObservableCollection<OtherEmployeeModel>());
+        public ObservableCollection<OtherEmployeeModel> OtherEmployeeValues
+        {
+            get => _otherEmployeeValues ?? (_otherEmployeeValues = new ObservableCollection<OtherEmployeeModel>());
+            set
+            {
+                _otherEmployeeValues = value;
+                OnPropertyChanged(nameof(_otherEmployeeValues));
+            }
+        }
 
         private List<string> _jobNames;
         public List<string> JobNames => _jobNames ?? (_jobNames = new List<string>());
 
+        public List<OtherEmployeeModel> AllValues { get; set; }
+
         public AddOtherEmployeeCommand Add => new AddOtherEmployeeCommand(this);
-        public DeleteOtherEmployeeCommand Delete => new DeleteOtherEmployeeCommand(this);
+        public DeleteOtherEmployeeCommand Delete => new DeleteOtherEmployeeCommand(this, _otherEmployeeService);
         public EditOtherEmployeeCommand Edit => new EditOtherEmployeeCommand(this); 
         public RejectOtherEmployeeCommand Reject => new RejectOtherEmployeeCommand(this);
-        public SaveOtherEmployeeCommand Save => new SaveOtherEmployeeCommand(this, _otherEmployeeMapper);
+        public SaveOtherEmployeeCommand Save => new SaveOtherEmployeeCommand(this, _otherEmployeeService);
 
         public void SetDefaultValues()
         {
