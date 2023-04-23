@@ -36,7 +36,9 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using(SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"";
+                string cmdText = @"select Receptionist.Id as ReceptionistId, FirstName, LastName, Gender, BirthDate, PIN, Email, PhoneNumber,
+                                   Salary, CreationDate, ModifiedDate, JobId, OtherJobs.JobName as JobName,  CreatorId, ModifierId
+			                      from Receptionist inner join OtherJobs on Receptionist.JobId = OtherJobs.Id where IsDelete = 0 ";
                 using(SqlCommand command= new SqlCommand( cmdText,connection))
                 {
                     SqlDataReader reader = command.ExecuteReader();
@@ -56,7 +58,19 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 
         public Receptionist GetById(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection= new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string cmdText = @"";
+
+                using (SqlCommand command = new SqlCommand(cmdText,connection))
+                {
+                    command.Parameters.AddWithValue("id", id);
+                    SqlDataReader reader= command.ExecuteReader();
+                    Receptionist receptionist=GetReceptionist(reader);
+                    return receptionist;    
+                }
+            }
         }
 
         public int Insert(Receptionist entity)
