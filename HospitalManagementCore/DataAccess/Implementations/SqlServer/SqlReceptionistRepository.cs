@@ -61,7 +61,9 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection= new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"";
+                string cmdText = @"select Receptionist.Id as ReceptionistId, FirstName, LastName, Gender, BirthDate, PIN, Email, PhoneNumber,
+                                   Salary, CreationDate, ModifiedDate, JobId, OtherJobs.JobName as JobName,  CreatorId, ModifierId
+			                      from Receptionist inner join OtherJobs on Receptionist.JobId = OtherJobs.Id where IsDelete = 0 and Id=@id";
 
                 using (SqlCommand command = new SqlCommand(cmdText,connection))
                 {
@@ -73,15 +75,41 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             }
         }
 
-        public int Insert(Receptionist entity)
+        public int Insert(Receptionist receptionist)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string cmdText = @"insert into Receptionist output inserted.id values(@creatorId,@modifierId,
+                                 (select Id from OtherJobs where JobName = @jobName),
+                                 @firstName,@lastName,@gender,
+                                 @birthDate,@pin,@email,@phoneNumber,@salary,@creationDate,@modifiedDate,@isDelete)";
+                using (SqlCommand command= new SqlCommand(cmdText,connection))
+                {
+                    AddParameters(command, receptionist);
+                    return (int)command.ExecuteScalar();
+                }
+            }
         }
 
-        public bool Update(Receptionist entity)
+        public bool Update(Receptionist receptionist)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string cmdText = @"update Receptionist set JobId=(select Id from OtherJobs where JobName = @jobName), 
+                                 FirstName=@firstName, LastName=@lastName,
+                                 Gender=@gender, BirthDate=@birthDate, PIN=@pin, Email=@email, PhoneNumber=@phoneNumber,
+                                 Salary=@salary, IsDelete=@isDelete, CreationDate=@creationDate, ModifiedD";
+                using (SqlCommand command = new SqlCommand(cmdText, connection))
+                {
+                    command.Parameters.AddWithValue("id", receptionist.Id);
+                    AddParameters(command, receptionist);
+                    return command.ExecuteNonQuery() == 1;
+                }
+            }
         }
+            
 
         private Receptionist GetReceptionist(SqlDataReader reader)
         {
@@ -117,7 +145,24 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             };
             
             return receptionist;
-          
+        }
+
+        private void AddParameters(SqlCommand command, Receptionist receptionist)
+        {
+            command.Parameters.AddWithValue("creatorId", receptionist.Creator.Id);
+            command.Parameters.AddWithValue("modifierId", receptionist.Modifier.Id);
+            command.Parameters.AddWithValue("jobName", receptionist.Job.Name);
+            command.Parameters.AddWithValue("firstName", receptionist.FirstName);
+            command.Parameters.AddWithValue("lastName", receptionist.LastName);
+            command.Parameters.AddWithValue("gender", receptionist.Gender);
+            command.Parameters.AddWithValue("birthDate", receptionist.BirthDate);
+            command.Parameters.AddWithValue("pin", receptionist.PIN);
+            command.Parameters.AddWithValue("email", receptionist.Email);
+            command.Parameters.AddWithValue("phoneNumber", receptionist.PhoneNumber);
+            command.Parameters.AddWithValue("salary", receptionist.Salary);
+            command.Parameters.AddWithValue("isDelete", receptionist.IsDelete);
+            command.Parameters.AddWithValue("creationDate", receptionist.CreationDate);
+            command.Parameters.AddWithValue("modifiedDate", receptionist.ModifierDate);
         }
     }
 }
