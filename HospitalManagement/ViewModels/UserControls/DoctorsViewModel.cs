@@ -3,6 +3,8 @@ using HospitalManagement.Commands.Nurses;
 using HospitalManagement.Enums;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Services.Interfaces;
+using HospitalManagement.Validations.Utils;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
@@ -16,10 +18,11 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public class DoctorsViewModel : BaseControlViewModel
     {
-        private readonly IDoctorMapper _doctorMapper;
-        public DoctorsViewModel(IUnitOfWork unitOfWork, IDoctorMapper doctorMapper, ErrorDialog errorDialog) : base(errorDialog)
+        private readonly IServiceUnitOfWork _serviceUnitOfWork;
+        public DoctorsViewModel(IServiceUnitOfWork serviceUnitOfWork, ErrorDialog errorDialog) : base(errorDialog)
         {
-            _doctorMapper = doctorMapper;
+            _serviceUnitOfWork = serviceUnitOfWork;
+            AllValues = new List<DoctorModel>();
             SetDefaultValues();
         }
         public override string Header => "Doctors";
@@ -68,17 +71,36 @@ namespace HospitalManagement.ViewModels.UserControls
         }
 
         private ObservableCollection<DoctorModel> _values;
-        public ObservableCollection<DoctorModel> Values => _values ?? (_values = new ObservableCollection<DoctorModel>());
+        public ObservableCollection<DoctorModel> Values
+        {
+            get => _values ?? (_values = new ObservableCollection<DoctorModel>());
+            set
+            {
+                _values = value;
+                OnPropertyChanged(nameof(Values));
+            }
+        }
 
+        public List<DoctorModel> AllValues { get; set; }
 
-        private List<string> _positionValues;
-        public List<string> PositionValues => _positionValues ?? (_positionValues = new List<string>());
+        private ObservableCollection<string> _positionValues;
+        public ObservableCollection<string> PositionValues
+        { 
+            get => _positionValues ?? (_positionValues = new ObservableCollection<string>());
+            set
+            {
+                _positionValues = value;
+                OnPropertyChanged(nameof(PositionValues));
+            }
+        }
+        public List<string> AllPositionValues { get; set; }
+
 
         public AddDoctorCommand Add => new AddDoctorCommand(this);
-        public DeleteDoctorCommand Delete => new DeleteDoctorCommand(this, _doctorMapper);
+        public DeleteDoctorCommand Delete => new DeleteDoctorCommand(this, _serviceUnitOfWork);
         public EditDoctorCommand Edit => new EditDoctorCommand(this);
         public RejectDoctorCommand Reject => new RejectDoctorCommand(this);
-        public SaveDoctorCommand Save => new SaveDoctorCommand(this, _doctorMapper);
+        public SaveDoctorCommand Save => new SaveDoctorCommand(this, _serviceUnitOfWork);
 
         public void SetDefaultValues()
         {
@@ -96,7 +118,28 @@ namespace HospitalManagement.ViewModels.UserControls
 
         protected override void OnSearchTextChanged()
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                Values = new ObservableCollection<DoctorModel>(AllValues);
+            }
+            else
+            {
+                string lowerSearchText = SearchText.ToLower();
+
+                var filteredResult = AllValues.Where(x => x.FirstName?.ToLower().Contains(lowerSearchText) == true ||
+                                                 x.LastName?.ToLower().Contains(lowerSearchText) == true ||
+                                                 x.PIN?.ToLower().Contains(lowerSearchText) == true ||
+                                                 x.GenderValue?.ToLower().Contains(lowerSearchText) == true ||
+                                                 x.IsChiefDoctorValue?.ToLower().Contains(lowerSearchText) == true ||
+                                                 x.Salary.ToString().Contains(lowerSearchText) == true ||
+                                                 x.BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerSearchText) == true ||
+                                                 x.PositionName?.ToLower().Contains(lowerSearchText) == true ||
+                                                 x.Phonenumber?.ToLower().Contains(lowerSearchText) == true ||
+                                                 x.DepartmentName?.ToLower().Contains(lowerSearchText) == true ||
+                                                 x.Email?.ToLower().Contains(lowerSearchText) == true).ToList();
+
+                Values = new ObservableCollection<DoctorModel>(filteredResult);
+            }
         }
     }
 }

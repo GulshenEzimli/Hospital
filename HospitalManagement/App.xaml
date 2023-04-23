@@ -235,6 +235,14 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="{x:Type Grid}" x:Key="grdSearch">
+            <Setter Property="IsEnabled" Value="False"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding CurrentSituation}" Value="1">
+                    <Setter Property="IsEnabled" Value="True"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         
     </Application.Resources>
 </Application>

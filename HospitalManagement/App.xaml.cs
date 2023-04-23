@@ -1,5 +1,7 @@
 ﻿using HospitalManagement.Mappers.Implementations;
 using HospitalManagement.Mappers.Interfaces;
+using HospitalManagement.Services.Implementations;
+using HospitalManagement.Services.Interfaces;
 using HospitalManagement.ViewModels.Windows;
 using HospitalManagement.Views.Windows;
 using HospitalManagementCore.DataAccess.Implementations.SqlServer;
@@ -18,14 +20,14 @@ namespace HospitalManagement
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
 
-            builder.DataSource = "GULSHAN\\SQLEXPRESS";
+            builder.DataSource = "localhost";
             builder.InitialCatalog = "Hospital";
             builder.IntegratedSecurity = true;
 
             IUnitOfWork db = new SqlUnitOfWork(builder.ConnectionString);
-
-            IDoctorMapper doctorMapper = new DoctorMapper();
-            INurseMapper nurseMapper = new NurseMapper();
+            IMapperUnitOfWork mapperUnitOfWork = new MapperUnitOfWork();
+            IServiceUnitOfWork serviceUnitOfWork = new ServiceUnitOfWork(db,mapperUnitOfWork);
+            
             IOtherEmployeeMapper otherEmployeeMapper = new OtherEmployeeMapper();
             IPatientMapper patientMapper = new PatientMapper();
             IProcedureMapper procedureMapper=new ProcedureMapper();
@@ -36,7 +38,7 @@ namespace HospitalManagement
             IOperationNurseMapper operationNurseMapper  = new OperationNurseMapper();
 
             DashboardWindow dashboardWindow = new DashboardWindow();
-            DashboardViewModel viewModel = new DashboardViewModel(db, doctorMapper, nurseMapper, otherEmployeeMapper, patientMapper, procedureMapper, patientProcedureMapper, positionMapper, operationMapper, operationDoctorMapper, operationNurseMapper);
+            DashboardViewModel viewModel = new DashboardViewModel(serviceUnitOfWork.nurseService, otherEmployeeMapper, patientMapper, procedureMapper, patientProcedureMapper, positionMapper, operationMapper, operationDoctorMapper, operationNurseMapper, serviceUnitOfWork);
 
             dashboardWindow.DataContext = viewModel;
             viewModel.CenterGrid = dashboardWindow.grdCenter;
