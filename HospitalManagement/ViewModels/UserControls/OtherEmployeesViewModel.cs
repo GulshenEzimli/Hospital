@@ -16,7 +16,7 @@ namespace HospitalManagement.ViewModels.UserControls
     public class OtherEmployeesViewModel : BaseControlViewModel
     {
         private readonly IOtherEmployeeMapper _otherEmployeeMapper;
-        public OtherEmployeesViewModel(IUnitOfWork unitOfWork, IOtherEmployeeMapper otherEmployeeMapper, ErrorDialog errorDialog) : base(unitOfWork, errorDialog)
+        public OtherEmployeesViewModel(IUnitOfWork unitOfWork, IOtherEmployeeMapper otherEmployeeMapper, ErrorDialog errorDialog) : base( errorDialog)
         {
             _otherEmployeeMapper = otherEmployeeMapper;
             SetDefaultValues();
@@ -89,6 +89,11 @@ namespace HospitalManagement.ViewModels.UserControls
         {
             _selectedValue = otherEmployeeModel;
             OnPropertyChanged(nameof(SelectedValue));
+        }
+
+        protected override void OnSearchTextChanged()
+        {
+            throw new NotImplementedException();
         }
     }
 }

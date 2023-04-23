@@ -1,5 +1,6 @@
 ﻿using HospitalManagement.Commands.Dashboard;
 using HospitalManagement.Mappers.Interfaces;
+using HospitalManagement.Services.Interfaces;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace HospitalManagement.ViewModels.Windows
     public class DashboardViewModel : BaseViewModel
     {        
         private readonly IDoctorMapper _doctorMapper;
-        private readonly INurseMapper _nurseMapper;
+        private readonly INurseService _nurseService;
         private readonly IOtherEmployeeMapper _otherEmployeeMapper;
         private readonly IPatientMapper _patientMapper;
         private readonly IProcedureMapper _procedureMapper;
@@ -23,13 +24,13 @@ namespace HospitalManagement.ViewModels.Windows
         private readonly IOperationDoctorMapper _operationDoctorMapper;
         private readonly IOperationNurseMapper _operationNurseMapper;
 
-        public DashboardViewModel(IUnitOfWork unitOfWork, IDoctorMapper doctorMapper,INurseMapper nurseMapper, 
+        public DashboardViewModel(IDoctorMapper doctorMapper, INurseService nurseService, 
             IOtherEmployeeMapper otherEmployeeMapper, IPatientMapper patientMapper, IProcedureMapper procedureMapper, 
             IPatientProcedureMapper patientProcedureMapper, IPositionMapper positionMapper, IOperationMapper operationMapper, 
-            IOperationDoctorMapper operationDoctorMapper, IOperationNurseMapper operationNurseMapper) : base(unitOfWork)
+            IOperationDoctorMapper operationDoctorMapper, IOperationNurseMapper operationNurseMapper) 
         {
             _doctorMapper = doctorMapper;
-            _nurseMapper = nurseMapper;
+            _nurseService = nurseService;
             _otherEmployeeMapper = otherEmployeeMapper;
             _patientMapper = patientMapper;
             _procedureMapper = procedureMapper;
@@ -56,9 +57,9 @@ namespace HospitalManagement.ViewModels.Windows
         public DropDownEmloyeesCommand DropDown => new DropDownEmloyeesCommand(this);
 
         public OpenDoctorsCommand OpenDoctors => new OpenDoctorsCommand(this, _doctorMapper, _positionMapper);
-        public OpenNursesCommand OpenNurses => new OpenNursesCommand(this,_nurseMapper);
+        public OpenNursesCommand OpenNurses => new OpenNursesCommand(this,_nurseService);
         public OpenOtherEmployeesCommand OpenOtherEmployees => new OpenOtherEmployeesCommand(this, _otherEmployeeMapper);
-        public OpenPatientProcedureCommand OpenPatientProcedures => new OpenPatientProcedureCommand(this, _patientProcedureMapper,_patientMapper,_doctorMapper,_nurseMapper,_procedureMapper);
+        public OpenPatientProcedureCommand OpenPatientProcedures => new OpenPatientProcedureCommand(this, _patientProcedureMapper,_patientMapper,_doctorMapper, _nurseService, _procedureMapper);
         public OpenPatientsCommand OpenPatients => new OpenPatientsCommand(this,_patientMapper);
         public OpenProceduresCommand OpenProcedures => new OpenProceduresCommand(this,_procedureMapper);
         public OpenReceptionistCommand OpenReceptionists => new OpenReceptionistCommand(this);

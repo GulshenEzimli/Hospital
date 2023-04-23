@@ -11,7 +11,7 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public abstract class BaseControlViewModel : BaseViewModel
     {
-        protected BaseControlViewModel(IUnitOfWork unitOfWork,ErrorDialog errorDialog) : base(unitOfWork)
+        protected BaseControlViewModel(ErrorDialog errorDialog)
         {
             ErrorDialog = errorDialog;
         }
@@ -29,6 +29,19 @@ namespace HospitalManagement.ViewModels.UserControls
                 OnPropertyChanged(nameof(Message)); 
             }      
         }
+
+        private string _searchText;
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged(nameof(SearchText));
+            }
+        }
+
+        protected abstract void OnSearchTextChanged();
 
     }
 }

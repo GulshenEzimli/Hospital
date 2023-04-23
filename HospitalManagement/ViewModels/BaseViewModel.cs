@@ -11,14 +11,6 @@ namespace HospitalManagement.ViewModels
 {
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
-        protected readonly IUnitOfWork _db;
-
-        public BaseViewModel(IUnitOfWork unitOfWork)
-        {
-            _db = unitOfWork;
-        }
-
-        public IUnitOfWork Db => _db;
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)

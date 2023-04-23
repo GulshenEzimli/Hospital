@@ -16,7 +16,7 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public class OperationsViewModel : BaseControlViewModel
     {
-        public OperationsViewModel(IUnitOfWork unitOfWork, ErrorDialog errorDialog) : base(unitOfWork, errorDialog)
+        public OperationsViewModel(IUnitOfWork unitOfWork, ErrorDialog errorDialog) : base(errorDialog)
         {
             SetDefaultValues();
         }
@@ -44,6 +44,11 @@ namespace HospitalManagement.ViewModels.UserControls
         public void SetDefaultValues()
         {
             CurrentSituation = Situations.NORMAL;
+        }
+
+        protected override void OnSearchTextChanged()
+        {
+            throw new NotImplementedException();
         }
     }
 }

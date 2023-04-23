@@ -17,7 +17,7 @@ namespace HospitalManagement.ViewModels.UserControls
     public class DoctorsViewModel : BaseControlViewModel
     {
         private readonly IDoctorMapper _doctorMapper;
-        public DoctorsViewModel(IUnitOfWork unitOfWork, IDoctorMapper doctorMapper, ErrorDialog errorDialog) :base(unitOfWork, errorDialog)
+        public DoctorsViewModel(IUnitOfWork unitOfWork, IDoctorMapper doctorMapper, ErrorDialog errorDialog) :base(errorDialog)
         {
             _doctorMapper = doctorMapper;
             SetDefaultValues();
@@ -66,5 +66,9 @@ namespace HospitalManagement.ViewModels.UserControls
             CurrentValue = new DoctorModel();
         }
 
+        protected override void OnSearchTextChanged()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

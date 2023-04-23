@@ -18,7 +18,7 @@ namespace HospitalManagement.ViewModels.UserControls
     public class PatientProcedureViewModel : BaseControlViewModel
     {
         private readonly IPatientProcedureMapper _patientProcedureMapper;
-        public PatientProcedureViewModel(IUnitOfWork unitOfWork, ErrorDialog errorDialog, IPatientProcedureMapper patientProcedureMapper) : base(unitOfWork, errorDialog)
+        public PatientProcedureViewModel(IUnitOfWork unitOfWork, ErrorDialog errorDialog, IPatientProcedureMapper patientProcedureMapper) : base(errorDialog)
         {
             _patientProcedureMapper = patientProcedureMapper;
             SetDefaultValues();
@@ -72,6 +72,11 @@ namespace HospitalManagement.ViewModels.UserControls
         {
             CurrentSituation = Situations.NORMAL;
             CurrentPatientProcedure = new PatientProcedureModel();
+        }
+
+        protected override void OnSearchTextChanged()
+        {
+            throw new NotImplementedException();
         }
     }
 }
