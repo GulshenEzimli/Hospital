@@ -38,6 +38,7 @@ namespace HospitalManagement.ViewModels.UserControls
             {
                 _searchText = value;
                 OnPropertyChanged(nameof(SearchText));
+                OnSearchTextChanged();
             }
         }
 
