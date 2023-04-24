@@ -78,8 +78,8 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
-        private List<string> _jobNames;
-        public List<string> JobNames => _jobNames ?? (_jobNames = new List<string>());
+        private List<JobModel> _jobNames;
+        public List<JobModel> JobNames => _jobNames ?? (_jobNames = new List<JobModel>());
 
         public List<OtherEmployeeModel> AllValues { get; set; }
 

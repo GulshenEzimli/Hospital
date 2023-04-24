@@ -20,7 +20,12 @@ namespace HospitalManagement.Mappers.Implementations
             nurseModel.LastName = nurse.LastName;
             nurseModel.BirthDate = nurse.BirthDate;
             nurseModel.PhoneNumber = nurse.PhoneNumber;
-            nurseModel.PositionName = nurse.Position.Name;
+            nurseModel.Position = new PositionModel
+            {
+                Id = nurse.Position.Id,
+                Name = nurse.Position.Name,
+                DepartmentName = nurse.Position.Department.Name,
+            };
             nurseModel.Email = nurse.Email;
             nurseModel.PIN = nurse.PIN;
             nurseModel.Salary = nurse.Salary;
@@ -40,8 +45,16 @@ namespace HospitalManagement.Mappers.Implementations
             nurse.LastName = nurseModel.LastName;
             nurse.BirthDate = nurseModel.BirthDate;
             nurse.PhoneNumber = nurseModel.PhoneNumber;
-            nurse.Position = new DoctorPosition();
-            nurse.Position.Name = nurseModel.PositionName;
+            nurse.Position = new DoctorPosition()
+            {
+                Id = nurseModel.Position.Id,
+                Name = nurseModel.Position.Name,
+                Department = new Department()
+                {
+                    Name = nurseModel.Position.DepartmentName,
+                }
+            };
+            
             nurse.Email = nurseModel.Email;
             nurse.PIN = nurseModel.PIN;
             nurse.Salary = nurseModel.Salary;

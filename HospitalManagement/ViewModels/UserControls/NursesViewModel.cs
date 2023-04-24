@@ -5,6 +5,7 @@ using HospitalManagement.Models;
 using HospitalManagement.Services.Interfaces;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
+using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -36,8 +37,8 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
-        private List<string> _positionNames;
-        public List<string> PositionNames => _positionNames ?? (_positionNames = new List<string>());
+        private List<PositionModel> _positions;
+        public List<PositionModel> Positions => _positions ?? (_positions = new List<PositionModel>());
 
         private NurseModel _currentValue;
         public NurseModel CurrentValue 
@@ -83,7 +84,7 @@ namespace HospitalManagement.ViewModels.UserControls
 
         public List<NurseModel> AllValues { get; set; }
         public AddNurseCommand Add => new AddNurseCommand(this);
-        public DeleteNurseCommand Delete => new DeleteNurseCommand(this);
+        public DeleteNurseCommand Delete => new DeleteNurseCommand(this,_nurseService);
         public EditNurseCommand Edit => new EditNurseCommand(this);
         public RejectNurseCommand Reject => new RejectNurseCommand(this);
         public SaveNurseCommand Save => new SaveNurseCommand(this, _nurseService);

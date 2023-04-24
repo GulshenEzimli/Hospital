@@ -202,6 +202,7 @@
     <Compile Include="Commands\Rooms\SaveRoomCommand.cs" />
     <Compile Include="Enums\Situations.cs" />
     <Compile Include="Mappers\Implementations\DoctorMapper.cs" />
+    <Compile Include="Mappers\Implementations\JobMapper.cs" />
     <Compile Include="Mappers\Implementations\MapperUnitOfWork.cs" />
     <Compile Include="Mappers\Implementations\NurseMapper.cs" />
     <Compile Include="Mappers\Implementations\OperationDoctorMapper.cs" />
@@ -213,6 +214,7 @@
     <Compile Include="Mappers\Implementations\PositionMapper.cs" />
     <Compile Include="Mappers\Implementations\ProcedureMapper.cs" />
     <Compile Include="Mappers\Interfaces\IDoctorMapper.cs" />
+    <Compile Include="Mappers\Interfaces\IJobMapper.cs" />
     <Compile Include="Mappers\Interfaces\IMapperUnitOfWork.cs" />
     <Compile Include="Mappers\Interfaces\IOperationDoctorMapper.cs" />
     <Compile Include="Mappers\Interfaces\IOperationMapper.cs" />
@@ -224,6 +226,7 @@
     <Compile Include="Mappers\Interfaces\IOtherEmployeeMapper.cs" />
     <Compile Include="Mappers\Interfaces\IPatientMapper.cs" />
     <Compile Include="Models\DoctorModel.cs" />
+    <Compile Include="Models\JobModel.cs" />
     <Compile Include="Models\MessageModel.cs" />
     <Compile Include="Models\NurseModel.cs" />
     <Compile Include="Models\OperationDoctorModel.cs" />
