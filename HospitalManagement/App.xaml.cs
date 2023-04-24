@@ -20,7 +20,7 @@ namespace HospitalManagement
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
 
-            builder.DataSource = "GULSHAN\\SQLEXPRESS";
+            builder.DataSource = "localhost";
             builder.InitialCatalog = "Hospital";
             builder.IntegratedSecurity = true;
 
@@ -28,7 +28,6 @@ namespace HospitalManagement
             IMapperUnitOfWork mapperUnitOfWork = new MapperUnitOfWork();
             IServiceUnitOfWork serviceUnitOfWork = new ServiceUnitOfWork(db,mapperUnitOfWork);
             
-            IOtherEmployeeMapper otherEmployeeMapper = new OtherEmployeeMapper();
             IPatientMapper patientMapper = new PatientMapper();
             IProcedureMapper procedureMapper=new ProcedureMapper();
             IPatientProcedureMapper patientProcedureMapper = new PatientProcedureMapper();
