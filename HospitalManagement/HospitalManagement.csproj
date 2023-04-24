@@ -240,6 +240,7 @@
     <Compile Include="Services\Implementations\PatientProcedureService.cs" />
     <Compile Include="Services\Implementations\PatientService.cs" />
     <Compile Include="Services\Implementations\PositionService.cs" />
+    <Compile Include="Services\Implementations\ProcedureService.cs" />
     <Compile Include="Services\Implementations\ServiceUnitOfWork.cs" />
     <Compile Include="Services\Interfaces\IDoctorService.cs" />
     <Compile Include="Services\Interfaces\INurseService.cs" />
@@ -247,11 +248,13 @@
     <Compile Include="Services\Interfaces\IPatientProcedureService.cs" />
     <Compile Include="Services\Interfaces\IPatientService.cs" />
     <Compile Include="Services\Interfaces\IPositionService.cs" />
+    <Compile Include="Services\Interfaces\IProcedureService.cs" />
     <Compile Include="Services\Interfaces\IServiceUnitOfWork.cs" />
     <Compile Include="Validations\NurseValidation.cs" />
     <Compile Include="Validations\OtherEmployeeValidation.cs" />
     <Compile Include="Validations\PatientProcedureValidation.cs" />
     <Compile Include="Validations\PatientValidation.cs" />
+    <Compile Include="Validations\ProcedureValidation.cs" />
     <Compile Include="Validations\Utils\SystemConstants.cs" />
     <Compile Include="Validations\Utils\ValidationMessageProvider.cs" />
     <Compile Include="Validations\DoctorValidation.cs" />
