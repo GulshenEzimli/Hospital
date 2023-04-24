@@ -83,17 +83,15 @@ namespace HospitalManagement.ViewModels.UserControls
 
         public List<DoctorModel> AllValues { get; set; }
 
-        private ObservableCollection<string> _positionValues;
-        public ObservableCollection<string> PositionValues
-        { 
-            get => _positionValues ?? (_positionValues = new ObservableCollection<string>());
+        private List<PositionModel> _positionValues;
+        public List<PositionModel> PositionValues
+        {
+            get => _positionValues ?? (_positionValues = new List<PositionModel>());
             set
             {
                 _positionValues = value;
-                OnPropertyChanged(nameof(PositionValues));
             }
         }
-        public List<string> AllPositionValues { get; set; }
 
 
         public AddDoctorCommand Add => new AddDoctorCommand(this);
@@ -114,7 +112,7 @@ namespace HospitalManagement.ViewModels.UserControls
         {
             _selectedValue = doctorModel;
             OnPropertyChanged(nameof(SelectedValue));
-        } 
+        }
 
         protected override void OnSearchTextChanged()
         {
@@ -133,7 +131,7 @@ namespace HospitalManagement.ViewModels.UserControls
                                                  x.IsChiefDoctorValue?.ToLower().Contains(lowerSearchText) == true ||
                                                  x.Salary.ToString().Contains(lowerSearchText) == true ||
                                                  x.BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerSearchText) == true ||
-                                                 x.PositionName?.ToLower().Contains(lowerSearchText) == true ||
+                                                 x.Position.Name?.ToLower().Contains(lowerSearchText) == true ||
                                                  x.Phonenumber?.ToLower().Contains(lowerSearchText) == true ||
                                                  x.DepartmentName?.ToLower().Contains(lowerSearchText) == true ||
                                                  x.Email?.ToLower().Contains(lowerSearchText) == true).ToList();

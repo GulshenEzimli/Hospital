@@ -11,7 +11,8 @@ namespace HospitalManagement.Models
     {
         public int Id { get; set; }
         public int No { get; set; }
-        public string PositionName { get; set; }
+        public PositionModel Position { get; set; }
+        
         public string DepartmentName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -60,7 +61,7 @@ namespace HospitalManagement.Models
                 Id = Id,
                 Phonenumber = Phonenumber,
                 PIN = PIN,
-                PositionName = PositionName,
+                Position = Position,
                 Salary = Salary,
                 No = No,
                 Gender = Gender,

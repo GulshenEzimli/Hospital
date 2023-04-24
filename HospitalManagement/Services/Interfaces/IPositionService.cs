@@ -9,6 +9,6 @@ namespace HospitalManagement.Services.Interfaces
 {
     public interface IPositionService
     {
-        List<string> GetAll();
+        List<PositionModel> GetAll();
     }
 }
