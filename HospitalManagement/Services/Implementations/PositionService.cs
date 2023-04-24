@@ -22,14 +22,14 @@ namespace HospitalManagement.Services.Implementations
             _unitOfWork = unitOfWork;
             _mapperUnitOfWork = mapperUnitOfWork;
         }
-        public List<string> GetAll()
+        public List<PositionModel> GetAll()
         {
-            List<string> positionModels = new List<string>();
+            List<PositionModel> positionModels = new List<PositionModel>();
             List<DoctorPosition> positions = _unitOfWork.PositionRepository.Get();
             foreach (DoctorPosition position in positions)
             {
                 PositionModel positionModel = _mapperUnitOfWork.PositionMapper.Map(position);
-                positionModels.Add(positionModel.Name);
+                positionModels.Add(positionModel);
             }
             return positionModels;
         }
