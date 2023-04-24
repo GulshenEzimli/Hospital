@@ -38,7 +38,14 @@ namespace HospitalManagement.ViewModels.UserControls
         }
 
         private List<PositionModel> _positions;
-        public List<PositionModel> Positions => _positions ?? (_positions = new List<PositionModel>());
+        public List<PositionModel> Positions
+        {
+            get => _positions ?? (_positions = new List<PositionModel>());
+            set
+            {
+                _positions = value; 
+            }
+        }
 
         private NurseModel _currentValue;
         public NurseModel CurrentValue 

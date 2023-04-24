@@ -11,7 +11,7 @@ namespace HospitalManagement.Mappers.Implementations
     {
         public IDoctorMapper DoctorMapper => new DoctorMapper(this);
 
-        public INurseMapper NurseMapper => new NurseMapper();
+        public INurseMapper NurseMapper => new NurseMapper(this);
 
         public IOperationDoctorMapper OperationDoctorMapper => new OperationDoctorMapper();
 

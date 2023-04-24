@@ -26,7 +26,7 @@ namespace HospitalManagement.Mappers.Implementations
             model.PIN = otherEmployee.PIN;
             if(otherEmployee.Gender) model.Gender[0] = otherEmployee.Gender;
             else model.Gender[1] = !otherEmployee.Gender;
-            model.JobName = otherEmployee.Job.Name;
+            //model.JobName = otherEmployee.Job.Name;
 
             return model;
         }
@@ -44,10 +44,10 @@ namespace HospitalManagement.Mappers.Implementations
             otherEmployee.BirthDate = model.BirthDate;
             otherEmployee.PIN = model.PIN;
             otherEmployee.Gender = model.Gender[0] ? true : false;
-            otherEmployee.Job = new Job()
-            {
-                Name = model.JobName,
-            };
+            //otherEmployee.Job = new Job()
+            //{
+            //    Name = model.JobName,
+            //};
 
             return otherEmployee;
         }

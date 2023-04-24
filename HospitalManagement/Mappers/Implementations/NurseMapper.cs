@@ -9,8 +9,13 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Mappers.Implementations
 {
-    public class NurseMapper : INurseMapper
+    public class NurseMapper :INurseMapper
     {
+        private readonly IMapperUnitOfWork _mapperUnitOfWork;
+        public NurseMapper(IMapperUnitOfWork mapperUnitOfWork)
+        {
+            _mapperUnitOfWork = mapperUnitOfWork;
+        }
         public NurseModel Map(Nurse nurse)
         {
             NurseModel nurseModel = new NurseModel();
@@ -20,12 +25,7 @@ namespace HospitalManagement.Mappers.Implementations
             nurseModel.LastName = nurse.LastName;
             nurseModel.BirthDate = nurse.BirthDate;
             nurseModel.PhoneNumber = nurse.PhoneNumber;
-            nurseModel.Position = new PositionModel
-            {
-                Id = nurse.Position.Id,
-                Name = nurse.Position.Name,
-                DepartmentName = nurse.Position.Department.Name,
-            };
+            nurseModel.Position = _mapperUnitOfWork.PositionMapper.Map(nurse.Position);
             nurseModel.Email = nurse.Email;
             nurseModel.PIN = nurse.PIN;
             nurseModel.Salary = nurse.Salary;
@@ -45,16 +45,7 @@ namespace HospitalManagement.Mappers.Implementations
             nurse.LastName = nurseModel.LastName;
             nurse.BirthDate = nurseModel.BirthDate;
             nurse.PhoneNumber = nurseModel.PhoneNumber;
-            nurse.Position = new DoctorPosition()
-            {
-                Id = nurseModel.Position.Id,
-                Name = nurseModel.Position.Name,
-                Department = new Department()
-                {
-                    Name = nurseModel.Position.DepartmentName,
-                }
-            };
-            
+            nurse.Position = _mapperUnitOfWork.PositionMapper.Map(nurseModel.Position);
             nurse.Email = nurseModel.Email;
             nurse.PIN = nurseModel.PIN;
             nurse.Salary = nurseModel.Salary;
