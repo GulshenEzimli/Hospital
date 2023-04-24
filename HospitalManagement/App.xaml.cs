@@ -28,10 +28,8 @@ namespace HospitalManagement
             IMapperUnitOfWork mapperUnitOfWork = new MapperUnitOfWork();
             IServiceUnitOfWork serviceUnitOfWork = new ServiceUnitOfWork(db,mapperUnitOfWork);
             
-            IOtherEmployeeMapper otherEmployeeMapper = new OtherEmployeeMapper();
             IPatientMapper patientMapper = new PatientMapper();
             IProcedureMapper procedureMapper=new ProcedureMapper();
-            IPatientProcedureMapper patientProcedureMapper = new PatientProcedureMapper();
             IPositionMapper positionMapper = new PositionMapper();
             IOperationMapper operationMapper = new OperationMapper();
             IOperationDoctorMapper operationDoctorMapper = new OperationDoctorMapper();

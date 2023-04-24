@@ -20,7 +20,7 @@ namespace HospitalManagement.Services.Implementations
         }
         public INurseService nurseService =>  new NurseService(_unitOfWork, _mapperUnitOfWork.NurseMapper);
         public IOtherEmployeeService otherEmployeeService => new OtherEmployeeService(_unitOfWork, _mapperUnitOfWork.OtherEmployeeMapper);
-        public IPatientProcedureService patientProcedureService => new PatientProcedureService(_unitOfWork, _mapperUnitOfWork.PatientProcedureMapper);
+        public IPatientProcedureService patientProcedureService => new PatientProcedureService(_unitOfWork, _mapperUnitOfWork);
         public IJobService jobService => new JobService(_unitOfWork,_mapperUnitOfWork.JobMapper);
         public IDoctorService doctorService => new DoctorService(_unitOfWork, _mapperUnitOfWork);
         public IPositionService positionService => new PositionService(_unitOfWork, _mapperUnitOfWork);

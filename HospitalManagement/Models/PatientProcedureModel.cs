@@ -22,5 +22,19 @@ namespace HospitalManagement.Models
         public decimal Cost => Procedure.Cost;
         public DateTime UseDate { get; set; }
 
+        public PatientProcedureModel Clone()
+        {
+            return new PatientProcedureModel
+            {
+                Id = Id,
+                No = No,
+                Patient = Patient,
+                Doctor = Doctor,
+                Nurse = Nurse,
+                Procedure = Procedure,
+                UseDate = UseDate,
+            };
+        }
+
     }
 }
