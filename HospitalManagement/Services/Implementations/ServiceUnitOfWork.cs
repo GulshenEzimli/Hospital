@@ -25,5 +25,7 @@ namespace HospitalManagement.Services.Implementations
         public IPatientProcedureService patientProcedureService => new PatientProcedureService(_unitOfWork, _mapperUnitOfWork.PatientProcedureMapper);
         public IDoctorService doctorService => new DoctorService(_unitOfWork, _mapperUnitOfWork);
         public IPositionService positionService => new PositionService(_unitOfWork, _mapperUnitOfWork);
+
+        public IPatientService patientService => new PatientService(_unitOfWork, _mapperUnitOfWork.PatientMapper);
     }
 }

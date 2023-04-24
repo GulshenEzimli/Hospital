@@ -238,12 +238,14 @@
     <Compile Include="Services\Implementations\NurseService.cs" />
     <Compile Include="Services\Implementations\OtherEmployeeService.cs" />
     <Compile Include="Services\Implementations\PatientProcedureService.cs" />
+    <Compile Include="Services\Implementations\PatientService.cs" />
     <Compile Include="Services\Implementations\PositionService.cs" />
     <Compile Include="Services\Implementations\ServiceUnitOfWork.cs" />
     <Compile Include="Services\Interfaces\IDoctorService.cs" />
     <Compile Include="Services\Interfaces\INurseService.cs" />
     <Compile Include="Services\Interfaces\IOtherEmployeeService.cs" />
     <Compile Include="Services\Interfaces\IPatientProcedureService.cs" />
+    <Compile Include="Services\Interfaces\IPatientService.cs" />
     <Compile Include="Services\Interfaces\IPositionService.cs" />
     <Compile Include="Services\Interfaces\IServiceUnitOfWork.cs" />
     <Compile Include="Validations\NurseValidation.cs" />

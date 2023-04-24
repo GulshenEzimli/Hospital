@@ -13,5 +13,6 @@ namespace HospitalManagement.Services.Interfaces
         IPatientProcedureService patientProcedureService { get; }
         IDoctorService doctorService { get; }
         IPositionService positionService { get; }
+        IPatientService patientService { get; }
     }
 }
