@@ -82,7 +82,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             {
                 connection.Open();
                 string cmdText = @"insert into Doctors output inserted.id 
-                                   values(@creatorId, @modifierId, (select Id from DoctorPositions where PositionName = @positionName),
+                                   values(@creatorId, @modifierId, @positionId,
                                    @firstName, @lastName, @gender, @birthDate, @pin, @email, @phoneNumber, @salary, @isChiefDoctor, 
                                    @creationDate, @modifiedDate, @isDelete)";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
@@ -98,7 +98,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"update Doctors set PositionId=(select Id from DoctorPositions where PositionName = @positionName), FirstName=@firstname, LastName=@lastname,
+                string cmdText = @"update Doctors set PositionId=@positionId, FirstName=@firstname, LastName=@lastname,
                                  Gender=@gender, BirthDate=@birthdate, PIN=@pin, Email=@email, PhoneNumber=@phonenumber,
                                  Salary=@salary, IsChiefDoctor= @ischiefdoctor, IsDelete=@isdelete, CreationDate=@creationdate, ModifiedDate=@modifieddate,
                                  CreatorId=@creatorid, ModifierId=@modifierid where Id=@id";
@@ -149,7 +149,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         }
         private void AddParameters(SqlCommand command, Doctor doctor)
         {            
-            command.Parameters.AddWithValue("positionName", doctor.Position.Name);
+            command.Parameters.AddWithValue("positionId", doctor.Position.Id);
             command.Parameters.AddWithValue("firstName", doctor.FirstName);
             command.Parameters.AddWithValue("lastName", doctor.LastName);
             command.Parameters.AddWithValue("gender", doctor.Gender);

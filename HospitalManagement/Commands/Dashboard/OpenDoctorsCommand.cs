@@ -33,10 +33,9 @@ namespace HospitalManagement.Commands.Dashboard
             doctorsViewModel.AllValues = doctorModels;
             doctorsViewModel.Values = new ObservableCollection<DoctorModel>(doctorModels);
 
-            List<string> positions = _serviceUnitOfWork.positionService.GetAll();
-            doctorsViewModel.AllPositionValues = positions;
-            doctorsViewModel.PositionValues = new ObservableCollection<string>(positions);
-
+            List<PositionModel> positions = _serviceUnitOfWork.positionService.GetAll();
+            doctorsViewModel.PositionValues = new List<PositionModel>(positions);
+            
             doctorControl.DataContext = doctorsViewModel;
             _viewModel.CenterGrid.Children.Clear();
             _viewModel.CenterGrid.Children.Add(doctorControl);

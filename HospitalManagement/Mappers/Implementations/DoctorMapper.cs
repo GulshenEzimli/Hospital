@@ -16,7 +16,12 @@ namespace HospitalManagement.Mappers.Implementations
         {
             DoctorModel doctorModel = new DoctorModel();
             doctorModel.Id = doctor.Id;
-            doctorModel.PositionName = doctor.Position.Name;
+            doctorModel.Position = new PositionModel()
+            {
+                Id = doctor.Position.Id,
+                Name = doctor.Position.Name,
+                DepartmentName = doctor.Position.Department.Name,
+            };
             doctorModel.DepartmentName = doctor.Position.Department.Name;
             doctorModel.FirstName = doctor.FirstName;
             doctorModel.LastName = doctor.LastName;
@@ -39,7 +44,12 @@ namespace HospitalManagement.Mappers.Implementations
             doctor.Id = doctorModel.Id;
             doctor.Position = new DoctorPosition()
             {
-                Name = doctorModel.PositionName
+                Name = doctorModel.Position.Name,
+                Id = doctorModel.Position.Id,
+                Department = new Department()
+                {
+                     Name = doctorModel.Position.DepartmentName
+                }
             };
             doctor.FirstName = doctorModel.FirstName;
             doctor.LastName = doctorModel.LastName;

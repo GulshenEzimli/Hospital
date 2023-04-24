@@ -108,6 +108,11 @@ namespace HospitalManagement.Validations
                 message = ValidationMessageProvider.GetSalaryMessage(10000);
                 return false;
             }
+            if(doctorModel.Position == null)
+            {
+                message = ValidationMessageProvider.GetRequiredMessage("Position");
+                return false;
+            }
 
             message = null;
             return true;
