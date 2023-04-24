@@ -36,14 +36,14 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
-        private OtherEmployeeModel _currentOtherEmployeeValue; 
-        public OtherEmployeeModel CurrentOtherEmployeeValue
+        private OtherEmployeeModel _currentValue; 
+        public OtherEmployeeModel CurrentValue
         {
-            get => _currentOtherEmployeeValue;
+            get => _currentValue;
             set
             {
-                _currentOtherEmployeeValue = value;
-                OnPropertyChanged(nameof(CurrentOtherEmployeeValue));
+                _currentValue = value;
+                OnPropertyChanged(nameof(CurrentValue));
             }
         }
 
@@ -60,26 +60,33 @@ namespace HospitalManagement.ViewModels.UserControls
                 }
                 else
                 {
-                    CurrentOtherEmployeeValue = SelectedValue.Clone();
+                    CurrentValue = SelectedValue.Clone();
                     CurrentSituation = Situations.SELECTED;
                 }
                 OnPropertyChanged(nameof(SelectedValue));
             }
         }
 
-        private ObservableCollection<OtherEmployeeModel> _otherEmployeeValues;
-        public ObservableCollection<OtherEmployeeModel> OtherEmployeeValues
+        private ObservableCollection<OtherEmployeeModel> _values;
+        public ObservableCollection<OtherEmployeeModel> Values
         {
-            get => _otherEmployeeValues ?? (_otherEmployeeValues = new ObservableCollection<OtherEmployeeModel>());
+            get => _values ?? (_values = new ObservableCollection<OtherEmployeeModel>());
             set
             {
-                _otherEmployeeValues = value;
-                OnPropertyChanged(nameof(_otherEmployeeValues));
+                _values = value;
+                OnPropertyChanged(nameof(Values));
             }
         }
 
         private List<JobModel> _jobNames;
-        public List<JobModel> JobNames => _jobNames ?? (_jobNames = new List<JobModel>());
+        public List<JobModel> JobNames
+        {
+            get => _jobNames ?? (_jobNames = new List<JobModel>());
+            set
+            {
+                _jobNames = value;
+            }
+        }
 
         public List<OtherEmployeeModel> AllValues { get; set; }
 
@@ -92,7 +99,7 @@ namespace HospitalManagement.ViewModels.UserControls
         public void SetDefaultValues()
         {
             CurrentSituation = Situations.NORMAL;
-            CurrentOtherEmployeeValue = new OtherEmployeeModel();
+            CurrentValue = new OtherEmployeeModel();
 
             SetSelectedValue(null);
         }

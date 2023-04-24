@@ -103,7 +103,7 @@
                         <GridViewColumn Header="Birth Date" Width="auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Path=BirthDate}" Style="{DynamicResource gridViewTextColumn}"/>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Path=BirthDate,StringFormat='dd.MM.yyyy'}" Style="{DynamicResource gridViewTextColumn}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -125,6 +125,13 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Path=Position.Name}" Style="{DynamicResource gridViewTextColumn}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Department" Width="auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Position.DepartmentName}" Style="{DynamicResource gridViewTextColumn}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

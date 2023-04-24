@@ -239,6 +239,7 @@
     <Compile Include="Models\PositionModel.cs" />
     <Compile Include="Models\ReceptionistModel.cs" />
     <Compile Include="Services\Implementations\DoctorService.cs" />
+    <Compile Include="Services\Implementations\JobService.cs" />
     <Compile Include="Services\Implementations\NurseService.cs" />
     <Compile Include="Services\Implementations\OtherEmployeeService.cs" />
     <Compile Include="Services\Implementations\PatientProcedureService.cs" />
@@ -247,6 +248,7 @@
     <Compile Include="Services\Implementations\ProcedureService.cs" />
     <Compile Include="Services\Implementations\ServiceUnitOfWork.cs" />
     <Compile Include="Services\Interfaces\IDoctorService.cs" />
+    <Compile Include="Services\Interfaces\IJobService.cs" />
     <Compile Include="Services\Interfaces\INurseService.cs" />
     <Compile Include="Services\Interfaces\IOtherEmployeeService.cs" />
     <Compile Include="Services\Interfaces\IPatientProcedureService.cs" />

@@ -34,7 +34,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"select OtherEmployees.Id as Id, CreatorId,ModifierId,OtherJobs.Id as 
+                string cmdText = @"select OtherEmployees.Id as OtherEmployeeId, CreatorId,ModifierId,OtherJobs.Id as 
                                 JobId,OtherJobs.JobName as JobName,FirstName,LastName,Gender,BirthDate,
                                 PIN,Email,PhoneNumber,Salary,
                                 CreationDate,ModifiedDate,IsDelete from OtherEmployees  inner join 
@@ -59,7 +59,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"select OtherEmployees.Id as Id, CreatorId,ModifierId,OtherJobs.Id as 
+                string cmdText = @"select OtherEmployees.Id as OtherEmployeeId, CreatorId,ModifierId,OtherJobs.Id as 
                                 JobId,OtherJobs.JobName as JobName,FirstName,LastName,Gender,BirthDate,
                                 PIN,Email,PhoneNumber,Salary,CreationDate,ModifiedDate,IsDelete from 
                                 OtherEmployees  inner join OtherJobs on OtherEmployees.JobId = OtherJobs.Id 
@@ -80,8 +80,8 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             {
                 connection.Open();
                 string cmdText = @"insert into OtherEmployees output inserted.id values(@creatorId,
-                                 @modifierId,(select Id from OtherJobs where OtherJobs.JobName=@jobName),
-                                 @firstName,@lastName,@gender,@birthDate,@pin,@email,@phoneNumber,@salary,@creationDate,@modifiedDate,@isDelete)";
+                                 @modifierId,@jobId, @firstName,@lastName,@gender,@birthDate,
+                                 @pin,@email,@phoneNumber,@salary,@creationDate,@modifiedDate,@isDelete)";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     AddParameters(command, otherEmployee);
@@ -113,7 +113,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         {
             OtherEmployee otherEmployee = new OtherEmployee();
 
-            otherEmployee.Id = reader.GetInt32("Id");
+            otherEmployee.Id = reader.GetInt32("OtherEmployeeId");
             otherEmployee.Job = new Job()
             {
                 Id = reader.GetInt32("JobId"),
@@ -146,7 +146,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         {
             command.Parameters.AddWithValue("creatorId", otherEmployee.Creator.Id);
             command.Parameters.AddWithValue("modifierId", otherEmployee.Modifier.Id);
-            command.Parameters.AddWithValue("jobName", otherEmployee.Job.Name);
+            command.Parameters.AddWithValue("jobId", otherEmployee.Job.Id);
             command.Parameters.AddWithValue("firstName", otherEmployee.FirstName);
             command.Parameters.AddWithValue("lastName", otherEmployee.LastName);
             command.Parameters.AddWithValue("gender", otherEmployee.Gender);

@@ -60,9 +60,9 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"select Nurses.Id as NurseId,DoctorPositions.Id as PositionId,Departments.Id as  
-                                DepartmentId, CreatorId, ModifierId, FirstName,LastName,Gender, BirthDate, PIN,
-                                Email,PhoneNumber, Salary,CreationDate, ModifiedDate,IsDelete,PositionName, DepartmentName 
+                string cmdText = @"select Nurses.Id as NurseId,CreatorId, ModifierId, FirstName,LastName,Gender, BirthDate, PIN,
+                                Email,PhoneNumber, Salary,CreationDate, ModifiedDate,IsDelete,DoctorPositions.Id as 
+                                PositionId,PositionName,Departments.Id as  DepartmentId,  DepartmentName 
                                 from Nurses inner join DoctorPositions on Nurses.PositionId = DoctorPositions.Id
                                 inner join Departments on DoctorPositions.DepartmentId= Departments.Id 
                                 where Nurses.Id=@id and IsDelete = 0";
@@ -70,6 +70,8 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 {
                     command.Parameters.AddWithValue("id", id);
                     SqlDataReader reader = command.ExecuteReader();
+                    if(reader.Read()==false)
+                        return null;
                     Nurse nurse = GetNurse(reader);
                     return nurse;
                 }

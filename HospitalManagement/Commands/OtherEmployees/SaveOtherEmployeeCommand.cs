@@ -28,7 +28,7 @@ namespace HospitalManagement.Commands.OtherEmployees
         }
         public override void Execute(object parameter)
         {
-            if(OtherEmployeeValidation.IsValid(_otherEmployeesViewModel.CurrentOtherEmployeeValue,out string message) == false)
+            if(OtherEmployeeValidation.IsValid(_otherEmployeesViewModel.CurrentValue,out string message) == false)
             {
                 _otherEmployeesViewModel.Message = new MessageModel()
                 {
@@ -39,11 +39,11 @@ namespace HospitalManagement.Commands.OtherEmployees
                 return;
             }
 
-            _otherEmployeeService.Save(_otherEmployeesViewModel.CurrentOtherEmployeeValue);
+            _otherEmployeeService.Save(_otherEmployeesViewModel.CurrentValue);
 
             var otherEmployeeModels = _otherEmployeeService.GetAll();
             _otherEmployeesViewModel.AllValues = otherEmployeeModels;
-            _otherEmployeesViewModel.OtherEmployeeValues = new ObservableCollection<OtherEmployeeModel>(otherEmployeeModels);
+            _otherEmployeesViewModel.Values = new ObservableCollection<OtherEmployeeModel>(otherEmployeeModels);
 
             _otherEmployeesViewModel.SetDefaultValues();
 
