@@ -1,9 +1,13 @@
 ﻿using HospitalManagement.Mappers.Interfaces;
+using HospitalManagement.Models;
+using HospitalManagement.Services.Implementations;
+using HospitalManagement.Services.Interfaces;
 using HospitalManagement.ViewModels.UserControls;
 using HospitalManagement.ViewModels.Windows;
 using HospitalManagement.Views.UserControls;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,31 +17,26 @@ namespace HospitalManagement.Commands.Dashboard
     public class OpenProceduresCommand:BaseCommand
     {
         private readonly DashboardViewModel _viewModel;
-        private readonly IProcedureMapper _procedureMapper;
+        private readonly IProcedureService _procedureService;
 
-        public OpenProceduresCommand(DashboardViewModel viewModel, IProcedureMapper procedureMapper)
+        public OpenProceduresCommand(DashboardViewModel viewModel, IProcedureService procedureService)
         {
             _viewModel = viewModel;
-            _procedureMapper = procedureMapper;
+            _procedureService = procedureService;
         }
 
         public override void Execute(object parameter)
         {
-            var controlViewModel = new ProceduresViewModel(_viewModel.Db);
-            var proceduresControl = new ProceduresControl();
+            var procedureControl = new ProceduresControl();
+            var controlViewModel = new ProceduresViewModel(_procedureService, procedureControl.ErrorDialog);
 
-            int no = 1;
-            var procedures = _viewModel.Db.ProcedureRepository.Get();
+            var procedureModels = _procedureService.GetAll();
+            controlViewModel.AllValues = procedureModels;
+            controlViewModel.Values = new ObservableCollection<ProcedureModel>(procedureModels);
 
-            foreach(var procedure in procedures)
-            {
-                var procedureModel = _procedureMapper.Map(procedure);
-                procedureModel.No = no++;
-                controlViewModel.Values.Add(procedureModel);
-            }
-            proceduresControl.DataContext = controlViewModel;
+            procedureControl.DataContext = controlViewModel;
             _viewModel.CenterGrid.Children.Clear();
-            _viewModel.CenterGrid.Children.Add(proceduresControl);
+            _viewModel.CenterGrid.Children.Add(procedureControl);
         }
 
     }

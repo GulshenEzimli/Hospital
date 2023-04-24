@@ -14,7 +14,7 @@ namespace HospitalManagement.Commands.Patients
 
         public AddPatientCommand(PatientsViewModel patientViewModel)
         {
-            _patientViewModel=patientViewModel;
+            _patientViewModel = patientViewModel;
         }
         public override void Execute(object parameter)
         {

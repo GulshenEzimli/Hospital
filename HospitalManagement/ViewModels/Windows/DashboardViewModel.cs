@@ -54,8 +54,8 @@ namespace HospitalManagement.ViewModels.Windows
         public OpenNursesCommand OpenNurses => new OpenNursesCommand(this,_serviceUnitOfWork);
         public OpenOtherEmployeesCommand OpenOtherEmployees => new OpenOtherEmployeesCommand(this, _serviceUnitOfWork);
         public OpenPatientProcedureCommand OpenPatientProcedures => new OpenPatientProcedureCommand(this, _serviceUnitOfWork.patientProcedureService);
-        public OpenPatientsCommand OpenPatients => new OpenPatientsCommand(this,_patientMapper);
-        public OpenProceduresCommand OpenProcedures => new OpenProceduresCommand(this,_procedureMapper);
+        public OpenPatientsCommand OpenPatients => new OpenPatientsCommand(this,_serviceUnitOfWork.patientService);
+        public OpenProceduresCommand OpenProcedures => new OpenProceduresCommand(this,_serviceUnitOfWork.procedureService);
         public OpenReceptionistCommand OpenReceptionists => new OpenReceptionistCommand(this);
         public OpenQueuesCommand OpenQueues => new OpenQueuesCommand(this);
         public OpenAdminsCommand OpenAdmins => new OpenAdminsCommand(this);

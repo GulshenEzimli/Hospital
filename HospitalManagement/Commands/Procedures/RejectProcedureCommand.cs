@@ -19,7 +19,8 @@ namespace HospitalManagement.Commands.Procedures
 
         public override void Execute(object parameter)
         {
-            _procedureViewModel.CurrentSituation = Situations.NORMAL;
+            _procedureViewModel.SetDefaultValues();
+            _procedureViewModel.SelectValue = null;
         }
     }
 }
