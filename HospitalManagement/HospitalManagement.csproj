@@ -234,6 +234,7 @@
     <Compile Include="Models\PatientProcedureModel.cs" />
     <Compile Include="Models\ProcedureModel.cs" />
     <Compile Include="Models\PositionModel.cs" />
+    <Compile Include="Models\ReceptionistModel.cs" />
     <Compile Include="Services\Implementations\DoctorService.cs" />
     <Compile Include="Services\Implementations\NurseService.cs" />
     <Compile Include="Services\Implementations\OtherEmployeeService.cs" />
