@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace HospitalManagement.Mappers.Implementations
 {
@@ -23,7 +24,14 @@ namespace HospitalManagement.Mappers.Implementations
 
         public DoctorPosition Map(PositionModel positionModel)
         {
-            throw new NotImplementedException();
+            DoctorPosition doctorPosition = new DoctorPosition();
+            doctorPosition.Name = positionModel.Name;
+            doctorPosition.Id = positionModel.Id;
+            doctorPosition.Department = new Department()
+            {
+                Name = positionModel.DepartmentName
+            };
+            return doctorPosition;
         }
     }
 }

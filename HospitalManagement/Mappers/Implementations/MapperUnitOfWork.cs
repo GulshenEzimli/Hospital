@@ -9,7 +9,7 @@ namespace HospitalManagement.Mappers.Implementations
 {
     public class MapperUnitOfWork : IMapperUnitOfWork
     {
-        public IDoctorMapper DoctorMapper => new DoctorMapper();
+        public IDoctorMapper DoctorMapper => new DoctorMapper(this);
 
         public INurseMapper NurseMapper => new NurseMapper();
 
