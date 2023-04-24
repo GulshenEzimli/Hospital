@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:HospitalManagement.Views.UserControls"
+             xmlns:local="clr-namespace:HospitalManagement.Views.UserControls" xmlns:components="clr-namespace:HospitalManagement.Views.Components"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -29,8 +29,8 @@
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0">
-                <!--<components:ControlHeader/>-->
-                <!--<components:ErrorDialog Height="0" x:Name="ErrorDialog"/>-->
+                <components:ControlHeader/>
+                <components:ErrorDialog Height="0" x:Name="ErrorDialog"/>
 
                 <Grid  >
                     <Grid.ColumnDefinitions>
@@ -66,8 +66,9 @@
                     </StackPanel>
                 </Grid>
             </StackPanel>
-            <ListView x:Name="MainList" ItemsSource="{Binding Values}" Grid.Row="1">
-                <!--SelectedItem="{Binding SelectedValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"-->
+            <ListView x:Name="MainList" Grid.Row="1"
+                      ItemsSource="{Binding Values}"
+                      SelectedItem="{Binding SelectedValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
                     <GridView >
                         <GridViewColumn DisplayMemberBinding="{Binding Path=No}" Header="No" Width="30" />
