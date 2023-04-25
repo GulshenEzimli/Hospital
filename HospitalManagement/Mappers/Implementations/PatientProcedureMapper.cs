@@ -30,9 +30,6 @@ namespace HospitalManagement.Mappers.Implementations
 
         public PatientProcedureModel Map(PatientProcedure patientProcedure)
         {
-            PatientProcedureModel patientProcedureModel = new PatientProcedureModel();
-
-
             //patientProcedureModel.Patient = new PatientModel()
             //{
             //    Id = patientProcedure.Patient.Id,
@@ -60,6 +57,9 @@ namespace HospitalManagement.Mappers.Implementations
             //    Name = patientProcedure.Procedure.Name,
             //    Cost = patientProcedure.Procedure.Cost,
             //};
+
+            PatientProcedureModel patientProcedureModel = new PatientProcedureModel();
+
             patientProcedureModel.Id = patientProcedure.Id;
             patientProcedureModel.Patient = _mapperUnitOfWork.PatientMapper.Map(patientProcedure.Patient);
             patientProcedureModel.Doctor = _mapperUnitOfWork.DoctorMapper.Map(patientProcedure.Doctor);

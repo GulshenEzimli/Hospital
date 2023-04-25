@@ -61,6 +61,7 @@ namespace HospitalManagement.ViewModels.UserControls
                 }
                 else
                 {
+                    CurrentValue = new OtherEmployeeModel();
                     CurrentValue = SelectedValue.Clone();
                     CurrentSituation = Situations.SELECTED;
                 }
