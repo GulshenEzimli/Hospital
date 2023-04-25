@@ -4,6 +4,7 @@ using HospitalManagement.Mappers.Implementations;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
 using HospitalManagement.Services.Interfaces;
+using HospitalManagement.Validations.Utils;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
@@ -141,7 +142,20 @@ namespace HospitalManagement.ViewModels.UserControls
 
         protected override void OnSearchTextChanged()
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                Values = new ObservableCollection<PatientProcedureModel>(AllValues);
+            }
+            else
+            {
+                string lowerText = SearchText.ToLower();
+                var filteredValues = AllValues.Where(x=>x.DisplayProcedure?.ToLower().Contains(lowerText) == true ||
+                                                        x.DisplayDoctor?.ToLower().Contains(lowerText) == true ||
+                                                        x.DisplayNurse?.ToLower().Contains(lowerText) == true ||
+                                                        x.DisplayPatient?.ToLower().Contains(lowerText) == true ||
+                                                        x.UseDate.ToString(SystemConstants.DateDisplayFormat).ToLower().Contains(lowerText) == true);
+                Values = new ObservableCollection<PatientProcedureModel>(filteredValues);
+            }
         }
     }
 }
