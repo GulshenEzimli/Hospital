@@ -35,16 +35,18 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             {
                 connection.Open();
                 string cmdText = @"select PatientProcedures.Id as PatientProceduresId,UseDate,Patients.Id as PatientId,
-                                Patients.FirstName as PatientName,Patients.LastName as PatientSurname,
-                                Patients.PIN as PatientPIN,Doctors.Id as DoctorId, Doctors.FirstName as DoctorName, 
-                                Doctors.LastName as DoctorSurname,Doctors.PIN as DoctorPIN,
-                                Nurses.Id as NurseId, Nurses.FirstName as NurseName,
-                                Nurses.LastName as NurseSurname, Nurses.PIN as NursePIN,
-                                Procedures.Id as ProcedureId,Procedures.Name as ProcedureName,Procedures.Cost as Cost
-                                from PatientProcedures inner join Doctors on PatientProcedures.DoctorId = Doctors.Id
-                                inner join Nurses on PatientProcedures.NurseId = Nurses.Id
-                                inner join Patients on PatientProcedures.PatientId = Patients.Id
-                                inner join Procedures on PatientProcedures.ProcedureId = Procedures.Id";
+                                    Patients.FirstName as PatientName,Patients.LastName as PatientSurname,
+                                    Patients.PIN as PatientPIN,Doctors.Id as DoctorId, Doctors.FirstName as DoctorName, 
+                                    Doctors.LastName as DoctorSurname,Doctors.PIN as DoctorPIN, Doctors.PositionId as DoctorPositionId, 
+                                    (select DepartmentId from DoctorPositions where DoctorPositions.Id = Doctors.PositionId) as DoctorDepartmentId,
+                                    Nurses.Id as NurseId, Nurses.FirstName as NurseName,
+                                    Nurses.LastName as NurseSurname, Nurses.PIN as NursePIN,Nurses.PositionId as NursePositionId,
+                                    (select DepartmentId from DoctorPositions where  DoctorPositions.Id = Nurses.PositionId) as NurseDepartmentId,
+                                    Procedures.Id as ProcedureId,Procedures.Name as ProcedureName,Procedures.Cost as Cost
+                                    from PatientProcedures inner join Doctors on PatientProcedures.DoctorId = Doctors.Id
+                                    inner join Nurses on PatientProcedures.NurseId = Nurses.Id
+                                    inner join Patients on PatientProcedures.PatientId = Patients.Id
+                                    inner join Procedures on PatientProcedures.ProcedureId = Procedures.Id";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     SqlDataReader reader = command.ExecuteReader();
@@ -65,17 +67,19 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             {
                 connection.Open();
                 string cmdText = @"select PatientProcedures.Id as PatientProceduresId,UseDate,Patients.Id as PatientId,
-                                Patients.FirstName as PatientName,Patients.LastName as PatientSurname,
-                                Patients.PIN as PatientPIN,Doctors.Id as DoctorId, Doctors.FirstName as DoctorName, 
-                                Doctors.LastName as DoctorSurname,Doctors.PIN as DoctorPIN,
-                                Nurses.Id as NurseId, Nurses.FirstName as NurseName,
-                                Nurses.LastName as NurseSurname, Nurses.PIN as NursePIN,
-                                Procedures.Id as ProcedureId,Procedures.Name as ProcedureName,Procedures.Cost as Cost
-                                from PatientProcedures inner join Doctors on PatientProcedures.DoctorId = Doctors.Id
-                                inner join Nurses on PatientProcedures.NurseId = Nurses.Id
-                                inner join Patients on PatientProcedures.PatientId = Patients.Id
-                                inner join Procedures on PatientProcedures.ProcedureId = Procedures.Id
-                                where PatientProcedures.Id = @id";
+                                    Patients.FirstName as PatientName,Patients.LastName as PatientSurname,
+                                    Patients.PIN as PatientPIN,Doctors.Id as DoctorId, Doctors.FirstName as DoctorName, 
+                                    Doctors.LastName as DoctorSurname,Doctors.PIN as DoctorPIN, Doctors.PositionId as DoctorPositionId, 
+                                    (select DepartmentId from DoctorPositions where DoctorPositions.Id = Doctors.PositionId) as DoctorDepartmentId,
+                                    Nurses.Id as NurseId, Nurses.FirstName as NurseName,
+                                    Nurses.LastName as NurseSurname, Nurses.PIN as NursePIN,Nurses.PositionId as NursePositionId,
+                                    (select DepartmentId from DoctorPositions where  DoctorPositions.Id = Nurses.PositionId) as NurseDepartmentId,
+                                    Procedures.Id as ProcedureId,Procedures.Name as ProcedureName,Procedures.Cost as Cost
+                                    from PatientProcedures inner join Doctors on PatientProcedures.DoctorId = Doctors.Id
+                                    inner join Nurses on PatientProcedures.NurseId = Nurses.Id
+                                    inner join Patients on PatientProcedures.PatientId = Patients.Id
+                                    inner join Procedures on PatientProcedures.ProcedureId = Procedures.Id
+                                    where PatientProcedures.Id = @id";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     command.Parameters.AddWithValue("id", id);
@@ -136,6 +140,14 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 FirstName = reader.GetString("DoctorName"),
                 LastName = reader.GetString("DoctorSurname"),
                 PIN = reader.GetString("DoctorPIN"),
+                Position = new DoctorPosition()
+                {
+                    Id = reader.GetInt32("DoctorPositionId"),
+                    Department = new Department()
+                    {
+                        Id = reader.GetInt32("DoctorDepartmentId"),
+                    },
+                },
             };
 
             patientProcedure.Nurse = new Nurse()
@@ -144,6 +156,14 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 FirstName = reader.GetString("NurseName"),
                 LastName = reader.GetString("NurseSurname"),
                 PIN = reader.GetString("NursePIN"),
+                Position = new DoctorPosition()
+                {
+                    Id = reader.GetInt32("NursePositionId"),
+                    Department = new Department()
+                    {
+                        Id = reader.GetInt32("NurseDepartmentId"),
+                    },
+                },
             };
              
             patientProcedure.Procedure = new Procedure()
