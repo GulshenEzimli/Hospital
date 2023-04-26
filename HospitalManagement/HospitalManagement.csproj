@@ -212,6 +212,7 @@
     <Compile Include="Mappers\Implementations\PatientProcedureMapper.cs" />
     <Compile Include="Mappers\Implementations\PositionMapper.cs" />
     <Compile Include="Mappers\Implementations\ProcedureMapper.cs" />
+    <Compile Include="Mappers\Implementations\ReceptionistMapper.cs" />
     <Compile Include="Mappers\Interfaces\IDoctorMapper.cs" />
     <Compile Include="Mappers\Interfaces\IMapperUnitOfWork.cs" />
     <Compile Include="Mappers\Interfaces\IOperationDoctorMapper.cs" />
@@ -223,6 +224,7 @@
     <Compile Include="Mappers\Interfaces\INurseMapper.cs" />
     <Compile Include="Mappers\Interfaces\IOtherEmployeeMapper.cs" />
     <Compile Include="Mappers\Interfaces\IPatientMapper.cs" />
+    <Compile Include="Mappers\Interfaces\IReceptionistMapper.cs" />
     <Compile Include="Models\DoctorModel.cs" />
     <Compile Include="Models\MessageModel.cs" />
     <Compile Include="Models\NurseModel.cs" />
@@ -240,17 +242,20 @@
     <Compile Include="Services\Implementations\OtherEmployeeService.cs" />
     <Compile Include="Services\Implementations\PatientProcedureService.cs" />
     <Compile Include="Services\Implementations\PositionService.cs" />
+    <Compile Include="Services\Implementations\ReceptionistService.cs" />
     <Compile Include="Services\Implementations\ServiceUnitOfWork.cs" />
     <Compile Include="Services\Interfaces\IDoctorService.cs" />
     <Compile Include="Services\Interfaces\INurseService.cs" />
     <Compile Include="Services\Interfaces\IOtherEmployeeService.cs" />
     <Compile Include="Services\Interfaces\IPatientProcedureService.cs" />
     <Compile Include="Services\Interfaces\IPositionService.cs" />
+    <Compile Include="Services\Interfaces\IReceptionistService.cs" />
     <Compile Include="Services\Interfaces\IServiceUnitOfWork.cs" />
     <Compile Include="Validations\NurseValidation.cs" />
     <Compile Include="Validations\OtherEmployeeValidation.cs" />
     <Compile Include="Validations\PatientProcedureValidation.cs" />
     <Compile Include="Validations\PatientValidation.cs" />
+    <Compile Include="Validations\ReceptionistValidation.cs" />
     <Compile Include="Validations\Utils\SystemConstants.cs" />
     <Compile Include="Validations\Utils\ValidationMessageProvider.cs" />
     <Compile Include="Validations\DoctorValidation.cs" />
