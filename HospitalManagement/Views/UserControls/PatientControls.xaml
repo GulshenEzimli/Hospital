@@ -94,7 +94,7 @@
                 </Grid>
             </StackPanel>
             <ListView Grid.Row="1" x:Name="MainList"  
-                      ItemsSource="{Binding Values}"
+                      ItemsSource="{Binding Values}" Style="{DynamicResource listViewCustom}"
                       SelectedItem="{Binding SelectValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
                     <GridView >

@@ -100,8 +100,9 @@
                 </Grid>
             </StackPanel>
 
-            <ListView x:Name="MainList" Grid.Row="1" SelectionChanged="MainList_SelectionChanged" 
-                      ItemsSource="{Binding Path=PatientProcedureValues}" Style="{DynamicResource listViewCustom}">
+            <ListView x:Name="MainList" Grid.Row="1" Style="{DynamicResource listViewCustom}">
+                <!--SelectionChanged="MainList_SelectionChanged" 
+                      ItemsSource="{Binding Path=PatientProcedureValues}" Style="{DynamicResource listViewCustom}"-->
                 <ListView.View>
                     <GridView >
                         <GridViewColumn Header="No" Width="auto" DisplayMemberBinding="{Binding No}"/>
