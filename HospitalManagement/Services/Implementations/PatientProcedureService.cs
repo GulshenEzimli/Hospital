@@ -13,11 +13,11 @@ namespace HospitalManagement.Services.Implementations
     public class PatientProcedureService : IPatientProcedureService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IPatientProcedureMapper _patientProcedureMapper;
-        public PatientProcedureService(IUnitOfWork unitOfWork, IPatientProcedureMapper patientProcedureMapper)
+        private readonly IMapperUnitOfWork _mapperUnitOfWork;
+        public PatientProcedureService(IUnitOfWork unitOfWork, IMapperUnitOfWork mapperUnitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _patientProcedureMapper = patientProcedureMapper;
+            _mapperUnitOfWork = mapperUnitOfWork;
         }
         public bool Delete(int id)
         {
@@ -31,7 +31,7 @@ namespace HospitalManagement.Services.Implementations
             int no = 1;
             foreach (var patientProcedure in patientProcedures)
             {
-                var model = _patientProcedureMapper.Map(patientProcedure);
+                var model = _mapperUnitOfWork.PatientProcedureMapper.Map(patientProcedure);
                 model.No = no++;
                 patientProcedureModels.Add(model);
             }
@@ -40,7 +40,7 @@ namespace HospitalManagement.Services.Implementations
 
         public int Save(PatientProcedureModel patientProcedureModel)
         {
-            var toBeSavedPatientProcedure = _patientProcedureMapper.Map(patientProcedureModel);
+            var toBeSavedPatientProcedure = _mapperUnitOfWork.PatientProcedureMapper.Map(patientProcedureModel);
 
             if (toBeSavedPatientProcedure.Id == 0)
             {

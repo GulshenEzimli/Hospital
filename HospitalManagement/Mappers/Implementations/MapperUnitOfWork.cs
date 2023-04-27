@@ -13,7 +13,7 @@ namespace HospitalManagement.Mappers.Implementations
 
         public INurseMapper NurseMapper => new NurseMapper(this);
         public IOtherEmployeeMapper OtherEmployeeMapper => new OtherEmployeeMapper(this);
-        public IPatientProcedureMapper PatientProcedureMapper => new PatientProcedureMapper();
+        public IPatientProcedureMapper PatientProcedureMapper => new PatientProcedureMapper(this);
         public IJobMapper JobMapper => new JobMapper();
         public IOperationDoctorMapper OperationDoctorMapper => new OperationDoctorMapper();
 
@@ -26,5 +26,7 @@ namespace HospitalManagement.Mappers.Implementations
         public IPositionMapper PositionMapper => new PositionMapper();
 
         public IProcedureMapper ProcedureMapper => new ProcedureMapper();
+
+        public IQueueMapper QueueMapper => new QueueMapper(this);
     }
 }

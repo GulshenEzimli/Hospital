@@ -35,12 +35,12 @@ namespace HospitalManagement.Commands.PatientProcedures
             if (isSure != true)
                 return;
 
-            int id = _patientProcedureViewModel.CurrentPatientProcedure.Id;
+            int id = _patientProcedureViewModel.CurrentValue.Id;
             _patientProcedureService.Delete(id);
 
             var patientProcedureModels = _patientProcedureService.GetAll();
             _patientProcedureViewModel.AllValues = patientProcedureModels;
-            _patientProcedureViewModel.PatientProcedureValues = new ObservableCollection<PatientProcedureModel>(patientProcedureModels);
+            _patientProcedureViewModel.Values = new ObservableCollection<PatientProcedureModel>(patientProcedureModels);
 
             _patientProcedureViewModel.Message = new MessageModel()
             {

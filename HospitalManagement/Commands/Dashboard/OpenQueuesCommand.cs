@@ -1,4 +1,5 @@
-﻿using HospitalManagement.ViewModels.UserControls;
+﻿using HospitalManagement.Services.Interfaces;
+using HospitalManagement.ViewModels.UserControls;
 using HospitalManagement.ViewModels.Windows;
 using HospitalManagement.Views.UserControls;
 using HospitalManagement.Views.Windows;
@@ -13,19 +14,22 @@ namespace HospitalManagement.Commands.Dashboard
     public class OpenQueuesCommand : BaseCommand
     {
         private readonly DashboardViewModel _viewModel;
-        public OpenQueuesCommand(DashboardViewModel viewModel)
+        private readonly IServiceUnitOfWork _serviceUnitOfWork;
+
+        public OpenQueuesCommand(DashboardViewModel viewModel,IServiceUnitOfWork serviceUnitOfWork)
         {
             _viewModel = viewModel;
+            _serviceUnitOfWork = serviceUnitOfWork;
         }
 
         public override void Execute(object parameter)
         {
-            QueuesViewModel queuesViewModel = new QueuesViewModel(_viewModel.Db);
-            QueuesControl queuesControl = new QueuesControl();
+            QueuesControl queueControl = new QueuesControl();
+            QueuesViewModel queueViewModel = new QueuesViewModel(_serviceUnitOfWork,queueControl.ErrorDialog);;
 
-            queuesControl.DataContext= queuesViewModel;
+            queueControl.DataContext= queueViewModel;
             _viewModel.CenterGrid.Children.Clear();
-            _viewModel.CenterGrid.Children.Add(queuesControl);
+            _viewModel.CenterGrid.Children.Add(queueControl);
         }
     }
 }

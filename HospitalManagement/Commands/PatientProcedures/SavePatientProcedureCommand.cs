@@ -27,7 +27,7 @@ namespace HospitalManagement.Commands.PatientProcedures
         public override void Execute(object parameter)
         {
             //TO DO...
-            if(PatientProcedureValidation.IsValid(_patientProcedureViewModel.CurrentPatientProcedure,out string message) == false)
+            if(PatientProcedureValidation.IsValid(_patientProcedureViewModel.CurrentValue,out string message) == false)
             {
                 _patientProcedureViewModel.Message = new MessageModel()
                 {
@@ -38,11 +38,11 @@ namespace HospitalManagement.Commands.PatientProcedures
                 return;
             }
 
-            _patientProcedureService.Save(_patientProcedureViewModel.CurrentPatientProcedure);
+            _patientProcedureService.Save(_patientProcedureViewModel.CurrentValue);
 
             var patientProcedureModels = _patientProcedureService.GetAll();
             _patientProcedureViewModel.AllValues = patientProcedureModels;
-            _patientProcedureViewModel.PatientProcedureValues = new ObservableCollection<PatientProcedureModel>(patientProcedureModels);
+            _patientProcedureViewModel.Values = new ObservableCollection<PatientProcedureModel>(patientProcedureModels);
 
             _patientProcedureViewModel.SetDefaultValues();
 

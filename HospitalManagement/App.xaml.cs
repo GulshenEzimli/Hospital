@@ -30,14 +30,14 @@ namespace HospitalManagement
             
             IPatientMapper patientMapper = new PatientMapper();
             IProcedureMapper procedureMapper=new ProcedureMapper();
-            IPatientProcedureMapper patientProcedureMapper = new PatientProcedureMapper();
             IPositionMapper positionMapper = new PositionMapper();
             IOperationMapper operationMapper = new OperationMapper();
             IOperationDoctorMapper operationDoctorMapper = new OperationDoctorMapper();
             IOperationNurseMapper operationNurseMapper  = new OperationNurseMapper();
+            IQueueMapper queueMapper = new QueueMapper(mapperUnitOfWork);
 
             DashboardWindow dashboardWindow = new DashboardWindow();
-            DashboardViewModel viewModel = new DashboardViewModel(serviceUnitOfWork,patientMapper, procedureMapper, positionMapper, operationMapper, operationDoctorMapper, operationNurseMapper);
+            DashboardViewModel viewModel = new DashboardViewModel(serviceUnitOfWork,patientMapper, procedureMapper, positionMapper, operationMapper, operationDoctorMapper, operationNurseMapper,queueMapper);
 
             dashboardWindow.DataContext = viewModel;
             viewModel.CenterGrid = dashboardWindow.grdCenter;

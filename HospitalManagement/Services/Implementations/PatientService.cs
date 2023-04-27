@@ -66,7 +66,7 @@ namespace HospitalManagement.Services.Implementations
             }
             else
             {
-                var existingPatient = _unitOfWork.NurseRepository.GetById(patientModel.Id);
+                var existingPatient = _unitOfWork.PatientRepository.GetById(patientModel.Id);
                 toBeSavedPatient.Creator = existingPatient.Creator;
                 toBeSavedPatient.CreationDate = existingPatient.CreationDate;
                 toBeSavedPatient.IsDelete = existingPatient.IsDelete;

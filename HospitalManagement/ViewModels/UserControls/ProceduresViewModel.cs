@@ -4,6 +4,7 @@ using HospitalManagement.Enums;
 using HospitalManagement.Models;
 using HospitalManagement.Services.Implementations;
 using HospitalManagement.Services.Interfaces;
+using HospitalManagement.Validations.Utils;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.ViewModels.UserControls
 {
-    public class ProceduresViewModel:BaseControlViewModel
+    public class ProceduresViewModel : BaseControlViewModel
     {
         private readonly IProcedureService _procedureService;
 
@@ -28,8 +29,8 @@ namespace HospitalManagement.ViewModels.UserControls
         }
         public override string Header => "Procedures";
 
-        private int _currentSituation;
-        public int CurrentSituation
+        private Situations _currentSituation;
+        public Situations CurrentSituation
         {
             get { return _currentSituation; }
 
@@ -65,8 +66,9 @@ namespace HospitalManagement.ViewModels.UserControls
                 }
                 else
                 {
+                    CurrentValue = new ProcedureModel();
                     CurrentValue = SelectValue.Clone();
-                    CurrentSituation = (int)Situations.SELECTED;
+                    CurrentSituation = Situations.SELECTED;
                 }
 
                 OnPropertyChanged(nameof(SelectValue));
@@ -86,14 +88,14 @@ namespace HospitalManagement.ViewModels.UserControls
         #region commands
         public List<ProcedureModel> AllValues { get; set; }
         public AddProcedureCommand Add => new AddProcedureCommand(this);
-        public DeleteProcedureCommand Delete=> new DeleteProcedureCommand(this,_procedureService);
+        public DeleteProcedureCommand Delete => new DeleteProcedureCommand(this, _procedureService);
         public EditProcedureCommand Edit => new EditProcedureCommand(this);
         public RejectProcedureCommand Reject => new RejectProcedureCommand(this);
-        public SaveProcedureCommand Save=> new SaveProcedureCommand(this,_procedureService);
+        public SaveProcedureCommand Save => new SaveProcedureCommand(this, _procedureService);
         #endregion
         public void SetDefaultValues()
         {
-            CurrentSituation = (int)Situations.NORMAL;
+            CurrentSituation = Situations.NORMAL;
             CurrentValue = new ProcedureModel();
             SetSelectValue(null);
         }
@@ -106,7 +108,17 @@ namespace HospitalManagement.ViewModels.UserControls
 
         protected override void OnSearchTextChanged()
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                Values = new ObservableCollection<ProcedureModel>(AllValues);
+            }
+            else
+            {
+                var lowerText = SearchText.ToLower();
+                var filteredValues = AllValues.Where(x => x.Name?.ToLower().Contains(lowerText) == true ||
+                                                 x.Cost.ToString().Contains(lowerText) == true).ToList();
+                Values = new ObservableCollection<ProcedureModel>(filteredValues);
+            }
         }
     }
 }

@@ -30,8 +30,8 @@ namespace HospitalManagement.ViewModels.UserControls
 
         public override string Header => "Patients";
 
-        private int _currentSituation;
-        public int CurrentSituation
+        private Situations _currentSituation;
+        public Situations CurrentSituation
         {
             get { return _currentSituation; }
             
@@ -67,8 +67,9 @@ namespace HospitalManagement.ViewModels.UserControls
                 }
                 else
                 {
+                    CurrentValue = new PatientModel();
                     CurrentValue = SelectValue.Clone();
-                    CurrentSituation =(int) Situations.SELECTED;
+                    CurrentSituation =Situations.SELECTED;
                 }
 
                 OnPropertyChanged(nameof(SelectValue));
@@ -97,7 +98,7 @@ namespace HospitalManagement.ViewModels.UserControls
 
         public void SetDefaultValues()
         {
-            CurrentSituation = (int)Situations.NORMAL;
+            CurrentSituation = Situations.NORMAL;
             CurrentValue = new PatientModel();
             SetSelectValue(null);
         }
@@ -111,15 +112,21 @@ namespace HospitalManagement.ViewModels.UserControls
         protected override void OnSearchTextChanged()
         {
             if (string.IsNullOrEmpty(SearchText))
-                return;
-            var lowerSearch = SearchText.ToLower();
+            {
+                Values = new ObservableCollection<PatientModel>(AllValues);
+            }
+            else
+            {
+                var lowerText = SearchText.ToLower();
 
-            var enumerable= Values.Where(x => x.Name?.ToLower().Contains(lowerSearch) == true||
-                                              x.Surname?.ToLower().Contains(lowerSearch) == true ||
-                                              x.BirthDate.ToString().Contains(lowerSearch) == true ||
-                                              x.PIN?.ToLower().Contains(lowerSearch) == true ||
-                                              x.PhoneNumber?.ToLower().Contains(lowerSearch) == true);
-            Values = new ObservableCollection<PatientModel>(enumerable);
+                var filteredValues = AllValues.Where(x => x.Name?.ToLower().Contains(lowerText) == true ||
+                                                  x.Surname?.ToLower().Contains(lowerText) == true ||
+                                                  x.BirthDate.ToString().Contains(lowerText) == true ||
+                                                  x.PIN?.ToLower().Contains(lowerText) == true ||
+                                                  x.PhoneNumber?.ToLower().Contains(lowerText) == true);
+                Values = new ObservableCollection<PatientModel>(filteredValues);
+            }
+            
         }
     }
 }

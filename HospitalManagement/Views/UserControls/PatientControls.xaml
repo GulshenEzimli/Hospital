@@ -31,7 +31,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
-                <!--<RowDefinition Height="Auto"/>-->
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0">
@@ -94,7 +94,7 @@
                 </Grid>
             </StackPanel>
             <ListView Grid.Row="1" x:Name="MainList"  
-                      ItemsSource="{Binding Values}"
+                      ItemsSource="{Binding Values}" Style="{DynamicResource listViewCustom}"
                       SelectedItem="{Binding SelectValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
                     <GridView >
@@ -145,11 +145,11 @@
                 </ListView.View>
             </ListView>
 
-            <!--<Grid Grid.Row="2" Style="{StaticResource grdSearch}">
+            <Grid Grid.Row="2" Style="{StaticResource grdSearch}">
                 <DockPanel>
                     <components:Search/>
                 </DockPanel>
-            </Grid>-->
+            </Grid>
         </Grid>
     </Border>
     
