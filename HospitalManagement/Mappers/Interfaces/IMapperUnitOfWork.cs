@@ -20,5 +20,6 @@ namespace HospitalManagement.Mappers.Interfaces
         IPositionMapper PositionMapper { get; }
         IProcedureMapper ProcedureMapper { get; }
         IQueueMapper QueueMapper { get; }
+        IRoomMapper RoomMapper { get; }
     }
 }
