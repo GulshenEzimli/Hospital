@@ -213,6 +213,7 @@
     <Compile Include="Mappers\Implementations\PatientProcedureMapper.cs" />
     <Compile Include="Mappers\Implementations\PositionMapper.cs" />
     <Compile Include="Mappers\Implementations\ProcedureMapper.cs" />
+    <Compile Include="Mappers\Implementations\QueueMapper.cs" />
     <Compile Include="Mappers\Implementations\ReceptionistMapper.cs" />
     <Compile Include="Mappers\Interfaces\IDoctorMapper.cs" />
     <Compile Include="Mappers\Interfaces\IJobMapper.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="Mappers\Interfaces\INurseMapper.cs" />
     <Compile Include="Mappers\Interfaces\IOtherEmployeeMapper.cs" />
     <Compile Include="Mappers\Interfaces\IPatientMapper.cs" />
+    <Compile Include="Mappers\Interfaces\IQueueMapper.cs" />
     <Compile Include="Mappers\Interfaces\IReceptionistMapper.cs" />
     <Compile Include="Models\DoctorModel.cs" />
     <Compile Include="Models\JobModel.cs" />
@@ -239,6 +241,7 @@
     <Compile Include="Models\PatientProcedureModel.cs" />
     <Compile Include="Models\ProcedureModel.cs" />
     <Compile Include="Models\PositionModel.cs" />
+    <Compile Include="Models\QueueModel.cs" />
     <Compile Include="Models\ReceptionistModel.cs" />
     <Compile Include="Services\Implementations\DoctorService.cs" />
     <Compile Include="Services\Implementations\JobService.cs" />
@@ -247,6 +250,7 @@
     <Compile Include="Services\Implementations\PatientProcedureService.cs" />
     <Compile Include="Services\Implementations\PatientService.cs" />
     <Compile Include="Services\Implementations\PositionService.cs" />
+    <Compile Include="Services\Implementations\QueueService.cs" />
     <Compile Include="Services\Implementations\ReceptionistService.cs" />
     <Compile Include="Services\Implementations\ProcedureService.cs" />
     <Compile Include="Services\Implementations\ServiceUnitOfWork.cs" />
@@ -257,6 +261,7 @@
     <Compile Include="Services\Interfaces\IPatientProcedureService.cs" />
     <Compile Include="Services\Interfaces\IPatientService.cs" />
     <Compile Include="Services\Interfaces\IPositionService.cs" />
+    <Compile Include="Services\Interfaces\IQueueService.cs" />
     <Compile Include="Services\Interfaces\IReceptionistService.cs" />
     <Compile Include="Services\Interfaces\IProcedureService.cs" />
     <Compile Include="Services\Interfaces\IServiceUnitOfWork.cs" />

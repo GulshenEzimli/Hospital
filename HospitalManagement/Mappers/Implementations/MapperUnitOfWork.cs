@@ -26,5 +26,7 @@ namespace HospitalManagement.Mappers.Implementations
         public IPositionMapper PositionMapper => new PositionMapper();
 
         public IProcedureMapper ProcedureMapper => new ProcedureMapper();
+
+        public IQueueMapper QueueMapper => new QueueMapper(this);
     }
 }

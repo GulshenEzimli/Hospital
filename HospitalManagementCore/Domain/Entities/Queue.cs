@@ -8,9 +8,14 @@ namespace HospitalManagementCore.Domain.Entities
     public class Queue : IEntity
     {
         public int Id { get; set; }
-        public Doctor DoctorId { get; set; }
-        public Patient PatientId { get; set; }
+        public int PatientId => Patient?.Id ?? 0;
+        public int DoctorId => Doctor?.Id ?? 0;
+        public int ProcedureId=>Procedure?.Id ?? 0;
         public int QueueNumber { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime UseDate { get; set; }
+
+        public Patient Patient { get; set; }
+        public Doctor Doctor { get; set; }
+        public Procedure Procedure { get; set; }
     }
 }
