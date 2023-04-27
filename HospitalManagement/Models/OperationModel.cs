@@ -46,7 +46,7 @@ namespace HospitalManagement.Models
                 OperationNurses = OperationNurses,
                 OperationReason = OperationReason,
                 Patient = Patient,
-                //Room = Room
+                Room = Room
             };
         }
     }

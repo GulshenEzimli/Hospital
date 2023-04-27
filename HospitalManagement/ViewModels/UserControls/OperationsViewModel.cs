@@ -5,6 +5,7 @@ using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
 using HospitalManagement.Services.Implementations;
 using HospitalManagement.Services.Interfaces;
+using HospitalManagement.Validations.Utils;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
@@ -83,6 +84,7 @@ namespace HospitalManagement.ViewModels.UserControls
 
         public List<OperationModel> AllValues { get; set; }
 
+
         public AddOperationCommand Add => new AddOperationCommand(this);
         public DeleteOperationCommand Delete => new DeleteOperationCommand(this);
         public EditOperationCommand Edit => new EditOperationCommand(this);
@@ -104,7 +106,24 @@ namespace HospitalManagement.ViewModels.UserControls
         }
         protected override void OnSearchTextChanged()
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                Values = new ObservableCollection<OperationModel>(AllValues);
+            }
+            else
+            {
+                string lowerSearchText = SearchText.ToLower();
+
+                var filteredResult = AllValues.Where(x => x.OperationCost.ToString().Contains(lowerSearchText) == true ||
+                                                 x.OperationReason?.ToLower().Contains(lowerSearchText) == true ||                                                 
+                                                 x.OperationDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerSearchText) == true ||
+                                                 x.DisplayPatient.ToLower().Contains(lowerSearchText) == true ||
+                                                 x.DisplayRoom.ToLower().Contains(lowerSearchText) == true ||
+                                                 x.OperationDoctors.Where(y => y.DisplayValue.ToLower().Contains(lowerSearchText) == true).ToList().Any() ||
+                                                 x.OperationNurses.Where(y => y.DisplayValue.ToLower().Contains(lowerSearchText) == true).ToList().Any()).ToList();
+
+                Values = new ObservableCollection<OperationModel>(filteredResult);
+            }
         }
     }
 }
