@@ -21,12 +21,6 @@ namespace HospitalManagement.Mappers.Implementations
         {
             DoctorModel doctorModel = new DoctorModel();
             doctorModel.Id = doctor.Id;
-            //doctorModel.Position = new PositionModel()
-            //{
-            //    Id = doctor.Position.Id,
-            //    Name = doctor.Position.Name,
-            //    DepartmentName = doctor.Position.Department.Name,
-            //};
             doctorModel.Position = _mapperUnitOfWork.PositionMapper.Map(doctor.Position);
             doctorModel.DepartmentName = doctor.Position.Department.Name;
             doctorModel.FirstName = doctor.FirstName;
@@ -48,15 +42,6 @@ namespace HospitalManagement.Mappers.Implementations
         {
             Doctor doctor = new Doctor();
             doctor.Id = doctorModel.Id;
-            //doctor.Position = new DoctorPosition()
-            //{
-            //    Name = doctorModel.Position.Name,
-            //    Id = doctorModel.Position.Id,
-            //    Department = new Department()
-            //    {
-            //         Name = doctorModel.Position.DepartmentName
-            //    }
-            //};
             doctor.Position = _mapperUnitOfWork.PositionMapper.Map(doctorModel.Position);
             doctor.FirstName = doctorModel.FirstName;
             doctor.LastName = doctorModel.LastName;

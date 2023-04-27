@@ -45,7 +45,14 @@
                             <StackPanel Grid.Column="1">
                                 <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.FirstName,Mode=TwoWay}"/>
                                 <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.LastName,Mode=TwoWay}"/>
-                                <ComboBox Height="25" FontSize="15" Margin="5 5" FontFamily="Times New Roman" ItemsSource="{Binding Path=PositionValues}" SelectedItem="{Binding CurrentValue.Position}" DisplayMemberPath="Name"/>
+                                <ComboBox Height="25" FontSize="15" Margin="5 5" FontFamily="Times New Roman" 
+                                          ItemsSource="{Binding Path=PositionValues}"
+                                          SelectedItem="{Binding CurrentValue.Position}"
+                                          DisplayMemberPath="Name"
+                                          SelectedValuePath="Name"
+                                          SelectedValue="{Binding CurrentValue.Position.Name}"
+                                          IsEditable="True" IsTextSearchEnabled="True"
+                                          IsTextSearchCaseSensitive="True"/>
                                 <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.Salary,Mode=TwoWay}"/>
                                 <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 3 0 0">
                                     <RadioButton IsChecked="{Binding CurrentValue.Gender[0]}" GroupName="Gender" Content="Male" Margin="6"/>
