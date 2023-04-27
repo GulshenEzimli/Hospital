@@ -60,16 +60,18 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"select Nurses.Id as NurseId,DoctorPositions.Id as PositionId,Departments.Id as  
-                                DepartmentId, CreatorId, ModifierId, FirstName,LastName,Gender, BirthDate, PIN,
-                                Email,PhoneNumber, Salary,CreationDate, ModifiedDate,IsDelete,PositionName, DepartmentName 
+                string cmdText = @"select Nurses.Id as NurseId,CreatorId, ModifierId, FirstName,LastName,Gender, BirthDate, PIN,
+                                Email,PhoneNumber, Salary,CreationDate, ModifiedDate,IsDelete,DoctorPositions.Id as 
+                                PositionId,PositionName,Departments.Id as  DepartmentId,  DepartmentName 
                                 from Nurses inner join DoctorPositions on Nurses.PositionId = DoctorPositions.Id
                                 inner join Departments on DoctorPositions.DepartmentId= Departments.Id 
-                                where Id=@id and IsDelete = 0";
+                                where Nurses.Id=@id and IsDelete = 0";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     command.Parameters.AddWithValue("id", id);
                     SqlDataReader reader = command.ExecuteReader();
+                    if(reader.Read()==false)
+                        return null;
                     Nurse nurse = GetNurse(reader);
                     return nurse;
                 }
@@ -82,8 +84,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             {
                 connection.Open();
                 string cmdText = @"insert into Nurses output inserted.id values(@creatorId,@modifierId,
-                                 (select Id from DoctorPositions where PositionName = @positionName),
-                                 @firstName,@lastName,@gender,
+                                 @positionId, @firstName,@lastName,@gender,
                                  @birthDate,@pin,@email,@phoneNumber,@salary,@creationDate,@modifiedDate,@isDelete)";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
@@ -98,7 +99,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"update Nurses set PositionId=(select Id from DoctorPositions where PositionName = @positionName), 
+                string cmdText = @"update Nurses set PositionId=@positionId, 
                                  FirstName=@firstName, LastName=@lastName,
                                  Gender=@gender, BirthDate=@birthDate, PIN=@pin, Email=@email, PhoneNumber=@phoneNumber,
                                  Salary=@salary, IsDelete=@isDelete, CreationDate=@creationDate, ModifiedDate=@modifiedDate,
@@ -154,7 +155,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         {
             command.Parameters.AddWithValue("creatorId", nurse.Creator.Id);
             command.Parameters.AddWithValue("modifierId", nurse.Modifier.Id);
-            command.Parameters.AddWithValue("positionName", nurse.Position.Name);
+            command.Parameters.AddWithValue("positionId", nurse.Position.Id);
             command.Parameters.AddWithValue("firstName", nurse.FirstName);
             command.Parameters.AddWithValue("lastName", nurse.LastName);
             command.Parameters.AddWithValue("gender", nurse.Gender);

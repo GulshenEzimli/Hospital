@@ -17,10 +17,23 @@ namespace HospitalManagement.Models
         public string DisplayPatient => $"{Patient.Name} {Patient.Surname} {Patient.PIN}";
         public string DisplayDoctor => $"{Doctor.FirstName} {Doctor.LastName} {Doctor.PIN}";
         public string DisplayNurse => $"{Nurse.FirstName} {Nurse.LastName} {Nurse.PIN}";
-        public string DisplayProcedure => $"{ProcedureName} {Procedure.Cost}";
         public string ProcedureName => Procedure.Name;
         public decimal Cost => Procedure.Cost;
         public DateTime UseDate { get; set; }
+
+        public PatientProcedureModel Clone()
+        {
+            return new PatientProcedureModel
+            {
+                Id = Id,
+                No = No,
+                Patient = Patient,
+                Doctor = Doctor,
+                Nurse = Nurse,
+                Procedure = Procedure,
+                UseDate = UseDate,
+            };
+        }
 
     }
 }

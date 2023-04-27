@@ -4,6 +4,7 @@ using HospitalManagement.Mappers.Implementations;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
 using HospitalManagement.Services.Interfaces;
+using HospitalManagement.Validations.Utils;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
@@ -21,6 +22,7 @@ namespace HospitalManagement.ViewModels.UserControls
         private readonly IPatientProcedureService _patientProcedureService;
         public PatientProcedureViewModel(IPatientProcedureService patientProcedureService, ErrorDialog errorDialog) : base(errorDialog)
         {
+            AllValues = new List<PatientProcedureModel>();
             _patientProcedureService = patientProcedureService;
             SetDefaultValues();
         }
@@ -36,58 +38,124 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
-        private PatientProcedureModel _currentPatientProcedure;
-        public PatientProcedureModel CurrentPatientProcedure
+        private PatientProcedureModel _currentValue;
+        public PatientProcedureModel CurrentValue
         {
-            get => _currentPatientProcedure;
+            get => _currentValue;
             set
             {
-                _currentPatientProcedure = value;
-                OnPropertyChanged(nameof(CurrentPatientProcedure));
+                _currentValue = value;
+                OnPropertyChanged(nameof(CurrentValue));
             }
         }
-        
-        public List<PatientProcedureModel> AllValues { get; set; }
 
-        private ObservableCollection<PatientProcedureModel> _patientProcedureValues;
-        public ObservableCollection<PatientProcedureModel> PatientProcedureValues
+        private PatientProcedureModel _selectedValue;
+        public PatientProcedureModel SelectedValue
         {
-            get => _patientProcedureValues ?? (_patientProcedureValues = new ObservableCollection<PatientProcedureModel>());
+            get => _selectedValue;
             set
             {
-                _patientProcedureValues = value;
-                OnPropertyChanged(nameof(PatientProcedureValues));
+                SetSelectedValue(value);
+                if (value == null)
+                    SetDefaultValues();
+                else
+                {
+                    CurrentValue = new PatientProcedureModel();
+                    CurrentValue = SelectedValue.Clone();
+                    CurrentSituation = Situations.SELECTED;
+                }
+                OnPropertyChanged(nameof(_selectedValue));
+            }
+        }
+
+        public List<PatientProcedureModel> AllValues { get; set; }
+
+        private ObservableCollection<PatientProcedureModel> _values;
+        public ObservableCollection<PatientProcedureModel> Values
+        {
+            get => _values ?? (_values = new ObservableCollection<PatientProcedureModel>());
+            set
+            {
+                _values = value;
+                OnPropertyChanged(nameof(Values));
             }
 
         }
 
         private List<PatientModel> _patients;
-        public List<PatientModel> Patients => _patients ?? (_patients = new List<PatientModel>());
+        public List<PatientModel> Patients
+        {
+            get => _patients ?? (_patients = new List<PatientModel>());
+            set
+            {
+                _patients = value;
+            }
+        }
 
         private List<DoctorModel> _doctors;
-        public List<DoctorModel> Doctors => _doctors ?? (_doctors = new List<DoctorModel>());
+        public List<DoctorModel> Doctors
+        {
+            get => _doctors ?? (_doctors = new List<DoctorModel>());
+            set
+            {
+                _doctors = value;
+            }
+        }
 
         private List<NurseModel> _nurses;
-        public List<NurseModel> Nurses => _nurses ?? (_nurses = new List<NurseModel>());
+        public List<NurseModel> Nurses
+        {
+            get => _nurses ?? (_nurses = new List<NurseModel>());
+            set
+            {
+                _nurses = value;
+            }
+        }
 
         private List<ProcedureModel> _procedures;
-        public List<ProcedureModel> Procedures => _procedures ?? (_procedures = new List<ProcedureModel>());
+        public List<ProcedureModel> Procedures
+        {
+            get => _procedures ?? (_procedures = new List<ProcedureModel>());
+            set
+            {
+                _procedures = value;
+            }
+        }
 
         public AddPatientProcedureCommand Add => new AddPatientProcedureCommand(this);
         public DeletePatientProcedureCommand Delete => new DeletePatientProcedureCommand(this, _patientProcedureService);
         public EditPatientProcedureCommand Edit => new EditPatientProcedureCommand(this);
         public RejectPatientProcedureCommand Reject => new RejectPatientProcedureCommand(this);
-        public SavePatientProcedureCommand Save => new SavePatientProcedureCommand(this,_patientProcedureService);
+        public SavePatientProcedureCommand Save => new SavePatientProcedureCommand(this, _patientProcedureService);
 
         public void SetDefaultValues()
         {
             CurrentSituation = Situations.NORMAL;
-            CurrentPatientProcedure = new PatientProcedureModel();
+            CurrentValue = new PatientProcedureModel();
+            SetSelectedValue(null);
+        }
+
+        public void SetSelectedValue(PatientProcedureModel model)
+        {
+            _selectedValue = model;
+            OnPropertyChanged(nameof(SelectedValue));
         }
 
         protected override void OnSearchTextChanged()
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                Values = new ObservableCollection<PatientProcedureModel>(AllValues);
+            }
+            else
+            {
+                string lowerText = SearchText.ToLower();
+                var filteredValues = AllValues.Where(x => x.DisplayDoctor?.ToLower().Contains(lowerText) == true ||
+                                                        x.DisplayNurse?.ToLower().Contains(lowerText) == true ||
+                                                        x.DisplayPatient?.ToLower().Contains(lowerText) == true ||
+                                                        x.UseDate.ToString(SystemConstants.DateDisplayFormat).ToLower().Contains(lowerText) == true);
+                Values = new ObservableCollection<PatientProcedureModel>(filteredValues);
+            }
         }
     }
 }

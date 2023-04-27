@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HospitalManagementCore.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace HospitalManagement.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string PIN { get; set; }
-        public string PositionName { get; set; }
+        public PositionModel Position { get; set; }
         public string DepartmentName { get; set; }
         public decimal Salary { get; set; }
         private bool[] _gender = { false, false };
@@ -44,7 +45,7 @@ namespace HospitalManagement.Models
                 PhoneNumber = PhoneNumber,
                 Email = Email,
                 PIN = PIN,
-                PositionName = PositionName,
+                Position = Position,
                 DepartmentName = DepartmentName,
                 Salary = Salary,
                 Gender = Gender,

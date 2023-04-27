@@ -17,7 +17,7 @@ namespace HospitalManagement.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string PIN { get; set; }
-        public string JobName { get; set; }
+        public JobModel Job { get; set; }
         public decimal Salary { get; set; }
         private bool[] _gender = { false, false };
         public bool[] Gender 
@@ -43,7 +43,7 @@ namespace HospitalManagement.Models
                 PhoneNumber = PhoneNumber,
                 Email = Email,
                 PIN = PIN,
-                JobName = JobName,
+                Job = Job,
                 Salary = Salary,
                 BirthDate = BirthDate,
                 No = No,

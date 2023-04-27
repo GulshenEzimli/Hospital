@@ -12,6 +12,11 @@ namespace HospitalManagement.Mappers.Implementations
 {
     public class OtherEmployeeMapper : IOtherEmployeeMapper
     {
+        private readonly IMapperUnitOfWork _mapperUnitOfWork;
+        public OtherEmployeeMapper(IMapperUnitOfWork mapperUnitOfWork)
+        {
+            _mapperUnitOfWork = mapperUnitOfWork;
+        }
         public OtherEmployeeModel Map(OtherEmployee otherEmployee)
         {
             OtherEmployeeModel model= new OtherEmployeeModel();
@@ -26,8 +31,7 @@ namespace HospitalManagement.Mappers.Implementations
             model.PIN = otherEmployee.PIN;
             if(otherEmployee.Gender) model.Gender[0] = otherEmployee.Gender;
             else model.Gender[1] = !otherEmployee.Gender;
-            model.JobName = otherEmployee.Job.Name;
-
+            model.Job = _mapperUnitOfWork.JobMapper.Map(otherEmployee.Job);
             return model;
         }
 
@@ -44,11 +48,8 @@ namespace HospitalManagement.Mappers.Implementations
             otherEmployee.BirthDate = model.BirthDate;
             otherEmployee.PIN = model.PIN;
             otherEmployee.Gender = model.Gender[0] ? true : false;
-            otherEmployee.Job = new Job()
-            {
-                Name = model.JobName,
-            };
-
+            otherEmployee.Job = _mapperUnitOfWork.JobMapper.Map(model.Job);
+            
             return otherEmployee;
         }
     }

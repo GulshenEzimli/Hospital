@@ -30,12 +30,6 @@ namespace HospitalManagement.Validations
                 return false;
             }
 
-            if (string.IsNullOrEmpty(patientProcedureModel.DisplayProcedure))
-            {
-                message = ValidationMessageProvider.GetRequiredMessage("Procedure value");
-                return false;
-            }
-
             message = null;
             return true;
         }

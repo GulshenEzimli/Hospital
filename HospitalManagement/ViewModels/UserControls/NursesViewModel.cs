@@ -3,8 +3,10 @@ using HospitalManagement.Enums;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
 using HospitalManagement.Services.Interfaces;
+using HospitalManagement.Validations.Utils;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
+using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -36,8 +38,15 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
-        private List<string> _positionNames;
-        public List<string> PositionNames => _positionNames ?? (_positionNames = new List<string>());
+        private List<PositionModel> _positions;
+        public List<PositionModel> Positions
+        {
+            get => _positions ?? (_positions = new List<PositionModel>());
+            set
+            {
+                _positions = value; 
+            }
+        }
 
         private NurseModel _currentValue;
         public NurseModel CurrentValue 
@@ -63,6 +72,7 @@ namespace HospitalManagement.ViewModels.UserControls
                 }
                 else
                 {
+                    CurrentValue = new NurseModel();
                     CurrentValue = SelectedValue.Clone();
                     CurrentSituation = Situations.SELECTED;
                 }
@@ -83,7 +93,7 @@ namespace HospitalManagement.ViewModels.UserControls
 
         public List<NurseModel> AllValues { get; set; }
         public AddNurseCommand Add => new AddNurseCommand(this);
-        public DeleteNurseCommand Delete => new DeleteNurseCommand(this);
+        public DeleteNurseCommand Delete => new DeleteNurseCommand(this,_nurseService);
         public EditNurseCommand Edit => new EditNurseCommand(this);
         public RejectNurseCommand Reject => new RejectNurseCommand(this);
         public SaveNurseCommand Save => new SaveNurseCommand(this, _nurseService);
@@ -104,7 +114,25 @@ namespace HospitalManagement.ViewModels.UserControls
 
         protected override void OnSearchTextChanged()
         {
-            throw new NotImplementedException();
+            if(string.IsNullOrWhiteSpace(SearchText))
+            {
+                Values = new ObservableCollection<NurseModel>(AllValues);
+            }
+            else
+            {
+                var lowerText = SearchText.ToLower();
+                var filteredValues = AllValues.Where(x => x.FirstName?.ToLower().Contains(lowerText) == true ||
+                                                 x.LastName?.ToLower().Contains(lowerText) == true ||
+                                                 x.PIN?.ToLower().Contains(lowerText) == true ||
+                                                 x.GenderValue?.ToLower().Contains(lowerText) == true ||
+                                                 x.Salary.ToString().Contains(lowerText) == true ||
+                                                 x.BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerText) == true ||
+                                                 x.Position.Name?.ToLower().Contains(lowerText) == true ||
+                                                 x.PhoneNumber?.ToLower().Contains(lowerText) == true ||
+                                                 x.DepartmentName?.ToLower().Contains(lowerText) == true ||
+                                                 x.Email?.ToLower().Contains(lowerText) == true).ToList();
+                Values = new ObservableCollection<NurseModel>(filteredValues);
+            }
         }
     }
 }

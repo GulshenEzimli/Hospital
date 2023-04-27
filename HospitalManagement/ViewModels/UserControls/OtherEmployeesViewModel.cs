@@ -3,6 +3,7 @@ using HospitalManagement.Enums;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
 using HospitalManagement.Services.Interfaces;
+using HospitalManagement.Validations.Utils;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
@@ -36,14 +37,14 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
-        private OtherEmployeeModel _currentOtherEmployeeValue; 
-        public OtherEmployeeModel CurrentOtherEmployeeValue
+        private OtherEmployeeModel _currentValue; 
+        public OtherEmployeeModel CurrentValue
         {
-            get => _currentOtherEmployeeValue;
+            get => _currentValue;
             set
             {
-                _currentOtherEmployeeValue = value;
-                OnPropertyChanged(nameof(CurrentOtherEmployeeValue));
+                _currentValue = value;
+                OnPropertyChanged(nameof(CurrentValue));
             }
         }
 
@@ -60,26 +61,34 @@ namespace HospitalManagement.ViewModels.UserControls
                 }
                 else
                 {
-                    CurrentOtherEmployeeValue = SelectedValue.Clone();
+                    CurrentValue = new OtherEmployeeModel();
+                    CurrentValue = SelectedValue.Clone();
                     CurrentSituation = Situations.SELECTED;
                 }
                 OnPropertyChanged(nameof(SelectedValue));
             }
         }
 
-        private ObservableCollection<OtherEmployeeModel> _otherEmployeeValues;
-        public ObservableCollection<OtherEmployeeModel> OtherEmployeeValues
+        private ObservableCollection<OtherEmployeeModel> _values;
+        public ObservableCollection<OtherEmployeeModel> Values
         {
-            get => _otherEmployeeValues ?? (_otherEmployeeValues = new ObservableCollection<OtherEmployeeModel>());
+            get => _values ?? (_values = new ObservableCollection<OtherEmployeeModel>());
             set
             {
-                _otherEmployeeValues = value;
-                OnPropertyChanged(nameof(_otherEmployeeValues));
+                _values = value;
+                OnPropertyChanged(nameof(Values));
             }
         }
 
-        private List<string> _jobNames;
-        public List<string> JobNames => _jobNames ?? (_jobNames = new List<string>());
+        private List<JobModel> _jobNames;
+        public List<JobModel> JobNames
+        {
+            get => _jobNames ?? (_jobNames = new List<JobModel>());
+            set
+            {
+                _jobNames = value;
+            }
+        }
 
         public List<OtherEmployeeModel> AllValues { get; set; }
 
@@ -92,7 +101,7 @@ namespace HospitalManagement.ViewModels.UserControls
         public void SetDefaultValues()
         {
             CurrentSituation = Situations.NORMAL;
-            CurrentOtherEmployeeValue = new OtherEmployeeModel();
+            CurrentValue = new OtherEmployeeModel();
 
             SetSelectedValue(null);
         }
@@ -105,7 +114,24 @@ namespace HospitalManagement.ViewModels.UserControls
 
         protected override void OnSearchTextChanged()
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                Values = new ObservableCollection<OtherEmployeeModel>(AllValues);
+            }
+            else
+            {
+                var lowerText = SearchText.ToLower();
+                var filteredValues = AllValues.Where(x => x.FirstName?.ToLower().Contains(lowerText) == true ||
+                                                 x.LastName?.ToLower().Contains(lowerText) == true ||
+                                                 x.PIN?.ToLower().Contains(lowerText) == true ||
+                                                 x.GenderValue?.ToLower().Contains(lowerText) == true ||
+                                                 x.Salary.ToString().Contains(lowerText) == true ||
+                                                 x.BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerText) == true ||
+                                                 x.Job.Name?.ToLower().Contains(lowerText) == true ||
+                                                 x.PhoneNumber?.ToLower().Contains(lowerText) == true ||
+                                                 x.Email?.ToLower().Contains(lowerText) == true).ToList();
+                Values = new ObservableCollection<OtherEmployeeModel>(filteredValues);
+            }
         }
     }
 }

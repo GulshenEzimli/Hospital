@@ -3,6 +3,7 @@ using HospitalManagement.Commands.Patients;
 using HospitalManagement.Enums;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Services.Interfaces;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
@@ -17,11 +18,12 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public class PatientsViewModel:BaseControlViewModel
     {
-        private readonly IPatientMapper _patientMapper;
+        private readonly IPatientService _patientService;
 
-        public PatientsViewModel(IUnitOfWork unitOfWork,IPatientMapper patientMapper,ErrorDialog errorDialog) : base(errorDialog)
+        public PatientsViewModel(IPatientService patientService,ErrorDialog errorDialog) : base(errorDialog)
         {
-            _patientMapper = patientMapper;
+            _patientService = patientService;
+            AllValues = new List<PatientModel>();
 
             SetDefaultValues();
         }
@@ -74,12 +76,21 @@ namespace HospitalManagement.ViewModels.UserControls
         }
 
         private ObservableCollection<PatientModel> _values;
-        public ObservableCollection<PatientModel> Values => _values ?? (_values = new ObservableCollection<PatientModel>());
+        public ObservableCollection<PatientModel> Values
+        {
+            get => _values ?? (_values = new ObservableCollection<PatientModel>());
+            set
+            {
+                _values = value;
+                OnPropertyChanged(nameof(Values));
+            }
+        }
 
         #region Commands
+        public List<PatientModel> AllValues { get; set; }
         public AddPatientCommand Add => new AddPatientCommand(this);
-        public SavePatientCommand Save => new SavePatientCommand(this, _patientMapper);
-        public DeletePatientCommand Delete => new DeletePatientCommand(this);
+        public SavePatientCommand Save => new SavePatientCommand(this, _patientService);
+        public DeletePatientCommand Delete => new DeletePatientCommand(this,_patientService);
         public EditPatientCommand Edit=> new EditPatientCommand(this);
         public RejectPatientCommand Reject=>new RejectPatientCommand(this);
         #endregion
@@ -99,7 +110,16 @@ namespace HospitalManagement.ViewModels.UserControls
 
         protected override void OnSearchTextChanged()
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(SearchText))
+                return;
+            var lowerSearch = SearchText.ToLower();
+
+            var enumerable= Values.Where(x => x.Name?.ToLower().Contains(lowerSearch) == true||
+                                              x.Surname?.ToLower().Contains(lowerSearch) == true ||
+                                              x.BirthDate.ToString().Contains(lowerSearch) == true ||
+                                              x.PIN?.ToLower().Contains(lowerSearch) == true ||
+                                              x.PhoneNumber?.ToLower().Contains(lowerSearch) == true);
+            Values = new ObservableCollection<PatientModel>(enumerable);
         }
     }
 }

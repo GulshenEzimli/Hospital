@@ -17,26 +17,23 @@ namespace HospitalManagement.Commands.Dashboard
     public class OpenOtherEmployeesCommand : BaseCommand
     {
         private readonly DashboardViewModel _viewModel;
-        private readonly IOtherEmployeeService _otherEmployeeService;
-        public OpenOtherEmployeesCommand(DashboardViewModel viewModel, IOtherEmployeeService otherEmployeeService)
+        private readonly IServiceUnitOfWork _serviceUnitOfWork;
+        public OpenOtherEmployeesCommand(DashboardViewModel viewModel, IServiceUnitOfWork serviceUnitOfWork)
         {
             _viewModel = viewModel;
-            _otherEmployeeService = otherEmployeeService;
+            _serviceUnitOfWork = serviceUnitOfWork;
         }
         public override void Execute(object parameter)
         {
             OtherEmployeesControl otherEmployeesControl = new OtherEmployeesControl();
-            OtherEmployeesViewModel otherEmployeesViewModel = new OtherEmployeesViewModel(_otherEmployeeService,otherEmployeesControl.ErrorDialog);
+            OtherEmployeesViewModel otherEmployeesViewModel = new OtherEmployeesViewModel(_serviceUnitOfWork.otherEmployeeService, otherEmployeesControl.ErrorDialog);
 
-            List<OtherEmployeeModel> otherEmployeeModels = _otherEmployeeService.GetAll();
+            List<OtherEmployeeModel> otherEmployeeModels = _serviceUnitOfWork.otherEmployeeService.GetAll();
             otherEmployeesViewModel.AllValues = otherEmployeeModels;
-            otherEmployeesViewModel.OtherEmployeeValues = new ObservableCollection<OtherEmployeeModel>(otherEmployeeModels);
+            otherEmployeesViewModel.Values = new ObservableCollection<OtherEmployeeModel>(otherEmployeeModels);
 
-            //List<Job> jobs = _viewModel.Db.JobRepository.Get();
-            //foreach (var job in jobs)
-            //{
-            //    otherEmployeesViewModel.JobNames.Add(job.Name);
-            //}
+            otherEmployeesViewModel.JobNames = _serviceUnitOfWork.jobService.GetAll();
+            
 
             otherEmployeesControl.DataContext = otherEmployeesViewModel;
             _viewModel.CenterGrid.Children.Clear();

@@ -17,21 +17,23 @@ namespace HospitalManagement.Commands.Dashboard
     public class OpenNursesCommand : BaseCommand
     {
         private readonly DashboardViewModel _viewModel;
-        private readonly INurseService _nurseService;
-        public OpenNursesCommand(DashboardViewModel viewModel,INurseService nurseService)
+        private readonly IServiceUnitOfWork _serviceUnitOfWork;
+        public OpenNursesCommand(DashboardViewModel viewModel, IServiceUnitOfWork serviceUnitOfWork)
         {
             _viewModel = viewModel;
-            _nurseService = nurseService;
+            _serviceUnitOfWork = serviceUnitOfWork;
         }
         public override void Execute(object parameter)
         {
             NurseControl nurseControl = new NurseControl();
-            NursesViewModel nursesViewModel = new NursesViewModel(_nurseService,nurseControl.ErrorDialog);
+            NursesViewModel nursesViewModel = new NursesViewModel(_serviceUnitOfWork.nurseService, nurseControl.ErrorDialog);
 
-            var nurseModels = _nurseService.GetAll();
+            var nurseModels = _serviceUnitOfWork.nurseService.GetAll();
             nursesViewModel.AllValues = nurseModels;
             nursesViewModel.Values = new ObservableCollection<NurseModel>(nursesViewModel.AllValues);
             
+            nursesViewModel.Positions  = _serviceUnitOfWork.positionService.GetAll();
+
             nurseControl.DataContext = nursesViewModel;
             _viewModel.CenterGrid.Children.Clear();
             _viewModel.CenterGrid.Children.Add(nurseControl);

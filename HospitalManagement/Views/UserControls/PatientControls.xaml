@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HospitalManagement.Views.UserControls" 
              xmlns:components="clr-namespace:HospitalManagement.Views.Components"
+             
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -30,7 +31,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
-                <!--<RowDefinition Height="Auto"/>-->
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0">
@@ -144,11 +145,11 @@
                 </ListView.View>
             </ListView>
 
-            <!--<Grid Grid.Row="2" Style="{StaticResource grdSearch}">
+            <Grid Grid.Row="2" Style="{StaticResource grdSearch}">
                 <DockPanel>
                     <components:Search/>
                 </DockPanel>
-            </Grid>-->
+            </Grid>
         </Grid>
     </Border>
     
