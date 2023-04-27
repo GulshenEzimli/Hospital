@@ -25,8 +25,8 @@ namespace HospitalManagement.Mappers.Implementations
             operationModel.OperationReason = operation.OperationReason;
             operationModel.Patient = new PatientModel();
             operationModel.Patient = _mapperUnitOfWork.PatientMapper.Map(operation.Patient);
-            //operationModel.Room = new RoomModel();
-            //operationModel.Room = _mapperUnitOfWork.DoctorMapper.Map(patientProcedure.Doctor);
+            operationModel.Room = new RoomModel();
+            operationModel.Room = _mapperUnitOfWork.RoomMapper.Map(operation.Room);
             return operationModel;
         }
 

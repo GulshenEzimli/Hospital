@@ -16,9 +16,9 @@ namespace HospitalManagement.Models
         public decimal OperationCost { get; set; }
         public string OperationReason { get; set; }
         public PatientModel Patient { get; set; }
-        //public RoomModel Room { get; set; }
+        public RoomModel Room { get; set; }
         public string DisplayPatient => $"{Patient.Name} {Patient.Surname} {Patient.PIN} {Patient.PhoneNumber}";
-        //public string DisplayRoom => $"{Room.BlockFloor}. mərtəbə {Room.Number} nömrəli {Room.Type} otağı";
+        public string DisplayRoom => $"{Room.BlockFloor}. mərtəbə {Room.Number} nömrəli {Room.Type} otağı";
 
         private ObservableCollection<OperationDoctorModel> _operationDoctors;
         public ObservableCollection<OperationDoctorModel> OperationDoctors
