@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Validations
 {
-    internal interface ReceptionistValidation
+    public class ReceptionistValidation
     {
         public static bool IsValid(ReceptionistModel receptionistModel, out string message)
         {
@@ -27,7 +27,7 @@ namespace HospitalManagement.Validations
                 message = ValidationMessageProvider.GetRequiredMessage("Surname");
                 return false;
             }
-            if (receptionistModel.Length > 25)
+            if (receptionistModel.LastName.Length > 25)
             {
                 message = ValidationMessageProvider.GetMaxLengthMessage("Surname", 25);
                 return false;

@@ -65,7 +65,7 @@ namespace HospitalManagement.ViewModels.UserControls
             get => _selectedValue;
             set
             {
-                SetSelectedValue(value);
+                SetSelectedValue(value); 
                 if (value == null)
                 {
                     SetDefaultValues();
