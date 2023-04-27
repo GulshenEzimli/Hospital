@@ -15,11 +15,11 @@ namespace HospitalManagement.Mappers.Implementations
         public IOtherEmployeeMapper OtherEmployeeMapper => new OtherEmployeeMapper(this);
         public IPatientProcedureMapper PatientProcedureMapper => new PatientProcedureMapper(this);
         public IJobMapper JobMapper => new JobMapper();
-        public IOperationDoctorMapper OperationDoctorMapper => new OperationDoctorMapper();
+        public IOperationDoctorMapper OperationDoctorMapper => new OperationDoctorMapper(this);
 
-        public IOperationMapper OperationMapper => new OperationMapper();
+        public IOperationMapper OperationMapper => new OperationMapper(this);
 
-        public IOperationNurseMapper OperationNurseMapper => new OperationNurseMapper();
+        public IOperationNurseMapper OperationNurseMapper => new OperationNurseMapper(this);
 
         public IPatientMapper PatientMapper => new PatientMapper();
 

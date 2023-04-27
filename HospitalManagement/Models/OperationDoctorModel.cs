@@ -10,10 +10,9 @@ namespace HospitalManagement.Models
     public class OperationDoctorModel
     {
         public int Id { get; set; }
-        public string DoctorName { get; set; }
-        public string DoctorSurname { get; set; }
-        public string DoctorPIN { get; set; }
+        public OperationModel Model { get; set; }
+        public DoctorModel Doctor { get; set; }
 
-        public string DisplayValue => $"{DoctorName} {DoctorSurname} {DoctorPIN}";
+        public string DisplayValue => $"{Doctor.FirstName} {Doctor.LastName} {Doctor.PIN}";
     }
 }

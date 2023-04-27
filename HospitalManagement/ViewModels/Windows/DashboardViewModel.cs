@@ -16,25 +16,15 @@ namespace HospitalManagement.ViewModels.Windows
     {
         private readonly IPatientMapper _patientMapper;
         private readonly IProcedureMapper _procedureMapper;
-        private readonly IPositionMapper _positionMapper;
-        private readonly IOperationMapper _operationMapper;
-        private readonly IOperationDoctorMapper _operationDoctorMapper;
-        private readonly IOperationNurseMapper _operationNurseMapper;
         private readonly IQueueMapper _queueMapper;
         private readonly IServiceUnitOfWork _serviceUnitOfWork;
 
         public DashboardViewModel(IServiceUnitOfWork serviceUnitOfWork,
-            IPatientMapper patientMapper, IProcedureMapper procedureMapper, 
-            IPositionMapper positionMapper, IOperationMapper operationMapper, 
-            IOperationDoctorMapper operationDoctorMapper, IOperationNurseMapper operationNurseMapper,
+            IPatientMapper patientMapper, IProcedureMapper procedureMapper,
             IQueueMapper queueMapper)
         {
             _patientMapper = patientMapper;
             _procedureMapper = procedureMapper;
-            _positionMapper = positionMapper;
-            _operationMapper = operationMapper;
-            _operationDoctorMapper = operationDoctorMapper;
-            _operationNurseMapper = operationNurseMapper;
             _queueMapper = queueMapper;
             _serviceUnitOfWork = serviceUnitOfWork;
         }
@@ -64,7 +54,7 @@ namespace HospitalManagement.ViewModels.Windows
         public OpenQueuesCommand OpenQueues => new OpenQueuesCommand(this, _serviceUnitOfWork);
         public OpenAdminsCommand OpenAdmins => new OpenAdminsCommand(this);
         public OpenRoomsCommand OpenRooms => new OpenRoomsCommand(this);
-        public OpenOperationsCommand OpenOperations => new OpenOperationsCommand(this, _operationMapper, _operationDoctorMapper, _operationNurseMapper);
+        public OpenOperationsCommand OpenOperations => new OpenOperationsCommand(this, _serviceUnitOfWork);
 
     }
 }

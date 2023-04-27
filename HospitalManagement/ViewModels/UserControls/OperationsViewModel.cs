@@ -3,6 +3,8 @@ using HospitalManagement.Commands.Operations;
 using HospitalManagement.Enums;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Services.Implementations;
+using HospitalManagement.Services.Interfaces;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
@@ -16,8 +18,11 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public class OperationsViewModel : BaseControlViewModel
     {
-        public OperationsViewModel(IUnitOfWork unitOfWork, ErrorDialog errorDialog) : base(errorDialog)
+        private readonly IServiceUnitOfWork _serviceUnitOfWork;
+        public OperationsViewModel(IServiceUnitOfWork serviceUnitOfWork, ErrorDialog errorDialog) : base(errorDialog)
         {
+            _serviceUnitOfWork = serviceUnitOfWork;
+            AllValues = new List<OperationModel>();
             SetDefaultValues();
         }
         public override string Header => "Operations";
@@ -33,19 +38,70 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
+        private OperationModel _currentValue;
+        public OperationModel CurrentValue
+        {
+            get => _currentValue;
+            set
+            {
+                _currentValue = value;
+                OnPropertyChanged(nameof(CurrentValue));
+            }
+        }
+
+        private OperationModel _selectedValue;
+        public OperationModel SelectedValue
+        {
+            get => _selectedValue;
+            set
+            {
+                SetSelectedValue(value);
+
+                if (value == null)
+                {
+                    SetDefaultValues();
+                }
+                else
+                {
+                    CurrentValue = new OperationModel();
+                    CurrentValue = SelectedValue.Clone();
+                    CurrentSituation = Situations.SELECTED;
+                }
+            }
+        }
+
         private ObservableCollection<OperationModel> _values;
-        public ObservableCollection<OperationModel> Values => _values ?? (_values = new ObservableCollection<OperationModel>());
+        public ObservableCollection<OperationModel> Values
+        {
+            get => _values ?? (_values = new ObservableCollection<OperationModel>());
+            set
+            {
+                _values = value;
+                OnPropertyChanged(nameof(Values));
+            }
+        }
+
+        public List<OperationModel> AllValues { get; set; }
 
         public AddOperationCommand Add => new AddOperationCommand(this);
         public DeleteOperationCommand Delete => new DeleteOperationCommand(this);
         public EditOperationCommand Edit => new EditOperationCommand(this);
         public RejectOperationCommand Reject => new RejectOperationCommand(this);
         public SaveOperationCommand Save => new SaveOperationCommand(this);
+        
         public void SetDefaultValues()
         {
             CurrentSituation = Situations.NORMAL;
+            CurrentValue = new OperationModel();
+
+            SetSelectedValue(null);
         }
 
+        private void SetSelectedValue(OperationModel operationModel)
+        {
+            _selectedValue = operationModel;
+            OnPropertyChanged(nameof(SelectedValue));
+        }
         protected override void OnSearchTextChanged()
         {
             throw new NotImplementedException();

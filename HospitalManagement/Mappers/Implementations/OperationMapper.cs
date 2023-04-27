@@ -11,6 +11,11 @@ namespace HospitalManagement.Mappers.Implementations
 {
     public class OperationMapper : IOperationMapper
     {
+        private readonly IMapperUnitOfWork _mapperUnitOfWork;
+        public OperationMapper(IMapperUnitOfWork mapperUnitOfWork) 
+        {
+            _mapperUnitOfWork = mapperUnitOfWork;
+        }
         public OperationModel Map(Operation operation)
         {
             OperationModel operationModel = new OperationModel();
@@ -18,13 +23,10 @@ namespace HospitalManagement.Mappers.Implementations
             operationModel.OperationDate = operation.OperationDate;
             operationModel.OperationCost = operation.OperationCost;
             operationModel.OperationReason = operation.OperationReason;
-            operationModel.PatientName = operation.Patient.Name;
-            operationModel.PatientSurname = operation.Patient.Surname;
-            operationModel.PatientPIN = operation.Patient.PIN;
-            operationModel.PatientPhoneNumber = operation.Patient.PhoneNumber;
-            operationModel.RoomNumber = operation.Room.Number;
-            operationModel.RoomFloor = operation.Room.BlockFloor;
-            operationModel.RoomType = operation.Room.Type;
+            operationModel.Patient = new PatientModel();
+            operationModel.Patient = _mapperUnitOfWork.PatientMapper.Map(operation.Patient);
+            //operationModel.Room = new RoomModel();
+            //operationModel.Room = _mapperUnitOfWork.DoctorMapper.Map(patientProcedure.Doctor);
             return operationModel;
         }
 

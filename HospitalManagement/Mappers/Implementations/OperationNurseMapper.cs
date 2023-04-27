@@ -11,12 +11,16 @@ namespace HospitalManagement.Mappers.Implementations
 {
     public class OperationNurseMapper : IOperationNurseMapper
     {
+        private readonly IMapperUnitOfWork _mapperUnitOfWork;
+        public OperationNurseMapper(IMapperUnitOfWork mapperUnitOfWork) 
+        {
+            _mapperUnitOfWork = mapperUnitOfWork;
+        }
         public OperationNurseModel Map(OperationNurse operationNurse)
         {
             OperationNurseModel operationNurseModel = new OperationNurseModel();
-            operationNurseModel.NurseName = operationNurse.Nurse.FirstName;
-            operationNurseModel.NurseSurname = operationNurse.Nurse.LastName;
-            operationNurseModel.NursePIN = operationNurse.Nurse.PIN;
+            operationNurseModel.Nurse = new NurseModel();
+            operationNurseModel.Nurse = _mapperUnitOfWork.NurseMapper.Map(operationNurse.Nurse);
             return operationNurseModel;
         }
 
