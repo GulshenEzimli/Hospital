@@ -11,6 +11,7 @@ namespace HospitalManagement.Services.Interfaces
         INurseService nurseService { get; }
         IOtherEmployeeService otherEmployeeService { get; }
         IPatientProcedureService patientProcedureService { get; }
+        IJobService jobService { get; }
         IDoctorService doctorService { get; }
         IPositionService positionService { get; }
         IPatientService patientService { get; }

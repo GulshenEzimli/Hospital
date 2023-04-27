@@ -40,7 +40,7 @@ namespace HospitalManagement.Commands.OtherEmployees
 
             var otherEmployeeModels = _otherEmployeeService.GetAll();
             _otherEmployeesViewModel.AllValues = otherEmployeeModels;
-            _otherEmployeesViewModel.OtherEmployeeValues = new ObservableCollection<OtherEmployeeModel>(otherEmployeeModels);
+            _otherEmployeesViewModel.Values = new ObservableCollection<OtherEmployeeModel>(otherEmployeeModels);
 
             _otherEmployeesViewModel.Message = new MessageModel()
             {

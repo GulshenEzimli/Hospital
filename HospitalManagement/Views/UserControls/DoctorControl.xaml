@@ -45,7 +45,7 @@
                             <StackPanel Grid.Column="1">
                                 <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.FirstName,Mode=TwoWay}"/>
                                 <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.LastName,Mode=TwoWay}"/>
-                                <ComboBox Height="25" FontSize="15" Margin="5 5" FontFamily="Times New Roman" ItemsSource="{Binding Path=PositionValues}" DisplayMemberPath="Name" SelectedItem="{Binding CurrentValue.Position}"/>
+                                <ComboBox Height="25" FontSize="15" Margin="5 5" FontFamily="Times New Roman" ItemsSource="{Binding Path=PositionValues}" SelectedItem="{Binding CurrentValue.Position}" DisplayMemberPath="Name"/>
                                 <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.Salary,Mode=TwoWay}"/>
                                 <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 3 0 0">
                                     <RadioButton IsChecked="{Binding CurrentValue.Gender[0]}" GroupName="Gender" Content="Male" Margin="6"/>
@@ -152,7 +152,7 @@
                             <GridViewColumn Header="Department" Width="Auto">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=DepartmentName}" Style="{StaticResource gridViewTextColumn}"/>
+                                        <TextBlock Text="{Binding Path=Position.DepartmentName}" Style="{StaticResource gridViewTextColumn}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

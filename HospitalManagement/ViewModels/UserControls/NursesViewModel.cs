@@ -3,6 +3,7 @@ using HospitalManagement.Enums;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
 using HospitalManagement.Services.Interfaces;
+using HospitalManagement.Validations.Utils;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
@@ -64,13 +65,14 @@ namespace HospitalManagement.ViewModels.UserControls
             get => _selectedValue;
             set
             {
-                SetSelectedValue(value);
+                SetSelectedValue(value); 
                 if (value == null)
                 {
                     SetDefaultValues();
                 }
                 else
                 {
+                    CurrentValue = new NurseModel();
                     CurrentValue = SelectedValue.Clone();
                     CurrentSituation = Situations.SELECTED;
                 }
@@ -112,7 +114,25 @@ namespace HospitalManagement.ViewModels.UserControls
 
         protected override void OnSearchTextChanged()
         {
-            throw new NotImplementedException();
+            if(string.IsNullOrWhiteSpace(SearchText))
+            {
+                Values = new ObservableCollection<NurseModel>(AllValues);
+            }
+            else
+            {
+                var lowerText = SearchText.ToLower();
+                var filteredValues = AllValues.Where(x => x.FirstName?.ToLower().Contains(lowerText) == true ||
+                                                 x.LastName?.ToLower().Contains(lowerText) == true ||
+                                                 x.PIN?.ToLower().Contains(lowerText) == true ||
+                                                 x.GenderValue?.ToLower().Contains(lowerText) == true ||
+                                                 x.Salary.ToString().Contains(lowerText) == true ||
+                                                 x.BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerText) == true ||
+                                                 x.Position.Name?.ToLower().Contains(lowerText) == true ||
+                                                 x.PhoneNumber?.ToLower().Contains(lowerText) == true ||
+                                                 x.DepartmentName?.ToLower().Contains(lowerText) == true ||
+                                                 x.Email?.ToLower().Contains(lowerText) == true).ToList();
+                Values = new ObservableCollection<NurseModel>(filteredValues);
+            }
         }
     }
 }

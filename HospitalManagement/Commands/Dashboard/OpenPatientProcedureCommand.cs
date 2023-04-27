@@ -17,44 +17,25 @@ namespace HospitalManagement.Commands.Dashboard
     public class OpenPatientProcedureCommand : BaseCommand
     {
         private readonly DashboardViewModel _viewModel;
-        private readonly IPatientProcedureService _patientProcedureService;
-        public OpenPatientProcedureCommand(DashboardViewModel viewModel, IPatientProcedureService patientProcedureService)
+        private readonly IServiceUnitOfWork _serviceUnitOfWork;
+        public OpenPatientProcedureCommand(DashboardViewModel viewModel, IServiceUnitOfWork serviceUnitOfWork)
         {
             _viewModel = viewModel;
-           _patientProcedureService = patientProcedureService;
+            _serviceUnitOfWork = serviceUnitOfWork;
         }
         public override void Execute(object parameter)
         {
             PatientProcedureControl patientProcedureControl = new PatientProcedureControl();
-            PatientProcedureViewModel patientProcedureViewModel = new PatientProcedureViewModel(_patientProcedureService,patientProcedureControl.ErrorDialog);
+            PatientProcedureViewModel patientProcedureViewModel = new PatientProcedureViewModel(_serviceUnitOfWork.patientProcedureService, patientProcedureControl.ErrorDialog);
 
-            var patientProcedureModels = _patientProcedureService.GetAll();
+            var patientProcedureModels = _serviceUnitOfWork.patientProcedureService.GetAll();
             patientProcedureViewModel.AllValues = patientProcedureModels;
-            patientProcedureViewModel.PatientProcedureValues = new ObservableCollection<PatientProcedureModel>(patientProcedureModels);
+            patientProcedureViewModel.Values = new ObservableCollection<PatientProcedureModel>(patientProcedureModels);
 
-            //List<Patient> patients = _viewModel.Db.PatientRepository.Get();
-            //foreach (var patient in patients)
-            //{
-            //    patientProcedureViewModel.Patients.Add(_patientMapper.Map(patient));
-            //}
-
-            //List<Doctor> doctors = _viewModel.Db.DoctorRepository.Get();
-            //foreach (var doctor in doctors)
-            //{
-            //    patientProcedureViewModel.Doctors.Add(_doctorMapper.Map(doctor));
-            //}
-
-            //List<Nurse> nurses = _viewModel.Db.NurseRepository.Get();
-            //foreach(var nurse in nurses)
-            //{
-            //    patientProcedureViewModel.Nurses.Add(_nurseMapper.Map(nurse));
-            //}
-
-            //List<Procedure> procedures = _viewModel.Db.ProcedureRepository.Get();
-            //foreach (var procedure in procedures)
-            //{
-            //    patientProcedureViewModel.Procedures.Add(_procedureMapper.Map(procedure));
-            //}
+            patientProcedureViewModel.Patients = _serviceUnitOfWork.patientService.GetAll();
+            patientProcedureViewModel.Doctors = _serviceUnitOfWork.doctorService.GetAll();
+            patientProcedureViewModel.Nurses = _serviceUnitOfWork.nurseService.GetAll();
+            patientProcedureViewModel.Procedures = _serviceUnitOfWork.procedureService.GetAll();
 
             patientProcedureControl.DataContext = patientProcedureViewModel;
             _viewModel.CenterGrid.Children.Clear();

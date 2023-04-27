@@ -57,13 +57,14 @@ namespace HospitalManagement.ViewModels.UserControls
             set
             {
                 SetSelectedValue(value);
-
+                
                 if (value == null)
                 {
                     SetDefaultValues();
                 }
                 else
                 {
+                    CurrentValue = new DoctorModel();
                     CurrentValue = SelectedValue.Clone();
                     CurrentSituation = Situations.SELECTED;
                 }

@@ -10,12 +10,13 @@ namespace HospitalManagement.Mappers.Interfaces
     {
         IDoctorMapper DoctorMapper { get; }
         INurseMapper NurseMapper { get; }
+        IOtherEmployeeMapper OtherEmployeeMapper { get; }
+        IPatientProcedureMapper PatientProcedureMapper { get; }
+        IJobMapper JobMapper { get; }
         IOperationDoctorMapper OperationDoctorMapper { get; }   
         IOperationMapper OperationMapper { get; }
         IOperationNurseMapper OperationNurseMapper { get; }
-        IOtherEmployeeMapper OtherEmployeeMapper { get; }
         IPatientMapper PatientMapper { get; }
-        IPatientProcedureMapper PatientProcedureMapper { get; }
         IPositionMapper PositionMapper { get; }
         IProcedureMapper ProcedureMapper { get; }
     }

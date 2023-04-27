@@ -30,13 +30,10 @@ namespace HospitalManagement.Commands.Dashboard
 
             List<OtherEmployeeModel> otherEmployeeModels = _serviceUnitOfWork.otherEmployeeService.GetAll();
             otherEmployeesViewModel.AllValues = otherEmployeeModels;
-            otherEmployeesViewModel.OtherEmployeeValues = new ObservableCollection<OtherEmployeeModel>(otherEmployeeModels);
+            otherEmployeesViewModel.Values = new ObservableCollection<OtherEmployeeModel>(otherEmployeeModels);
 
-            //List<Job> jobs = _viewModel.Db.JobRepository.Get();
-            //foreach (var job in jobs)
-            //{
-            //    otherEmployeesViewModel.JobNames.Add(job.Name);
-            //}
+            otherEmployeesViewModel.JobNames = _serviceUnitOfWork.jobService.GetAll();
+            
 
             otherEmployeesControl.DataContext = otherEmployeesViewModel;
             _viewModel.CenterGrid.Children.Clear();
