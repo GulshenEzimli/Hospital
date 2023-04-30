@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HospitalManagement.Views.UserControls"
+             xmlns:components="clr-namespace:HospitalManagement.Views.Components"
+             xmlns:enums="clr-namespace:HospitalManagementCore.Domain.Enums;assembly=HospitalManagementCore"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border>
@@ -12,8 +14,10 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-
+          
             <StackPanel Grid.Row="0">
+                <components:ControlHeader/>
+                <components:ErrorDialog x:Name="ErrorDialog"/>
                 <Grid >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="4.8*"/>
@@ -35,8 +39,8 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">
-                            <TextBox Height="25" FontSize="15" Margin="5 5"/>
-                            <TextBox Height="25" FontSize="15" Margin="5 5" />
+                            <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding Path=CurrentValue.Number, Mode=TwoWay}"/>
+                            <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding Path=CurrentValue.BlockFloor, Mode=TwoWay}" />
                           
                             
                             
@@ -50,10 +54,19 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="3">
-                            <TextBox Height="25" FontSize="15" Margin="5 5"/>
+                            <ComboBox>
+                                <ComboBoxItem Content="{x:Static enums:RoomTypes.Standart}" />
+                                <ComboBoxItem Content="{x:Static enums:RoomTypes.SemiPrivate}" />
+                                <ComboBoxItem Content="{x:Static enums:RoomTypes.Private}" />
+                                <ComboBoxItem Content="{x:Static enums:RoomTypes.IntensiveCareUnit}" />
+                                <ComboBoxItem Content="{x:Static enums:RoomTypes.Recovery}" />
+                                <ComboBoxItem Content="{x:Static enums:RoomTypes.Operating}" />
+                                <ComboBoxItem Content="{x:Static enums:RoomTypes.Isolation}" />
+                                <ComboBoxItem Content="{x:Static enums:RoomTypes.Emergency}" />
+                            </ComboBox>
                             <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <RadioButton GroupName="Gender" Content="Yes" Margin="6"/>
-                                <RadioButton Content="No" GroupName="Gender" Margin=" 6"/>
+                                <RadioButton GroupName="Available" Content="Yes" Margin="6"/>
+                                <RadioButton Content="No" GroupName="Available" Margin=" 6"/>
                             </WrapPanel>
                         </StackPanel>
 
@@ -73,35 +86,37 @@
                 </Grid>
             </StackPanel>
 
-            <ListView x:Name="MainList" Grid.Row="1" >
+            <ListView x:Name="MainList" Grid.Row="1" Style="{DynamicResource listViewCustom}"
+                      ItemsSource="{Binding Path=Values}"
+                      SelectedItem="{Binding SelectedValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
                     <GridView >
-                        <GridViewColumn Header="No" Width="30" />
+                        <GridViewColumn Header="No" Width="30" DisplayMemberBinding="{Binding Path=No}"/>
                         <GridViewColumn Header="Number" Width="60">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock />
+                                    <TextBlock Text="{Binding Path=Number}" Style="{DynamicResource gridViewTextColumn}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Block Floor" Width="70">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock />
+                                    <TextBlock Text="{Binding Path=BlockFloor}" Style="{DynamicResource gridViewTextColumn}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Room Tpye" Width="70">
+                        <GridViewColumn Header="Room Type" Width="70">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Path=RoomType}" Style="{DynamicResource gridViewTextColumn}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                       
                     </GridView>
                 </ListView.View>
             </ListView>
+
 
         </Grid>
     </Border>

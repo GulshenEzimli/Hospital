@@ -1,5 +1,6 @@
 ﻿using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
+using HospitalManagementCore.Domain.Enums;
 using HospitalManagementCore.Utils;
 using System;
 using System.Collections.Generic;
@@ -93,7 +94,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 Id = reader.GetInt32("RoomId"),
                 Number = reader.GetInt32("Number"),
                 BlockFloor = reader.GetInt32("BlockFloor"),
-                Type = reader.GetByte("Type"),
+                Type = (RoomTypes)reader.GetByte("Type"),
                 IsAvailable = reader.GetBoolean("IsAvailable")
             };
             return operation;
