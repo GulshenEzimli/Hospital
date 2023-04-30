@@ -36,8 +36,8 @@ namespace HospitalManagement.Commands.Dashboard
             List<PatientModel> patients = _serviceUnitOfWork.patientService.GetAll();
             operationsViewModel.PatientValues = new List<PatientModel>(patients);
 
-            //List<RoomModel> rooms = _serviceUnitOfWork.roomService.GetAll();
-            //operationsViewModel.RoomValues = new List<RoomModel>(rooms);
+            List<RoomModel> rooms = _serviceUnitOfWork.roomService.GetAll();
+            operationsViewModel.RoomValues = new List<RoomModel>(rooms);
 
             var doctors = _serviceUnitOfWork.doctorService.GetAll();
             operationsViewModel.DoctorValues = new ObservableCollection<DoctorModel>(doctors);

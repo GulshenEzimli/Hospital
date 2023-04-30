@@ -299,8 +299,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         private void AddParametersOperation(SqlCommand command, Operation operation)
         {
             command.Parameters.AddWithValue("patientId", operation.Patient.Id);
-            //todo roomid
-            command.Parameters.AddWithValue("roomId", 1);
+            command.Parameters.AddWithValue("roomId", operation.Room.Id);
             command.Parameters.AddWithValue("operationDate", operation.OperationDate);
             command.Parameters.AddWithValue("operationCost", operation.OperationCost);
             command.Parameters.AddWithValue("operationReason", operation.OperationReason);

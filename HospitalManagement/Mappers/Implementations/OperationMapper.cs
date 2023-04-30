@@ -39,9 +39,8 @@ namespace HospitalManagement.Mappers.Implementations
             operation.OperationReason = operationModel.OperationReason;
             operation.Patient = new Patient();
             operation.Patient = _mapperUnitOfWork.PatientMapper.Map(operationModel.Patient);
-            //todo room
-            //operation.Room = new Room();
-            //operation.Room = _mapperUnitOfWork.RoomMapper.Map(operationModel.Room);
+            operation.Room = new Room();
+            operation.Room = _mapperUnitOfWork.RoomMapper.Map(operationModel.Room);
             operation.Doctors = new List<Doctor>();
             foreach (DoctorModel doctorModel in operationModel.Doctors)
             {

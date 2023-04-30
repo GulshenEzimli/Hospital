@@ -22,8 +22,6 @@ namespace HospitalManagement.Models
         public string OperationReason { get; set; }
         public PatientModel Patient { get; set; }
         public RoomModel Room { get; set; }
-        public string DisplayPatient => $"{Patient.Name} {Patient.Surname} {Patient.PIN} {Patient.PhoneNumber}";
-        public string DisplayRoom => $"{Room.BlockFloor}. mərtəbə {Room.Number} nömrəli {Room.Type} otağı";
                
         public ObservableCollection<DoctorModel> Doctors { get; set; }
         public ObservableCollection<NurseModel> Nurses { get; set; }

@@ -223,8 +223,8 @@ namespace HospitalManagement.ViewModels.UserControls
                 var filteredResult = AllValues.Where(x => x.OperationCost.ToString().Contains(lowerSearchText) == true ||
                                                  x.OperationReason?.ToLower().Contains(lowerSearchText) == true ||                                                 
                                                  x.OperationDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerSearchText) == true ||
-                                                 x.DisplayPatient.ToLower().Contains(lowerSearchText) == true ||
-                                                 x.DisplayRoom.ToLower().Contains(lowerSearchText) == true ||
+                                                 x.Patient.DisplayPatient.ToLower().Contains(lowerSearchText) == true ||
+                                                 x.Room.DisplayRoom.ToLower().Contains(lowerSearchText) == true ||
                                                  x.Doctors.Where(y => y.DisplayDoctor.ToLower().Contains(lowerSearchText) == true).ToList().Any() ||
                                                  x.Nurses.Where(y => y.DisplayNurse.ToLower().Contains(lowerSearchText) == true).ToList().Any()).ToList();
 

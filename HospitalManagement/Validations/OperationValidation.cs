@@ -37,11 +37,11 @@ namespace HospitalManagement.Validations
                 message = ValidationMessageProvider.GetRequiredMessage("Patient");
                 return false;
             }
-            //if (operationModel.Room == null)
-            //{
-            //    message = ValidationMessageProvider.GetRequiredMessage("Room");
-            //    return false;
-            //}
+            if (operationModel.Room == null)
+            {
+                message = ValidationMessageProvider.GetRequiredMessage("Room");
+                return false;
+            }
 
             message = null;
             return true;

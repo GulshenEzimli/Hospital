@@ -49,24 +49,17 @@
                                     <ComboBox Height="25" FontSize="15" Margin="5 5" FontFamily="Times New Roman" 
                                               ItemsSource="{Binding Path=PatientValues}"
                                               SelectedItem="{Binding CurrentValue.Patient}"
+                                              DisplayMemberPath="DisplayPatient"
                                               SelectedValuePath="Id"
-                                              SelectedValue="{Binding CurrentValue.Patient.Id}">
-                                        <ComboBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock>
-                                                    <TextBlock.Text>
-                                                        <MultiBinding StringFormat="{} {0} {1} {2} {3}">
-                                                            <Binding Path="Name"/>
-                                                            <Binding Path="Surname"/>
-                                                            <Binding Path="PIN"/>
-                                                            <Binding Path="PhoneNumber"/>
-                                                        </MultiBinding>
-                                                    </TextBlock.Text>
-                                                </TextBlock>
-                                            </DataTemplate>
-                                        </ComboBox.ItemTemplate>
-                                    </ComboBox>
-                                    <ComboBox Height="25" FontSize="15" Margin="5 5" FontFamily="Times New Roman"/>
+                                              SelectedValue="{Binding CurrentValue.Patient.Id}"/>
+
+                                    <ComboBox Height="25" FontSize="15" Margin="5 5" FontFamily="Times New Roman" 
+                                              ItemsSource="{Binding Path=RoomValues}"
+                                              SelectedItem="{Binding CurrentValue.Room}"
+                                              DisplayMemberPath="DisplayRoom"
+                                              SelectedValuePath="Id"
+                                              SelectedValue="{Binding CurrentValue.Room.Id}"/>
+                                    
                                     <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.OperationCost, Mode=TwoWay}"/>
                                     <components:CustomDatePicker Margin="5 5" DataContext="{Binding CurrentValue.OperationDate,Mode=TwoWay}" Height="25"/>
                                 </StackPanel>
@@ -181,10 +174,7 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <WrapPanel>
-                                            <TextBlock Text="{Binding Path=Patient.Name}" Style="{StaticResource gridViewTextColumn}"/>
-                                            <TextBlock Text="{Binding Path=Patient.Surname}" Style="{StaticResource gridViewTextColumn}"/>
-                                            <TextBlock Text="{Binding Path=Patient.PIN}" Style="{StaticResource gridViewTextColumn}"/>
-                                            <TextBlock Text="{Binding Path=Patient.PhoneNumber}" Style="{StaticResource gridViewTextColumn}"/>
+                                            <TextBlock Text="{Binding Path=Patient.DisplayPatient}" Style="{StaticResource gridViewTextColumn}"/>                                            
                                         </WrapPanel>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -192,7 +182,7 @@
                             <GridViewColumn Header="Room" Width="Auto">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=DisplayRoom}" Style="{StaticResource gridViewTextColumn}"/>
+                                        <TextBlock Text="{Binding Path=Room.DisplayRoom}" Style="{StaticResource gridViewTextColumn}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
