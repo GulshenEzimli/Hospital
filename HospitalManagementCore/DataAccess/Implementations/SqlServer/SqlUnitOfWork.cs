@@ -24,11 +24,12 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         public IPatientProcedureRepository PatientProcedureRepository => new SqlPatientProcedureRepository(_connectionString);
         public IJobRepository JobRepository => new SqlJobRepository(_connectionString);
 
-        public IReceptionistRepository ReceptionistRepository => throw new NotImplementedException();
+        public IReceptionistRepository ReceptionistRepository => new SqlReceptionistRepository(_connectionString);
         public IPatientRepository PatientRepository=>new SqlPatientRepository(_connectionString);
         public IProcedureRepository ProcedureRepository => new SqlProcedureRepository(_connectionString);
 
-        public IQueueRepository QueueRepository => new SqlQueueRepository(_connectionString);
+        public IRoomRepository RoomRepository => new SqlRoomRepository(_connectionString);
 
+        public IAdminRepository AdminRepository => new SqlAdminRepository(_connectionString);
     }
 }
