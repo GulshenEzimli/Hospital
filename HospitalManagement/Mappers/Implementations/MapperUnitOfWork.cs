@@ -30,5 +30,7 @@ namespace HospitalManagement.Mappers.Implementations
         public IQueueMapper QueueMapper => new QueueMapper(this);
 
         public IRoomMapper RoomMapper => new RoomMapper(this);
+
+        public IReceptionistMapper ReceptionistMapper => new ReceptionistMapper();
     }
 }

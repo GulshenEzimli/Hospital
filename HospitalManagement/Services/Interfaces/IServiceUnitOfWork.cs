@@ -18,5 +18,7 @@ namespace HospitalManagement.Services.Interfaces
         IProcedureService procedureService { get; }
         IQueueService queueService { get; }
         IOperationService operationService { get; }
+        IReceptionistService receptionistService { get; }
+        IRoomService roomService { get; }
     }
 }
