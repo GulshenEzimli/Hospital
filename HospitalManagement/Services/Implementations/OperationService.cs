@@ -35,8 +35,9 @@ namespace HospitalManagement.Services.Implementations
                 {
                     if (operationDoctor.OperationId == operation.Id)
                     {
-                        OperationDoctorModel operationDoctorModel = _mapperUnitOfWork.OperationDoctorMapper.Map(operationDoctor);
-                        operationModel.OperationDoctors.Add(operationDoctorModel);
+                        Doctor doctor = _unitOfWork.DoctorRepository.GetById(operationDoctor.Doctor.Id);
+                        DoctorModel doctorModel = _mapperUnitOfWork.DoctorMapper.Map(doctor);
+                        operationModel.Doctors.Add(doctorModel);
                     }
                 }
 
@@ -44,8 +45,9 @@ namespace HospitalManagement.Services.Implementations
                 {
                     if (operationNurse.OperationId == operation.Id)
                     {
-                        OperationNurseModel operationNurseModel = _mapperUnitOfWork.OperationNurseMapper.Map(operationNurse);
-                        operationModel.OperationNurses.Add(operationNurseModel);
+                        Nurse nurse = _unitOfWork.NurseRepository.GetById(operationNurse.Nurse.Id);
+                        NurseModel nurseModel = _mapperUnitOfWork.NurseMapper.Map(nurse);
+                        operationModel.Nurses.Add(nurseModel);
                     }
                 }
                 operationModel.No = no++;

@@ -34,6 +34,7 @@ namespace HospitalManagement.Models
             }
         }
 
+        public string DisplayNurse => $"{FirstName} {LastName} {PIN}";
         public NurseModel Clone()
         {
             return new NurseModel()

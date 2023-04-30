@@ -49,6 +49,8 @@ namespace HospitalManagement.Models
                 return IsChiefDoctor[0] ? "Baş həkim" : "Həkim";
             }
         }
+
+        public string DisplayDoctor => $"{FirstName} {LastName} {PIN}";
         public DoctorModel Clone()
         {
             return new DoctorModel()
