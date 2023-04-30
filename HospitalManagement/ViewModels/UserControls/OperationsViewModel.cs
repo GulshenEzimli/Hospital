@@ -190,10 +190,10 @@ namespace HospitalManagement.ViewModels.UserControls
 
 
         public AddOperationCommand Add => new AddOperationCommand(this);
-        public DeleteOperationCommand Delete => new DeleteOperationCommand(this);
+        public DeleteOperationCommand Delete => new DeleteOperationCommand(this, _serviceUnitOfWork);
         public EditOperationCommand Edit => new EditOperationCommand(this);
         public RejectOperationCommand Reject => new RejectOperationCommand(this);
-        public SaveOperationCommand Save => new SaveOperationCommand(this);
+        public SaveOperationCommand Save => new SaveOperationCommand(this, _serviceUnitOfWork);
         public RemoveDoctorCommand RemoveDoctor => new RemoveDoctorCommand(this);
         public RemoveNurseCommand RemoveNurse => new RemoveNurseCommand(this);
 

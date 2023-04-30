@@ -10,5 +10,7 @@ namespace HospitalManagement.Services.Interfaces
     public interface IOperationService
     {
         List<OperationModel> GetAll();
+        int SaveOperation(OperationModel operationModel);
+        bool DeleteOperation(int id);
     }
 }

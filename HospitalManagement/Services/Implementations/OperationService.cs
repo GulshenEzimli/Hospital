@@ -20,6 +20,14 @@ namespace HospitalManagement.Services.Implementations
             _unitOfWork = unitOfWork;
             _mapperUnitOfWork = mapperUnitOfWork;
         }
+
+        public bool DeleteOperation(int id)
+        {
+            Operation operation = _unitOfWork.OperationRepository.GetById(id);
+            operation.IsDelete = true;
+            return _unitOfWork.OperationRepository.UpdateForDelete(operation);
+        }
+
         public List<OperationModel> GetAll()
         {
             List<OperationModel> operationModels = new List<OperationModel>();
@@ -54,6 +62,21 @@ namespace HospitalManagement.Services.Implementations
                 operationModels.Add(operationModel);
             }
             return operationModels;
+        }
+
+        public int SaveOperation(OperationModel operationModel)
+        {
+            Operation toBeSavedOperation = _mapperUnitOfWork.OperationMapper.Map(operationModel);
+
+            if (toBeSavedOperation.Id == 0)
+            {
+                return _unitOfWork.OperationRepository.Insert(toBeSavedOperation);
+            }
+            else
+            {                
+                _unitOfWork.OperationRepository.Update(toBeSavedOperation);
+                return toBeSavedOperation.Id;
+            }
         }
     }
 }
