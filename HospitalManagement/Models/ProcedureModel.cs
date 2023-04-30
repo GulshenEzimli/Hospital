@@ -12,6 +12,14 @@ namespace HospitalManagement.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal Cost { get; set; }
+        public string DisplayProcedure
+        {
+            get => $"{Name}  {Cost}";
+            set
+            {
+                DisplayProcedure = value;
+            }
+        }
         public ProcedureModel Clone()
         {
             return new ProcedureModel()
