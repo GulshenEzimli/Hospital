@@ -31,5 +31,6 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         public IRoomRepository RoomRepository => new SqlRoomRepository(_connectionString);
 
         public IAdminRepository AdminRepository => new SqlAdminRepository(_connectionString);
+        public IQueueRepository QueueRepository=>new SqlQueueRepository(_connectionString);
     }
 }
