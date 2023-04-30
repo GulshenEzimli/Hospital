@@ -32,7 +32,28 @@ namespace HospitalManagement.Mappers.Implementations
 
         public Operation Map(OperationModel operationModel)
         {
-            throw new NotImplementedException();
+            Operation operation = new Operation();
+            operation.Id = operationModel.Id;
+            operation.OperationDate = operationModel.OperationDate;
+            operation.OperationCost = operationModel.OperationCost;
+            operation.OperationReason = operationModel.OperationReason;
+            operation.Patient = new Patient();
+            operation.Patient = _mapperUnitOfWork.PatientMapper.Map(operationModel.Patient);
+            //todo room
+            //operation.Room = new Room();
+            //operation.Room = _mapperUnitOfWork.RoomMapper.Map(operationModel.Room);
+            operation.Doctors = new List<Doctor>();
+            foreach (DoctorModel doctorModel in operationModel.Doctors)
+            {
+                Doctor doctor = _mapperUnitOfWork.DoctorMapper.Map(doctorModel);
+                operation.Doctors.Add(doctor);
+            }
+            foreach (NurseModel nurseModel in operationModel.Nurses)
+            {
+                Nurse nurse = _mapperUnitOfWork.NurseMapper.Map(nurseModel);
+                operation.Nurses.Add(nurse);
+            }
+            return operation;
         }
     }
 }
