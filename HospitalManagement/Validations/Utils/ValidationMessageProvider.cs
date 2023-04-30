@@ -47,6 +47,10 @@ namespace HospitalManagement.Validations.Utils
         {
             return "Salary should be greater than 0.";
         }
+        public static string GetOperationCostMessage()
+        {
+            return "Operation cost should be greater than 0.";
+        }
         public static string GetSalaryMessage(decimal salary)
         {
             return $"Salary should be less than {salary}.";

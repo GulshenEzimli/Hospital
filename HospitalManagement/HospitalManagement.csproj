@@ -269,6 +269,7 @@
     <Compile Include="Services\Interfaces\IProcedureService.cs" />
     <Compile Include="Services\Interfaces\IServiceUnitOfWork.cs" />
     <Compile Include="Validations\NurseValidation.cs" />
+    <Compile Include="Validations\OperationValidation.cs" />
     <Compile Include="Validations\OtherEmployeeValidation.cs" />
     <Compile Include="Validations\PatientProcedureValidation.cs" />
     <Compile Include="Validations\PatientValidation.cs" />
