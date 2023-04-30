@@ -13,26 +13,45 @@ namespace HospitalManagement.Services.Implementations
     public class QueueService : IQueueService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IQueueMapper _queueMapper;
-        public QueueService(IUnitOfWork unitOfWork, IQueueMapper queueMapper)
+        private readonly IMapperUnitOfWork _mapperUnitOfWork;
+        public QueueService(IUnitOfWork unitOfWork, IMapperUnitOfWork mapperUnitOfWork)
         {
-            _queueMapper = queueMapper;
+            _mapperUnitOfWork = mapperUnitOfWork;
             _unitOfWork = unitOfWork;
         }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            return _unitOfWork.QueueRepository.Delete(id);
         }
 
         public List<QueueModel> GetAll()
         {
-            throw new NotImplementedException();
+            var queues = _unitOfWork.QueueRepository.Get();
+            var queueModels=new List<QueueModel>();
+            int no = 1;
+            foreach(var queue in queues)
+            {
+                var model = _mapperUnitOfWork.QueueMapper.Map(queue);
+                model.No= no++;
+                queueModels.Add(model);
+            }
+            return queueModels;
         }
 
         public int Save(QueueModel queueModel)
         {
-            throw new NotImplementedException();
+            var toBeSavedQueue = _mapperUnitOfWork.QueueMapper.Map(queueModel);
+
+            if(toBeSavedQueue.Id==0)
+            {
+                return _unitOfWork.QueueRepository.Insert(toBeSavedQueue);
+            }
+            else
+            {
+                _unitOfWork.QueueRepository.Update(toBeSavedQueue);
+                return toBeSavedQueue.Id;
+            }
         }
     }
 }

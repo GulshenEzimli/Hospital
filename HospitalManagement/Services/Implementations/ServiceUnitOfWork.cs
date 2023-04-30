@@ -26,8 +26,12 @@ namespace HospitalManagement.Services.Implementations
         public IPositionService positionService => new PositionService(_unitOfWork, _mapperUnitOfWork);
         public IPatientService patientService => new PatientService(_unitOfWork, _mapperUnitOfWork.PatientMapper);
         public IProcedureService procedureService => new ProcedureService(_unitOfWork,_mapperUnitOfWork.ProcedureMapper);
-        public IQueueService queueService => new QueueService(_unitOfWork,_mapperUnitOfWork.QueueMapper);
+        public IQueueService queueService => new QueueService(_unitOfWork,_mapperUnitOfWork);
 
         public IOperationService operationService => new OperationService(_unitOfWork, _mapperUnitOfWork);
+
+        public IReceptionistService receptionistService => new ReceptionistService(_unitOfWork, _mapperUnitOfWork.ReceptionistMapper);
+
+        public IRoomService roomService => new RoomService(_unitOfWork, _mapperUnitOfWork.RoomMapper);
     }
 }

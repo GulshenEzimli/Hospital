@@ -1,8 +1,10 @@
-﻿using HospitalManagement.ViewModels.UserControls;
+﻿using HospitalManagement.Services.Interfaces;
+using HospitalManagement.ViewModels.UserControls;
 using HospitalManagement.ViewModels.Windows;
 using HospitalManagement.Views.UserControls;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,14 +14,23 @@ namespace HospitalManagement.Commands.Dashboard
     public class OpenReceptionistCommand : BaseCommand
     {
         private readonly DashboardViewModel _viewModel;
-        public OpenReceptionistCommand(DashboardViewModel viewModel)
+        private readonly IServiceUnitOfWork _serviceUnitOfWork;
+
+        public OpenReceptionistCommand(DashboardViewModel viewModel, IServiceUnitOfWork serviceUnitOfWork)
         {
             _viewModel = viewModel;
+            _serviceUnitOfWork = serviceUnitOfWork;
         }
         public override void Execute(object parameter)
         {
-            ReceptionistViewModel receptionistViewModel = new ReceptionistViewModel(_viewModel.Db);
             ReceptionistControl receptionistControl = new ReceptionistControl();
+            ReceptionistViewModel receptionistViewModel = new ReceptionistViewModel(_serviceUnitOfWork.receptionistService, receptionistControl.ErrorDialog);
+
+            var receptionistModels = _serviceUnitOfWork.receptionistService.GetAll();
+            receptionistViewModel.AllValues = receptionistModels;
+            receptionistViewModel.Values = new ObservableCollection<Models.ReceptionistModel>(receptionistViewModel.AllValues);
+
+            receptionistViewModel.Jobs = _serviceUnitOfWork.jobService.GetAll();
 
             receptionistControl.DataContext = receptionistViewModel;
             _viewModel.CenterGrid.Children.Clear();

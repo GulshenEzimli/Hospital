@@ -257,6 +257,7 @@
     <Compile Include="Services\Implementations\QueueService.cs" />
     <Compile Include="Services\Implementations\ReceptionistService.cs" />
     <Compile Include="Services\Implementations\ProcedureService.cs" />
+    <Compile Include="Services\Implementations\RoomService.cs" />
     <Compile Include="Services\Implementations\ServiceUnitOfWork.cs" />
     <Compile Include="Services\Interfaces\IDoctorService.cs" />
     <Compile Include="Services\Interfaces\IJobService.cs" />
@@ -269,11 +270,13 @@
     <Compile Include="Services\Interfaces\IQueueService.cs" />
     <Compile Include="Services\Interfaces\IReceptionistService.cs" />
     <Compile Include="Services\Interfaces\IProcedureService.cs" />
+    <Compile Include="Services\Interfaces\IRoomService.cs" />
     <Compile Include="Services\Interfaces\IServiceUnitOfWork.cs" />
     <Compile Include="Validations\NurseValidation.cs" />
     <Compile Include="Validations\OtherEmployeeValidation.cs" />
     <Compile Include="Validations\PatientProcedureValidation.cs" />
     <Compile Include="Validations\PatientValidation.cs" />
+    <Compile Include="Validations\QueueValidation.cs" />
     <Compile Include="Validations\ReceptionistValidation.cs" />
     <Compile Include="Validations\ProcedureValidation.cs" />
     <Compile Include="Validations\Utils\SystemConstants.cs" />
