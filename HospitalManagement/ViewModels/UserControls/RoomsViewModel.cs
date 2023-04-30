@@ -12,9 +12,9 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public class RoomsViewModel:BaseViewModel
     {
-        public RoomsViewModel(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
-        }
+        //public RoomsViewModel(IUnitOfWork unitOfWork) : base(unitOfWork)
+        //{
+        //}
 
         private Situations _currentSituation = Situations.NORMAL;
         public Situations CurrentSituation

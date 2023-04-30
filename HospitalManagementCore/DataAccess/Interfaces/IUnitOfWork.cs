@@ -18,5 +18,6 @@ namespace HospitalManagementCore.DataAccess.Interfaces
         IOperationRepository OperationRepository { get; }
         IOperationDoctorRepository OperationDoctorRepository { get; }
         IOperationNurseRepository OperationNurseRepository { get; }
+        IQueueRepository QueueRepository { get; }
     }
 }

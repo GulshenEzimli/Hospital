@@ -28,5 +28,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         public IPatientRepository PatientRepository=>new SqlPatientRepository(_connectionString);
         public IProcedureRepository ProcedureRepository => new SqlProcedureRepository(_connectionString);
 
+        public IQueueRepository QueueRepository => new SqlQueueRepository(_connectionString);
+
     }
 }
