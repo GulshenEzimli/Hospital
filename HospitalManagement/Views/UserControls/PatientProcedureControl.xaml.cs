@@ -25,9 +25,5 @@ namespace HospitalManagement.Views.UserControls
             InitializeComponent();
         }
 
-        private void MainList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }

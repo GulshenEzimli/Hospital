@@ -1,4 +1,5 @@
-﻿using HospitalManagement.ViewModels.UserControls;
+﻿using HospitalManagement.Services.Interfaces;
+using HospitalManagement.ViewModels.UserControls;
 using HospitalManagement.ViewModels.Windows;
 using HospitalManagement.Views.UserControls;
 using System;
@@ -12,16 +13,22 @@ namespace HospitalManagement.Commands.Dashboard
     public class OpenAdminsCommand : BaseCommand
     {
         private readonly DashboardViewModel _viewModel;
-        public OpenAdminsCommand(DashboardViewModel viewModel)
+        private readonly IServiceUnitOfWork _serviceUnitOfWork;
+
+        public OpenAdminsCommand(DashboardViewModel viewModel, IServiceUnitOfWork serviceUnitOfWork)
         {
             _viewModel = viewModel;
+            _serviceUnitOfWork = serviceUnitOfWork;
         }
         public override void Execute(object parameter)
         {
-            AdminsViewModel adminsViewModel = new AdminsViewModel(_viewModel.Db);
             AdminControl adminControl = new AdminControl();
+            //AdminsViewModel adminsViewModel = new AdminsViewModel(_viewModel.Db);
 
-            adminControl.DataContext = adminsViewModel;
+            //var adminmodels = _serviceUnitOfWork.adminService.GetAll();
+
+
+            //adminControl.DataContext = adminsViewModel;
             _viewModel.CenterGrid.Children.Clear();
             _viewModel.CenterGrid.Children.Add(adminControl);
         }

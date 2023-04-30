@@ -30,7 +30,13 @@ namespace HospitalManagement.Mappers.Implementations
 
         public Room Map(RoomModel roomModel)
         {
-            throw new NotImplementedException();
+            Room room = new Room();
+            room.Id = roomModel.Id;
+            room.BlockFloor = roomModel.BlockFloor;
+            room.Number = roomModel.Number;
+            room.Type = roomModel.Type;
+            room.IsAvailable = roomModel.IsAvailable;
+            return room;
         }
     }
 }

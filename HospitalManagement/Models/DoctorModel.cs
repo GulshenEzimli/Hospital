@@ -12,7 +12,14 @@ namespace HospitalManagement.Models
         public int Id { get; set; }
         public int No { get; set; }
         public PositionModel Position { get; set; }
-        
+        public string DisplayDoctor
+        {
+            get => $"{FirstName}   {LastName}   {PIN}";
+            set
+            {
+                DisplayDoctor = value;
+            }
+        }
         public string DepartmentName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

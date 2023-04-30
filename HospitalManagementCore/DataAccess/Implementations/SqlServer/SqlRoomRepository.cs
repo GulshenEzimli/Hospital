@@ -1,5 +1,6 @@
 ﻿using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
+using HospitalManagementCore.Domain.Enums;
 using HospitalManagementCore.Utils;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,8 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"";
+                string cmdText = @"select Id, Number, IsAvailable, Type, BlockFloor, IsDelete 
+                                   from Rooms where IsDelete = 0";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     SqlDataReader reader = command.ExecuteReader();
@@ -58,7 +60,8 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"";
+                string cmdText = @"select Id, Number, IsAvailable, Type, BlockFloor, IsDelete 
+                                   from Rooms where IsDelete = 0 and Id = @id";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     command.Parameters.AddWithValue("id", id);
@@ -74,7 +77,8 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"";
+                string cmdText = @"insert into Rooms output inserted.id values(
+                                 @number, @isAvailable, @type, @blockFloor, @isDelete)";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     AddParameters(command, room);
@@ -88,7 +92,9 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"";
+                string cmdText = @"update Rooms set Number = @number, IsAvailable = @isAvailable,
+                                 Type = @type, BlockFloor = @blockFloor, IsDelete = @isDelete
+                                 where Id = @id";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     command.Parameters.AddWithValue("id", room.Id);
@@ -105,21 +111,17 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             room.Number = reader.GetInt32("number");
             room.BlockFloor = reader.GetInt32("blockFloor");
             room.IsAvailable = reader.GetBoolean("IsAvailable");
-            room.Type = reader.GetByte("type");
-
+            room.Type = (RoomTypes)reader.GetByte("type");
 
             return room;
-
         }
 
         private void AddParameters(SqlCommand command, Room room)
         {
-            command.Parameters.AddWithValue("id", room.Id);
             command.Parameters.AddWithValue ("number", room.Number);
             command.Parameters.AddWithValue("blockFloor", room.BlockFloor);
             command.Parameters.AddWithValue("isAvailable",room.IsAvailable);    
             command.Parameters.AddWithValue("type",room.Type);
-
         }
     }
 }

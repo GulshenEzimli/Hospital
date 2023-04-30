@@ -1,5 +1,6 @@
 ﻿using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
+using HospitalManagementCore.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -31,22 +32,132 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 
         public List<Queue> Get()
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string cmdText = @"select Queues.Id as QueuesId,Date,Patients.Id as PatientId,
+                                    Patients.FirstName as PatientName,Patients.LastName as PatientSurname,
+                                    Patients.PIN as PatientPIN,Doctors.Id as DoctorId, Doctors.FirstName as DoctorName, 
+                                    Doctors.LastName as DoctorSurname,Doctors.PIN as DoctorPIN, Doctors.PositionId as DoctorPositionId, 
+                                    Procedures.Id as ProcedureId,Procedures.Name as ProcedureName
+                                    from Queues inner join Doctors on Queues.DoctorId = Doctors.Id
+                                    inner join Patients on Queues.PatientId = Patients.Id
+                                    inner join Procedures on Queues.ProcedureId = Procedures.Id";
+                using (SqlCommand command = new SqlCommand(cmdText, connection))
+                {
+                    SqlDataReader reader = command.ExecuteReader();
+                    List<Queue> queues = new List<Queue>();
+                    while (reader.Read())
+                    {
+                        Queue queue = GetQueue(reader);
+                        queues.Add(queue);
+                    }
+                    return queues;
+                }
+            }
         }
 
         public Queue GetById(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string cmdText = @"select Queues.Id as QueuesId,Date,Patients.Id as PatientId,
+                                    Patients.FirstName as PatientName,Patients.LastName as PatientSurname,
+                                    Patients.PIN as PatientPIN,Doctors.Id as DoctorId, Doctors.FirstName as DoctorName, 
+                                    Doctors.LastName as DoctorSurname,Doctors.PIN as DoctorPIN, Doctors.PositionId as DoctorPositionId, 
+                                    (select DepartmentId from DoctorPositions where DoctorPositions.Id = Doctors.PositionId) as DoctorDepartmentId,
+                                    Procedures.Id as ProcedureId,Procedures.Name as ProcedureName from Queues
+									inner join Doctors on Queues.DoctorId = Doctors.Id
+                                    inner join Patients on Queues.PatientId = Patients.Id
+                                    inner join Procedures on Queues.ProcedureId = Procedures.Id
+                                    where Queues.Id = @id";
+                using (SqlCommand command = new SqlCommand(cmdText, connection))
+                {
+                    command.Parameters.AddWithValue("id", id);
+                    SqlDataReader reader = command.ExecuteReader();
+                    Queue queue = GetQueue(reader);
+                    return queue;
+                }
+            }
         }
 
-        public int Insert(Queue entity)
+        public int Insert(Queue queue)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string cmdText = @"insert into Queues output inserted.Id 
+                                    values (@doctorId,@patientId,@procedureId,@queueNumber,@date)";
+                using (SqlCommand command = new SqlCommand(cmdText, connection))
+                {
+                    AddParameters(command, queue);
+                    return (int)command.ExecuteScalar();
+                }
+            }
         }
 
-        public bool Update(Queue entity)
+        public bool Update(Queue queue)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string cmdText = @"update Queues set DoctorId = @doctorId, PatientId=@patientId, 
+                                   QueueNumber= @queueNumber, Date=@Date where Id=@id";
+                using (SqlCommand command = new SqlCommand(cmdText, connection))
+                {
+                    AddParameters(command, queue);
+                    return command.ExecuteNonQuery() == 1;
+                }
+            }
         }
+
+        #region GetQueue
+        private Queue GetQueue(SqlDataReader reader)
+        {
+            Queue queue = new Queue();
+            queue.Id = reader.GetInt32("Id");
+            queue.Doctor = new Doctor() {
+                Id = reader.GetInt32("DoctorId"),
+                FirstName = reader.GetString("DoctorName"),
+                LastName = reader.GetString("DoctorSurname"),
+                PIN = reader.GetString("DoctorPIN"),
+                Position=new DoctorPosition()
+                {
+                    Id = reader.GetInt32("DoctorPositionId"),
+                    Department = new Department()
+                    {
+                        Id = reader.GetInt32("DoctorDepartmentId"),
+                    },
+                },
+            };
+            queue.Patient = new Patient()
+            {
+                Id = reader.GetInt32("PatientId"),
+                Name = reader.GetString("PatientName"),
+                Surname = reader.GetString("PatientSurname"),
+                PIN = reader.GetString("PatientPIN"),
+            };
+            queue.Procedure = new Procedure()
+            {
+                Id = reader.GetInt32("ProcedureId"),
+                Name = reader.GetString("ProcedureName"),
+            };
+            queue.UseDate = reader.GetDateTime("Date");
+
+            return queue;
+
+        }
+        #endregion
+        #region AddParameters
+        private void AddParameters(SqlCommand command,Queue queue)
+        {
+            command.Parameters.AddWithValue("@doctorId",queue.DoctorId);
+            command.Parameters.AddWithValue("@patientId", queue.PatientId);
+            command.Parameters.AddWithValue("@queueNumber", queue.QueueNumber);
+            command.Parameters.AddWithValue("@date", queue.UseDate);
+
+        }
+        #endregion
     }
 }

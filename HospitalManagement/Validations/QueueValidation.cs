@@ -8,30 +8,29 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Validations
 {
-    public static class PatientProcedureValidation
+    public class QueueValidation
     {
-        public static bool IsValid(PatientProcedureModel patientProcedureModel, out string message)
+        public static bool IsValid(QueueModel queueModel,out string message)
         {
-            if (string.IsNullOrEmpty(patientProcedureModel.Patient.DisplayPatient))
+            if (string.IsNullOrEmpty(queueModel.DisplayPatient))
             {
                 message = ValidationMessageProvider.GetRequiredMessage("Patient value");
                 return false;
             }
 
-            if (string.IsNullOrEmpty(patientProcedureModel.Doctor.DisplayDoctor))
+            if (string.IsNullOrEmpty(queueModel.DisplayDoctor))
             {
                 message = ValidationMessageProvider.GetRequiredMessage("Doctor value");
                 return false;
             }
-
-            if (string.IsNullOrEmpty(patientProcedureModel.Nurse.DisplayNurse))
-            {
-                message = ValidationMessageProvider.GetRequiredMessage("Nurse value");
-                return false;
-            }
-            if (string.IsNullOrEmpty(patientProcedureModel.Procedure.DisplayProcedure))
+            if (string.IsNullOrEmpty(queueModel.DisplayProcedure))
             {
                 message = ValidationMessageProvider.GetRequiredMessage("Procedure value");
+                return false;
+            }
+            if(queueModel.QueueNumber==0)
+            {
+                message = ValidationMessageProvider.GetRequiredMessage("Queue number");
                 return false;
             }
 
