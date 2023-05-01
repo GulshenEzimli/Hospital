@@ -57,7 +57,7 @@
 
                                  <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.OperationCost, Mode=TwoWay}"/>
                                  <components:CustomDatePicker Margin="5 5" DataContext="{Binding CurrentValue.OperationDate,Mode=TwoWay}" Height="25"/>
-                                 <TextBox Height="50" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.OperationReason, Mode=TwoWay}"/>
+                                 <TextBox Height="100" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.OperationReason, Mode=TwoWay}"/>
                             </StackPanel>
 
                             <StackPanel Grid.Column="2">
