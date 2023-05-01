@@ -58,9 +58,13 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 string cmdText = @"select * from Procedures where Id = @id ";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
+                    command.Parameters.AddWithValue("@id", id);
                     SqlDataReader reader = command.ExecuteReader();
-                    Procedure procedure = GetProcedure(reader);
-                    return procedure;
+
+                    if (reader.Read() == false)
+                        return null;
+
+                    return GetProcedure(reader);
                 }
             }
         }
@@ -84,9 +88,10 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"Update Patients set Name=@name,Cost=@cost where Id=@id";
+                string cmdText = @"Update Procedures set Name=@name,Cost=@cost where Id=@id";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
+                    command.Parameters.AddWithValue("@id", procedure.Id);
                     AddParameters(command, procedure);
                     return command.ExecuteNonQuery() == 1;
                 }

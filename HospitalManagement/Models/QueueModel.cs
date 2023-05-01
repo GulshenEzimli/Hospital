@@ -13,8 +13,8 @@ namespace HospitalManagement.Models
         public PatientModel Patient { get; set; }
         public DoctorModel Doctor { get; set; }
         public ProcedureModel Procedure { get; set; }
-        public string DisplayPatient => $"{Patient.Name} {Patient.Surname}";
-        public string DisplayDoctor => $"{Doctor.FirstName} {Doctor.LastName}";
+        public string DisplayPatient => $"{Patient.Name} {Patient.Surname} {Patient.PIN} ";
+        public string DisplayDoctor => $"{Doctor.FirstName} {Doctor.LastName} {Doctor.PIN}";
         public string DisplayProcedure => $"{Procedure.Name}";
         public DateTime UseDate { get; set; }
         public int QueueNumber { get; set; }
