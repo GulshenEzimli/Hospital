@@ -11,8 +11,7 @@ namespace HospitalManagement.Models
     {
         public int Id { get; set; }
         public int No { get; set; }
-        public PositionModel Position { get; set; }
-        
+        public PositionModel Position { get; set; }        
         public string DepartmentName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -49,6 +48,8 @@ namespace HospitalManagement.Models
                 return IsChiefDoctor[0] ? "Baş həkim" : "Həkim";
             }
         }
+
+        public string DisplayDoctor => $"{FirstName} {LastName} {PIN}";
         public DoctorModel Clone()
         {
             return new DoctorModel()

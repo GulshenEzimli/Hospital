@@ -32,7 +32,18 @@ namespace HospitalManagement.Commands.Dashboard
             List<OperationModel> operations = _serviceUnitOfWork.operationService.GetAll();
             operationsViewModel.AllValues = operations;
             operationsViewModel.Values = new ObservableCollection<OperationModel>(operations);
-            
+
+            List<PatientModel> patients = _serviceUnitOfWork.patientService.GetAll();
+            operationsViewModel.PatientValues = new List<PatientModel>(patients);
+
+            List<RoomModel> rooms = _serviceUnitOfWork.roomService.GetAll();
+            operationsViewModel.RoomValues = new List<RoomModel>(rooms);
+
+            var doctors = _serviceUnitOfWork.doctorService.GetAll();
+            operationsViewModel.DoctorValues = new ObservableCollection<DoctorModel>(doctors);
+
+            var nurses = _serviceUnitOfWork.nurseService.GetAll();
+            operationsViewModel.NurseValues = new ObservableCollection<NurseModel>(nurses);
 
             operationControl.DataContext = operationsViewModel;
             _viewModel.CenterGrid.Children.Clear();

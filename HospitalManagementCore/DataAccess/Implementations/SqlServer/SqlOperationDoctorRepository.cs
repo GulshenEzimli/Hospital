@@ -25,9 +25,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"select OperationDoctors.Id as OperationDoctorId, Doctors.Id as DoctorId, Operations.Id as OperationId,
-                                   FirstName, LastName, PIN, PositionId, 
-                                   (select DepartmentId from DoctorPositions where DoctorPositions.Id = Doctors.PositionId) as DoctorDepartmentId
+                string cmdText = @"select OperationDoctors.Id as OperationDoctorId, Doctors.Id as DoctorId, Operations.Id as OperationId
                                    from OperationDoctors 
                                    inner join Doctors on OperationDoctors.DoctorId = Doctors.Id
                                    inner join Operations on OperationDoctors.OperationId = Operations.Id";
@@ -68,17 +66,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             operationDoctor.Id = reader.GetInt32("OperationDoctorId");
             operationDoctor.Doctor = new Doctor()
             {
-                FirstName = reader.GetString("FirstName"),
-                LastName = reader.GetString("LastName"),
-                PIN = reader.GetString("PIN"),
-                Position = new DoctorPosition() 
-                {
-                     Id = reader.GetInt32("PositionId"),
-                     Department = new Department()
-                     {
-                         Id = reader.GetInt32("DoctorDepartmentId")
-                     }
-                }
+                Id = reader.GetInt32("DoctorId")               
             };
             operationDoctor.Operation = new Operation()
             {

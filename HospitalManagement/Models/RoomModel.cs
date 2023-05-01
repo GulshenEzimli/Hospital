@@ -1,4 +1,5 @@
-﻿using HospitalManagementCore.Domain.Enums;
+﻿using HospitalManagementCore.Domain.Entities;
+using HospitalManagementCore.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace HospitalManagement.Models
         public bool IsAvailable { get; set; }
         public RoomTypes Type { get; set; }
         public int BlockFloor { get; set; }
+
+        public string DisplayRoom => $"{BlockFloor}. mərtəbə {Number} nömrəli {Type} otaq";
 
         public RoomModel Clone()
         {

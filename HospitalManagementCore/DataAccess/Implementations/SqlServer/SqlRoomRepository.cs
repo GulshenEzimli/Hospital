@@ -37,8 +37,8 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"select Id, Number, IsAvailable, Type, BlockFloor, IsDelete 
-                                   from Rooms where IsDelete = 0";
+                string cmdText = @"select Id, Number, IsAvailable, Type, BlockFloor 
+                                   from Rooms";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     SqlDataReader reader = command.ExecuteReader();

@@ -10,6 +10,11 @@ namespace HospitalManagement.Models
 {
     public class OperationModel
     {
+        public OperationModel() 
+        {
+            Doctors = new ObservableCollection<DoctorModel>();
+            Nurses = new ObservableCollection<NurseModel>();
+        }
         public int Id { get; set; }
         public int No { get; set; }
         public DateTime OperationDate { get; set; }
@@ -17,37 +22,28 @@ namespace HospitalManagement.Models
         public string OperationReason { get; set; }
         public PatientModel Patient { get; set; }
         public RoomModel Room { get; set; }
-        public string DisplayPatient => $"{Patient.Name} {Patient.Surname} {Patient.PIN} {Patient.PhoneNumber}";
-        public string DisplayRoom => $"{Room.BlockFloor}. mərtəbə {Room.Number} nömrəli {Room.Type} otağı";
-
-        private ObservableCollection<OperationDoctorModel> _operationDoctors;
-        public ObservableCollection<OperationDoctorModel> OperationDoctors
-        {
-            get => _operationDoctors ?? (_operationDoctors = new ObservableCollection<OperationDoctorModel>());
-            set { _operationDoctors = value; }
-        }
-                
-        private ObservableCollection<OperationNurseModel> _operationNurses;
-        public ObservableCollection<OperationNurseModel> OperationNurses
-        {
-            get => _operationNurses ?? (_operationNurses = new ObservableCollection<OperationNurseModel>());
-            set { _operationNurses =value; }        
-        }
+               
+        public ObservableCollection<DoctorModel> Doctors { get; set; }
+        public ObservableCollection<NurseModel> Nurses { get; set; }
 
         public OperationModel Clone()
         {
-            return new OperationModel()
+            OperationModel operationModel = new OperationModel()
             {
                 Id = Id,
                 No = No,
                 OperationCost = OperationCost,
                 OperationDate = OperationDate,
-                OperationDoctors = OperationDoctors,
-                OperationNurses = OperationNurses,
                 OperationReason = OperationReason,
                 Patient = Patient,
                 Room = Room
             };
+            var clonedDoctors = Doctors.Select(x=>x.Clone()).Cast<DoctorModel>();
+            operationModel.Doctors = new ObservableCollection<DoctorModel>(clonedDoctors);
+
+            var clonedNurses = Nurses.Select(x => x.Clone()).Cast<NurseModel>();
+            operationModel.Nurses = new ObservableCollection<NurseModel>(clonedNurses);
+            return operationModel;
         }
     }
 }

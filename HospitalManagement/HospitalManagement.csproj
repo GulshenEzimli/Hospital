@@ -164,6 +164,8 @@
     <Compile Include="Commands\Operations\DeleteOperationCommand.cs" />
     <Compile Include="Commands\Operations\EditOperationCommand.cs" />
     <Compile Include="Commands\Operations\RejectOperationCommand.cs" />
+    <Compile Include="Commands\Operations\RemoveDoctorCommand.cs" />
+    <Compile Include="Commands\Operations\RemoveNurseCommand.cs" />
     <Compile Include="Commands\Operations\SaveOperationCommand.cs" />
     <Compile Include="Commands\OtherEmployees\AddOtherEmployeeCommand.cs" />
     <Compile Include="Commands\OtherEmployees\DeleteOtherEmployeeCommand.cs" />
@@ -205,9 +207,7 @@
     <Compile Include="Mappers\Implementations\JobMapper.cs" />
     <Compile Include="Mappers\Implementations\MapperUnitOfWork.cs" />
     <Compile Include="Mappers\Implementations\NurseMapper.cs" />
-    <Compile Include="Mappers\Implementations\OperationDoctorMapper.cs" />
     <Compile Include="Mappers\Implementations\OperationMapper.cs" />
-    <Compile Include="Mappers\Implementations\OperationNurseMapper.cs" />
     <Compile Include="Mappers\Implementations\OtherEmployeeMapper.cs" />
     <Compile Include="Mappers\Implementations\PatientMapper.cs" />
     <Compile Include="Mappers\Implementations\PatientProcedureMapper.cs" />
@@ -219,9 +219,7 @@
     <Compile Include="Mappers\Interfaces\IDoctorMapper.cs" />
     <Compile Include="Mappers\Interfaces\IJobMapper.cs" />
     <Compile Include="Mappers\Interfaces\IMapperUnitOfWork.cs" />
-    <Compile Include="Mappers\Interfaces\IOperationDoctorMapper.cs" />
     <Compile Include="Mappers\Interfaces\IOperationMapper.cs" />
-    <Compile Include="Mappers\Interfaces\IOperationNurseMapper.cs" />
     <Compile Include="Mappers\Interfaces\IPatientProcedureMapper.cs" />
     <Compile Include="Mappers\Interfaces\IPositionMapper.cs" />
     <Compile Include="Mappers\Interfaces\IProcedureMapper.cs" />
@@ -273,6 +271,7 @@
     <Compile Include="Services\Interfaces\IRoomService.cs" />
     <Compile Include="Services\Interfaces\IServiceUnitOfWork.cs" />
     <Compile Include="Validations\NurseValidation.cs" />
+    <Compile Include="Validations\OperationValidation.cs" />
     <Compile Include="Validations\OtherEmployeeValidation.cs" />
     <Compile Include="Validations\PatientProcedureValidation.cs" />
     <Compile Include="Validations\PatientValidation.cs" />

@@ -11,7 +11,7 @@ namespace HospitalManagement.Models
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string LastName { get; set; }        
         public int No { get; set; }
         public DateTime BirthDate { get; set; }
         public string PhoneNumber { get; set; }
@@ -34,6 +34,7 @@ namespace HospitalManagement.Models
             }
         }
 
+        public string DisplayNurse => $"{FirstName} {LastName} {PIN}";
         public NurseModel Clone()
         {
             return new NurseModel()

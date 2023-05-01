@@ -7,5 +7,6 @@ namespace HospitalManagementCore.DataAccess.Interfaces
 {
     public interface IOperationRepository : IEntityRepository<Operation>
     {
+        bool UpdateForDelete(Operation operation);
     }
 }

@@ -63,7 +63,13 @@
                             <components:CustomDatePicker Margin="5 5" Height="25" DataContext="{Binding Path=CurrentValue.BirthDate,Mode=TwoWay}"/>
                             <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding Path=CurrentValue.PIN,Mode=TwoWay}"/>
                             <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding Path=CurrentValue.Salary,Mode=TwoWay}"/>
-                            <ComboBox Height="25" FontSize="15" Margin="5 5" ItemsSource="{Binding Path=Positions}" SelectedValue="{Binding Path=CurrentValue.Position}" DisplayMemberPath="Name"/>
+                            <ComboBox Height="25" FontSize="15" Margin="5 5" 
+                                      ItemsSource="{Binding Path=Positions}" 
+                                      SelectedItem="{Binding Path=CurrentValue.Position}" 
+                                      SelectedValue="{Binding Path=CurrentValue.Position.Name}" 
+                                      DisplayMemberPath="Name" SelectedValuePath="Name"
+                                      IsEditable="True" IsTextSearchEnabled="True"
+                                      IsTextSearchCaseSensitive="True"/>
                         </StackPanel>
                     </Grid>
 
