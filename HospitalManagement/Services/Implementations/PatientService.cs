@@ -40,7 +40,6 @@ namespace HospitalManagement.Services.Implementations
             var patientModels = new List<PatientModel>();
             var patients = _unitOfWork.PatientRepository.Get();
             int no = 1;
-
             foreach (var patient in patients)
             {
                 var patientModel = _patientMapper.Map(patient);

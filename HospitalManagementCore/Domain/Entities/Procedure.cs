@@ -10,5 +10,6 @@ namespace HospitalManagementCore.Domain.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal Cost { get; set; }
+        public bool IsDelete { get; set; }
     }
 }
