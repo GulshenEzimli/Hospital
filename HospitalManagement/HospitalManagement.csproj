@@ -279,6 +279,7 @@
     <Compile Include="Validations\QueueValidation.cs" />
     <Compile Include="Validations\ReceptionistValidation.cs" />
     <Compile Include="Validations\ProcedureValidation.cs" />
+    <Compile Include="Validations\RoomValidation.cs" />
     <Compile Include="Validations\Utils\SystemConstants.cs" />
     <Compile Include="Validations\Utils\ValidationMessageProvider.cs" />
     <Compile Include="Validations\DoctorValidation.cs" />
