@@ -122,6 +122,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             command.Parameters.AddWithValue("blockFloor", room.BlockFloor);
             command.Parameters.AddWithValue("isAvailable",room.IsAvailable);    
             command.Parameters.AddWithValue("type",room.Type);
+            command.Parameters.AddWithValue("isDelete", room.IsDelete);
         }
     }
 }

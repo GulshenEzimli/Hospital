@@ -20,7 +20,7 @@ namespace HospitalManagement
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
 
-            builder.DataSource = "localhost";
+            builder.DataSource = "(localdb)\\MSSQLLocaldb";
             builder.InitialCatalog = "Hospital";
             builder.IntegratedSecurity = true;
 
