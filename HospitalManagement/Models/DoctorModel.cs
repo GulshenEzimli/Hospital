@@ -49,7 +49,14 @@ namespace HospitalManagement.Models
             }
         }
 
-        public string DisplayDoctor => $"{FirstName} {LastName} {PIN}";
+        public string DisplayDoctor
+        {
+            get => $"{FirstName} {LastName} {PIN}";
+            set
+            {
+                DisplayDoctor = value;
+            }
+        }
         public DoctorModel Clone()
         {
             return new DoctorModel()

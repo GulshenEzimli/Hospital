@@ -16,7 +16,7 @@ namespace HospitalManagement.Models
         public DateTime BirthDate { get; set; }
         public string PIN { get; set; }
         public string PhoneNumber { get; set; }
-        public string DisplayPatient
+        public string DisplayPatient 
         {
             get => $"{Name} {Surname} {PIN}";
             set
