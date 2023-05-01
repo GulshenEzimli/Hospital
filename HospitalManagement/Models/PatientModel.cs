@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HospitalManagementCore.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,8 @@ namespace HospitalManagement.Models
         public DateTime BirthDate { get; set; }
         public string PIN { get; set; }
         public string PhoneNumber { get; set; }
+        public string DisplayPatient => $"{Name} {Surname} {PIN}";
+
         public bool IsDelete { get; set; }
         private bool[] _gender = { false, false };
         public bool[] Gender

@@ -20,6 +20,14 @@ namespace HospitalManagement.Services.Implementations
             _unitOfWork = unitOfWork;
             _mapperUnitOfWork = mapperUnitOfWork;
         }
+
+        public bool DeleteOperation(int id)
+        {
+            Operation operation = _unitOfWork.OperationRepository.GetById(id);
+            operation.IsDelete = true;
+            return _unitOfWork.OperationRepository.UpdateForDelete(operation);
+        }
+
         public List<OperationModel> GetAll()
         {
             List<OperationModel> operationModels = new List<OperationModel>();
@@ -35,8 +43,9 @@ namespace HospitalManagement.Services.Implementations
                 {
                     if (operationDoctor.OperationId == operation.Id)
                     {
-                        OperationDoctorModel operationDoctorModel = _mapperUnitOfWork.OperationDoctorMapper.Map(operationDoctor);
-                        operationModel.OperationDoctors.Add(operationDoctorModel);
+                        Doctor doctor = _unitOfWork.DoctorRepository.GetById(operationDoctor.Doctor.Id);
+                        DoctorModel doctorModel = _mapperUnitOfWork.DoctorMapper.Map(doctor);
+                        operationModel.Doctors.Add(doctorModel);
                     }
                 }
 
@@ -44,14 +53,30 @@ namespace HospitalManagement.Services.Implementations
                 {
                     if (operationNurse.OperationId == operation.Id)
                     {
-                        OperationNurseModel operationNurseModel = _mapperUnitOfWork.OperationNurseMapper.Map(operationNurse);
-                        operationModel.OperationNurses.Add(operationNurseModel);
+                        Nurse nurse = _unitOfWork.NurseRepository.GetById(operationNurse.Nurse.Id);
+                        NurseModel nurseModel = _mapperUnitOfWork.NurseMapper.Map(nurse);
+                        operationModel.Nurses.Add(nurseModel);
                     }
                 }
                 operationModel.No = no++;
                 operationModels.Add(operationModel);
             }
             return operationModels;
+        }
+
+        public int SaveOperation(OperationModel operationModel)
+        {
+            Operation toBeSavedOperation = _mapperUnitOfWork.OperationMapper.Map(operationModel);
+
+            if (toBeSavedOperation.Id == 0)
+            {
+                return _unitOfWork.OperationRepository.Insert(toBeSavedOperation);
+            }
+            else
+            {                
+                _unitOfWork.OperationRepository.Update(toBeSavedOperation);
+                return toBeSavedOperation.Id;
+            }
         }
     }
 }

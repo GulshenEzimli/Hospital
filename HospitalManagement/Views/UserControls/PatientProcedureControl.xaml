@@ -38,36 +38,20 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">
-                            <ComboBox Height="25" FontSize="15" Margin="5 5" ItemsSource="{Binding Path=Patients}" SelectedItem="{Binding CurrentValue.Patient}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock>
-                                            <TextBlock.Text>
-                                                <MultiBinding StringFormat="{} {0} {1} {2}">
-                                                    <Binding Path="Name"/>
-                                                    <Binding Path="Surname"/>
-                                                    <Binding Path="PIN"/>
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <ComboBox Height="25" FontSize="15" Margin="5 5" ItemsSource="{Binding Path=Doctors}" SelectedItem="{Binding CurrentValue.Doctor}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock>
-                                            <TextBlock.Text>
-                                                <MultiBinding StringFormat="{} {0} {1} {2}">
-                                                    <Binding Path="FirstName"/>
-                                                    <Binding Path="LastName"/>
-                                                    <Binding Path="PIN"/>
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
+                            <ComboBox Height="25" FontSize="15" Margin="5 5" 
+                                      ItemsSource="{Binding Path=Patients}" 
+                                      SelectedItem="{Binding Path=CurrentValue.Patient}"
+                                      SelectedValue="{Binding Path=CurrentValue.Patient.Id}" 
+                                      SelectedValuePath="Id" 
+                                      DisplayMemberPath="DisplayPatient"
+                                      IsEditable="True" IsTextSearchEnabled="True"
+                                      IsTextSearchCaseSensitive="True"/>
+                            <ComboBox Height="25" FontSize="15" Margin="5 5" ItemsSource="{Binding Path=Doctors}" 
+                                      SelectedItem="{Binding Path=CurrentValue.Doctor}"
+                                      SelectedValue="{Binding Path=CurrentValue.Doctor.Id}"
+                                      SelectedValuePath="Id" DisplayMemberPath="DisplayDoctor"
+                                      IsEditable="True" IsTextSearchEnabled="True"
+                                      IsTextSearchCaseSensitive="True"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="2">
@@ -76,35 +60,19 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="3">
-                            <ComboBox Height="25" FontSize="15" Margin="5 5" ItemsSource="{Binding Path=Nurses}" SelectedItem="{Binding CurrentValue.Nurse}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock>
-                                            <TextBlock.Text>
-                                                <MultiBinding StringFormat="{} {0} {1} {2}">
-                                                    <Binding Path="FirstName"/>
-                                                    <Binding Path="LastName"/>
-                                                    <Binding Path="PIN"/>
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <ComboBox Height="25" FontSize="15" Margin="5 5" ItemsSource="{Binding Path=Procedures}" SelectedItem="{Binding CurrentValue.Procedure}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock>
-                                            <TextBlock.Text>
-                                                <MultiBinding StringFormat="{} {0} {1}">
-                                                    <Binding Path="Name"/>
-                                                    <Binding Path="Cost"/>
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
+                            <ComboBox Height="25" FontSize="15" Margin="5 5" ItemsSource="{Binding Path=Nurses}" 
+                                      SelectedItem="{Binding Path=CurrentValue.Nurse}"
+                                      SelectedValue="{Binding Path=CurrentValue.Nurse.Id}"
+                                      SelectedValuePath="Id" DisplayMemberPath="DisplayNurse"
+                                      IsEditable="True" IsTextSearchEnabled="True"
+                                      IsTextSearchCaseSensitive="True"/>
+                            <ComboBox Height="25" FontSize="15" Margin="5 5" ItemsSource="{Binding Path=Procedures}"
+                                      SelectedItem="{Binding Path=CurrentValue.Procedure}"
+                                      SelectedValue="{Binding Path=CurrentValue.Procedure.Id}"
+                                      SelectedValuePath="Id" DisplayMemberPath="DisplayProcedure"
+                                      IsEditable="True" IsTextSearchEnabled="True"
+                                      IsTextSearchCaseSensitive="True"/>
+
                         </StackPanel>
                     </Grid>
 
@@ -122,7 +90,7 @@
                 </Grid>
             </StackPanel>
 
-            <ListView x:Name="MainList" Grid.Row="1" SelectionChanged="MainList_SelectionChanged" 
+            <ListView x:Name="MainList" Grid.Row="1"  
                       ItemsSource="{Binding Path=Values}" Style="{DynamicResource listViewCustom}"
                       SelectedItem="{Binding SelectedValue, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
@@ -131,35 +99,35 @@
                         <GridViewColumn Header="Patient Values" Width="auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=DisplayPatient}" Style="{DynamicResource gridViewTextColumn}"/>
+                                    <TextBlock Text="{Binding Path=Patient.DisplayPatient}" Style="{DynamicResource gridViewTextColumn}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Doctor Values" Width="auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=DisplayDoctor}" Style="{DynamicResource gridViewTextColumn}"/>
+                                    <TextBlock Text="{Binding Path=Doctor.DisplayDoctor}" Style="{DynamicResource gridViewTextColumn}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Nurse Values" Width="auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=DisplayNurse}" Style="{DynamicResource gridViewTextColumn}"/>
+                                    <TextBlock Text="{Binding Path=Nurse.DisplayNurse}" Style="{DynamicResource gridViewTextColumn}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Procedure Name" Width="auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=ProcedureName}" Style="{DynamicResource gridViewTextColumn}"/>
+                                    <TextBlock Text="{Binding Path=Procedure.Name}" Style="{DynamicResource gridViewTextColumn}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="Cost" Width="auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Path=Cost}" Style="{DynamicResource gridViewTextColumn}"/>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Path=Procedure.Cost}" Style="{DynamicResource gridViewTextColumn}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

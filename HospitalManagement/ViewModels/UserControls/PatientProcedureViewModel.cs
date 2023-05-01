@@ -150,9 +150,10 @@ namespace HospitalManagement.ViewModels.UserControls
             else
             {
                 string lowerText = SearchText.ToLower();
-                var filteredValues = AllValues.Where(x => x.DisplayDoctor?.ToLower().Contains(lowerText) == true ||
-                                                        x.DisplayNurse?.ToLower().Contains(lowerText) == true ||
-                                                        x.DisplayPatient?.ToLower().Contains(lowerText) == true ||
+                var filteredValues = AllValues.Where(x => x.Doctor.DisplayDoctor?.ToLower().Contains(lowerText) == true ||
+                                                        x.Nurse.DisplayNurse?.ToLower().Contains(lowerText) == true ||
+                                                        x.Patient.DisplayPatient?.ToLower().Contains(lowerText) == true ||
+                                                        x.Procedure.DisplayProcedure?.ToLower().Contains(lowerText) == true ||
                                                         x.UseDate.ToString(SystemConstants.DateDisplayFormat).ToLower().Contains(lowerText) == true);
                 Values = new ObservableCollection<PatientProcedureModel>(filteredValues);
             }

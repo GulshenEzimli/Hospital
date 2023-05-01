@@ -20,7 +20,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"delete * from OtherEmployees where Id = @id";
+                string cmdText = @"delete from OtherEmployees where Id = @id";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     command.Parameters.AddWithValue("id", id);
@@ -68,6 +68,8 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 {
                     command.Parameters.AddWithValue("id", id);
                     SqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read() == false)
+                        return null;
                     OtherEmployee otherEmployee = GetOtherEmployee(reader);
                     return otherEmployee;
                 }
@@ -147,6 +149,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             command.Parameters.AddWithValue("creatorId", otherEmployee.Creator.Id);
             command.Parameters.AddWithValue("modifierId", otherEmployee.Modifier.Id);
             command.Parameters.AddWithValue("jobId", otherEmployee.Job.Id);
+            command.Parameters.AddWithValue("jobName", otherEmployee.Job.Name);
             command.Parameters.AddWithValue("firstName", otherEmployee.FirstName);
             command.Parameters.AddWithValue("lastName", otherEmployee.LastName);
             command.Parameters.AddWithValue("gender", otherEmployee.Gender);

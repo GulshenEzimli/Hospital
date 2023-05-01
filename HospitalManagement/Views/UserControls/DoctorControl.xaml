@@ -49,10 +49,8 @@
                                           ItemsSource="{Binding Path=PositionValues}"
                                           SelectedItem="{Binding CurrentValue.Position}"
                                           DisplayMemberPath="Name"
-                                          SelectedValuePath="Name"
-                                          SelectedValue="{Binding CurrentValue.Position.Name}"
-                                          IsEditable="True" IsTextSearchEnabled="True"
-                                          IsTextSearchCaseSensitive="True"/>
+                                          SelectedValuePath="Id"
+                                          SelectedValue="{Binding CurrentValue.Position.Id}"/>
                                 <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.Salary,Mode=TwoWay}"/>
                                 <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 3 0 0">
                                     <RadioButton IsChecked="{Binding CurrentValue.Gender[0]}" GroupName="Gender" Content="Male" Margin="6"/>

@@ -18,7 +18,7 @@ namespace HospitalManagement.Commands.Rooms
 
         public override void Execute(object parameter)
         {
-            _roomsViewModel.CurrentSituation = Situations.NORMAL;
+            _roomsViewModel.SetDefaultValues();
         }
     }
 }

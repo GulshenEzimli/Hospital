@@ -47,11 +47,48 @@ namespace HospitalManagement.Validations.Utils
         {
             return "Salary should be greater than 0.";
         }
+        public static string GetOperationCostMessage()
+        {
+            return "Operation cost should be greater than 0.";
+        }
         public static string GetSalaryMessage(decimal salary)
         {
             return $"Salary should be less than {salary}.";
         }
         
+        public static string GetGreaterThanMessage(string propName, int value)
+        {
+            return $"{propName} should be greater than {value}.";
+        }
 
+        public static string GetGreaterThanOrEqualToMessage(string propName, int value)
+        {
+            return $"{propName} should be greater than or equal to {value}.";
+        }
+
+        public static string GetEqualToMessage(string propName, int value)
+        {
+            return $"{propName} should be equal to {value}.";
+        }
+
+        public static string GetLessThanMessage(string propName, int value)
+        {
+            return $"{propName} should be less than {value}.";
+        }
+
+        public static string GetLessThanOrEqualToMessage(string propName, int value)
+        {
+            return $"{propName} should be less than or equal to {value}.";
+        }
+
+        public static string GetInclusiveIntervalMessage(string propName, int from, int to)
+        {
+            return $"{propName} should be inclusive range in ({from}, {to}).";
+        }
+
+        public static string GetExclusiveIntervalMessage(string propName, int from, int to)
+        {
+            return $"{propName} should be exclusive range in [{from}, {to}].";
+        }
     }
 }

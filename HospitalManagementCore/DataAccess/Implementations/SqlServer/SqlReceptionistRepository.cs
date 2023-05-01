@@ -21,7 +21,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection= new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"Deleted * from Receptionist where Id=@id";
+                string cmdText = @"Delete from Receptionist where Id=@id";
                 using (SqlCommand command= new SqlCommand(cmdText,connection))
                 {
                     command.Parameters.AddWithValue("id", id);

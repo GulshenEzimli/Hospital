@@ -25,14 +25,5 @@ namespace HospitalManagement.Views.UserControls
             InitializeComponent();
         }
 
-        private void MainList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }

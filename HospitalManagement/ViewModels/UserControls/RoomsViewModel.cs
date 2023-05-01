@@ -22,6 +22,7 @@ namespace HospitalManagement.ViewModels.UserControls
         {
             _roomService = roomService;
             AllValues = new List<RoomModel>();
+            SetDefaultValues();
         }
 
         public override string Header => "Rooms";
@@ -84,10 +85,10 @@ namespace HospitalManagement.ViewModels.UserControls
 
         public List<RoomModel> AllValues { get; set; }
         public AddRoomCommand Add => new AddRoomCommand(this);
-        public DeleteRoomCommand Delete => new DeleteRoomCommand(this);
+        public DeleteRoomCommand Delete => new DeleteRoomCommand(this, _roomService);
         public EditRoomCommand Edit => new EditRoomCommand(this);
         public RejectRoomCommand Reject => new RejectRoomCommand(this);
-        public SaveRoomCommand Save => new SaveRoomCommand(this);
+        public SaveRoomCommand Save => new SaveRoomCommand(this, _roomService);
 
         public void SetDefaultValues()
         {
