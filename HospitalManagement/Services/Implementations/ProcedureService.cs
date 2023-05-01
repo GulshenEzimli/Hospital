@@ -25,11 +25,9 @@ namespace HospitalManagement.Services.Implementations
 
         public bool Delete(int id)
         {
-
             var procedure = _unitOfWork.ProcedureRepository.GetById(id);
-
+            procedure.IsDelete = true;
             return _unitOfWork.ProcedureRepository.Update(procedure);
-
         }
 
         public List<ProcedureModel> GetAll()
@@ -51,8 +49,6 @@ namespace HospitalManagement.Services.Implementations
         public int Save(ProcedureModel procedureModel)
         {
             var saveProcedure = _procedureMapper.Map(procedureModel);
-            
-
             if (saveProcedure.Id == 0)
             {
                 return _unitOfWork.ProcedureRepository.Insert(saveProcedure);
@@ -60,6 +56,7 @@ namespace HospitalManagement.Services.Implementations
             else
             {
                 var existingPatient = _unitOfWork.NurseRepository.GetById(procedureModel.Id);
+
                 _unitOfWork.ProcedureRepository.Update(saveProcedure);
                 return saveProcedure.Id;
             }

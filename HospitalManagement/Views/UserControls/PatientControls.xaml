@@ -65,7 +65,7 @@
                             <components:CustomDatePicker Margin="5 5" Height="25" DataContext="{Binding Path=CurrentValue.BirthDate,Mode=TwoWay}"/>
                             <WrapPanel Height="25" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <RadioButton GroupName="Gender" Content="Male" Margin="0 8 40 0" IsChecked="{Binding CurrentValue.Gender[0],Mode=TwoWay}"/>
-                                <RadioButton Content="Female" GroupName="Gender" Margin="10 8 0 0" IsChecked="{Binding CurrentValue.Gender[1],Mode=TwoWay}"/>
+                                <RadioButton Content="Female" GroupName="Gender" Margin="-4 8 0 0" IsChecked="{Binding CurrentValue.Gender[1],Mode=TwoWay}"/>
                             </WrapPanel>
                         </StackPanel>
 

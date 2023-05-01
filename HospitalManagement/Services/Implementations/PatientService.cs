@@ -29,7 +29,7 @@ namespace HospitalManagement.Services.Implementations
             var patient = _unitOfWork.PatientRepository.GetById(id);
             patient.IsDelete = true;
             patient.ModifiedDate=DateTime.Now;
-            patient.Modifier = new Admin { Id = id };
+            patient.Modifier = new Admin { Id = 1 };
 
             return _unitOfWork.PatientRepository.Update(patient);
 
@@ -40,7 +40,6 @@ namespace HospitalManagement.Services.Implementations
             var patientModels = new List<PatientModel>();
             var patients = _unitOfWork.PatientRepository.Get();
             int no = 1;
-
             foreach (var patient in patients)
             {
                 var patientModel = _patientMapper.Map(patient);
