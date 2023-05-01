@@ -2,9 +2,11 @@
 using HospitalManagement.Models;
 using HospitalManagement.Services.Interfaces;
 using HospitalManagement.Validations;
+using HospitalManagement.Validations.Utils;
 using HospitalManagement.ViewModels.UserControls;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +41,16 @@ namespace HospitalManagement.Commands.Rooms
 
             var roomModels = _roomService.GetAll();
             _roomsViewModel.AllValues = roomModels;
+            _roomsViewModel.Values = new ObservableCollection<RoomModel>(_roomsViewModel.AllValues);
 
+            _roomsViewModel.SetDefaultValues();
+
+            _roomsViewModel.Message = new MessageModel
+            {
+                IsSuccess = true,
+                Message = ValidationMessageProvider.GetOperationSuccessMessage()
+            };
+            DoAnimation(_roomsViewModel.ErrorDialog);
         }
     }
 }
