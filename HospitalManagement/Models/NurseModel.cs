@@ -34,14 +34,8 @@ namespace HospitalManagement.Models
             }
         }
 
-        public string DisplayNurse
-        {
-            get => $"{FirstName} {LastName} {PIN}";
-            set
-            {
-                DisplayNurse = value;
-            }
-        }
+        public string DisplayNurse => $"{FirstName} {LastName} {PIN}";
+        
         public NurseModel Clone()
         {
             return new NurseModel()

@@ -40,16 +40,16 @@
                         <StackPanel Grid.Column="1">
                             <ComboBox Height="25" FontSize="15" Margin="5 5" 
                                       ItemsSource="{Binding Path=Patients}" 
-                                      SelectedItem="{Binding CurrentValue.Patient}"
-                                      SelectedValue="{Binding Path=CurrentValue.Patient.DisplayPatient}" 
-                                      SelectedValuePath="DisplayPatient" 
+                                      SelectedItem="{Binding Path=CurrentValue.Patient}"
+                                      SelectedValue="{Binding Path=CurrentValue.Patient.Id}" 
+                                      SelectedValuePath="Id" 
                                       DisplayMemberPath="DisplayPatient"
                                       IsEditable="True" IsTextSearchEnabled="True"
                                       IsTextSearchCaseSensitive="True"/>
                             <ComboBox Height="25" FontSize="15" Margin="5 5" ItemsSource="{Binding Path=Doctors}" 
-                                      SelectedItem="{Binding CurrentValue.Doctor}"
-                                      SelectedValue="{Binding CurrentValue.Doctor.DisplayDoctor}"
-                                      SelectedValuePath="DisplayDoctor" DisplayMemberPath="DisplayDoctor"
+                                      SelectedItem="{Binding Path=CurrentValue.Doctor}"
+                                      SelectedValue="{Binding Path=CurrentValue.Doctor.Id}"
+                                      SelectedValuePath="Id" DisplayMemberPath="DisplayDoctor"
                                       IsEditable="True" IsTextSearchEnabled="True"
                                       IsTextSearchCaseSensitive="True"/>
                         </StackPanel>
@@ -61,15 +61,15 @@
 
                         <StackPanel Grid.Column="3">
                             <ComboBox Height="25" FontSize="15" Margin="5 5" ItemsSource="{Binding Path=Nurses}" 
-                                      SelectedItem="{Binding CurrentValue.Nurse}"
-                                      SelectedValue="{Binding CurrentValue.Nurse.DisplayNurse}"
-                                      SelectedValuePath="DisplayNurse" DisplayMemberPath="DisplayNurse"
+                                      SelectedItem="{Binding Path=CurrentValue.Nurse}"
+                                      SelectedValue="{Binding Path=CurrentValue.Nurse.Id}"
+                                      SelectedValuePath="Id" DisplayMemberPath="DisplayNurse"
                                       IsEditable="True" IsTextSearchEnabled="True"
                                       IsTextSearchCaseSensitive="True"/>
                             <ComboBox Height="25" FontSize="15" Margin="5 5" ItemsSource="{Binding Path=Procedures}"
-                                      SelectedItem="{Binding CurrentValue.Procedure}"
-                                      SelectedValue="{Binding CurrentValue.Procedure.DisplayProcedure}"
-                                      SelectedValuePath="DisplayProcedure" DisplayMemberPath="DisplayProcedure"
+                                      SelectedItem="{Binding Path=CurrentValue.Procedure}"
+                                      SelectedValue="{Binding Path=CurrentValue.Procedure.Id}"
+                                      SelectedValuePath="Id" DisplayMemberPath="DisplayProcedure"
                                       IsEditable="True" IsTextSearchEnabled="True"
                                       IsTextSearchCaseSensitive="True"/>
 
