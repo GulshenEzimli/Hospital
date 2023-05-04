@@ -101,6 +101,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 }
             }
         }
+
         #region GetPatient
         private Patient GetPatient(SqlDataReader reader)
         {
@@ -128,6 +129,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             return patient;
         }
         #endregion
+
         #region AddParameters
         private void AddParameters(SqlCommand command, Patient patient)
         {
