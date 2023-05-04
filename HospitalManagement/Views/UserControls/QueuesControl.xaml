@@ -56,8 +56,7 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">
-                            <ComboBox Height="25" FontSize="15" Margin="5 5" 
-                                      ItemsSource="{Binding Path=Patients}" 
+                            <ComboBox Height="25" FontSize="15" Margin="5 5" ItemsSource="{Binding Path=Patients}" 
                                       SelectedItem="{Binding Path=CurrentValue.Patient}"
                                       SelectedValue="{Binding Path=CurrentValue.Patient.Id}" 
                                       SelectedValuePath="Id" DisplayMemberPath="DisplayPatient"
@@ -72,10 +71,10 @@
                             <ComboBox Height="25" FontSize="15" Margin="5 5" ItemsSource="{Binding Path=Procedures}"
                                       SelectedItem="{Binding Path=CurrentValue.Procedure}"
                                       SelectedValue="{Binding Path=CurrentValue.Procedure.Id}"
-                                      SelectedValuePath="Id" DisplayMemberPath="DisplayProcedure"
+                                      SelectedValuePath="Id" DisplayMemberPath="DisplayProcedures"
                                       IsEditable="True" IsTextSearchEnabled="True"
                                       IsTextSearchCaseSensitive="True"/>
-                            <TextBox Style="{StaticResource myTextBox}" Width="377" />
+                            <TextBox Style="{StaticResource myTextBox}" Text="{Binding Path=CurrentValue.QueueNumber,Mode=TwoWay}" />
                         </StackPanel>
                     </Grid>
 
@@ -84,7 +83,7 @@
                             <StackPanel>
                                 <Button Content="Add" Style="{DynamicResource btnAdd}" />
                                 <Button Content="Save" Style="{DynamicResource btnSave}"/>
-                                <Button Content="Edit" Style="{DynamicResource btnChange}" />
+                                <Button Content="Edit" Style="{DynamicResource btnChange}"/>
                                 <Button Content="Cancel Changes" Style="{DynamicResource btnReject}"/>
                                 <Button Content="Delete" Style="{DynamicResource btnDelete}"/>
                             </StackPanel>
@@ -117,7 +116,7 @@
                         <GridViewColumn Header="Procedure Name" Width="auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=Procedure.DisplayProcedure}" Style="{DynamicResource gridViewTextColumn}"/>
+                                    <TextBlock Text="{Binding Path=Procedure.DisplayProcedures}" Style="{DynamicResource gridViewTextColumn}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

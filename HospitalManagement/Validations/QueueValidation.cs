@@ -23,7 +23,7 @@ namespace HospitalManagement.Validations
                 message = ValidationMessageProvider.GetRequiredMessage("Doctor value");
                 return false;
             }
-            if (string.IsNullOrEmpty(queueModel.DisplayProcedure))
+            if (string.IsNullOrEmpty(queueModel.DisplayProcedures))
             {
                 message = ValidationMessageProvider.GetRequiredMessage("Procedure value");
                 return false;

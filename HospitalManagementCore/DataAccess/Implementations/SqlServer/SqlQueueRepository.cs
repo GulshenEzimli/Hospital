@@ -35,7 +35,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"select Queues.Id as Id,Date,Patients.Id as PatientId,
+                string cmdText = @"select Queues.Id as Id,QueueNumber,Date,Patients.Id as PatientId,
                                     Patients.FirstName as PatientName,Patients.LastName as PatientSurname,
                                     Patients.PIN as PatientPIN,Doctors.Id as DoctorId, Doctors.FirstName as DoctorName, 
                                     Doctors.LastName as DoctorSurname,Doctors.PIN as DoctorPIN, Doctors.PositionId as DoctorPositionId, 
@@ -63,7 +63,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"select Queues.Id as Id,Date,Patients.Id as PatientId,
+                string cmdText = @"select Queues.Id as Id,QueueNumber,Date,Patients.Id as PatientId,
                                     Patients.FirstName as PatientName,Patients.LastName as PatientSurname,
                                     Patients.PIN as PatientPIN,Doctors.Id as DoctorId, Doctors.FirstName as DoctorName, 
                                     Doctors.LastName as DoctorSurname,Doctors.PIN as DoctorPIN, Doctors.PositionId as DoctorPositionId, 
@@ -147,6 +147,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 Name = reader.GetString("ProcedureName"),
             };
             queue.UseDate = reader.GetDateTime("Date");
+            queue.QueueNumber = reader.GetInt32("QueueNumber");
 
             return queue;
 

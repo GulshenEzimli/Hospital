@@ -15,7 +15,7 @@ namespace HospitalManagement.Models
         public ProcedureModel Procedure { get; set; }
         public string DisplayPatient => $"{Patient.Name} {Patient.Surname} {Patient.PIN} ";
         public string DisplayDoctor => $"{Doctor.FirstName} {Doctor.LastName} {Doctor.PIN} {Doctor.Position}";
-        public string DisplayProcedure => $"{Procedure.Name}";
+        public string DisplayProcedures => $"{Procedure.Name}";
         public DateTime UseDate { get; set; }
         public int QueueNumber { get; set; }
 
