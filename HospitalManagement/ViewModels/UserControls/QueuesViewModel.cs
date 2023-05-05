@@ -22,6 +22,7 @@ namespace HospitalManagement.ViewModels.UserControls
         public QueuesViewModel(IQueueService queueService, ErrorDialog errorDialog) : base(errorDialog)
         {
             _queueService = queueService;
+            CurrentValue = new QueueModel();
         }
         private Situations _currentSituation = Situations.NORMAL;
         public Situations CurrentSituation
@@ -137,9 +138,9 @@ namespace HospitalManagement.ViewModels.UserControls
             else
             {
                 string lowerText = SearchText.ToLower();
-                var filteredValues = AllValues.Where(x => x.DisplayProcedures?.ToLower().Contains(lowerText) == true || 
-                                                          x.DisplayDoctor?.ToLower().Contains(lowerText) == true ||
-                                                          x.DisplayPatient?.ToLower().Contains(lowerText) == true ||
+                var filteredValues = AllValues.Where(x => x.Procedure.Name?.ToLower().Contains(lowerText) == true || 
+                                                          x.Doctor.DisplayDoctor?.ToLower().Contains(lowerText) == true ||
+                                                          x.Patient.DisplayPatient?.ToLower().Contains(lowerText) == true ||
                                                           x.UseDate.ToString(SystemConstants.DateDisplayFormat).ToLower().Contains(lowerText) == true);
                 Values = new ObservableCollection<QueueModel>(filteredValues);
             }
