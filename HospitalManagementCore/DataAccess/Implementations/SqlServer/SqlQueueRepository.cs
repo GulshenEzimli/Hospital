@@ -107,6 +107,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                                    QueueNumber= @queueNumber, Date=@Date where Id=@id";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
+                    command.Parameters.AddWithValue("@id", queue.Id);
                     AddParameters(command, queue);
                     return command.ExecuteNonQuery() == 1;
                 }
