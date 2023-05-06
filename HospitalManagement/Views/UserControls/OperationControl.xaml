@@ -11,7 +11,7 @@
         <Border>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" MaxHeight="278"/>
+                    <RowDefinition Height="auto" MaxHeight="168"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
@@ -29,7 +29,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="1.5*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1.1*"/>
                                 <ColumnDefinition Width="1.5*"/>
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="2*"/>
@@ -81,8 +81,8 @@
                                                      SelectedValue="{Binding SelectedDoctor.Id}"/>
 
                                 <ListView ItemsSource="{Binding CurrentValue.Doctors}" 
-                                                      SelectionMode="Single"
-                                                      MaxHeight="50">
+                                          SelectionMode="Single"
+                                          MaxHeight="65">
                                     <ListView.Style>
                                         <Style TargetType="ListView">
                                             <Setter Property="Visibility" Value="Visible"/>
@@ -115,8 +115,8 @@
                                                      SelectedValue="{Binding SelectedNurse.Id}"/>
 
                                 <ListView ItemsSource="{Binding CurrentValue.Nurses}" 
-                                                      SelectionMode="Single"
-                                                      MaxHeight="50">
+                                          SelectionMode="Single"
+                                          MaxHeight="65">
                                     <ListView.Style>
                                         <Style TargetType="ListView">
                                             <Setter Property="Visibility" Value="Visible"/>
