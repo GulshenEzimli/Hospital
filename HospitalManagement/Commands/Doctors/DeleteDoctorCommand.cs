@@ -37,9 +37,9 @@ namespace HospitalManagement.Commands.Doctors
                 return;
 
             int id = _doctorsViewModel.CurrentValue.Id;
-            _serviceUnitOfWork.doctorService.DeleteDoctor(id);
+            _serviceUnitOfWork.DoctorService.DeleteDoctor(id);
 
-            List<DoctorModel> doctorModels = _serviceUnitOfWork.doctorService.GetAll();
+            List<DoctorModel> doctorModels = _serviceUnitOfWork.DoctorService.GetAll();
             _doctorsViewModel.AllValues = doctorModels;
             _doctorsViewModel.Values = new ObservableCollection<DoctorModel>(doctorModels);
             

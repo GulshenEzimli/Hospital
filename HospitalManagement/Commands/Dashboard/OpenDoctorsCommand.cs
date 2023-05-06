@@ -29,11 +29,11 @@ namespace HospitalManagement.Commands.Dashboard
             DoctorControl doctorControl = new DoctorControl();
             DoctorsViewModel doctorsViewModel = new DoctorsViewModel(_serviceUnitOfWork, doctorControl.ErrorDialog);
 
-            List<DoctorModel> doctorModels = _serviceUnitOfWork.doctorService.GetAll();
+            List<DoctorModel> doctorModels = _serviceUnitOfWork.DoctorService.GetAll();
             doctorsViewModel.AllValues = doctorModels;
             doctorsViewModel.Values = new ObservableCollection<DoctorModel>(doctorModels);
 
-            List<PositionModel> positions = _serviceUnitOfWork.positionService.GetAll();
+            List<PositionModel> positions = _serviceUnitOfWork.PositionService.GetAll();
             doctorsViewModel.PositionValues = new List<PositionModel>(positions);
             
             doctorControl.DataContext = doctorsViewModel;

@@ -26,16 +26,16 @@ namespace HospitalManagement.Commands.Dashboard
         public override void Execute(object parameter)
         {
             PatientProcedureControl patientProcedureControl = new PatientProcedureControl();
-            PatientProcedureViewModel patientProcedureViewModel = new PatientProcedureViewModel(_serviceUnitOfWork.patientProcedureService, patientProcedureControl.ErrorDialog);
+            PatientProcedureViewModel patientProcedureViewModel = new PatientProcedureViewModel(_serviceUnitOfWork.PatientProcedureService, patientProcedureControl.ErrorDialog);
 
-            var patientProcedureModels = _serviceUnitOfWork.patientProcedureService.GetAll();
+            var patientProcedureModels = _serviceUnitOfWork.PatientProcedureService.GetAll();
             patientProcedureViewModel.AllValues = patientProcedureModels;
             patientProcedureViewModel.Values = new ObservableCollection<PatientProcedureModel>(patientProcedureModels);
 
-            patientProcedureViewModel.Patients = _serviceUnitOfWork.patientService.GetAll();
-            patientProcedureViewModel.Doctors = _serviceUnitOfWork.doctorService.GetAll();
-            patientProcedureViewModel.Nurses = _serviceUnitOfWork.nurseService.GetAll();
-            patientProcedureViewModel.Procedures = _serviceUnitOfWork.procedureService.GetAll();
+            patientProcedureViewModel.Patients = _serviceUnitOfWork.PatientService.GetAll();
+            patientProcedureViewModel.Doctors = _serviceUnitOfWork.DoctorService.GetAll();
+            patientProcedureViewModel.Nurses = _serviceUnitOfWork.NurseService.GetAll();
+            patientProcedureViewModel.Procedures = _serviceUnitOfWork.ProcedureService.GetAll();
 
             patientProcedureControl.DataContext = patientProcedureViewModel;
             _viewModel.CenterGrid.Children.Clear();

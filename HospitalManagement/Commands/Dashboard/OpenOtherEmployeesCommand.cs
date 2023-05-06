@@ -26,13 +26,13 @@ namespace HospitalManagement.Commands.Dashboard
         public override void Execute(object parameter)
         {
             OtherEmployeesControl otherEmployeesControl = new OtherEmployeesControl();
-            OtherEmployeesViewModel otherEmployeesViewModel = new OtherEmployeesViewModel(_serviceUnitOfWork.otherEmployeeService, otherEmployeesControl.ErrorDialog);
+            OtherEmployeesViewModel otherEmployeesViewModel = new OtherEmployeesViewModel(_serviceUnitOfWork.OtherEmployeeService, otherEmployeesControl.ErrorDialog);
 
-            List<OtherEmployeeModel> otherEmployeeModels = _serviceUnitOfWork.otherEmployeeService.GetAll();
+            List<OtherEmployeeModel> otherEmployeeModels = _serviceUnitOfWork.OtherEmployeeService.GetAll();
             otherEmployeesViewModel.AllValues = otherEmployeeModels;
             otherEmployeesViewModel.Values = new ObservableCollection<OtherEmployeeModel>(otherEmployeeModels);
 
-            otherEmployeesViewModel.JobNames = _serviceUnitOfWork.jobService.GetAll();
+            otherEmployeesViewModel.JobNames = _serviceUnitOfWork.JobService.GetAll();
             
 
             otherEmployeesControl.DataContext = otherEmployeesViewModel;
