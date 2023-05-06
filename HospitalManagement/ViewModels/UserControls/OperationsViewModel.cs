@@ -24,6 +24,8 @@ namespace HospitalManagement.ViewModels.UserControls
         {
             _serviceUnitOfWork = serviceUnitOfWork;
             AllValues = new List<OperationModel>();
+            AllDoctorValues = new List<DoctorModel>();
+            AllNurseValues = new List<NurseModel>();
             SetDefaultValues();
         }
         public override string Header => "Operations";
@@ -134,8 +136,11 @@ namespace HospitalManagement.ViewModels.UserControls
             set
             {
                 _doctorValues = value;
+                OnPropertyChanged(nameof(DoctorValues));
             }
         }
+
+        public List<DoctorModel> AllDoctorValues { get; set; }
 
         private DoctorModel _selectedDoctor;
         public DoctorModel SelectedDoctor
@@ -161,8 +166,11 @@ namespace HospitalManagement.ViewModels.UserControls
             set
             {
                 _nurseValues = value;
+                OnPropertyChanged(nameof(NurseValues));
             }
         }
+
+        public List<NurseModel> AllNurseValues { get; set; }
 
         private NurseModel _selectedNurse;
         public NurseModel SelectedNurse
@@ -203,7 +211,11 @@ namespace HospitalManagement.ViewModels.UserControls
         {
             _selectedValue = operationModel;
             OnPropertyChanged(nameof(SelectedValue));
+
+            DoctorValues = new ObservableCollection<DoctorModel>(AllDoctorValues);
+            NurseValues = new ObservableCollection<NurseModel>(AllNurseValues);
         }
+
         protected override void OnSearchTextChanged()
         {
             if (string.IsNullOrWhiteSpace(SearchText))
