@@ -25,7 +25,7 @@ namespace HospitalManagement.Services.Implementations
         {
             Operation operation = _unitOfWork.OperationRepository.GetById(id);
             operation.IsDelete = true;
-            return _unitOfWork.OperationRepository.UpdateForDelete(operation);
+            return _unitOfWork.OperationRepository.Update(operation);
         }
 
         public List<OperationModel> GetAll()

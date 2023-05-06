@@ -24,7 +24,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 
                 var transaction = connection.BeginTransaction();
                 string cmdText = @"delete from OperationDoctors where OperationId=@id";
-                using (SqlCommand command = new SqlCommand(cmdText,connection,transaction))
+                using (SqlCommand command = new SqlCommand(cmdText, connection, transaction))
                 {
                     bool isSuccess = false;
 
@@ -151,80 +151,82 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             }
         }
 
-        public bool UpdateForDelete(Operation operation)
-        {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                string cmdText = @"update Operations set
-                                   PatientId=@patientId, RoomId=@roomId, OperationDate=@operationDate,
-                                   OperationCost=@operationCost, OperationReason=@operationReason, IsDelete=@isDelete
-                                   where Id=@id";
-                using (SqlCommand command = new SqlCommand(cmdText, connection))
-                {
-                    command.Parameters.AddWithValue("id", operation.Id);
-                    AddParametersOperation(command, operation);
-                    return command.ExecuteNonQuery() == 1;
-                }
-            }
-        }
-
         public bool Update(Operation operation)
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            if (operation.IsDelete == false)
             {
-                connection.Open();
-                var transaction = connection.BeginTransaction();
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    var transaction = connection.BeginTransaction();
 
-                string cmdText = @"update Operations set
+                    string cmdText = @"update Operations set
                                 PatientId=@patientId, RoomId=@roomId, OperationDate=@operationDate,
                                 OperationCost=@operationCost, OperationReason=@operationReason, IsDelete=@isDelete
                                 where Id=@id";
 
-                using (SqlCommand command = new SqlCommand(cmdText, connection, transaction))
+                    using (SqlCommand command = new SqlCommand(cmdText, connection, transaction))
+                    {
+                        bool isSuccess = false;
+                        try
+                        {
+                            command.Parameters.AddWithValue("id", operation.Id);
+                            AddParametersOperation(command, operation);
+                            isSuccess = command.ExecuteNonQuery() == 1;
+                            command.Parameters.Clear();
+
+                            command.CommandText = @"delete from OperationDoctors where OperationId=@id";
+                            command.Parameters.AddWithValue("id", operation.Id);
+                            isSuccess = command.ExecuteNonQuery() == 1;
+                            command.Parameters.Clear();
+
+                            foreach (Doctor doctor in operation.Doctors)
+                            {
+                                command.CommandText = @"insert into OperationDoctors output inserted.id 
+                                                    values(@operationId, @doctorId)";
+                                AddParametersOperationDoctor(command, operation.Id, doctor);
+                                command.ExecuteScalar();
+                                command.Parameters.Clear();
+                            }
+
+                            command.CommandText = @"delete from OperationNurses where OperationId=@id";
+                            command.Parameters.AddWithValue("id", operation.Id);
+                            isSuccess = command.ExecuteNonQuery() == 1;
+                            command.Parameters.Clear();
+
+                            foreach (Nurse nurse in operation.Nurses)
+                            {
+                                command.CommandText = @"insert into OperationNurses output inserted.id 
+                                                    values(@operationId, @nurseId)";
+                                AddParametersOperationNurse(command, operation.Id, nurse);
+                                command.ExecuteScalar();
+                                command.Parameters.Clear();
+                            }
+                            transaction.Commit();
+                            return isSuccess;
+                        }
+                        catch (Exception)
+                        {
+                            transaction.Rollback();
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
-                    bool isSuccess = false;
-                    try
+                    connection.Open();
+                    string cmdText = @"update Operations set
+                                   PatientId=@patientId, RoomId=@roomId, OperationDate=@operationDate,
+                                   OperationCost=@operationCost, OperationReason=@operationReason, IsDelete=@isDelete
+                                   where Id=@id";
+                    using (SqlCommand command = new SqlCommand(cmdText, connection))
                     {
                         command.Parameters.AddWithValue("id", operation.Id);
                         AddParametersOperation(command, operation);
-                        isSuccess = command.ExecuteNonQuery() == 1;
-                        command.Parameters.Clear();
-
-                        command.CommandText = @"delete from OperationDoctors where OperationId=@id";
-                        command.Parameters.AddWithValue("id", operation.Id);
-                        isSuccess = command.ExecuteNonQuery() == 1;
-                        command.Parameters.Clear();
-
-                        foreach (Doctor doctor in operation.Doctors)
-                        {
-                            command.CommandText = @"insert into OperationDoctors output inserted.id 
-                                                    values(@operationId, @doctorId)";
-                            AddParametersOperationDoctor(command, operation.Id, doctor);
-                            command.ExecuteScalar();
-                            command.Parameters.Clear();
-                        }
-
-                        command.CommandText = @"delete from OperationNurses where OperationId=@id";
-                        command.Parameters.AddWithValue("id", operation.Id);
-                        isSuccess = command.ExecuteNonQuery() == 1;
-                        command.Parameters.Clear();
-
-                        foreach (Nurse nurse in operation.Nurses)
-                        {
-                            command.CommandText = @"insert into OperationNurses output inserted.id 
-                                                    values(@operationId, @nurseId)";
-                            AddParametersOperationNurse(command, operation.Id, nurse);
-                            command.ExecuteScalar();
-                            command.Parameters.Clear();
-                        }
-                        transaction.Commit();
-                        return isSuccess;
-                    }
-                    catch (Exception)
-                    {
-                        transaction.Rollback();
-                        return false;
+                        return command.ExecuteNonQuery() == 1;
                     }
                 }
             }
