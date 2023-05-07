@@ -20,7 +20,7 @@ namespace HospitalManagement.ViewModels.Windows
         }
         public LoginPage LoginPage { get; set; }
 
-        public SignInCommand SignIn => new SignInCommand(this, _adminService);
+        //public SignInCommand SignIn => new SignInCommand(this, _adminService);
 
         private string _username;
         public string Username

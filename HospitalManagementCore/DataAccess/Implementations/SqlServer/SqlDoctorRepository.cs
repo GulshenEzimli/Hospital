@@ -127,7 +127,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             };
             doctor.FirstName = reader.GetString("FirstName");
             doctor.LastName = reader.GetString("LastName");
-            doctor.Gender = reader.GetBoolean("Gender") ? Gender.Male : Gender.Female;
+            doctor.Gender = reader.GetBoolean("Gender") ? Gender.Kişi : Gender.Qadın;
             doctor.PIN = reader.GetString("PIN");
             doctor.Email = reader.GetString("Email");
             doctor.Phonenumber = reader.GetString("Phonenumber");
@@ -153,7 +153,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             command.Parameters.AddWithValue("positionId", doctor.Position.Id);
             command.Parameters.AddWithValue("firstName", doctor.FirstName);
             command.Parameters.AddWithValue("lastName", doctor.LastName);
-            command.Parameters.AddWithValue("gender", doctor.Gender == Gender.Male ? true : false);
+            command.Parameters.AddWithValue("gender", doctor.Gender == Gender.Kişi ? true : false);
             command.Parameters.AddWithValue("birthDate", doctor.BirthDate);
             command.Parameters.AddWithValue("pin", doctor.PIN);
             command.Parameters.AddWithValue("email", doctor.Email);

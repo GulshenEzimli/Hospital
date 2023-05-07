@@ -85,7 +85,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 },
                 FirstName = reader.GetString("FirstName"),
                 LastName = reader.GetString("LastName"),
-                Gender = reader.GetBoolean("Gender") ? Gender.Male : Gender.Female,
+                Gender = reader.GetBoolean("Gender") ? Gender.Kişi : Gender.Qadın,
                 PIN = reader.GetString("PIN"),
                 Email = reader.GetString("Email"),
                 Phonenumber = reader.GetString("Phonenumber"),
