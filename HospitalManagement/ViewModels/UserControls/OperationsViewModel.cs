@@ -198,6 +198,8 @@ namespace HospitalManagement.ViewModels.UserControls
         public SaveOperationCommand Save => new SaveOperationCommand(this, _serviceUnitOfWork);
         public RemoveDoctorCommand RemoveDoctor => new RemoveDoctorCommand(this);
         public RemoveNurseCommand RemoveNurse => new RemoveNurseCommand(this);
+        public ExportExcelOperationCommand ExportExcel => new ExportExcelOperationCommand(this);
+
 
         public void SetDefaultValues()
         {

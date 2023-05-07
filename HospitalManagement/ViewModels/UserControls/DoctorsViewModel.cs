@@ -100,6 +100,7 @@ namespace HospitalManagement.ViewModels.UserControls
         public EditDoctorCommand Edit => new EditDoctorCommand(this);
         public RejectDoctorCommand Reject => new RejectDoctorCommand(this);
         public SaveDoctorCommand Save => new SaveDoctorCommand(this, _serviceUnitOfWork);
+        public ExportExcelDoctorCommand ExportExcel => new ExportExcelDoctorCommand(this);
 
         public void SetDefaultValues()
         {
