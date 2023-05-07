@@ -1,4 +1,5 @@
 ﻿using HospitalManagement.Commands;
+using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Services.Interfaces;
 using HospitalManagement.Views.Windows;
 using System;
@@ -13,14 +14,16 @@ namespace HospitalManagement.ViewModels.Windows
     public class LoginViewModel : BaseViewModel
     {
         private readonly IAdminService _adminService;
-        public LoginViewModel(IAdminService adminService,LoginPage loginPage)
+        private readonly IServiceUnitOfWork _serviceUnitOfWork;
+        public LoginViewModel(IAdminService adminService, IServiceUnitOfWork serviceUnitOfWork,LoginPage loginPage)
         {
             _adminService = adminService;
+            _serviceUnitOfWork = serviceUnitOfWork;
             LoginPage = loginPage;
         }
         public LoginPage LoginPage { get; set; }
 
-        //public SignInCommand SignIn => new SignInCommand(this, _adminService);
+        public SignInCommand SignIn => new SignInCommand(this, _adminService,_serviceUnitOfWork);
 
         private string _username;
         public string Username

@@ -16,19 +16,11 @@ namespace HospitalManagement.Commands
         private readonly LoginViewModel _loginViewModel;
         private readonly IAdminService _adminService;
         private readonly IServiceUnitOfWork _serviceUnitOfWork;
-        private readonly IPatientMapper _patientMapper;
-        private readonly IProcedureMapper _procedureMapper;
-        private readonly IQueueMapper _queueMapper;
-        public SignInCommand(LoginViewModel loginViewModel, IAdminService adminService, 
-                                IServiceUnitOfWork serviceUnitOfWork,IPatientMapper patientMapper,
-                                IProcedureMapper procedureMapper,IQueueMapper queueMapper)
+        public SignInCommand(LoginViewModel loginViewModel, IAdminService adminService, IServiceUnitOfWork serviceUnitOfWork)
         {
             _loginViewModel = loginViewModel;
             _adminService = adminService;
             _serviceUnitOfWork = serviceUnitOfWork;
-            _patientMapper = patientMapper;
-            _procedureMapper = procedureMapper;
-            _queueMapper = queueMapper;
         }
         public override void Execute(object parameter)
         {
@@ -39,7 +31,7 @@ namespace HospitalManagement.Commands
             if(authorizationSuccess)
             {
                 DashboardWindow dashboardWindow = new DashboardWindow();
-                DashboardViewModel dashboardViewModel = new DashboardViewModel(_serviceUnitOfWork,_patientMapper,_procedureMapper, _queueMapper);
+                DashboardViewModel dashboardViewModel = new DashboardViewModel(_serviceUnitOfWork);
 
                 dashboardViewModel.CenterGrid = dashboardWindow.grdCenter;
                 dashboardWindow.DataContext = dashboardViewModel;
