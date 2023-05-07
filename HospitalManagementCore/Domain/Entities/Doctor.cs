@@ -1,4 +1,5 @@
-﻿using HospitalManagementCore.Domain.Interfaces;
+﻿using HospitalManagementCore.Domain.Enums;
+using HospitalManagementCore.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,7 +13,7 @@ namespace HospitalManagementCore.Domain.Entities
         public DoctorPosition Position { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public bool Gender { get; set; }
+        public Gender Gender { get; set; }
         public DateTime BirthDate { get; set; }
         public string PIN { get; set; }
         public string Email { get; set; }

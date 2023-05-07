@@ -202,6 +202,7 @@
     <Compile Include="Commands\Rooms\EditRoomCommand.cs" />
     <Compile Include="Commands\Rooms\RejectRoomCommand.cs" />
     <Compile Include="Commands\Rooms\SaveRoomCommand.cs" />
+    <Compile Include="Converters\RadioButtonToEnumConverter.cs" />
     <Compile Include="Enums\Situations.cs" />
     <Compile Include="Mappers\Implementations\DoctorMapper.cs" />
     <Compile Include="Mappers\Implementations\JobMapper.cs" />

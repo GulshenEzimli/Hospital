@@ -45,15 +45,9 @@ namespace HospitalManagement.Validations
                 return false;
             }
 
-            if (doctorModel.Gender[0] && doctorModel.Gender[1])
+            if (doctorModel.Gender == 0)
             {
                 message = ValidationMessageProvider.GetRequiredMessage("Gender");
-                return false;
-            }
-
-            if (doctorModel.IsChiefDoctor[0] && doctorModel.IsChiefDoctor[1])
-            {
-                message = ValidationMessageProvider.GetRequiredMessage("ChiefDoctor");
                 return false;
             }
 
