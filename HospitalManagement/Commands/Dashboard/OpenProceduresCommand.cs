@@ -17,20 +17,20 @@ namespace HospitalManagement.Commands.Dashboard
     public class OpenProceduresCommand:BaseCommand
     {
         private readonly DashboardViewModel _viewModel;
-        private readonly IProcedureService _procedureService;
+        private readonly IServiceUnitOfWork _serviceUnitOfWork;
 
-        public OpenProceduresCommand(DashboardViewModel viewModel, IProcedureService procedureService)
+        public OpenProceduresCommand(DashboardViewModel viewModel, IServiceUnitOfWork serviceUnitOfWork)
         {
             _viewModel = viewModel;
-            _procedureService = procedureService;
+            _serviceUnitOfWork = serviceUnitOfWork;
         }
 
         public override void Execute(object parameter)
         {
             var procedureControl = new ProceduresControl();
-            var controlViewModel = new ProceduresViewModel(_procedureService, procedureControl.ErrorDialog);
+            var controlViewModel = new ProceduresViewModel(_serviceUnitOfWork.ProcedureService, procedureControl.ErrorDialog);
 
-            var procedureModels = _procedureService.GetAll();
+            var procedureModels = _serviceUnitOfWork.ProcedureService.GetAll();
             controlViewModel.AllValues = procedureModels;
             controlViewModel.Values = new ObservableCollection<ProcedureModel>(procedureModels);
 

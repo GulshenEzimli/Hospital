@@ -17,20 +17,20 @@ namespace HospitalManagement.Commands.Dashboard
     public class OpenPatientsCommand : BaseCommand
     {
         private readonly DashboardViewModel _viewModel;
-        private readonly IPatientService _patientService;
+        private readonly IServiceUnitOfWork _servicUnitOfWork;    
 
-        public OpenPatientsCommand(DashboardViewModel viewModel,IPatientService patientService)
+        public OpenPatientsCommand(DashboardViewModel viewModel, IServiceUnitOfWork serviceUnitOfWork)
         {
             _viewModel = viewModel;
-            _patientService =patientService;
+            _servicUnitOfWork = serviceUnitOfWork;
         }   
 
         public override void Execute(object parameter)
         {
             var patientControl = new PatientControls();
-            var controlViewModel = new PatientsViewModel(_patientService,patientControl.ErrorDialog);
+            var controlViewModel = new PatientsViewModel(_servicUnitOfWork.PatientService, patientControl.ErrorDialog);
 
-            var patientModels = _patientService.GetAll();
+            var patientModels = _servicUnitOfWork.PatientService.GetAll();
             controlViewModel.AllValues=patientModels;
             controlViewModel.Values = new ObservableCollection<PatientModel>(patientModels);
 

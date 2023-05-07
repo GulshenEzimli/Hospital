@@ -110,10 +110,9 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using(SqlConnection connection = new SqlConnection(_connectionString)) 
             {
                 connection.Open();
-                string cmdText = @"select * from Admins where Username = @username";
+                string cmdText = $"select * from Admins where Username = '{username}'";
                 using(SqlCommand command = new SqlCommand(cmdText, connection))
                 {
-                    command.Parameters.AddWithValue("username", username);
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.Read() == false)
                         return null;
