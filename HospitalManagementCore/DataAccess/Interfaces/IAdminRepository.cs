@@ -7,5 +7,6 @@ namespace HospitalManagementCore.DataAccess.Interfaces
 {
     public interface IAdminRepository:IEntityRepository<Admin>
     {
+        Admin Get(string username);
     }
 }
