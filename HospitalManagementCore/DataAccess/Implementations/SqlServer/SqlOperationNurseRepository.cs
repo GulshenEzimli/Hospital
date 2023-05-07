@@ -1,5 +1,6 @@
 ﻿using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
+using HospitalManagementCore.Domain.Enums;
 using HospitalManagementCore.Utils;
 using System;
 using System.Collections.Generic;
@@ -94,7 +95,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 },
                 FirstName = reader.GetString("FirstName"),
                 LastName = reader.GetString("LastName"),
-                Gender = reader.GetBoolean("Gender"),
+                Gender = reader.GetBoolean("Gender") ? Gender.Kişi : Gender.Qadın,
                 PIN = reader.GetString("PIN"),
                 Email = reader.GetString("Email"),
                 PhoneNumber = reader.GetString("PhoneNumber"),

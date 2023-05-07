@@ -1,5 +1,6 @@
 ﻿using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
+using HospitalManagementCore.Domain.Enums;
 using HospitalManagementCore.Utils;
 using System;
 using System.Collections.Generic;
@@ -131,7 +132,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             };
             otherEmployee.FirstName = reader.GetString("FirstName");
             otherEmployee.LastName = reader.GetString("LastName");
-            otherEmployee.Gender = reader.GetBoolean("Gender");
+            otherEmployee.Gender = reader.GetBoolean("Gender") ? Gender.Kişi : Gender.Qadın;
             otherEmployee.PIN = reader.GetString("PIN");
             otherEmployee.Email = reader.GetString("Email");
             otherEmployee.PhoneNumber = reader.GetString("PhoneNumber");
@@ -152,7 +153,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             command.Parameters.AddWithValue("jobName", otherEmployee.Job.Name);
             command.Parameters.AddWithValue("firstName", otherEmployee.FirstName);
             command.Parameters.AddWithValue("lastName", otherEmployee.LastName);
-            command.Parameters.AddWithValue("gender", otherEmployee.Gender);
+            command.Parameters.AddWithValue("gender", otherEmployee.Gender == Gender.Qadın ? false : true);
             command.Parameters.AddWithValue("birthDate", otherEmployee.BirthDate);
             command.Parameters.AddWithValue("pin", otherEmployee.PIN);
             command.Parameters.AddWithValue("email", otherEmployee.Email);
