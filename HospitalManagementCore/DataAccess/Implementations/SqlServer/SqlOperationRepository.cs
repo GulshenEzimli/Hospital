@@ -251,7 +251,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 {
                     Id = reader.GetInt32("ModifierId")
                 },
-                Gender = reader.GetBoolean("Gender"),
+                Gender = reader.GetBoolean("Gender") ? Gender.Kişi : Gender.Qadın,
                 BirthDate = reader.GetDateTime("BirthDate"),
                 Name = reader.GetString("FirstName"),
                 Surname = reader.GetString("LastName"),
@@ -292,6 +292,11 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         {
             command.Parameters.AddWithValue("operationId", operationId);
             command.Parameters.AddWithValue("nurseId", nurse.Id);
+        }
+
+        public bool UpdateForDelete(Operation operation)
+        {
+            throw new NotImplementedException();
         }
     }
 }

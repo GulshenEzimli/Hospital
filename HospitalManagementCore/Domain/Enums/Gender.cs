@@ -7,6 +7,8 @@ namespace HospitalManagementCore.Domain.Enums
     public enum Gender
     {
         Kişi = 1,
-        Qadın = 2
+        Qadın = 2,
+        Male = 3,
+        Female = 4
     }
 }
