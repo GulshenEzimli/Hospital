@@ -83,6 +83,7 @@
     <Compile Include="Attributes\ExcelColumnAttribute.cs" />
     <Compile Include="Attributes\ExcelIgnoreAttribute.cs" />
     <Compile Include="Commands\Doctors\ExportExcelDoctorCommand.cs" />
+    <Compile Include="Commands\Nurses\ExportExcelNurseCommand.cs" />
     <Compile Include="Commands\Operations\ExportExcelOperationCommand.cs" />
     <Compile Include="Commands\SignInCommand.cs" />
     <Compile Include="Kernel.cs" />
