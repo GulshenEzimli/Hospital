@@ -21,6 +21,62 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!--<ControlTemplate>
+            <Border S CornerRadius="15" Height="auto">
+                <Button  FontSize="22" BorderBrush="Transparent" 
+                    Background="Transparent"   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Border>
+        </ControlTemplate>>-->
+        
+        <Style x:Key="LoginButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="30,0,30,0"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="IsEnabled" Value="True"/>
+            <Setter Property="Content" Value="LOGIN"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid x:Name="grid">
+                            <Border x:Name="border" CornerRadius="20" BorderBrush="Gray" BorderThickness="2">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                                        <GradientStop Color="#56CFE1" Offset="0"/>
+                                        <GradientStop Color="#4EA8DE" Offset="0.25"/>
+                                        <GradientStop Color="#5E60CE" Offset="0.6"/>
+                                        <GradientStop Color="#B903D8" Offset="0.8"/>
+                                        <GradientStop Color="#D80AFB" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <ContentPresenter x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                                  TextElement.FontFamily="Century Gothic" TextElement.Foreground="White" 
+                                                  TextElement.FontSize="20" TextElement.FontWeight="Bold"></ContentPresenter>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                                            <LinearGradientBrush.Transform>
+                                                <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="0.5" ScaleY="0.5"/>
+                                            </LinearGradientBrush.Transform>
+                                            <GradientStop Color="#56CFE1" Offset="0"/>
+                                            <GradientStop Color="#4EA8DE" Offset="0.25"/>
+                                            <GradientStop Color="#5E60CE" Offset="0.6"/>
+                                            <GradientStop Color="#B903D8" Offset="0.8"/>
+                                            <GradientStop Color="#D80AFB" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Height" Value="25"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Window.Resources>
     <Border Style="{StaticResource LoginColorStyle}">
         <Grid>
@@ -36,16 +92,16 @@
                         <Label Content="Login" FontFamily="Arial" FontSize="45" FontWeight="Bold" Height="auto" Margin="0 60 0 30"
                             Background="Transparent" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <TextBlock Text="Email" FontWeight="Bold" Background="Transparent"  FontFamily="Arial" FontSize="15" Foreground="Black" Margin="30,0,30,0"/>
-                        <TextBox Margin="30,0,30,0" BorderThickness="0" Text="{Binding Username }" Height="auto"
+                        <TextBox Margin="30,5,30,0" BorderThickness="0" Text="{Binding Username }" Height="auto"
                          Foreground="Black" Background="Transparent"  FontFamily="Century Gothic" FontSize="15">
                             <TextBox.InputBindings>
                                 <KeyBinding Command="{Binding Path=SignIn}" CommandParameter="{Binding ElementName=PasswordTxt}" Key="Enter" />
                             </TextBox.InputBindings>
                         </TextBox>
-                        <Separator BorderBrush="white" Margin="30 10"/>
+                        <Separator BorderBrush="white" Margin="30 5"/>
 
                         <TextBlock Text="Password" FontWeight="Bold" Background="Transparent" Height="auto"  FontFamily="Arial" FontSize="15" Foreground="Black" Margin="30,0,30,0"/>
-                        <PasswordBox Margin="30,0,30,0" x:Name="PasswordTxt" Background="Transparent" BorderThickness="0" Foreground="Black" FontFamily="Century Gothic" FontSize="15">
+                        <PasswordBox Margin="30,5,30,0" x:Name="PasswordTxt" Background="Transparent" BorderThickness="0" Foreground="Black" FontFamily="Century Gothic" FontSize="15">
                             <PasswordBox.InputBindings>
                                 <KeyBinding Command="{Binding Path=SignIn}" CommandParameter="{Binding ElementName=PasswordTxt}" Key="Enter" />
                             </PasswordBox.InputBindings>
@@ -54,17 +110,7 @@
                         <TextBlock Text="Email or password is incorrect" Background="Transparent" FontFamily="Arial" FontSize="15" Height="auto"
                            Foreground="Red" Margin="30,0,30,30"  Visibility="{Binding ErrorVisibility}"/>
 
-                        <Button IsEnabled="True" Margin="30,30,30,0">
-                            <Button.Template>
-                                <ControlTemplate>
-                                    <Border Style="{StaticResource LoginColorStyle}" CornerRadius="15" Height="auto">
-                                        <Button Command="{Binding SignIn}" CommandParameter="{Binding ElementName=PasswordTxt}" FontSize="22" BorderBrush="Transparent" 
-                                            Background="Transparent" Foreground="White" FontFamily="Century Gothic" FontWeight="Bold" Content="LOGIN" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-
+                        <Button Command="{Binding SignIn}" CommandParameter="{Binding ElementName=PasswordTxt}" Style="{StaticResource LoginButtonStyle}"/>
                     </StackPanel>
                 </Grid>
             </Border>

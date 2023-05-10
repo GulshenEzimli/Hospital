@@ -1,4 +1,5 @@
 ﻿using HospitalManagementCore.Domain.Entities;
+using HospitalManagementCore.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,18 +20,8 @@ namespace HospitalManagement.Models
         public string DisplayPatient => $"{Name} {Surname} {PIN}";
 
         public bool IsDelete { get; set; }
-        private bool[] _gender = { false, false };
-        public bool[] Gender
-        {
-            get { return _gender; }
-        }
-        public string GenderValue
-        {
-            get
-            {
-                return _gender[0] ? "Kişi" : "Qadın";
-            }
-        }
+        public Gender Gender { get; set; }
+
         public PatientModel Clone()
         {
             return new PatientModel()
@@ -42,7 +33,7 @@ namespace HospitalManagement.Models
                 BirthDate = BirthDate,
                 PIN = PIN,
                 PhoneNumber = PhoneNumber,
-                _gender= Gender,
+                Gender= Gender,
             };
         }
     }

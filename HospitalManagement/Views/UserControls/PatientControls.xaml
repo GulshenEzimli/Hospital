@@ -5,10 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HospitalManagement.Views.UserControls" 
              xmlns:components="clr-namespace:HospitalManagement.Views.Components"
-             
+             xmlns:converters="clr-namespace:HospitalManagement.Converters"
+             xmlns:enum="clr-namespace:HospitalManagementCore.Domain.Enums;assembly=HospitalManagementCore"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <converters:RadioButtonToEnumConverter x:Key="RdbEnumConverter"/>
+    
         <Style x:Key="myTextBlock" TargetType="TextBlock">
             <Setter Property="Height" Value="Auto"/>
             <Setter Property="FontSize" Value="15"/>
@@ -63,9 +66,11 @@
                             <TextBox Style="{StaticResource myTextBox}" Text="{Binding Path=CurrentValue.Name,Mode=TwoWay}" />
                             <TextBox Style="{StaticResource myTextBox}" Text="{Binding Path=CurrentValue.Surname,Mode=TwoWay}" />
                             <components:CustomDatePicker Margin="5 5" Height="25" DataContext="{Binding Path=CurrentValue.BirthDate,Mode=TwoWay}"/>
-                            <WrapPanel Height="25" VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <RadioButton GroupName="Gender" Content="Male" Margin="0 8 40 0" IsChecked="{Binding CurrentValue.Gender[0],Mode=TwoWay}"/>
-                                <RadioButton Content="Female" GroupName="Gender" Margin="-4 8 0 0" IsChecked="{Binding CurrentValue.Gender[1],Mode=TwoWay}"/>
+                            <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 3 0 0">
+                                <RadioButton IsChecked="{Binding CurrentValue.Gender, Converter={StaticResource RdbEnumConverter}, ConverterParameter={x:Static enum:Gender.Kişi}}"
+                                                 GroupName="Gender" Content="Male" Margin="6"/>
+                                <RadioButton IsChecked="{Binding CurrentValue.Gender, Converter={StaticResource RdbEnumConverter}, ConverterParameter={x:Static enum:Gender.Qadın}}"
+                                                 GroupName="Gender" Content="Female" Margin=" 6"/>
                             </WrapPanel>
                         </StackPanel>
 
@@ -123,7 +128,7 @@
                         <GridViewColumn Header="Gender" Width="50">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=GenderValue}" />
+                                    <TextBlock Text="{Binding Path=Gender}" Style="{StaticResource gridViewTextColumn}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

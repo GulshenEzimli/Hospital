@@ -97,6 +97,7 @@ namespace HospitalManagement.ViewModels.UserControls
         public EditNurseCommand Edit => new EditNurseCommand(this);
         public RejectNurseCommand Reject => new RejectNurseCommand(this);
         public SaveNurseCommand Save => new SaveNurseCommand(this, _nurseService);
+        public ExportExcelNurseCommand ExportExcel => new ExportExcelNurseCommand(this);
 
         public void SetDefaultValues()
         {
