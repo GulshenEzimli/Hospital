@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HospitalManagement.Views.Windows"
         mc:Ignorable="d"
-        Title="LoginPage" Height="450" Width="800" MaxHeight="450" MaxWidth="800" Background="Transparent" AllowsTransparency="True"
+        Title="LoginPage" Height="400" Width="500" MaxHeight="450" MaxWidth="800" Background="Transparent" AllowsTransparency="True"
         WindowStyle="None" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="Border" x:Key="LoginColorStyle">
@@ -25,15 +25,15 @@
     <Border Style="{StaticResource LoginColorStyle}">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="1.2*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.6*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="0.6*"/>
             </Grid.ColumnDefinitions>
 
             <Border Grid.Column="1" Background="White" Margin="0">
                 <Grid>
                     <StackPanel>
-                        <Label Content="Login" FontFamily="Arial" FontSize="45" FontWeight="Bold" Height="auto" Margin="0 20"
+                        <Label Content="Login" FontFamily="Arial" FontSize="45" FontWeight="Bold" Height="auto" Margin="0 60 0 30"
                             Background="Transparent" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <TextBlock Text="Email" FontWeight="Bold" Background="Transparent"  FontFamily="Arial" FontSize="15" Foreground="Black" Margin="30,0,30,0"/>
                         <TextBox Margin="30,0,30,0" BorderThickness="0" Text="{Binding Username }" Height="auto"
@@ -54,7 +54,7 @@
                         <TextBlock Text="Email or password is incorrect" Background="Transparent" FontFamily="Arial" FontSize="15" Height="auto"
                            Foreground="Red" Margin="30,0,30,30"  Visibility="{Binding ErrorVisibility}"/>
 
-                        <Button IsEnabled="True" Margin="30,0,30,0">
+                        <Button IsEnabled="True" Margin="30,30,30,0">
                             <Button.Template>
                                 <ControlTemplate>
                                     <Border Style="{StaticResource LoginColorStyle}" CornerRadius="15" Height="auto">
