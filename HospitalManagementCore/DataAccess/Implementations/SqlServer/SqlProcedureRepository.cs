@@ -74,9 +74,10 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"Insert into Procedures values(@name,@cost,@isDelete)";
+                string cmdText = @"Insert into Procedures output inserted.id values(@name,@cost,@isDelete)";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
+
                     AddParameters(command, procedure);
                     return (int)command.ExecuteScalar();
                 }
