@@ -13,12 +13,10 @@ namespace HospitalManagement.Models
         public PatientModel Patient { get; set; }
         public DoctorModel Doctor { get; set; }
         public ProcedureModel Procedure { get; set; }
-        //public string DisplayPatient => $"{Patient.Name} {Patient.Surname} {Patient.PIN} ";
-        //public string DisplayDoctor => $"{Doctor.FirstName} {Doctor.LastName} {Doctor.PIN} {Doctor.Position}";
-        //public string DisplayProcedures => $"{Procedure.Name}";
+        
         public DateTime UseDate { get; set; }
         public int QueueNumber { get; set; }
-
+        //public int LastQueueNumber { get; set; }
         public QueueModel Clone()
         {
             return new QueueModel

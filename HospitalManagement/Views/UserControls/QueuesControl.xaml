@@ -52,7 +52,7 @@
                             <TextBlock Height="25" FontSize="14" Margin="5 5" Text="Patient" HorizontalAlignment="Center"/>
                             <TextBlock Height="25" FontSize="14" Margin="5 5" Text="Doctor" HorizontalAlignment="Center"/>
                             <TextBlock Height="25" FontSize="14" TextAlignment="Center" Margin="5 5" Text="Procedure"/>
-                            <TextBlock Height="25" FontSize="14" TextAlignment="Center" Margin="5 5" Text="Queue"/>
+                            <!--<TextBlock Height="25" FontSize="14" TextAlignment="Center" Margin="5 5" Text="Queue"/>-->
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">
@@ -74,7 +74,7 @@
                                       SelectedValuePath="Id" DisplayMemberPath="Name"
                                       IsEditable="True" IsTextSearchEnabled="True"
                                       IsTextSearchCaseSensitive="True"/>
-                            <TextBox Style="{StaticResource myTextBox}" Text="{Binding Path=CurrentValue.QueueNumber,Mode=TwoWay}" />
+                            <!--<TextBlock Background="White" Margin="5 5" Text="{Binding Path=CurrentValue.QueueNumber}"/>-->
                         </StackPanel>
                     </Grid>
 

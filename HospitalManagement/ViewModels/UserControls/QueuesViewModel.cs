@@ -32,7 +32,6 @@ namespace HospitalManagement.ViewModels.UserControls
             {
                 _currentSituation = value;
                 OnPropertyChanged(nameof(CurrentSituation));
-                OnPropertyChanged(nameof(CurrentSituation));
             }
         }
         private QueueModel _currentValue;
@@ -138,10 +137,11 @@ namespace HospitalManagement.ViewModels.UserControls
             else
             {
                 string lowerText = SearchText.ToLower();
-                var filteredValues = AllValues.Where(x => x.Procedure.Name?.ToLower().Contains(lowerText) == true || 
+                var filteredValues = AllValues.Where(x => x.Procedure.Name?.ToLower().Contains(lowerText) == true ||
                                                           x.Doctor.DisplayDoctor?.ToLower().Contains(lowerText) == true ||
                                                           x.Patient.DisplayPatient?.ToLower().Contains(lowerText) == true ||
-                                                          x.UseDate.ToString(SystemConstants.DateDisplayFormat).ToLower().Contains(lowerText) == true);
+                                                          x.UseDate.ToString(SystemConstants.DateDisplayFormat).ToLower().Contains(lowerText) == true||
+                                                          x.QueueNumber.ToString().Contains(lowerText) == true );
                 Values = new ObservableCollection<QueueModel>(filteredValues);
             }
         }

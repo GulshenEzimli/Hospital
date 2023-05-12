@@ -28,11 +28,7 @@ namespace HospitalManagement.Validations
                 message = ValidationMessageProvider.GetRequiredMessage("Procedure value");
                 return false;
             }
-            if(queueModel.QueueNumber==0)
-            {
-                message = ValidationMessageProvider.GetRequiredMessage("Queue number");
-                return false;
-            }
+            
 
             message = null;
             return true;

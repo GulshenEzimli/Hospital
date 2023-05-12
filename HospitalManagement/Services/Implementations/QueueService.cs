@@ -45,6 +45,8 @@ namespace HospitalManagement.Services.Implementations
             toBeSavedQueue.UseDate = DateTime.Now;
             if(toBeSavedQueue.Id==0)
             {
+                var lastEntity = _unitOfWork.QueueRepository.Get().Where(x=>x.DoctorId == toBeSavedQueue.DoctorId).LastOrDefault();
+                toBeSavedQueue.QueueNumber = lastEntity?.QueueNumber + 1 ?? 1;
                 return _unitOfWork.QueueRepository.Insert(toBeSavedQueue);
             }
             else
