@@ -1,4 +1,5 @@
-﻿using HospitalManagementCore.Domain.Entities;
+﻿using HospitalManagement.Attributes;
+using HospitalManagementCore.Domain.Entities;
 using HospitalManagementCore.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -10,16 +11,20 @@ namespace HospitalManagement.Models
 {
     public class PatientModel
     {
+        [ExcelIgnore]
         public int Id { get; set; }
+        [ExcelIgnore]
+        public bool IsDelete { get; set; }
         public int No { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime BirthDate { get; set; }
         public string PIN { get; set; }
-        public string PhoneNumber { get; set; }
-        public string DisplayPatient => $"{Name} {Surname} {PIN}";
 
-        public bool IsDelete { get; set; }
+        [ExcelColumn("Phone number")]
+        public string PhoneNumber { get; set; }
+
+        public string DisplayPatient => $"{Name} {Surname} {PIN}";
         public Gender Gender { get; set; }
 
         public PatientModel Clone()

@@ -94,6 +94,7 @@ namespace HospitalManagement.ViewModels.UserControls
         public DeletePatientCommand Delete => new DeletePatientCommand(this,_patientService);
         public EditPatientCommand Edit=> new EditPatientCommand(this);
         public RejectPatientCommand Reject=>new RejectPatientCommand(this);
+        public ExportExcelPatientCommand ExportExcel => new ExportExcelPatientCommand(this);
         #endregion
 
         public void SetDefaultValues()
