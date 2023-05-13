@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HospitalManagement.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,15 +9,14 @@ namespace HospitalManagement.Models
 {
     public class QueueModel
     {
+        [ExcelIgnore]
         public int Id { get; set; }
         public int No { get; set; }
         public PatientModel Patient { get; set; }
         public DoctorModel Doctor { get; set; }
         public ProcedureModel Procedure { get; set; }
-        
         public DateTime UseDate { get; set; }
         public int QueueNumber { get; set; }
-        //public int LastQueueNumber { get; set; }
         public QueueModel Clone()
         {
             return new QueueModel

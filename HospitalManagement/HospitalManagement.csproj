@@ -87,6 +87,7 @@
     <Compile Include="Commands\Operations\ExportExcelOperationCommand.cs" />
     <Compile Include="Commands\Patients\ExportExcelPatientCommand.cs" />
     <Compile Include="Commands\Procedures\ExportExcelProcedureCommand.cs" />
+    <Compile Include="Commands\Queues\ExportExcelQueueCommand.cs" />
     <Compile Include="Commands\SignInCommand.cs" />
     <Compile Include="Kernel.cs" />
     <Compile Include="Services\Implementations\AdminService.cs" />
