@@ -17,54 +17,7 @@ namespace HospitalManagement.Mappers.Implementations
         {
             _mapperUnitOfWork = mapperUnitOfWork;
         }
-        #region Reflection
-        //public TTarget Map<TSource,TTarget>(TSource source)
-        //{
-        //    var target = Activator.CreateInstance<TTarget>();
-        //    var sourceType = typeof(TSource);
-        //    var targetType = typeof(TTarget);
-        //    var properties = targetType.GetProperties();
-
-        //    foreach(var property in properties)
-        //    {
-        //        var sourceProperty = sourceType.GetProperty(property.Name);
-        //        if (sourceProperty != null)
-        //        {
-        //            var sourceValue = sourceProperty.GetValue(source);
-        //            property.SetValue(target, sourceValue);
-        //        }
-        //    }
-        //    return target;
-        //}
-
-
-        //public QueueModel Map(Queue queue)
-        //{
-        //    var queueModel = Map<Queue, QueueModel>(queue);
-        //    queueModel.Id = queue.Id;
-        //    queueModel.Patient= Map<Patient, PatientModel>(queue.Patient);
-        //    queueModel.Doctor = Map<Doctor, DoctorModel>(queue.Doctor);
-        //    queueModel.Procedure=Map<Procedure,ProcedureModel>(queue.Procedure);
-        //    queueModel.UseDate = queue.UseDate;
-        //    queueModel.QueueNumber = queue.QueueNumber;
-
-        //    return queueModel;
-        //}
-
-        //public Queue Map(QueueModel queueModel)
-        //{
-        //    var queue=Map<QueueModel,Queue>(queueModel);
-
-        //    queue.Patient = Map<PatientModel, Patient>(queueModel.Patient);
-        //    queue.Doctor = Map<DoctorModel, Doctor>(queueModel.Doctor);
-        //    queue.Procedure = Map<ProcedureModel, Procedure>(queueModel.Procedure);
-        //    queue.UseDate = queueModel.UseDate;
-        //    queue.QueueNumber = queueModel.QueueNumber;
-        //    queue.Id = queueModel.Id;
-
-        //    return queue;
-        //}
-        #endregion
+        
         public QueueModel Map(Queue queue)
         {
             var queueModel = new QueueModel();
