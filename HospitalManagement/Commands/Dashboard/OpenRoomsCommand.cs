@@ -29,7 +29,7 @@ namespace HospitalManagement.Commands.Dashboard
 
             var roomModels = _serviceUnitOfWork.roomService.GetAll();
             roomsViewModel.AllValues = roomModels;
-            roomsViewModel.Values = new ObservableCollection<RoomModel>(roomsViewModel.Values);
+            roomsViewModel.Values = new ObservableCollection<RoomModel>(roomsViewModel.AllValues);
 
             roomControl.DataContext = roomsViewModel;
             _viewModel.CenterGrid.Children.Clear();

@@ -13,7 +13,18 @@ namespace HospitalManagement.Models
         public int Id { get; set; }
         public int No { get; set; }
         public int Number { get; set; }
-        public bool IsAvailable { get; set; }
+        private bool[] _isAvailable = {false, false};
+        public bool[] IsAvailable 
+        {
+            get => _isAvailable;
+            set => _isAvailable = value;
+        }
+
+        public string IsAvailableValue
+        {
+            get => IsAvailable[0] ? "Boş" : "Dolu";
+        }
+
         public RoomTypes Type { get; set; }
         public int BlockFloor { get; set; }
 

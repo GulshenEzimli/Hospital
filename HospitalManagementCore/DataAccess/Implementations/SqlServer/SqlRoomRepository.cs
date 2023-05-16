@@ -23,7 +23,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"delete * from Rooms where Id = @id";
+                string cmdText = @"delete from Rooms where Id = @id";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     command.Parameters.AddWithValue("id", id);
@@ -78,7 +78,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             {
                 connection.Open();
                 string cmdText = @"insert into Rooms output inserted.id values(
-                                 @number, @isAvailable, @type, @blockFloor, @isDelete)";
+                                 @number, @blockFloor, @isAvailable, @type,  @isDelete)";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     AddParameters(command, room);

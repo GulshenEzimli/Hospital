@@ -5,6 +5,7 @@ using HospitalManagement.Models;
 using HospitalManagement.Services.Interfaces;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
+using HospitalManagementCore.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,6 +23,8 @@ namespace HospitalManagement.ViewModels.UserControls
         {
             _roomService = roomService;
             AllValues = new List<RoomModel>();
+            RoomTypes = Enum.GetValues(typeof(RoomTypes)).Cast<RoomTypes>().ToList();
+
             SetDefaultValues();
         }
 
@@ -71,6 +74,15 @@ namespace HospitalManagement.ViewModels.UserControls
                 OnPropertyChanged(nameof(SelectedValue));
             }
         }
+
+        private List<RoomTypes> _roomTypes;
+
+        public List<RoomTypes> RoomTypes
+        {
+            get { return _roomTypes; }
+            set { _roomTypes = value; }
+        }
+
 
         private ObservableCollection<RoomModel> _values;
         public ObservableCollection<RoomModel> Values

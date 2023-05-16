@@ -23,7 +23,8 @@ namespace HospitalManagement.Mappers.Implementations
             roomModel.BlockFloor = room.BlockFloor;
             roomModel.Number = room.Number;
             roomModel.Type = room.Type;
-            roomModel.IsAvailable = room.IsAvailable;
+            if (room.IsAvailable) roomModel.IsAvailable[0] = room.IsAvailable;
+            else roomModel.IsAvailable[1] = !room.IsAvailable;
             return roomModel;
             
         }
@@ -35,7 +36,7 @@ namespace HospitalManagement.Mappers.Implementations
             room.BlockFloor = roomModel.BlockFloor;
             room.Number = roomModel.Number;
             room.Type = roomModel.Type;
-            room.IsAvailable = roomModel.IsAvailable;
+            room.IsAvailable = roomModel.IsAvailable[0] ? true : false;
             return room;
         }
     }
