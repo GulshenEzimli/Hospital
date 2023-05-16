@@ -43,6 +43,11 @@ namespace HospitalManagement.Validations
                 message = ValidationMessageProvider.GetSpecificLength("Phonenumber", 13);
                 return false;
             }
+            if (patientModel.Gender == 0)
+            {
+                message = ValidationMessageProvider.GetRequiredMessage("Gender");
+                return false;
+            }
 
             message = null;
             return true;

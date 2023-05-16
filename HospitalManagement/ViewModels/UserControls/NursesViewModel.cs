@@ -97,6 +97,7 @@ namespace HospitalManagement.ViewModels.UserControls
         public EditNurseCommand Edit => new EditNurseCommand(this);
         public RejectNurseCommand Reject => new RejectNurseCommand(this);
         public SaveNurseCommand Save => new SaveNurseCommand(this, _nurseService);
+        public ExportExcelNurseCommand ExportExcel => new ExportExcelNurseCommand(this);
 
         public void SetDefaultValues()
         {
@@ -124,7 +125,7 @@ namespace HospitalManagement.ViewModels.UserControls
                 var filteredValues = AllValues.Where(x => x.FirstName?.ToLower().Contains(lowerText) == true ||
                                                  x.LastName?.ToLower().Contains(lowerText) == true ||
                                                  x.PIN?.ToLower().Contains(lowerText) == true ||
-                                                 x.GenderValue?.ToLower().Contains(lowerText) == true ||
+                                                 x.Gender.ToString()?.ToLower().Contains(lowerText) == true ||
                                                  x.Salary.ToString().Contains(lowerText) == true ||
                                                  x.BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerText) == true ||
                                                  x.Position.Name?.ToLower().Contains(lowerText) == true ||

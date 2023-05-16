@@ -34,9 +34,9 @@ namespace HospitalManagement.Commands.Operations
                 return;
 
             int id = _operationsViewModel.CurrentValue.Id;
-            _serviceUnitOfWork.operationService.DeleteOperation(id);
+            _serviceUnitOfWork.OperationService.DeleteOperation(id);
 
-            List<OperationModel> operationModels = _serviceUnitOfWork.operationService.GetAll();
+            List<OperationModel> operationModels = _serviceUnitOfWork.OperationService.GetAll();
             _operationsViewModel.AllValues = operationModels;
             _operationsViewModel.Values = new ObservableCollection<OperationModel>(operationModels);
 

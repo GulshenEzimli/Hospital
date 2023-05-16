@@ -1,5 +1,6 @@
 ﻿using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
+using HospitalManagementCore.Domain.Enums;
 using HospitalManagementCore.Utils;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"delete * from Doctors where Id = @id";
+                string cmdText = @"delete from Doctors where Id = @id";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     command.Parameters.AddWithValue("id", id);
@@ -126,7 +127,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             };
             doctor.FirstName = reader.GetString("FirstName");
             doctor.LastName = reader.GetString("LastName");
-            doctor.Gender = reader.GetBoolean("Gender");
+            doctor.Gender = reader.GetBoolean("Gender") ? Gender.Kişi : Gender.Qadın;
             doctor.PIN = reader.GetString("PIN");
             doctor.Email = reader.GetString("Email");
             doctor.Phonenumber = reader.GetString("Phonenumber");
@@ -152,7 +153,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             command.Parameters.AddWithValue("positionId", doctor.Position.Id);
             command.Parameters.AddWithValue("firstName", doctor.FirstName);
             command.Parameters.AddWithValue("lastName", doctor.LastName);
-            command.Parameters.AddWithValue("gender", doctor.Gender);
+            command.Parameters.AddWithValue("gender", doctor.Gender == Gender.Kişi ? true : false);
             command.Parameters.AddWithValue("birthDate", doctor.BirthDate);
             command.Parameters.AddWithValue("pin", doctor.PIN);
             command.Parameters.AddWithValue("email", doctor.Email);

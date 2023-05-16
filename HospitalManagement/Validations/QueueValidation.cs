@@ -12,27 +12,23 @@ namespace HospitalManagement.Validations
     {
         public static bool IsValid(QueueModel queueModel,out string message)
         {
-            if (string.IsNullOrEmpty(queueModel.DisplayPatient))
+            if (string.IsNullOrEmpty(queueModel.Patient.DisplayPatient))
             {
                 message = ValidationMessageProvider.GetRequiredMessage("Patient value");
                 return false;
             }
 
-            if (string.IsNullOrEmpty(queueModel.DisplayDoctor))
+            if (string.IsNullOrEmpty(queueModel.Doctor.DisplayDoctor))
             {
                 message = ValidationMessageProvider.GetRequiredMessage("Doctor value");
                 return false;
             }
-            if (string.IsNullOrEmpty(queueModel.DisplayProcedure))
+            if (string.IsNullOrEmpty(queueModel.Procedure.Name))
             {
                 message = ValidationMessageProvider.GetRequiredMessage("Procedure value");
                 return false;
             }
-            if(queueModel.QueueNumber==0)
-            {
-                message = ValidationMessageProvider.GetRequiredMessage("Queue number");
-                return false;
-            }
+            
 
             message = null;
             return true;

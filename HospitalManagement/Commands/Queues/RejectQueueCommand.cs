@@ -19,7 +19,7 @@ namespace HospitalManagement.Commands.Queues
 
         public override void Execute(object parameter)
         {
-            _queueViewModel.CurrentSituation = Situations.NORMAL;
+            _queueViewModel.SetDefaultValues();
         }
     }
 }

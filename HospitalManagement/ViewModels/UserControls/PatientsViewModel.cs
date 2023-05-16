@@ -94,6 +94,7 @@ namespace HospitalManagement.ViewModels.UserControls
         public DeletePatientCommand Delete => new DeletePatientCommand(this,_patientService);
         public EditPatientCommand Edit=> new EditPatientCommand(this);
         public RejectPatientCommand Reject=>new RejectPatientCommand(this);
+        public ExportExcelPatientCommand ExportExcel => new ExportExcelPatientCommand(this);
         #endregion
 
         public void SetDefaultValues()
@@ -121,6 +122,7 @@ namespace HospitalManagement.ViewModels.UserControls
 
                 var filteredValues = AllValues.Where(x => x.Name?.ToLower().Contains(lowerText) == true ||
                                                   x.Surname?.ToLower().Contains(lowerText) == true ||
+                                                  x.Gender.ToString().ToLower().Contains(lowerText) == true ||
                                                   x.BirthDate.ToString().Contains(lowerText) == true ||
                                                   x.PIN?.ToLower().Contains(lowerText) == true ||
                                                   x.PhoneNumber?.ToLower().Contains(lowerText) == true);

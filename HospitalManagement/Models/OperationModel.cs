@@ -1,4 +1,5 @@
-﻿using HospitalManagementCore.Domain.Entities;
+﻿using HospitalManagement.Attributes;
+using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,10 +16,18 @@ namespace HospitalManagement.Models
             Doctors = new ObservableCollection<DoctorModel>();
             Nurses = new ObservableCollection<NurseModel>();
         }
+
+        [ExcelIgnore]
         public int Id { get; set; }
         public int No { get; set; }
+
+        [ExcelColumn("Date of operation")]
         public DateTime OperationDate { get; set; }
+
+        [ExcelColumn("Cost of operation")]
         public decimal OperationCost { get; set; }
+
+        [ExcelColumn("Reason of operation")]
         public string OperationReason { get; set; }
         public PatientModel Patient { get; set; }
         public RoomModel Room { get; set; }

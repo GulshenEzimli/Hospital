@@ -100,6 +100,7 @@ namespace HospitalManagement.ViewModels.UserControls
         public EditDoctorCommand Edit => new EditDoctorCommand(this);
         public RejectDoctorCommand Reject => new RejectDoctorCommand(this);
         public SaveDoctorCommand Save => new SaveDoctorCommand(this, _serviceUnitOfWork);
+        public ExportExcelDoctorCommand ExportExcel => new ExportExcelDoctorCommand(this);
 
         public void SetDefaultValues()
         {
@@ -128,7 +129,7 @@ namespace HospitalManagement.ViewModels.UserControls
                 var filteredResult = AllValues.Where(x => x.FirstName?.ToLower().Contains(lowerSearchText) == true ||
                                                  x.LastName?.ToLower().Contains(lowerSearchText) == true ||
                                                  x.PIN?.ToLower().Contains(lowerSearchText) == true ||
-                                                 x.GenderValue?.ToLower().Contains(lowerSearchText) == true ||
+                                                 x.Gender.ToString()?.ToLower().Contains(lowerSearchText) == true ||
                                                  x.IsChiefDoctorValue?.ToLower().Contains(lowerSearchText) == true ||
                                                  x.Salary.ToString().Contains(lowerSearchText) == true ||
                                                  x.BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerSearchText) == true ||

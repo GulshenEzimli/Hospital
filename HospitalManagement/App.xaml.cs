@@ -20,25 +20,20 @@ namespace HospitalManagement
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
 
-            builder.DataSource = "(localdb)\\MSSQLLocaldb";
+            builder.DataSource = "localhost";
             builder.InitialCatalog = "Hospital";
             builder.IntegratedSecurity = true;
 
             IUnitOfWork db = new SqlUnitOfWork(builder.ConnectionString);
+            IAdminService adminService = new AdminService(db);
             IMapperUnitOfWork mapperUnitOfWork = new MapperUnitOfWork();
             IServiceUnitOfWork serviceUnitOfWork = new ServiceUnitOfWork(db,mapperUnitOfWork);
+
+            LoginPage loginPage = new LoginPage();
+            LoginViewModel loginViewModel = new LoginViewModel(adminService, serviceUnitOfWork,loginPage);
+            loginPage.DataContext = loginViewModel;
             
-            IPatientMapper patientMapper = new PatientMapper();
-            IProcedureMapper procedureMapper=new ProcedureMapper();
-            IQueueMapper queueMapper = new QueueMapper(mapperUnitOfWork);
-
-            DashboardWindow dashboardWindow = new DashboardWindow();
-            DashboardViewModel viewModel = new DashboardViewModel(serviceUnitOfWork, patientMapper, procedureMapper, queueMapper);
-
-            dashboardWindow.DataContext = viewModel;
-            viewModel.CenterGrid = dashboardWindow.grdCenter;
-
-            MainWindow = dashboardWindow;
+            MainWindow = loginPage;
             MainWindow.Show();
         }
     }

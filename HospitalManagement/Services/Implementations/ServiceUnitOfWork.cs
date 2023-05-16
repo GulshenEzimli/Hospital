@@ -18,20 +18,20 @@ namespace HospitalManagement.Services.Implementations
             _unitOfWork = unitOfWork;
             _mapperUnitOfWork = mapperUnitOfWork;
         }
-        public INurseService nurseService =>  new NurseService(_unitOfWork, _mapperUnitOfWork.NurseMapper);
-        public IOtherEmployeeService otherEmployeeService => new OtherEmployeeService(_unitOfWork, _mapperUnitOfWork.OtherEmployeeMapper);
-        public IPatientProcedureService patientProcedureService => new PatientProcedureService(_unitOfWork, _mapperUnitOfWork);
-        public IJobService jobService => new JobService(_unitOfWork,_mapperUnitOfWork.JobMapper);
-        public IDoctorService doctorService => new DoctorService(_unitOfWork, _mapperUnitOfWork);
-        public IPositionService positionService => new PositionService(_unitOfWork, _mapperUnitOfWork);
-        public IPatientService patientService => new PatientService(_unitOfWork, _mapperUnitOfWork.PatientMapper);
-        public IProcedureService procedureService => new ProcedureService(_unitOfWork,_mapperUnitOfWork.ProcedureMapper);
-        public IQueueService queueService => new QueueService(_unitOfWork,_mapperUnitOfWork);
+        public INurseService NurseService =>  new NurseService(_unitOfWork, _mapperUnitOfWork.NurseMapper);
+        public IOtherEmployeeService OtherEmployeeService => new OtherEmployeeService(_unitOfWork, _mapperUnitOfWork.OtherEmployeeMapper);
+        public IPatientProcedureService PatientProcedureService => new PatientProcedureService(_unitOfWork, _mapperUnitOfWork);
+        public IJobService JobService => new JobService(_unitOfWork,_mapperUnitOfWork.JobMapper);
+        public IDoctorService DoctorService => new DoctorService(_unitOfWork, _mapperUnitOfWork);
+        public IPositionService PositionService => new PositionService(_unitOfWork, _mapperUnitOfWork);
+        public IPatientService PatientService => new PatientService(_unitOfWork, _mapperUnitOfWork.PatientMapper);
+        public IProcedureService ProcedureService => new ProcedureService(_unitOfWork,_mapperUnitOfWork.ProcedureMapper);
+        public IQueueService QueueService => new QueueService(_unitOfWork,_mapperUnitOfWork);
 
-        public IOperationService operationService => new OperationService(_unitOfWork, _mapperUnitOfWork);
+        public IOperationService OperationService => new OperationService(_unitOfWork, _mapperUnitOfWork);
 
-        public IReceptionistService receptionistService => new ReceptionistService(_unitOfWork, _mapperUnitOfWork.ReceptionistMapper);
+        public IReceptionistService ReceptionistService => new ReceptionistService(_unitOfWork, _mapperUnitOfWork.ReceptionistMapper);
 
-        public IRoomService roomService => new RoomService(_unitOfWork, _mapperUnitOfWork.RoomMapper);
+        public IRoomService RoomService => new RoomService(_unitOfWork, _mapperUnitOfWork.RoomMapper);
     }
 }

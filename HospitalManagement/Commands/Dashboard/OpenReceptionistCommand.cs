@@ -24,13 +24,13 @@ namespace HospitalManagement.Commands.Dashboard
         public override void Execute(object parameter)
         {
             ReceptionistControl receptionistControl = new ReceptionistControl();
-            ReceptionistViewModel receptionistViewModel = new ReceptionistViewModel(_serviceUnitOfWork.receptionistService, receptionistControl.ErrorDialog);
+            ReceptionistViewModel receptionistViewModel = new ReceptionistViewModel(_serviceUnitOfWork.ReceptionistService, receptionistControl.ErrorDialog);
 
-            var receptionistModels = _serviceUnitOfWork.receptionistService.GetAll();
+            var receptionistModels = _serviceUnitOfWork.ReceptionistService.GetAll();
             receptionistViewModel.AllValues = receptionistModels;
             receptionistViewModel.Values = new ObservableCollection<Models.ReceptionistModel>(receptionistViewModel.AllValues);
 
-            receptionistViewModel.Jobs = _serviceUnitOfWork.jobService.GetAll();
+            receptionistViewModel.Jobs = _serviceUnitOfWork.JobService.GetAll();
 
             receptionistControl.DataContext = receptionistViewModel;
             _viewModel.CenterGrid.Children.Clear();

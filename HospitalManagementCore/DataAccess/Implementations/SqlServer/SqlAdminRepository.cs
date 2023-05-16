@@ -22,7 +22,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection= new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"delete * from Admins where Id=@id";
+                string cmdText = @"delete from Admins where Id=@id";
 
                 using (SqlCommand command = new SqlCommand(cmdText,connection))
                 {
@@ -37,7 +37,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection())
             {
                 connection.Open();
-                string cmdText = @"";
+                string cmdText = @"select * from Admins";
 
                 using (SqlCommand command= new SqlCommand(cmdText, connection))
                 {
@@ -46,7 +46,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 
                     while (reader.Read())
                     {
-                        Admin admin = new Admin();
+                        Admin admin = GetAdmin(reader);
                         admins.Add(admin);
                     }
                     return admins;
@@ -60,13 +60,14 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             {
                 connection.Open();
 
-                string cmdText = @"";
+                string cmdText = @"select * from Admins where Id = @id";
 
                 using (SqlCommand command= new SqlCommand(cmdText, connection))
                 {
-                    command.Parameters
-                        .AddWithValue("id", id);
+                    command.Parameters.AddWithValue("id", id);
                     SqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read() == false)
+                        return null;
                     Admin admin = GetAdmin(reader);
                     return admin;
                 }
@@ -78,7 +79,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection())
             {
                 connection.Open();
-                string cmdText = @"";
+                string cmdText = @"insert into Admins values(@username,@password)";
                 using (SqlCommand command= new SqlCommand(cmdText,connection))
                 {
                     AddParameters(command, admin);
@@ -92,11 +93,11 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"";
+                string cmdText = @"update Admins set Username=@username,Password=@password where Id=@id";
 
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
-                    command.Parameters .AddWithValue("id", admin.Id);
+                    command.Parameters.AddWithValue("id", admin.Id);
                     AddParameters(command, admin);
                     return command.ExecuteNonQuery() == 1;
 
@@ -104,12 +105,28 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             }
         }
 
+        public Admin Get(string username)
+        {
+            using(SqlConnection connection = new SqlConnection(_connectionString)) 
+            {
+                connection.Open();
+                string cmdText = $"select * from Admins where Username = '{username}'";
+                using(SqlCommand command = new SqlCommand(cmdText, connection))
+                {
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read() == false)
+                        return null;
+                    Admin admin = GetAdmin(reader);
+                    return admin;
+                }
+            }
+        }
         private Admin GetAdmin(SqlDataReader reader)
         {
             Admin admin = new Admin();
 
-            admin.Id = reader.GetInt32("AdminId");
-            admin.UserName=reader.GetString("UserName");
+            admin.Id = reader.GetInt32("Id");
+            admin.UserName=reader.GetString("Username");
             admin.Password=reader.GetString("Password");
            
             return admin;
@@ -117,7 +134,6 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
 
         private  void AddParameters(SqlCommand command, Admin admin)
         {
-            command.Parameters.AddWithValue("id", admin.Id);
             command.Parameters.AddWithValue ("username", admin.UserName);
             command.Parameters.AddWithValue("password",admin.Password);
         }

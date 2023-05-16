@@ -124,7 +124,7 @@ namespace HospitalManagement.ViewModels.UserControls
                 var filteredValues = AllValues.Where(x => x.FirstName?.ToLower().Contains(lowerText) == true ||
                                                  x.LastName?.ToLower().Contains(lowerText) == true ||
                                                  x.PIN?.ToLower().Contains(lowerText) == true ||
-                                                 x.GenderValue?.ToLower().Contains(lowerText) == true ||
+                                                 x.Gender.ToString()?.ToLower().Contains(lowerText) == true ||
                                                  x.Salary.ToString().Contains(lowerText) == true ||
                                                  x.BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerText) == true ||
                                                  x.Job.Name?.ToLower().Contains(lowerText) == true ||

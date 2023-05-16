@@ -35,7 +35,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using(SqlConnection connection=new SqlConnection(_connectionString))
             {
                 connection.Open ();
-                string cmdText = @"Select * from Procedures";
+                string cmdText = @"Select * from Procedures where IsDelete = 0";
                 using(SqlCommand command=new SqlCommand(cmdText, connection))
                 {
                     List<Procedure> procedures= new List<Procedure>();
@@ -55,12 +55,16 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"select * from Procedures where Id = @id ";
+                string cmdText = @"select * from Procedures where Id = @id and IsDelete = 0 ";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
+                    command.Parameters.AddWithValue("@id", id);
                     SqlDataReader reader = command.ExecuteReader();
-                    Procedure procedure = GetProcedure(reader);
-                    return procedure;
+
+                    if (reader.Read() == false)
+                        return null;
+
+                    return GetProcedure(reader);
                 }
             }
         }
@@ -70,9 +74,10 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"Insert into Procedures values(@name,@cost)";
+                string cmdText = @"Insert into Procedures output inserted.id values(@name,@cost,@isDelete)";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
+
                     AddParameters(command, procedure);
                     return (int)command.ExecuteScalar();
                 }
@@ -84,9 +89,10 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"Update Patients set Name=@name,Cost=@cost where Id=@id";
+                string cmdText = @"Update Procedures set Name=@name,Cost=@cost,IsDelete=@isDelete where Id=@id";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
+                    command.Parameters.AddWithValue("@id", procedure.Id);
                     AddParameters(command, procedure);
                     return command.ExecuteNonQuery() == 1;
                 }
@@ -99,6 +105,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             procedure.Id=reader.GetInt32("Id");
             procedure.Name = reader.GetString("Name");
             procedure.Cost = reader.GetDecimal("Cost");
+            procedure.IsDelete = reader.GetBoolean("IsDelete");
             return procedure;
         }
         #endregion
@@ -107,6 +114,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         {
             command.Parameters.AddWithValue("@name", procedure.Name);
             command.Parameters.AddWithValue("@cost", procedure.Cost);
+            command.Parameters.AddWithValue("@isDelete", procedure.IsDelete);
         }
         #endregion
     }

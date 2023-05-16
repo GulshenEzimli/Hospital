@@ -38,9 +38,9 @@ namespace HospitalManagement.Commands.Doctors
                 return;
             }
 
-            _serviceUnitOfWork.doctorService.SaveDoctor(_doctorsViewModel.CurrentValue);
+            _serviceUnitOfWork.DoctorService.SaveDoctor(_doctorsViewModel.CurrentValue);
 
-            List<DoctorModel> doctorModels = _serviceUnitOfWork.doctorService.GetAll();
+            List<DoctorModel> doctorModels = _serviceUnitOfWork.DoctorService.GetAll();
             _doctorsViewModel.AllValues = doctorModels;
             _doctorsViewModel.Values = new ObservableCollection<DoctorModel>(doctorModels);
 

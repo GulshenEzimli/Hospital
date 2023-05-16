@@ -1,4 +1,6 @@
-﻿using HospitalManagementCore.Domain.Entities;
+﻿using HospitalManagement.Attributes;
+using HospitalManagementCore.Domain.Entities;
+using HospitalManagementCore.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,46 +11,44 @@ namespace HospitalManagement.Models
 {
     public class DoctorModel
     {
+        [ExcelIgnore]
         public int Id { get; set; }
         public int No { get; set; }
-        public PositionModel Position { get; set; }        
+        public PositionModel Position { get; set; }
+
+        [ExcelColumn("Department")]
         public string DepartmentName { get; set; }
+
+        [ExcelColumn("Name")]
         public string FirstName { get; set; }
+
+        [ExcelColumn("Surname")]
         public string LastName { get; set; }
 
-        private bool[] _gender = { false, false };
-        public bool[] Gender
-        {
-            get { return _gender; }
-            set { _gender = value; }
-        }
-        public string GenderValue
-        {
-            get
-            {
-                return _gender[0] ? "Kişi" : "Qadın";
-            }
-        }
+        public Gender Gender { get; set; }
+
+        [ExcelColumn("Date of Birth")]
         public DateTime BirthDate { get; set; }
         public string PIN { get; set; }
         public string Email { get; set; }
+
+        [ExcelColumn("Phone number")]
         public string Phonenumber { get; set; }
         public decimal Salary { get; set; }
 
-        private bool[] _isChiefDoctor = { false, false };
-        public bool[] IsChiefDoctor
-        {
-            get { return _isChiefDoctor; }
-            set { _isChiefDoctor= value; }
-        }
+        [ExcelIgnore]
+        public bool IsChiefDoctor { get; set; }
+
+        [ExcelColumn("Rank of doctor")]
         public string IsChiefDoctorValue
         {
             get
             {
-                return IsChiefDoctor[0] ? "Baş həkim" : "Həkim";
+                return IsChiefDoctor ? "Baş həkim" : "Həkim";
             }
         }
 
+        [ExcelIgnore]
         public string DisplayDoctor => $"{FirstName} {LastName} {PIN}";
         public DoctorModel Clone()
         {

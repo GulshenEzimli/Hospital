@@ -8,17 +8,17 @@ namespace HospitalManagement.Services.Interfaces
 {
     public interface IServiceUnitOfWork
     {
-        INurseService nurseService { get; }
-        IOtherEmployeeService otherEmployeeService { get; }
-        IPatientProcedureService patientProcedureService { get; }
-        IJobService jobService { get; }
-        IDoctorService doctorService { get; }
-        IPositionService positionService { get; }
-        IPatientService patientService { get; }
-        IProcedureService procedureService { get; }
-        IQueueService queueService { get; }
-        IOperationService operationService { get; }
-        IReceptionistService receptionistService { get; }
-        IRoomService roomService { get; }
+        INurseService NurseService { get; }
+        IOtherEmployeeService OtherEmployeeService { get; }
+        IPatientProcedureService PatientProcedureService { get; }
+        IJobService JobService { get; }
+        IDoctorService DoctorService { get; }
+        IPositionService PositionService { get; }
+        IPatientService PatientService { get; }
+        IProcedureService ProcedureService { get; }
+        IQueueService QueueService { get; }
+        IOperationService OperationService { get; }
+        IReceptionistService ReceptionistService { get; }
+        IRoomService RoomService { get; }
     }
 }

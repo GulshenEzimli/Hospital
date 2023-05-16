@@ -1,4 +1,6 @@
-﻿using HospitalManagementCore.Domain.Entities;
+﻿using HospitalManagement.Attributes;
+using HospitalManagementCore.Domain.Entities;
+using HospitalManagementCore.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,34 +11,22 @@ namespace HospitalManagement.Models
 {
     public class PatientModel
     {
+        [ExcelIgnore]
         public int Id { get; set; }
+        [ExcelIgnore]
+        public bool IsDelete { get; set; }
         public int No { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime BirthDate { get; set; }
         public string PIN { get; set; }
+
+        [ExcelColumn("Phone number")]
         public string PhoneNumber { get; set; }
-        public string DisplayPatient
-        {
-            get => $"{Name} {Surname} {PIN}";
-            set
-            {
-                DisplayPatient = value;
-            }
-        }
-        public bool IsDelete { get; set; }
-        private bool[] _gender = { false, false };
-        public bool[] Gender
-        {
-            get { return _gender; }
-        }
-        public string GenderValue
-        {
-            get
-            {
-                return _gender[0] ? "Kişi" : "Qadın";
-            }
-        }
+
+        public string DisplayPatient => $"{Name} {Surname} {PIN}";
+        public Gender Gender { get; set; }
+
         public PatientModel Clone()
         {
             return new PatientModel()
@@ -48,7 +38,7 @@ namespace HospitalManagement.Models
                 BirthDate = BirthDate,
                 PIN = PIN,
                 PhoneNumber = PhoneNumber,
-                _gender= Gender,
+                Gender= Gender,
             };
         }
     }

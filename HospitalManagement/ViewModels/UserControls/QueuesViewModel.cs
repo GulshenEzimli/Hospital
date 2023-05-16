@@ -22,6 +22,7 @@ namespace HospitalManagement.ViewModels.UserControls
         public QueuesViewModel(IQueueService queueService, ErrorDialog errorDialog) : base(errorDialog)
         {
             _queueService = queueService;
+            CurrentValue = new QueueModel();
         }
         private Situations _currentSituation = Situations.NORMAL;
         public Situations CurrentSituation
@@ -106,11 +107,15 @@ namespace HospitalManagement.ViewModels.UserControls
                 _procedures = value;
             }
         }
+
+        #region Commands
         public AddQueueCommand Add => new AddQueueCommand(this);
         public DeleteQueueCommand Delete => new DeleteQueueCommand(this,_queueService);
         public EditQueueCommand Edit => new EditQueueCommand(this);
         public RejectQueueCommand Reject => new RejectQueueCommand(this);
         public SaveQueueCommand Save => new SaveQueueCommand(this,_queueService);
+        public ExportExcelQueueCommand ExportExcel => new ExportExcelQueueCommand(this);
+        #endregion
 
         public void SetDefaultValues()
         {
@@ -136,9 +141,11 @@ namespace HospitalManagement.ViewModels.UserControls
             else
             {
                 string lowerText = SearchText.ToLower();
-                var filteredValues = AllValues.Where(x => x.DisplayDoctor?.ToLower().Contains(lowerText) == true ||
-                                                        x.DisplayPatient?.ToLower().Contains(lowerText) == true ||
-                                                        x.UseDate.ToString(SystemConstants.DateDisplayFormat).ToLower().Contains(lowerText) == true);
+                var filteredValues = AllValues.Where(x => x.Procedure.Name?.ToLower().Contains(lowerText) == true ||
+                                                          x.Doctor.DisplayDoctor?.ToLower().Contains(lowerText) == true ||
+                                                          x.Patient.DisplayPatient?.ToLower().Contains(lowerText) == true ||
+                                                          x.UseDate.ToString(SystemConstants.DateDisplayFormat).ToLower().Contains(lowerText) == true||
+                                                          x.QueueNumber.ToString().Contains(lowerText) == true );
                 Values = new ObservableCollection<QueueModel>(filteredValues);
             }
         }

@@ -21,7 +21,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"delete * from Queues where Id = @id";
+                string cmdText = @"delete  from Queues where Id = @id";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     command.Parameters.AddWithValue("id", id);
@@ -35,14 +35,15 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"select Queues.Id as QueuesId,Date,Patients.Id as PatientId,
+                string cmdText = @"select Queues.Id as Id,QueueNumber,Date,Patients.Id as PatientId,
                                     Patients.FirstName as PatientName,Patients.LastName as PatientSurname,
                                     Patients.PIN as PatientPIN,Doctors.Id as DoctorId, Doctors.FirstName as DoctorName, 
                                     Doctors.LastName as DoctorSurname,Doctors.PIN as DoctorPIN, Doctors.PositionId as DoctorPositionId, 
+                                    (select DepartmentId from DoctorPositions where DoctorPositions.Id = Doctors.PositionId) as DoctorDepartmentId,
                                     Procedures.Id as ProcedureId,Procedures.Name as ProcedureName
                                     from Queues inner join Doctors on Queues.DoctorId = Doctors.Id
                                     inner join Patients on Queues.PatientId = Patients.Id
-                                    inner join Procedures on Queues.ProcedureId = Procedures.Id";
+                                    inner join Procedures on Queues.ProcedureId = Procedures.Id ";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     SqlDataReader reader = command.ExecuteReader();
@@ -62,13 +63,13 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"select Queues.Id as QueuesId,Date,Patients.Id as PatientId,
+                string cmdText = @"select Queues.Id as Id,QueueNumber,Date,Patients.Id as PatientId,
                                     Patients.FirstName as PatientName,Patients.LastName as PatientSurname,
                                     Patients.PIN as PatientPIN,Doctors.Id as DoctorId, Doctors.FirstName as DoctorName, 
                                     Doctors.LastName as DoctorSurname,Doctors.PIN as DoctorPIN, Doctors.PositionId as DoctorPositionId, 
                                     (select DepartmentId from DoctorPositions where DoctorPositions.Id = Doctors.PositionId) as DoctorDepartmentId,
-                                    Procedures.Id as ProcedureId,Procedures.Name as ProcedureName from Queues
-									inner join Doctors on Queues.DoctorId = Doctors.Id
+                                    Procedures.Id as ProcedureId,Procedures.Name as ProcedureName
+                                    from Queues inner join Doctors on Queues.DoctorId = Doctors.Id
                                     inner join Patients on Queues.PatientId = Patients.Id
                                     inner join Procedures on Queues.ProcedureId = Procedures.Id
                                     where Queues.Id = @id";
@@ -106,6 +107,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                                    QueueNumber= @queueNumber, Date=@Date where Id=@id";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
+                    command.Parameters.AddWithValue("@id", queue.Id);
                     AddParameters(command, queue);
                     return command.ExecuteNonQuery() == 1;
                 }
@@ -116,7 +118,9 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
         private Queue GetQueue(SqlDataReader reader)
         {
             Queue queue = new Queue();
+
             queue.Id = reader.GetInt32("Id");
+
             queue.Doctor = new Doctor() {
                 Id = reader.GetInt32("DoctorId"),
                 FirstName = reader.GetString("DoctorName"),
@@ -144,16 +148,19 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 Name = reader.GetString("ProcedureName"),
             };
             queue.UseDate = reader.GetDateTime("Date");
+            queue.QueueNumber = reader.GetInt32("QueueNumber");
 
             return queue;
 
         }
         #endregion
+
         #region AddParameters
         private void AddParameters(SqlCommand command,Queue queue)
         {
             command.Parameters.AddWithValue("@doctorId",queue.DoctorId);
             command.Parameters.AddWithValue("@patientId", queue.PatientId);
+            command.Parameters.AddWithValue("@procedureId", queue.ProcedureId);
             command.Parameters.AddWithValue("@queueNumber", queue.QueueNumber);
             command.Parameters.AddWithValue("@date", queue.UseDate);
 

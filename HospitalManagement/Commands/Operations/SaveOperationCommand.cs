@@ -37,9 +37,9 @@ namespace HospitalManagement.Commands.Operations
                 return;
             }
 
-            _serviceUnitOfWork.operationService.SaveOperation(_operationsViewModel.CurrentValue);
+            _serviceUnitOfWork.OperationService.SaveOperation(_operationsViewModel.CurrentValue);
 
-            List<OperationModel> operationModels = _serviceUnitOfWork.operationService.GetAll();
+            List<OperationModel> operationModels = _serviceUnitOfWork.OperationService.GetAll();
             _operationsViewModel.AllValues = operationModels;
             _operationsViewModel.Values = new ObservableCollection<OperationModel>(operationModels);
 

@@ -1,6 +1,7 @@
 ﻿using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
 using HospitalManagementCore.Domain.Entities;
+using HospitalManagementCore.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,9 +31,8 @@ namespace HospitalManagement.Mappers.Implementations
             nurseModel.PIN = nurse.PIN;
             nurseModel.Salary = nurse.Salary;
             nurseModel.DepartmentName = nurse.Position.Department.Name;
-            if (nurse.Gender) nurseModel.Gender[0] = nurse.Gender;
-            else nurseModel.Gender[1] = !nurse.Gender;
-         
+            nurseModel.Gender = nurse.Gender;
+
             return nurseModel;
         }
 
@@ -49,7 +49,7 @@ namespace HospitalManagement.Mappers.Implementations
             nurse.Email = nurseModel.Email;
             nurse.PIN = nurseModel.PIN;
             nurse.Salary = nurseModel.Salary;
-            nurse.Gender = nurseModel.Gender[0] ? true : false;
+            nurse.Gender = nurseModel.Gender;
 
             return nurse;
         }

@@ -27,15 +27,15 @@ namespace HospitalManagement.Commands.Dashboard
         public override void Execute(object parameter)
         {
             QueuesControl queueControl = new QueuesControl();
-            QueuesViewModel queueViewModel = new QueuesViewModel(_serviceUnitOfWork.queueService,queueControl.ErrorDialog);
+            QueuesViewModel queueViewModel = new QueuesViewModel(_serviceUnitOfWork.QueueService,queueControl.ErrorDialog);
 
-            var queueModels = _serviceUnitOfWork.queueService.GetAll();
+            var queueModels = _serviceUnitOfWork.QueueService.GetAll();
             queueViewModel.AllValues = queueModels;
             queueViewModel.Values = new ObservableCollection<QueueModel>(queueModels);
 
-            queueViewModel.Patients = _serviceUnitOfWork.patientService.GetAll();
-            queueViewModel.Doctors = _serviceUnitOfWork.doctorService.GetAll();
-            queueViewModel.Procedures = _serviceUnitOfWork.procedureService.GetAll();
+            queueViewModel.Patients = _serviceUnitOfWork.PatientService.GetAll();
+            queueViewModel.Doctors = _serviceUnitOfWork.DoctorService.GetAll();
+            queueViewModel.Procedures = _serviceUnitOfWork.ProcedureService.GetAll();
 
             queueControl.DataContext= queueViewModel;
             _viewModel.CenterGrid.Children.Clear();

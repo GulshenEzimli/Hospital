@@ -1,5 +1,6 @@
 ﻿using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
+using HospitalManagementCore.Domain.Enums;
 using HospitalManagementCore.Utils;
 using System;
 using System.Collections.Generic;
@@ -101,6 +102,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 }
             }
         }
+
         #region GetPatient
         private Patient GetPatient(SqlDataReader reader)
         {
@@ -109,7 +111,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             patient.Id = reader.GetInt32("Id");
             patient.Name = reader.GetString("FirstName");
             patient.Surname = reader.GetString("LastName");
-            patient.Gender = reader.GetBoolean("Gender");
+            patient.Gender = reader.GetBoolean("Gender") ? Gender.Kişi : Gender.Qadın;
             patient.PIN = reader.GetString("PIN");
             patient.BirthDate = reader.GetDateTime("BirthDate");
             patient.PhoneNumber = reader.GetString("Phonenumber");
@@ -128,12 +130,13 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             return patient;
         }
         #endregion
+
         #region AddParameters
         private void AddParameters(SqlCommand command, Patient patient)
         {
             command.Parameters.AddWithValue("@firstName", patient.Name);
             command.Parameters.AddWithValue("@lastName", patient.Surname);
-            command.Parameters.AddWithValue("@gender", patient.Gender);
+            command.Parameters.AddWithValue("@gender", patient.Gender == Gender.Kişi ? true : false);
             command.Parameters.AddWithValue("@birthDate", patient.BirthDate);
             command.Parameters.AddWithValue("@phoneNumber", patient.PhoneNumber);
             command.Parameters.AddWithValue("@pin", patient.PIN);

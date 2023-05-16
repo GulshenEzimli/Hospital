@@ -80,7 +80,7 @@
                         <GridViewColumn Header="Procedure Name" Width="Auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=Name}" />
+                                    <TextBlock Text="{Binding Path=Name}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -99,6 +99,7 @@
             <Grid Grid.Row="2" Style="{StaticResource grdSearch}">
                 <DockPanel>
                     <components:Search/>
+                    <Button Content="Excel" HorizontalAlignment="Right" Command="{Binding Path=ExportExcel}" Style="{StaticResource WellDesignedButton}" Height="30" Width="150"/>
                 </DockPanel>
             </Grid>
         </Grid>

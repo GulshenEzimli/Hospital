@@ -85,6 +85,7 @@ namespace HospitalManagement.ViewModels.UserControls
                 OnPropertyChanged(nameof(Values));
             }
         }
+
         #region commands
         public List<ProcedureModel> AllValues { get; set; }
         public AddProcedureCommand Add => new AddProcedureCommand(this);
@@ -92,7 +93,9 @@ namespace HospitalManagement.ViewModels.UserControls
         public EditProcedureCommand Edit => new EditProcedureCommand(this);
         public RejectProcedureCommand Reject => new RejectProcedureCommand(this);
         public SaveProcedureCommand Save => new SaveProcedureCommand(this, _procedureService);
+        public ExportExcelProcedureCommand ExportExcel=>new ExportExcelProcedureCommand(this);
         #endregion
+
         public void SetDefaultValues()
         {
             CurrentSituation = Situations.NORMAL;

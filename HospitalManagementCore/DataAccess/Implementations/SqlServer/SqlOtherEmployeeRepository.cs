@@ -1,5 +1,6 @@
 ﻿using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
+using HospitalManagementCore.Domain.Enums;
 using HospitalManagementCore.Utils;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string cmdText = @"delete * from OtherEmployees where Id = @id";
+                string cmdText = @"delete from OtherEmployees where Id = @id";
                 using (SqlCommand command = new SqlCommand(cmdText, connection))
                 {
                     command.Parameters.AddWithValue("id", id);
@@ -68,6 +69,8 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
                 {
                     command.Parameters.AddWithValue("id", id);
                     SqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read() == false)
+                        return null;
                     OtherEmployee otherEmployee = GetOtherEmployee(reader);
                     return otherEmployee;
                 }
@@ -129,7 +132,7 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             };
             otherEmployee.FirstName = reader.GetString("FirstName");
             otherEmployee.LastName = reader.GetString("LastName");
-            otherEmployee.Gender = reader.GetBoolean("Gender");
+            otherEmployee.Gender = reader.GetBoolean("Gender") ? Gender.Kişi : Gender.Qadın;
             otherEmployee.PIN = reader.GetString("PIN");
             otherEmployee.Email = reader.GetString("Email");
             otherEmployee.PhoneNumber = reader.GetString("PhoneNumber");
@@ -147,9 +150,10 @@ namespace HospitalManagementCore.DataAccess.Implementations.SqlServer
             command.Parameters.AddWithValue("creatorId", otherEmployee.Creator.Id);
             command.Parameters.AddWithValue("modifierId", otherEmployee.Modifier.Id);
             command.Parameters.AddWithValue("jobId", otherEmployee.Job.Id);
+            command.Parameters.AddWithValue("jobName", otherEmployee.Job.Name);
             command.Parameters.AddWithValue("firstName", otherEmployee.FirstName);
             command.Parameters.AddWithValue("lastName", otherEmployee.LastName);
-            command.Parameters.AddWithValue("gender", otherEmployee.Gender);
+            command.Parameters.AddWithValue("gender", otherEmployee.Gender == Gender.Qadın ? false : true);
             command.Parameters.AddWithValue("birthDate", otherEmployee.BirthDate);
             command.Parameters.AddWithValue("pin", otherEmployee.PIN);
             command.Parameters.AddWithValue("email", otherEmployee.Email);

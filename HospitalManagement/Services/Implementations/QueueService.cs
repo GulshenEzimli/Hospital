@@ -42,9 +42,11 @@ namespace HospitalManagement.Services.Implementations
         public int Save(QueueModel queueModel)
         {
             var toBeSavedQueue = _mapperUnitOfWork.QueueMapper.Map(queueModel);
-
+            toBeSavedQueue.UseDate = DateTime.Now;
             if(toBeSavedQueue.Id==0)
             {
+                var lastEntity = _unitOfWork.QueueRepository.Get().Where(x=>x.DoctorId == toBeSavedQueue.DoctorId).LastOrDefault();
+                toBeSavedQueue.QueueNumber = lastEntity?.QueueNumber + 1 ?? 1;
                 return _unitOfWork.QueueRepository.Insert(toBeSavedQueue);
             }
             else

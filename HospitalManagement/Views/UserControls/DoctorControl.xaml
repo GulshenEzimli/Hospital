@@ -4,9 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HospitalManagement.Views.UserControls"
+             xmlns:converters="clr-namespace:HospitalManagement.Converters"
+             xmlns:enum="clr-namespace:HospitalManagementCore.Domain.Enums;assembly=HospitalManagementCore"
              xmlns:components="clr-namespace:HospitalManagement.Views.Components"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>        
+        <converters:RadioButtonToEnumConverter x:Key="RdbEnumConverter"/>
+    </UserControl.Resources>
     <Grid>
         <Border>
             <Grid>
@@ -53,8 +58,10 @@
                                           SelectedValue="{Binding CurrentValue.Position.Id}"/>
                                 <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.Salary,Mode=TwoWay}"/>
                                 <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 3 0 0">
-                                    <RadioButton IsChecked="{Binding CurrentValue.Gender[0]}" GroupName="Gender" Content="Male" Margin="6"/>
-                                    <RadioButton IsChecked="{Binding CurrentValue.Gender[1]}" GroupName="Gender" Content="Female" Margin=" 6"/>
+                                    <RadioButton IsChecked="{Binding CurrentValue.Gender, Converter={StaticResource RdbEnumConverter}, ConverterParameter={x:Static enum:Gender.Kişi}}"
+                                                 GroupName="Gender" Content="Male" Margin="6"/>
+                                    <RadioButton IsChecked="{Binding CurrentValue.Gender, Converter={StaticResource RdbEnumConverter}, ConverterParameter={x:Static enum:Gender.Qadın}}"
+                                                 GroupName="Gender" Content="Female" Margin=" 6"/>
                                 </WrapPanel>
                             </StackPanel>
 
@@ -62,19 +69,16 @@
                                 <TextBlock Height="25" FontSize="14" TextAlignment="Center" Margin="5 5" Text="Email"/>
                                 <TextBlock Height="25" FontSize="14" TextAlignment="Center" Margin="5 5" Text="PIN"/>
                                 <TextBlock Height="25" FontSize="14" TextAlignment="Center" Margin="5 5" Text="Phone Number"/>
-                                <TextBlock Height="25" FontSize="14" TextAlignment="Center" Margin="5 5" Text="Birth Date"/>                                
-                                <TextBlock Height="25" FontSize="14" TextAlignment="Center" Margin="5 5" Text="ChiefDoctor"/>
+                                <TextBlock Height="25" FontSize="14" TextAlignment="Center" Margin="5 5" Text="Birth Date"/>
                             </StackPanel>
 
                             <StackPanel Grid.Column="3">
                                 <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.Email,Mode=TwoWay}"/>
                                 <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.PIN,Mode=TwoWay}"/>
                                 <TextBox Height="25" FontSize="15" Margin="5 5" Text="{Binding CurrentValue.Phonenumber,Mode=TwoWay}"/>
-                                <components:CustomDatePicker Margin="5 5" DataContext="{Binding CurrentValue.BirthDate,Mode=TwoWay}" Height="25"/>                                
-                                <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 3 0 0">
-                                    <RadioButton GroupName="ChiefDoctor" Content="Yes" Margin="6" IsChecked="{Binding CurrentValue.IsChiefDoctor[0]}"/>
-                                    <RadioButton GroupName="ChiefDoctor" Content="No" Margin="6" IsChecked="{Binding CurrentValue.IsChiefDoctor[1]}"/>
-                                </WrapPanel>                                
+                                <components:CustomDatePicker Margin="5 5" DataContext="{Binding CurrentValue.BirthDate,Mode=TwoWay}" Height="25"/>
+                                <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 9"
+                                          Content="Chief Doctor" IsChecked="{Binding CurrentValue.IsChiefDoctor}"/>                         
                             </StackPanel>
                         </Grid>
 
@@ -122,7 +126,7 @@
                             <GridViewColumn Header="Gender" Width="Auto">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Path=GenderValue}" Style="{StaticResource gridViewTextColumn}"/>
+                                        <TextBlock Text="{Binding Path=Gender}" Style="{StaticResource gridViewTextColumn}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -181,6 +185,7 @@
                 <Grid Grid.Row="2" Style="{StaticResource grdSearch}">
                     <DockPanel>
                         <components:Search/>
+                        <Button Content="Excel" Height="30" Width="150" HorizontalAlignment="Right" Command="{Binding ExportExcel}" Style="{StaticResource WellDesignedButton}"/>
                     </DockPanel>
                 </Grid>
             </Grid>

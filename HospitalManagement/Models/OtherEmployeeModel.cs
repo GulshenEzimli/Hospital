@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HospitalManagementCore.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.IO.Packaging;
 using System.Linq;
@@ -19,20 +20,7 @@ namespace HospitalManagement.Models
         public string PIN { get; set; }
         public JobModel Job { get; set; }
         public decimal Salary { get; set; }
-        private bool[] _gender = { false, false };
-        public bool[] Gender 
-        {
-            get { return _gender; }
-            set { _gender = value; }
-        }
-        public string GenderValue
-        {
-            get
-            {
-                return _gender[0] ? "Kişi" : "Qadın";
-            }
-        }
-
+        public Gender Gender { get; set; }
         public OtherEmployeeModel Clone()
         {
             return new OtherEmployeeModel()

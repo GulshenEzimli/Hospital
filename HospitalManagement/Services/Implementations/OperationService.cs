@@ -25,7 +25,7 @@ namespace HospitalManagement.Services.Implementations
         {
             Operation operation = _unitOfWork.OperationRepository.GetById(id);
             operation.IsDelete = true;
-            return _unitOfWork.OperationRepository.UpdateForDelete(operation);
+            return _unitOfWork.OperationRepository.Update(operation);
         }
 
         public List<OperationModel> GetAll()
@@ -43,7 +43,7 @@ namespace HospitalManagement.Services.Implementations
                 {
                     if (operationDoctor.OperationId == operation.Id)
                     {
-                        Doctor doctor = _unitOfWork.DoctorRepository.GetById(operationDoctor.Doctor.Id);
+                        Doctor doctor = operationDoctor.Doctor;
                         DoctorModel doctorModel = _mapperUnitOfWork.DoctorMapper.Map(doctor);
                         operationModel.Doctors.Add(doctorModel);
                     }
@@ -53,7 +53,7 @@ namespace HospitalManagement.Services.Implementations
                 {
                     if (operationNurse.OperationId == operation.Id)
                     {
-                        Nurse nurse = _unitOfWork.NurseRepository.GetById(operationNurse.Nurse.Id);
+                        Nurse nurse = operationNurse.Nurse;
                         NurseModel nurseModel = _mapperUnitOfWork.NurseMapper.Map(nurse);
                         operationModel.Nurses.Add(nurseModel);
                     }

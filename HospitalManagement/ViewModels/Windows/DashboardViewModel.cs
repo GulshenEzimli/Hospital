@@ -14,18 +14,10 @@ namespace HospitalManagement.ViewModels.Windows
 {
     public class DashboardViewModel : BaseViewModel
     {
-        private readonly IPatientMapper _patientMapper;
-        private readonly IProcedureMapper _procedureMapper;
-        private readonly IQueueMapper _queueMapper;
         private readonly IServiceUnitOfWork _serviceUnitOfWork;
 
-        public DashboardViewModel(IServiceUnitOfWork serviceUnitOfWork,
-            IPatientMapper patientMapper, IProcedureMapper procedureMapper,
-            IQueueMapper queueMapper)
+        public DashboardViewModel(IServiceUnitOfWork serviceUnitOfWork)
         {
-            _patientMapper = patientMapper;
-            _procedureMapper = procedureMapper;
-            _queueMapper = queueMapper;
             _serviceUnitOfWork = serviceUnitOfWork;
         }
 
@@ -48,8 +40,8 @@ namespace HospitalManagement.ViewModels.Windows
         public OpenNursesCommand OpenNurses => new OpenNursesCommand(this,_serviceUnitOfWork);
         public OpenOtherEmployeesCommand OpenOtherEmployees => new OpenOtherEmployeesCommand(this, _serviceUnitOfWork);
         public OpenPatientProcedureCommand OpenPatientProcedures => new OpenPatientProcedureCommand(this, _serviceUnitOfWork);
-        public OpenPatientsCommand OpenPatients => new OpenPatientsCommand(this,_serviceUnitOfWork.patientService);
-        public OpenProceduresCommand OpenProcedures => new OpenProceduresCommand(this,_serviceUnitOfWork.procedureService);
+        public OpenPatientsCommand OpenPatients => new OpenPatientsCommand(this,_serviceUnitOfWork);
+        public OpenProceduresCommand OpenProcedures => new OpenProceduresCommand(this,_serviceUnitOfWork);
         public OpenReceptionistCommand OpenReceptionists => new OpenReceptionistCommand(this, _serviceUnitOfWork);
         public OpenQueuesCommand OpenQueues => new OpenQueuesCommand(this, _serviceUnitOfWork);
         public OpenAdminsCommand OpenAdmins => new OpenAdminsCommand(this, _serviceUnitOfWork);

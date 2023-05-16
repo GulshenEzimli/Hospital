@@ -28,7 +28,7 @@ namespace HospitalManagement.Services.Implementations
             Doctor doctor = _unitOfWork.DoctorRepository.GetById(id);
             doctor.IsDelete = true;
             doctor.ModifiedDate = DateTime.Now;
-            doctor.Modifier = new Admin { Id = 1 };
+            doctor.Modifier = new Admin { Id = Kernel.Admin.Id };
             return _unitOfWork.DoctorRepository.Update(doctor);
         }
 
@@ -50,12 +50,12 @@ namespace HospitalManagement.Services.Implementations
         {
             Doctor toBeSavedDoctor = _mapperUnitOfWork.DoctorMapper.Map(doctorModel);
             toBeSavedDoctor.ModifiedDate = DateTime.Now;
-            toBeSavedDoctor.Modifier = new Admin() { Id = 1 };
+            toBeSavedDoctor.Modifier = new Admin() { Id = Kernel.Admin.Id };
 
             if (toBeSavedDoctor.Id == 0)
             {
                 toBeSavedDoctor.CreationDate = DateTime.Now;
-                toBeSavedDoctor.Creator = new Admin() { Id = 1 };
+                toBeSavedDoctor.Creator = new Admin() { Id = Kernel.Admin.Id };
                 return _unitOfWork.DoctorRepository.Insert(toBeSavedDoctor);
             }
             else

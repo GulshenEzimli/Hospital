@@ -19,6 +19,7 @@ namespace HospitalManagement.Commands.Queues
         public override void Execute(object parameter)
         {
             _queueViewModel.CurrentSituation = Situations.ADD;
+            //_queueViewModel.CurrentValue.QueueNumber = _queueViewModel.Values.Where(x => x.Doctor.Id == _queueViewModel.CurrentValue.Doctor.Id).LastOrDefault()?.QueueNumber+1 ?? 1;
         }
     }
 }

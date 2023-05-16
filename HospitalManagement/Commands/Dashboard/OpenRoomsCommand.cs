@@ -25,9 +25,9 @@ namespace HospitalManagement.Commands.Dashboard
         public override void Execute(object parameter)
         {
             RoomControl roomControl = new RoomControl();
-            RoomsViewModel roomsViewModel = new RoomsViewModel(_serviceUnitOfWork.roomService, roomControl.ErrorDialog);
+            RoomsViewModel roomsViewModel = new RoomsViewModel(_serviceUnitOfWork.RoomService, roomControl.ErrorDialog);
 
-            var roomModels = _serviceUnitOfWork.roomService.GetAll();
+            var roomModels = _serviceUnitOfWork.RoomService.GetAll();
             roomsViewModel.AllValues = roomModels;
             roomsViewModel.Values = new ObservableCollection<RoomModel>(roomsViewModel.AllValues);
 
