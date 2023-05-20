@@ -1,4 +1,6 @@
-﻿using HospitalManagement.Models.Interfaces;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using HospitalManagement.Models.Interfaces;
+using HospitalManagement.Validations.Utils;
 using HospitalManagementCore.Domain.Entities;
 using HospitalManagementCore.Domain.Enums;
 using System;
@@ -7,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HospitalManagement.Models
+namespace HospitalManagement.Models.Implementations
 {
     public class RoomModel : IControlModel
     {
@@ -31,7 +33,7 @@ namespace HospitalManagement.Models
 
         public string DisplayRoom => $"{BlockFloor}. mərtəbə {Number} nömrəli {Type} otaq";
 
-        public RoomModel Clone()
+        public IControlModel Clone()
         {
             return new RoomModel
             {
@@ -41,6 +43,27 @@ namespace HospitalManagement.Models
                 Type = Type,
                 BlockFloor = BlockFloor
             };
+        }
+        public bool IsCompatibleWithFilter(string searchText)
+        {
+            if (string.IsNullOrWhiteSpace(searchText))
+                return true;
+
+            string lowerSearchText = searchText.ToLower();
+
+            if (Number.ToString().Contains(lowerSearchText))
+                return true;
+
+            if (IsAvailable.ToString().Contains(lowerSearchText))
+                return true;
+
+            if (Type.ToString().Contains(lowerSearchText))
+                return true;
+
+            if (BlockFloor.ToString().Contains(lowerSearchText))
+                return true;
+
+            return false;            
         }
     }
 }

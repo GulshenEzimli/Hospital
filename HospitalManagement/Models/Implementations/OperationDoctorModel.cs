@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HospitalManagement.Models
+namespace HospitalManagement.Models.Implementations
 {
-    public class OperationDoctorModel : IControlModel
-    {
-        public int Id { get; set; }
-        public OperationModel Model { get; set; }
-        public DoctorModel Doctor { get; set; }
+    //public class OperationDoctorModel : IControlModel
+    //{
+    //    public int Id { get; set; }
+    //    public OperationModel Model { get; set; }
+    //    public DoctorModel Doctor { get; set; }
 
-        public string DisplayValue => $"{Doctor.FirstName} {Doctor.LastName} {Doctor.PIN}";
-    }
+    //    public string DisplayValue => $"{Doctor.FirstName} {Doctor.LastName} {Doctor.PIN}";
+    //}
 }

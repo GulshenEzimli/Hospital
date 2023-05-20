@@ -1,6 +1,8 @@
-﻿using HospitalManagement.Attributes;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using HospitalManagement.Attributes;
 using HospitalManagement.Models.Implementations;
 using HospitalManagement.Models.Interfaces;
+using HospitalManagement.Validations.Utils;
 using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HospitalManagement.Models
+namespace HospitalManagement.Models.Implementations
 {
     public class OperationModel : IControlModel
     {
@@ -37,7 +39,7 @@ namespace HospitalManagement.Models
         public ObservableCollection<DoctorModel> Doctors { get; set; }
         public ObservableCollection<NurseModel> Nurses { get; set; }
 
-        public OperationModel Clone()
+        public IControlModel Clone()
         {
             OperationModel operationModel = new OperationModel()
             {
@@ -46,8 +48,8 @@ namespace HospitalManagement.Models
                 OperationCost = OperationCost,
                 OperationDate = OperationDate,
                 OperationReason = OperationReason,
-                Patient = Patient,
-                Room = Room
+                Patient = (PatientModel)Patient.Clone(),
+                Room = (RoomModel)Room.Clone()
             };
             var clonedDoctors = Doctors.Select(x=>x.Clone()).Cast<DoctorModel>();
             operationModel.Doctors = new ObservableCollection<DoctorModel>(clonedDoctors);
@@ -55,6 +57,30 @@ namespace HospitalManagement.Models
             var clonedNurses = Nurses.Select(x => x.Clone()).Cast<NurseModel>();
             operationModel.Nurses = new ObservableCollection<NurseModel>(clonedNurses);
             return operationModel;
+        }
+        public bool IsCompatibleWithFilter(string searchText)
+        {
+            if (string.IsNullOrWhiteSpace(searchText))
+                return true;
+
+            string lowerSearchText = searchText.ToLower();
+
+            if (Name?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+
+            if (Surname?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+
+            if (BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerSearchText))
+                return true;
+
+            if (Note?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+
+            if (Motherland?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+
+            return false;
         }
     }
 }

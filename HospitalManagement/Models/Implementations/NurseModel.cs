@@ -1,5 +1,7 @@
-﻿using HospitalManagement.Attributes;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using HospitalManagement.Attributes;
 using HospitalManagement.Models.Interfaces;
+using HospitalManagement.Validations.Utils;
 using HospitalManagementCore.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -7,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HospitalManagement.Models
+namespace HospitalManagement.Models.Implementations
 {
     public class NurseModel : IControlModel
     {
@@ -30,7 +32,7 @@ namespace HospitalManagement.Models
         [ExcelIgnore]
         public string DisplayNurse => $"{FirstName} {LastName} {PIN}";
         
-        public NurseModel Clone()
+        public IControlModel Clone()
         {
             return new NurseModel()
             {
@@ -41,11 +43,35 @@ namespace HospitalManagement.Models
                 PhoneNumber = PhoneNumber,
                 Email = Email,
                 PIN = PIN,
-                Position = Position,
+                Position = (PositionModel)Position.Clone(),
                 DepartmentName = DepartmentName,
                 Salary = Salary,
                 Gender = Gender,
             };
+        }
+        public bool IsCompatibleWithFilter(string searchText)
+        {
+            if (string.IsNullOrWhiteSpace(searchText))
+                return true;
+
+            string lowerSearchText = searchText.ToLower();
+
+            if (Name?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+
+            if (Surname?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+
+            if (BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerSearchText))
+                return true;
+
+            if (Note?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+
+            if (Motherland?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+
+            return false;
         }
     }
 }

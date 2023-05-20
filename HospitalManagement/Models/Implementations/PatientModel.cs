@@ -1,5 +1,6 @@
 ﻿using HospitalManagement.Attributes;
 using HospitalManagement.Models.Interfaces;
+using HospitalManagement.Validations.Utils;
 using HospitalManagementCore.Domain.Entities;
 using HospitalManagementCore.Domain.Enums;
 using System;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HospitalManagement.Models
+namespace HospitalManagement.Models.Implementations
 {
     public class PatientModel : IControlModel
     {
@@ -28,7 +29,7 @@ namespace HospitalManagement.Models
         public string DisplayPatient => $"{Name} {Surname} {PIN}";
         public Gender Gender { get; set; }
 
-        public PatientModel Clone()
+        public IControlModel Clone()
         {
             return new PatientModel()
             {
@@ -41,6 +42,30 @@ namespace HospitalManagement.Models
                 PhoneNumber = PhoneNumber,
                 Gender= Gender,
             };
+        }
+        public bool IsCompatibleWithFilter(string searchText)
+        {
+            if (string.IsNullOrWhiteSpace(searchText))
+                return true;
+
+            string lowerSearchText = searchText.ToLower();
+
+            if (Name?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+
+            if (Surname?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+
+            if (BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerSearchText))
+                return true;
+
+            if (Note?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+
+            if (Motherland?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+
+            return false;
         }
     }
 }

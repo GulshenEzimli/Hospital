@@ -1,5 +1,7 @@
-﻿using HospitalManagement.Attributes;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using HospitalManagement.Attributes;
 using HospitalManagement.Models.Interfaces;
+using HospitalManagement.Validations.Utils;
 using HospitalManagementCore.Domain.Entities;
 using HospitalManagementCore.Domain.Enums;
 using System;
@@ -51,7 +53,7 @@ namespace HospitalManagement.Models.Implementations
 
         [ExcelIgnore]
         public string DisplayDoctor => $"{FirstName} {LastName} {PIN}";
-        public DoctorModel Clone()
+        public IControlModel Clone()
         {
             return new DoctorModel()
             {
@@ -63,12 +65,48 @@ namespace HospitalManagement.Models.Implementations
                 Id = Id,
                 Phonenumber = Phonenumber,
                 PIN = PIN,
-                Position = Position,
+                Position = (PositionModel)Position.Clone(),
                 Salary = Salary,
                 No = No,
                 Gender = Gender,
                 IsChiefDoctor = IsChiefDoctor
             };
+        }
+
+        public bool IsCompatibleWithFilter(string searchText)
+        {
+            if (string.IsNullOrWhiteSpace(searchText))
+                return true;
+
+            string lowerSearchText = searchText.ToLower();
+
+            if (FirstName?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+
+            if (Surname?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+
+            if (BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerSearchText))
+                return true;
+
+            if (Note?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+
+            if (Motherland?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+
+            return false;
+            //var filteredResult = AllValues.Where(x => x.FirstName?.ToLower().Contains(lowerSearchText) == true ||
+            //                                     x.LastName?.ToLower().Contains(lowerSearchText) == true ||
+            //                                     x.PIN?.ToLower().Contains(lowerSearchText) == true ||
+            //                                     x.Gender.ToString()?.ToLower().Contains(lowerSearchText) == true ||
+            //                                     x.IsChiefDoctorValue?.ToLower().Contains(lowerSearchText) == true ||
+            //                                     x.Salary.ToString().Contains(lowerSearchText) == true ||
+            //                                     x.BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerSearchText) == true ||
+            //                                     x.Position.Name?.ToLower().Contains(lowerSearchText) == true ||
+            //                                     x.Phonenumber?.ToLower().Contains(lowerSearchText) == true ||
+            //                                     x.DepartmentName?.ToLower().Contains(lowerSearchText) == true ||
+            //                                     x.Email?.ToLower().Contains(lowerSearchText) == true).ToList();
         }
     }
 }
