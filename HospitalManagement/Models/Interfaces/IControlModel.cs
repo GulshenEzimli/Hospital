@@ -12,6 +12,6 @@ namespace HospitalManagement.Models.Interfaces
 
         IControlModel Clone();
 
-        bool ICompatibleWithFilter(string searchText);
+        bool IsCompatibleWithFilter(string searchText);
     }
 }
