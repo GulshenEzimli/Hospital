@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
+﻿using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Wordprocessing;
 using HospitalManagement.Attributes;
 using HospitalManagement.Models.Implementations;
 using HospitalManagement.Models.Interfaces;
@@ -65,19 +66,25 @@ namespace HospitalManagement.Models.Implementations
 
             string lowerSearchText = searchText.ToLower();
 
-            if (Name?.ToLower().Contains(lowerSearchText) == true)
+            if (OperationCost.ToString().Contains(lowerSearchText))
                 return true;
 
-            if (Surname?.ToLower().Contains(lowerSearchText) == true)
+            if (OperationReason?.ToLower().Contains(lowerSearchText) == true)
                 return true;
 
-            if (BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerSearchText))
+            if (OperationDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerSearchText))
                 return true;
 
-            if (Note?.ToLower().Contains(lowerSearchText) == true)
+            if (Patient.DisplayPatient?.ToLower().Contains(lowerSearchText) == true)
                 return true;
 
-            if (Motherland?.ToLower().Contains(lowerSearchText) == true)
+            if (Room.DisplayRoom?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+
+            if (Doctors.Any(x => x.IsCompatibleWithFilter(lowerSearchText)))
+                return true;
+
+            if (Nurses.Any(x => x.IsCompatibleWithFilter(lowerSearchText)))
                 return true;
 
             return false;
