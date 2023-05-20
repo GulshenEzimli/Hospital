@@ -1,4 +1,6 @@
 ﻿using HospitalManagement.Attributes;
+using HospitalManagement.Models.Implementations;
+using HospitalManagement.Models.Interfaces;
 using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Models
 {
-    public class OperationModel
+    public class OperationModel : IControlModel
     {
         public OperationModel() 
         {

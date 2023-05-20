@@ -1,4 +1,5 @@
-﻿using HospitalManagementCore.Domain.Entities;
+﻿using HospitalManagement.Models.Interfaces;
+using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Models
 {
-    public class OperationNurseModel
+    public class OperationNurseModel : IControlModel
     {
         public int Id { get; set; }
         public OperationModel OperationModel { get; set; }

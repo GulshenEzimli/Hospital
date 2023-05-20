@@ -1,4 +1,4 @@
-﻿using HospitalManagement.Models;
+﻿using HospitalManagement.Models.Implementations;
 using HospitalManagement.Validations.Utils;
 using System;
 using System.Collections.Generic;

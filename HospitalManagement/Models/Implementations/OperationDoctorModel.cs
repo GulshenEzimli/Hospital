@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HospitalManagement.Models.Implementations;
+using HospitalManagement.Models.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Models
 {
-    public class OperationDoctorModel
+    public class OperationDoctorModel : IControlModel
     {
         public int Id { get; set; }
         public OperationModel Model { get; set; }

@@ -1,6 +1,7 @@
 ﻿using HospitalManagement.Mappers.Implementations;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Models.Implementations;
 using HospitalManagement.Services.Interfaces;
 using HospitalManagement.Validations.Utils;
 using HospitalManagement.ViewModels;

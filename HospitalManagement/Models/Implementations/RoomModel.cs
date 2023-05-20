@@ -1,4 +1,5 @@
-﻿using HospitalManagementCore.Domain.Entities;
+﻿using HospitalManagement.Models.Interfaces;
+using HospitalManagementCore.Domain.Entities;
 using HospitalManagementCore.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Models
 {
-    public class RoomModel
+    public class RoomModel : IControlModel
     {
         public int Id { get; set; }
         public int No { get; set; }

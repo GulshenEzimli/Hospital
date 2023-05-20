@@ -2,6 +2,7 @@
 using HospitalManagement.Commands.Queues;
 using HospitalManagement.Enums;
 using HospitalManagement.Models;
+using HospitalManagement.Models.Implementations;
 using HospitalManagement.Services.Implementations;
 using HospitalManagement.Services.Interfaces;
 using HospitalManagement.Validations.Utils;

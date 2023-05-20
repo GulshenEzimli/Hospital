@@ -1,5 +1,5 @@
 ﻿using HospitalManagement.Mappers.Interfaces;
-using HospitalManagement.Models;
+using HospitalManagement.Models.Implementations;
 using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
