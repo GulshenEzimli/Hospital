@@ -24,12 +24,16 @@ namespace HospitalManagement.Models.Implementations
                 DepartmentName = DepartmentName
             };
         }
-        public bool IsCompatibleWithFilter(string searchText)
+
+        public bool ICompatibleWithFilter(string searchText)
         {
             if (string.IsNullOrWhiteSpace(searchText))
                 return true;
 
             string lowerSearchText = searchText.ToLower();
+
+            if (Id.ToString()?.Contains(lowerSearchText) == true)
+                return true;
 
             if (Name?.ToLower().Contains(lowerSearchText) == true)
                 return true;
@@ -39,5 +43,7 @@ namespace HospitalManagement.Models.Implementations
 
             return false;
         }
+
+        
     }
 }

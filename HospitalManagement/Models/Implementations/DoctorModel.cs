@@ -73,6 +73,8 @@ namespace HospitalManagement.Models.Implementations
             };
         }
 
+       
+
         public bool IsCompatibleWithFilter(string searchText)
         {
             if (string.IsNullOrWhiteSpace(searchText))
@@ -80,33 +82,29 @@ namespace HospitalManagement.Models.Implementations
 
             string lowerSearchText = searchText.ToLower();
 
-            if (FirstName?.ToLower().Contains(lowerSearchText) == true)
-                return true;
-
-            if (Surname?.ToLower().Contains(lowerSearchText) == true)
-                return true;
-
             if (BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerSearchText))
                 return true;
-
-            if (Note?.ToLower().Contains(lowerSearchText) == true)
+            if (DepartmentName?.ToLower().Contains(lowerSearchText) == true)
                 return true;
-
-            if (Motherland?.ToLower().Contains(lowerSearchText) == true)
+            if (Email?.ToLower().Contains(lowerSearchText) == true)
                 return true;
-
+            if (FirstName?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+            if (LastName?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+            if (Phonenumber?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+            if (PIN?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+            if (Position.Name?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+            if (Salary.ToString()?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+            if (Gender.ToString()?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+            if (IsChiefDoctor.ToString()?.ToLower().Contains(lowerSearchText) == true)
+                return true;
             return false;
-            //var filteredResult = AllValues.Where(x => x.FirstName?.ToLower().Contains(lowerSearchText) == true ||
-            //                                     x.LastName?.ToLower().Contains(lowerSearchText) == true ||
-            //                                     x.PIN?.ToLower().Contains(lowerSearchText) == true ||
-            //                                     x.Gender.ToString()?.ToLower().Contains(lowerSearchText) == true ||
-            //                                     x.IsChiefDoctorValue?.ToLower().Contains(lowerSearchText) == true ||
-            //                                     x.Salary.ToString().Contains(lowerSearchText) == true ||
-            //                                     x.BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerSearchText) == true ||
-            //                                     x.Position.Name?.ToLower().Contains(lowerSearchText) == true ||
-            //                                     x.Phonenumber?.ToLower().Contains(lowerSearchText) == true ||
-            //                                     x.DepartmentName?.ToLower().Contains(lowerSearchText) == true ||
-            //                                     x.Email?.ToLower().Contains(lowerSearchText) == true).ToList();
         }
     }
 }

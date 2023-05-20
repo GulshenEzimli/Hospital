@@ -28,21 +28,12 @@ namespace HospitalManagement.Models.Implementations
 
             string lowerSearchText = searchText.ToLower();
 
+            if (Id.ToString()?.ToLower().Contains(lowerSearchText) == true)
+                return true;
             if (Name?.ToLower().Contains(lowerSearchText) == true)
                 return true;
 
-            if (Surname?.ToLower().Contains(lowerSearchText) == true)
-                return true;
-
-            if (BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerSearchText))
-                return true;
-
-            if (Note?.ToLower().Contains(lowerSearchText) == true)
-                return true;
-
-            if (Motherland?.ToLower().Contains(lowerSearchText) == true)
-                return true;
-
+           
             return false;
         }
     }
