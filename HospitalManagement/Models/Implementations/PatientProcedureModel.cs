@@ -40,22 +40,22 @@ namespace HospitalManagement.Models.Implementations
 
             string lowerSearchText = searchText.ToLower();
 
-            if (Name?.ToLower().Contains(lowerSearchText) == true)
+            if (Doctor.DisplayDoctor?.ToLower().Contains(lowerSearchText) == true)
                 return true;
 
-            if (Surname?.ToLower().Contains(lowerSearchText) == true)
+            if (Nurse.DisplayNurse?.ToLower().Contains(lowerSearchText) == true)
                 return true;
 
-            if (BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerSearchText))
+            if (UseDate.ToString(SystemConstants.DateDisplayFormat).ToLower().Contains(lowerSearchText))
                 return true;
 
-            if (Note?.ToLower().Contains(lowerSearchText) == true)
+            if (Patient.DisplayPatient?.ToLower().Contains(lowerSearchText) == true)
                 return true;
 
-            if (Motherland?.ToLower().Contains(lowerSearchText) == true)
+            if (Procedure.DisplayProcedure?.ToLower().Contains(lowerSearchText) == true)
                 return true;
 
-            return false;
+            return false;            
         }
 
     }

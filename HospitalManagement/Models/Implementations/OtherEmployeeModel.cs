@@ -48,22 +48,34 @@ namespace HospitalManagement.Models.Implementations
 
             string lowerSearchText = searchText.ToLower();
 
-            if (Name?.ToLower().Contains(lowerSearchText) == true)
+            if (FirstName?.ToLower().Contains(lowerSearchText) == true)
                 return true;
 
-            if (Surname?.ToLower().Contains(lowerSearchText) == true)
+            if (LastName?.ToLower().Contains(lowerSearchText) == true)
                 return true;
 
             if (BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerSearchText))
                 return true;
 
-            if (Note?.ToLower().Contains(lowerSearchText) == true)
+            if (PIN?.ToLower().Contains(lowerSearchText) == true)
                 return true;
 
-            if (Motherland?.ToLower().Contains(lowerSearchText) == true)
+            if (Gender.ToString()?.ToLower().Contains(lowerSearchText) == true)
                 return true;
 
-            return false;
+            if (Salary.ToString().Contains(lowerSearchText))
+                return true;
+
+            if (PhoneNumber?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+
+            if (Email?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+
+            if (Job.IsCompatibleWithFilter(lowerSearchText))
+                return true;
+
+            return false;           
         }
     }
 }

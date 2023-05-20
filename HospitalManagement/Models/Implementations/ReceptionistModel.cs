@@ -91,12 +91,6 @@ namespace HospitalManagement.Models.Implementations
             if (GenderValue?.ToLower().Contains(lowerSearchText) == true)
                 return true;
 
-            if (DepartmentName?.ToLower().Contains(lowerSearchText) == true)
-                return true;
-
-            if (DepartmentName?.ToLower().Contains(lowerSearchText) == true)
-                return true;
-
             return false;
         }
 
