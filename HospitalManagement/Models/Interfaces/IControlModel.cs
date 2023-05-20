@@ -10,8 +10,8 @@ namespace HospitalManagement.Models.Interfaces
     {
         int Id { get; set; }
 
-        //public IControlModel Clone();
+        IControlModel Clone();
 
-
+        bool ICompatibleWithFilter(string searchText);
     }
 }

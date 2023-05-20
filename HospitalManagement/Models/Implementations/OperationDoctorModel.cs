@@ -1,4 +1,5 @@
-﻿using HospitalManagement.Models.Interfaces;
+﻿using HospitalManagement.Models.Implementations;
+using HospitalManagement.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HospitalManagement.Models
+namespace HospitalManagement.Models.Implementations
 {
     public class DoctorModel : IControlModel
     {

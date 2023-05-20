@@ -1,6 +1,6 @@
 ﻿using ClosedXML.Excel;
 using HospitalManagement.Attributes;
-using HospitalManagement.Models;
+using HospitalManagement.Models.Implementations;
 using HospitalManagement.ViewModels.UserControls;
 using Microsoft.Win32;
 using System;

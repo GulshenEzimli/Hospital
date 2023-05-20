@@ -1,4 +1,5 @@
 ﻿using HospitalManagement.Attributes;
+using HospitalManagement.Models.Implementations;
 using HospitalManagement.Models.Interfaces;
 using HospitalManagementCore.Domain.Entities;
 using System;
