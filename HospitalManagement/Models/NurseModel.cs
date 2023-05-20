@@ -1,4 +1,5 @@
 ﻿using HospitalManagement.Attributes;
+using HospitalManagement.Models.Interfaces;
 using HospitalManagementCore.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Models
 {
-    public class NurseModel
+    public class NurseModel : IControlModel
     {
         [ExcelIgnore]
         public int Id { get; set; }

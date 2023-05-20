@@ -1,4 +1,5 @@
-﻿using HospitalManagementCore.Domain.Enums;
+﻿using HospitalManagement.Models.Interfaces;
+using HospitalManagementCore.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.IO.Packaging;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Models
 {
-    public class OtherEmployeeModel
+    public class OtherEmployeeModel : IControlModel
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

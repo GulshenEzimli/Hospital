@@ -90,6 +90,7 @@
     <Compile Include="Commands\Queues\ExportExcelQueueCommand.cs" />
     <Compile Include="Commands\SignInCommand.cs" />
     <Compile Include="Kernel.cs" />
+    <Compile Include="Models\Interfaces\IControlModel.cs" />
     <Compile Include="Services\Implementations\AdminService.cs" />
     <Compile Include="Services\Interfaces\IAdminService.cs" />
     <Compile Include="ViewModels\Windows\LoginViewModel.cs" />
