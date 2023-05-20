@@ -1,5 +1,6 @@
 ﻿using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Models.Implementations;
 using HospitalManagement.Services.Interfaces;
 using HospitalManagement.ViewModels.UserControls;
 using HospitalManagementCore.DataAccess.Interfaces;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Services.Implementations
 {
-    public class NurseService : INurseService
+    public class NurseService : IControlModelService<NurseModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly INurseMapper _nurseMapper;

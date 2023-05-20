@@ -27,9 +27,7 @@ namespace HospitalManagement.Models.Implementations
                 return true;
 
             string lowerSearchText = searchText.ToLower();
-
-            if (Id.ToString()?.ToLower().Contains(lowerSearchText) == true)
-                return true;
+                       
             if (Name?.ToLower().Contains(lowerSearchText) == true)
                 return true;
 

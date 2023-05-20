@@ -8,6 +8,7 @@ namespace HospitalManagement.Services.Interfaces
 {
     public interface IAdminService
     {
+        // TODO : add this service to IControlModelService
         bool Authorize(string username, string password);   
     }
 }

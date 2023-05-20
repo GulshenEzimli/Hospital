@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Services.Implementations
 {
-    public class DoctorService : IDoctorService
+    public class DoctorService : IControlModelService<DoctorModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapperUnitOfWork _mapperUnitOfWork;
@@ -23,7 +23,7 @@ namespace HospitalManagement.Services.Implementations
             _mapperUnitOfWork = mapperUnitOfWork;
         }
 
-        public bool DeleteDoctor(int id)
+        public bool Delete(int id)
         {
             Doctor doctor = _unitOfWork.DoctorRepository.GetById(id);
             doctor.IsDelete = true;
@@ -46,7 +46,7 @@ namespace HospitalManagement.Services.Implementations
             return doctorModels;
         }
 
-        public int SaveDoctor(DoctorModel doctorModel)
+        public int Save(DoctorModel doctorModel)
         {
             Doctor toBeSavedDoctor = _mapperUnitOfWork.DoctorMapper.Map(doctorModel);
             toBeSavedDoctor.ModifiedDate = DateTime.Now;

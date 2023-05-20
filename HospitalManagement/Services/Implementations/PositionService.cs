@@ -1,6 +1,7 @@
 ﻿using HospitalManagement.Mappers.Implementations;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Models.Implementations;
 using HospitalManagement.Services.Interfaces;
 using HospitalManagement.ViewModels.UserControls;
 using HospitalManagementCore.DataAccess.Interfaces;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Services.Implementations
 {
-    public class PositionService : IPositionService
+    public class PositionService : IControlModelService<PositionModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapperUnitOfWork _mapperUnitOfWork;
@@ -21,7 +22,8 @@ namespace HospitalManagement.Services.Implementations
         {
             _unitOfWork = unitOfWork;
             _mapperUnitOfWork = mapperUnitOfWork;
-        }
+        }              
+
         public List<PositionModel> GetAll()
         {
             List<PositionModel> positionModels = new List<PositionModel>();
@@ -32,6 +34,16 @@ namespace HospitalManagement.Services.Implementations
                 positionModels.Add(positionModel);
             }
             return positionModels;
+        }
+
+        // TODO
+        public int Save(PositionModel model)
+        {
+            throw new NotImplementedException();
+        }
+        public bool Delete(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

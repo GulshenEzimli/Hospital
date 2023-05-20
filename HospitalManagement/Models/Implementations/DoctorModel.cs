@@ -96,7 +96,7 @@ namespace HospitalManagement.Models.Implementations
                 return true;
             if (PIN?.ToLower().Contains(lowerSearchText) == true)
                 return true;
-            if (Position.Name?.ToLower().Contains(lowerSearchText) == true)
+            if (Position.ICompatibleWithFilter(lowerSearchText))
                 return true;
             if (Salary.ToString()?.ToLower().Contains(lowerSearchText) == true)
                 return true;

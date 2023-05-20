@@ -1,5 +1,6 @@
 ﻿using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Models.Implementations;
 using HospitalManagement.Services.Interfaces;
 using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Services.Implementations
 {
-    public class JobService : IJobService
+    public class JobService : IControlModelService<JobModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IJobMapper _jobMapper;
@@ -20,6 +21,7 @@ namespace HospitalManagement.Services.Implementations
             _unitOfWork = unitOfWork;
             _jobMapper = jobMapper;
         }
+                
         public List<JobModel> GetAll()
         {
             List<Job> jobs = _unitOfWork.JobRepository.Get();
@@ -30,6 +32,17 @@ namespace HospitalManagement.Services.Implementations
                 jobModels.Add(jobModel);
             }
             return jobModels;
+        }
+
+        // TODO
+        public bool Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Save(JobModel model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

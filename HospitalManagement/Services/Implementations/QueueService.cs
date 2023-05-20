@@ -1,5 +1,6 @@
 ﻿using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Models.Implementations;
 using HospitalManagement.Services.Interfaces;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Services.Implementations
 {
-    public class QueueService : IQueueService
+    public class QueueService : IControlModelService<QueueModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapperUnitOfWork _mapperUnitOfWork;

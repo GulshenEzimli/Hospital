@@ -1,5 +1,6 @@
 ﻿using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Models.Implementations;
 using HospitalManagement.Services.Interfaces;
 using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Services.Implementations
 {
-    public class OtherEmployeeService : IOtherEmployeeService
+    public class OtherEmployeeService : IControlModelService<OtherEmployeeModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IOtherEmployeeMapper _otherEmployeeMapper;

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Services.Implementations
 {
-    public class OperationService : IOperationService
+    public class OperationService : IControlModelService<OperationModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapperUnitOfWork _mapperUnitOfWork;
@@ -22,7 +22,7 @@ namespace HospitalManagement.Services.Implementations
             _mapperUnitOfWork = mapperUnitOfWork;
         }
 
-        public bool DeleteOperation(int id)
+        public bool Delete(int id)
         {
             Operation operation = _unitOfWork.OperationRepository.GetById(id);
             operation.IsDelete = true;
@@ -65,7 +65,7 @@ namespace HospitalManagement.Services.Implementations
             return operationModels;
         }
 
-        public int SaveOperation(OperationModel operationModel)
+        public int Save(OperationModel operationModel)
         {
             Operation toBeSavedOperation = _mapperUnitOfWork.OperationMapper.Map(operationModel);
 

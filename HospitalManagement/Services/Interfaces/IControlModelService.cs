@@ -1,4 +1,4 @@
-﻿using HospitalManagement.Models;
+﻿using HospitalManagement.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Services.Interfaces
 {
-    public interface IPatientProcedureService
+    public interface IControlModelService<T> where T : IControlModel, new()
     {
-        List<PatientProcedureModel> GetAll();
-        int Save(PatientProcedureModel patientProcedureModel);
+        List<T> GetAll();
+        int Save(T model);
         bool Delete(int id);
     }
 }

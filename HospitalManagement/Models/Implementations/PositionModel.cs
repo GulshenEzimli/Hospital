@@ -25,16 +25,13 @@ namespace HospitalManagement.Models.Implementations
             };
         }
 
-        public bool ICompatibleWithFilter(string searchText)
+        public bool IsCompatibleWithFilter(string searchText)
         {
             if (string.IsNullOrWhiteSpace(searchText))
                 return true;
 
             string lowerSearchText = searchText.ToLower();
-
-            if (Id.ToString()?.Contains(lowerSearchText) == true)
-                return true;
-
+                       
             if (Name?.ToLower().Contains(lowerSearchText) == true)
                 return true;
 

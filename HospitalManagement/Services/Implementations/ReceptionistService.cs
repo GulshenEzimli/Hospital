@@ -1,6 +1,7 @@
 ﻿using HospitalManagement.Mappers.Implementations;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Models.Implementations;
 using HospitalManagement.Services.Interfaces;
 using HospitalManagement.ViewModels.UserControls;
 using HospitalManagementCore.DataAccess.Interfaces;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Services.Implementations
 {
-    public class ReceptionistService : IReceptionistService
+    public class ReceptionistService : IControlModelService<ReceptionistModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IReceptionistMapper _receptionistMapper;

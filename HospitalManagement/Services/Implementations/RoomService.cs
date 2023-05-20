@@ -1,5 +1,6 @@
 ﻿using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Models.Implementations;
 using HospitalManagement.Services.Interfaces;
 using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
@@ -10,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace HospitalManagement.Services.Implementations
 {
-    public class RoomService : IRoomService
+    public class RoomService : IControlModelService<RoomModel>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRoomMapper _roomMapper;
