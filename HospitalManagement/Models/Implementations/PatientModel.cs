@@ -59,13 +59,16 @@ namespace HospitalManagement.Models.Implementations
             if (BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerSearchText))
                 return true;
 
-            if (Note?.ToLower().Contains(lowerSearchText) == true)
+            if (Gender.ToString().ToLower().Contains(lowerSearchText))
                 return true;
 
-            if (Motherland?.ToLower().Contains(lowerSearchText) == true)
+            if (PIN?.ToLower().Contains(lowerSearchText) == true)
                 return true;
 
-            return false;
+            if (PhoneNumber?.ToLower().Contains(lowerSearchText) == true)
+                return true;
+
+            return false;            
         }
     }
 }
