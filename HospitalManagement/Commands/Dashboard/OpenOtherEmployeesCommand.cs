@@ -32,7 +32,7 @@ namespace HospitalManagement.Commands.Dashboard
             otherEmployeesViewModel.AllValues = otherEmployeeModels;
             otherEmployeesViewModel.Values = new ObservableCollection<OtherEmployeeModel>(otherEmployeeModels);
 
-            otherEmployeesViewModel.JobNames = _serviceUnitOfWork.JobService.GetAll();
+            otherEmployeesViewModel.Load();
             
 
             otherEmployeesControl.DataContext = otherEmployeesViewModel;

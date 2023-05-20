@@ -18,6 +18,7 @@ namespace HospitalManagement.Commands.Operations
         public override void Execute(object parameter)
         {
             _operationsViewModel.SetDefaultValues();
+            _operationsViewModel.OnSelectedValueChanged();
         }
     }
 }

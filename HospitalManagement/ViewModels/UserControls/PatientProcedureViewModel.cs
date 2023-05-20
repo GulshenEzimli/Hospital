@@ -18,71 +18,26 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.ViewModels.UserControls
 {
-    public class PatientProcedureViewModel : BaseControlViewModel
+    public class PatientProcedureViewModel : BaseControlViewModel<PatientProcedureModel>
     {
-        private readonly IPatientProcedureService _patientProcedureService;
-        public PatientProcedureViewModel(IPatientProcedureService patientProcedureService, ErrorDialog errorDialog) : base(errorDialog)
+        private readonly IControlModelService<PatientModel> _patientService;
+        private readonly IControlModelService<DoctorModel> _doctorService;
+        private readonly IControlModelService<NurseModel> _nurseService;
+        private readonly IControlModelService<ProcedureModel> _procedureService;
+        public PatientProcedureViewModel(IControlModelService<PatientModel> patientService,
+                                         IControlModelService<DoctorModel> doctorService,
+                                         IControlModelService<NurseModel> nurseService,
+                                         IControlModelService<ProcedureModel> procedureService,
+                                         IControlModelService<PatientProcedureModel> patientProcedureService,
+                                         ErrorDialog errorDialog) : base(patientProcedureService, errorDialog)
         {
-            AllValues = new List<PatientProcedureModel>();
-            _patientProcedureService = patientProcedureService;
-            SetDefaultValues();
+            _patientService = patientService;
+            _doctorService = doctorService;
+            _nurseService = nurseService;
+            _procedureService = procedureService;
         }
         public override string Header => "Patients and Procedures";
-        private Situations _currentSituation;
-        public Situations CurrentSituation
-        {
-            get => _currentSituation;
-            set
-            {
-                _currentSituation = value;
-                OnPropertyChanged(nameof(CurrentSituation));
-            }
-        }
-
-        private PatientProcedureModel _currentValue;
-        public PatientProcedureModel CurrentValue
-        {
-            get => _currentValue;
-            set
-            {
-                _currentValue = value;
-                OnPropertyChanged(nameof(CurrentValue));
-            }
-        }
-
-        private PatientProcedureModel _selectedValue;
-        public PatientProcedureModel SelectedValue
-        {
-            get => _selectedValue;
-            set
-            {
-                SetSelectedValue(value);
-                if (value == null)
-                    SetDefaultValues();
-                else
-                {
-                    CurrentValue = new PatientProcedureModel();
-                    CurrentValue = SelectedValue.Clone();
-                    CurrentSituation = Situations.SELECTED;
-                }
-                OnPropertyChanged(nameof(_selectedValue));
-            }
-        }
-
-        public List<PatientProcedureModel> AllValues { get; set; }
-
-        private ObservableCollection<PatientProcedureModel> _values;
-        public ObservableCollection<PatientProcedureModel> Values
-        {
-            get => _values ?? (_values = new ObservableCollection<PatientProcedureModel>());
-            set
-            {
-                _values = value;
-                OnPropertyChanged(nameof(Values));
-            }
-
-        }
-
+        
         private List<PatientModel> _patients;
         public List<PatientModel> Patients
         {
@@ -123,41 +78,13 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
-        public AddPatientProcedureCommand Add => new AddPatientProcedureCommand(this);
-        public DeletePatientProcedureCommand Delete => new DeletePatientProcedureCommand(this, _patientProcedureService);
-        public EditPatientProcedureCommand Edit => new EditPatientProcedureCommand(this);
-        public RejectPatientProcedureCommand Reject => new RejectPatientProcedureCommand(this);
-        public SavePatientProcedureCommand Save => new SavePatientProcedureCommand(this, _patientProcedureService);
-
-        public void SetDefaultValues()
+        public override void Load()
         {
-            CurrentSituation = Situations.NORMAL;
-            CurrentValue = new PatientProcedureModel();
-            SetSelectedValue(null);
-        }
+            Patients = _patientService.GetAll();
+            Doctors = _doctorService.GetAll();
+            Nurses = _nurseService.GetAll();
+            Procedures = _procedureService.GetAll();
 
-        public void SetSelectedValue(PatientProcedureModel model)
-        {
-            _selectedValue = model;
-            OnPropertyChanged(nameof(SelectedValue));
-        }
-
-        protected override void OnSearchTextChanged()
-        {
-            if (string.IsNullOrWhiteSpace(SearchText))
-            {
-                Values = new ObservableCollection<PatientProcedureModel>(AllValues);
-            }
-            else
-            {
-                string lowerText = SearchText.ToLower();
-                var filteredValues = AllValues.Where(x => x.Doctor.DisplayDoctor?.ToLower().Contains(lowerText) == true ||
-                                                        x.Nurse.DisplayNurse?.ToLower().Contains(lowerText) == true ||
-                                                        x.Patient.DisplayPatient?.ToLower().Contains(lowerText) == true ||
-                                                        x.Procedure.DisplayProcedure?.ToLower().Contains(lowerText) == true ||
-                                                        x.UseDate.ToString(SystemConstants.DateDisplayFormat).ToLower().Contains(lowerText) == true);
-                Values = new ObservableCollection<PatientProcedureModel>(filteredValues);
-            }
         }
     }
 }

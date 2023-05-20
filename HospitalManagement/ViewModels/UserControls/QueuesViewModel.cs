@@ -17,67 +17,23 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.ViewModels.UserControls
 {
-    public class QueuesViewModel:BaseControlViewModel
+    public class QueuesViewModel : BaseControlViewModel<QueueModel>
     {
-        private readonly IQueueService _queueService;
-        public QueuesViewModel(IQueueService queueService, ErrorDialog errorDialog) : base(errorDialog)
+        private readonly IControlModelService<PatientModel> _patientService;
+        private readonly IControlModelService<DoctorModel> _doctorService;
+        private readonly IControlModelService<ProcedureModel> _procedureService;
+        public QueuesViewModel(IControlModelService<PatientModel> patientService,
+                               IControlModelService<DoctorModel> doctorService,
+                               IControlModelService<ProcedureModel> procedureService, 
+                               IControlModelService<QueueModel> queueService,
+                               ErrorDialog errorDialog) : base(queueService, errorDialog)
         {
-            _queueService = queueService;
-            CurrentValue = new QueueModel();
-        }
-        private Situations _currentSituation = Situations.NORMAL;
-        public Situations CurrentSituation
-        {
-            get => _currentSituation;
-            set
-            {
-                _currentSituation = value;
-                OnPropertyChanged(nameof(CurrentSituation));
-            }
-        }
-        private QueueModel _currentValue;
-        public QueueModel CurrentValue
-        {
-            get => _currentValue;
-            set
-            {
-                _currentValue = value;
-                OnPropertyChanged(nameof(CurrentValue));
-            }
+            _patientService = patientService;
+            _doctorService = doctorService;
+            _procedureService = procedureService;
         }
 
-        private QueueModel _selectedValue;
-        public QueueModel SelectedValue
-        {
-            get => _selectedValue;
-            set
-            {
-                SetSelectedValue(value);
-                if (value == null)
-                    SetDefaultValues();
-                else
-                {
-                    CurrentValue = new QueueModel();
-                    CurrentValue = SelectedValue.Clone();
-                    CurrentSituation = Situations.SELECTED;
-                }
-                OnPropertyChanged(nameof(_selectedValue));
-            }
-        }
-
-        public List<QueueModel> AllValues { get; set; }
-
-        private ObservableCollection<QueueModel> _values;
-        public ObservableCollection<QueueModel> Values
-        {
-            get => _values ?? (_values = new ObservableCollection<QueueModel>());
-            set
-            {
-                _values = value;
-                OnPropertyChanged(nameof(Values));
-            }
-
-        }
+        public override string Header => "Queues";
 
         private List<PatientModel> _patients;
         public List<PatientModel> Patients
@@ -109,46 +65,11 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
-        #region Commands
-        public AddQueueCommand Add => new AddQueueCommand(this);
-        public DeleteQueueCommand Delete => new DeleteQueueCommand(this,_queueService);
-        public EditQueueCommand Edit => new EditQueueCommand(this);
-        public RejectQueueCommand Reject => new RejectQueueCommand(this);
-        public SaveQueueCommand Save => new SaveQueueCommand(this,_queueService);
-        public ExportExcelQueueCommand ExportExcel => new ExportExcelQueueCommand(this);
-        #endregion
-
-        public void SetDefaultValues()
+        public override void Load()
         {
-            CurrentSituation = Situations.NORMAL;
-            CurrentValue = new QueueModel();
-            SetSelectedValue(null);
-        }
-
-        public void SetSelectedValue(QueueModel model)
-        {
-            _selectedValue = model;
-            OnPropertyChanged(nameof(SelectedValue));
-        }
-
-        public override string Header => "Queues";
-
-        protected override void OnSearchTextChanged()
-        {
-            if (string.IsNullOrWhiteSpace(SearchText))
-            {
-                Values = new ObservableCollection<QueueModel>(AllValues);
-            }
-            else
-            {
-                string lowerText = SearchText.ToLower();
-                var filteredValues = AllValues.Where(x => x.Procedure.Name?.ToLower().Contains(lowerText) == true ||
-                                                          x.Doctor.DisplayDoctor?.ToLower().Contains(lowerText) == true ||
-                                                          x.Patient.DisplayPatient?.ToLower().Contains(lowerText) == true ||
-                                                          x.UseDate.ToString(SystemConstants.DateDisplayFormat).ToLower().Contains(lowerText) == true||
-                                                          x.QueueNumber.ToString().Contains(lowerText) == true );
-                Values = new ObservableCollection<QueueModel>(filteredValues);
-            }
+            Patients = _patientService.GetAll();
+            Doctors = _doctorService.GetAll();
+            Procedures = _procedureService.GetAll();
         }
     }
 }

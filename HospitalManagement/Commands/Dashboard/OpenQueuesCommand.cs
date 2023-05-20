@@ -33,9 +33,7 @@ namespace HospitalManagement.Commands.Dashboard
             queueViewModel.AllValues = queueModels;
             queueViewModel.Values = new ObservableCollection<QueueModel>(queueModels);
 
-            queueViewModel.Patients = _serviceUnitOfWork.PatientService.GetAll();
-            queueViewModel.Doctors = _serviceUnitOfWork.DoctorService.GetAll();
-            queueViewModel.Procedures = _serviceUnitOfWork.ProcedureService.GetAll();
+            queueViewModel.Load();
 
             queueControl.DataContext= queueViewModel;
             _viewModel.CenterGrid.Children.Clear();

@@ -30,7 +30,7 @@ namespace HospitalManagement.Commands.Dashboard
             receptionistViewModel.AllValues = receptionistModels;
             receptionistViewModel.Values = new ObservableCollection<Models.ReceptionistModel>(receptionistViewModel.AllValues);
 
-            receptionistViewModel.Jobs = _serviceUnitOfWork.JobService.GetAll();
+            receptionistViewModel.Load();
 
             receptionistControl.DataContext = receptionistViewModel;
             _viewModel.CenterGrid.Children.Clear();

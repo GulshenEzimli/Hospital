@@ -17,74 +17,15 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.ViewModels.UserControls
 {
-    public class DoctorsViewModel : BaseControlViewModel
+    public class DoctorsViewModel : BaseControlViewModel<DoctorModel>
     {
-        private readonly IServiceUnitOfWork _serviceUnitOfWork;
-        public DoctorsViewModel(IServiceUnitOfWork serviceUnitOfWork, ErrorDialog errorDialog) : base(errorDialog)
-        {
-            _serviceUnitOfWork = serviceUnitOfWork;
-            AllValues = new List<DoctorModel>();
-            SetDefaultValues();
+        private readonly IControlModelService<PositionModel> _positionService;
+        public DoctorsViewModel(IControlModelService<PositionModel> positionService, IControlModelService<DoctorModel> doctorService, ErrorDialog errorDialog) : base(doctorService, errorDialog)
+        {   
+            _positionService = positionService;
         }
         public override string Header => "Doctors";
-
-
-        private Situations _currentSituation;
-        public Situations CurrentSituation
-        {
-            get => _currentSituation;
-            set
-            {
-                _currentSituation = value;
-                OnPropertyChanged(nameof(CurrentSituation));
-            }
-        }
-
-        private DoctorModel _currentValue;
-        public DoctorModel CurrentValue
-        {
-            get => _currentValue;
-            set
-            {
-                _currentValue = value;
-                OnPropertyChanged(nameof(CurrentValue));
-            }
-        }
-
-        private DoctorModel _selectedValue;
-        public DoctorModel SelectedValue
-        {
-            get => _selectedValue;
-            set
-            {
-                SetSelectedValue(value);
-                
-                if (value == null)
-                {
-                    SetDefaultValues();
-                }
-                else
-                {
-                    CurrentValue = new DoctorModel();
-                    CurrentValue = SelectedValue.Clone();
-                    CurrentSituation = Situations.SELECTED;
-                }
-            }
-        }
-
-        private ObservableCollection<DoctorModel> _values;
-        public ObservableCollection<DoctorModel> Values
-        {
-            get => _values ?? (_values = new ObservableCollection<DoctorModel>());
-            set
-            {
-                _values = value;
-                OnPropertyChanged(nameof(Values));
-            }
-        }
-
-        public List<DoctorModel> AllValues { get; set; }
-
+        
         private List<PositionModel> _positionValues;
         public List<PositionModel> PositionValues
         {
@@ -95,52 +36,10 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
-
-        public AddDoctorCommand Add => new AddDoctorCommand(this);
-        public DeleteDoctorCommand Delete => new DeleteDoctorCommand(this, _serviceUnitOfWork);
-        public EditDoctorCommand Edit => new EditDoctorCommand(this);
-        public RejectDoctorCommand Reject => new RejectDoctorCommand(this);
-        public SaveDoctorCommand Save => new SaveDoctorCommand(this, _serviceUnitOfWork);
-        public ExportExcelDoctorCommand ExportExcel => new ExportExcelDoctorCommand(this);
-
-        public void SetDefaultValues()
+        public override void Load()
         {
-            CurrentSituation = Situations.NORMAL;
-            CurrentValue = new DoctorModel();
-
-            SetSelectedValue(null);
-        }
-
-        private void SetSelectedValue(DoctorModel doctorModel)
-        {
-            _selectedValue = doctorModel;
-            OnPropertyChanged(nameof(SelectedValue));
-        }
-
-        protected override void OnSearchTextChanged()
-        {
-            if (string.IsNullOrWhiteSpace(SearchText))
-            {
-                Values = new ObservableCollection<DoctorModel>(AllValues);
-            }
-            else
-            {
-                string lowerSearchText = SearchText.ToLower();
-
-                var filteredResult = AllValues.Where(x => x.FirstName?.ToLower().Contains(lowerSearchText) == true ||
-                                                 x.LastName?.ToLower().Contains(lowerSearchText) == true ||
-                                                 x.PIN?.ToLower().Contains(lowerSearchText) == true ||
-                                                 x.Gender.ToString()?.ToLower().Contains(lowerSearchText) == true ||
-                                                 x.IsChiefDoctorValue?.ToLower().Contains(lowerSearchText) == true ||
-                                                 x.Salary.ToString().Contains(lowerSearchText) == true ||
-                                                 x.BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerSearchText) == true ||
-                                                 x.Position.Name?.ToLower().Contains(lowerSearchText) == true ||
-                                                 x.Phonenumber?.ToLower().Contains(lowerSearchText) == true ||
-                                                 x.DepartmentName?.ToLower().Contains(lowerSearchText) == true ||
-                                                 x.Email?.ToLower().Contains(lowerSearchText) == true).ToList();
-
-                Values = new ObservableCollection<DoctorModel>(filteredResult);
-            }
+            List<PositionModel> positions = _positionService.GetAll();
+            PositionValues = new List<PositionModel>(positions);
         }
     }
 }

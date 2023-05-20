@@ -1,7 +1,9 @@
 ﻿using HospitalManagement.Commands.Nurses;
 using HospitalManagement.Enums;
 using HospitalManagement.Models;
+using HospitalManagement.Models.Implementations;
 using HospitalManagement.Models.Interfaces;
+using HospitalManagement.Services.Interfaces;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
@@ -15,23 +17,49 @@ namespace HospitalManagement.ViewModels.UserControls
 {
     public abstract class BaseControlViewModel<T> : BaseViewModel where T : IControlModel, new()
     {
-        protected BaseControlViewModel(ErrorDialog errorDialog)
+        private readonly IControlModelService<T> _service;
+        protected BaseControlViewModel(IControlModelService<T> service, ErrorDialog errorDialog)
         {
+            _service = service;
             ErrorDialog = errorDialog;
+
+            AllValues = new List<T>();
+            SetDefaultValues();
         }
         public abstract string Header { get; }
 
+        public virtual void Load()
+        {
+
+        }
+
+        public virtual void OnSelectedValueChanged()
+        {
+
+        }
+
+        #region commands
+        public AddControlModelCommand<T> Add => new AddControlModelCommand<T>(this);
+        public DeleteControlModelCommand<T> Delete => new DeleteControlModelCommand<T>(this, _service);
+        public EditControlModelCommand<T> Edit => new EditControlModelCommand<T>(this);
+        public RejectControlModelCommand<T> Reject => new RejectControlModelCommand<T>(this);
+        public SaveControlModelCommand<T> Save => new SaveControlModelCommand<T>(this, _service);
+        public ExportExcelControlModelCommand<T> ExportExcel => new ExportExcelControlModelCommand<T>(this);
+        #endregion
+
+        #region properties
         public ErrorDialog ErrorDialog { get; }
 
         private MessageModel _message = new MessageModel();
 
-        public MessageModel Message {
+        public MessageModel Message
+        {
             get => _message;
             set
             {
                 _message = value;
-                OnPropertyChanged(nameof(Message)); 
-            }      
+                OnPropertyChanged(nameof(Message));
+            }
         }
 
         private string _searchText;
@@ -42,11 +70,19 @@ namespace HospitalManagement.ViewModels.UserControls
             {
                 _searchText = value;
                 OnPropertyChanged(nameof(SearchText));
-                OnSearchTextChanged();
+
+                if (string.IsNullOrWhiteSpace(SearchText))
+                {
+                    Values = new ObservableCollection<T>(AllValues);
+                }
+                else
+                {
+                    var filteredResult = AllValues.Where(x => x.IsCompatibleWithFilter(SearchText));
+
+                    Values = new ObservableCollection<T>(filteredResult);
+                }
             }
         }
-
-        protected abstract void OnSearchTextChanged();
 
         private Situations _currentSituation;
         public Situations CurrentSituation
@@ -58,7 +94,7 @@ namespace HospitalManagement.ViewModels.UserControls
                 OnPropertyChanged(nameof(CurrentSituation));
             }
         }
-               
+
         private T _currentValue;
         public T CurrentValue
         {
@@ -77,6 +113,7 @@ namespace HospitalManagement.ViewModels.UserControls
             set
             {
                 SetSelectedValue(value);
+                OnSelectedValueChanged();
                 if (value == null)
                 {
                     SetDefaultValues();
@@ -91,10 +128,10 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
-        private ObservableCollection<NurseModel> _values;
-        public ObservableCollection<NurseModel> Values
+        private ObservableCollection<T> _values;
+        public ObservableCollection<T> Values
         {
-            get => _values ?? (_values = new ObservableCollection<NurseModel>());
+            get => _values ?? (_values = new ObservableCollection<T>());
             set
             {
                 _values = value;
@@ -102,26 +139,23 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
-        public List<NurseModel> AllValues { get; set; }
-        public AddNurseCommand Add => new AddNurseCommand(this);
-        public DeleteNurseCommand Delete => new DeleteNurseCommand(this, _nurseService);
-        public EditNurseCommand Edit => new EditNurseCommand(this);
-        public RejectNurseCommand Reject => new RejectNurseCommand(this);
-        public SaveNurseCommand Save => new SaveNurseCommand(this, _nurseService);
-        public ExportExcelNurseCommand ExportExcel => new ExportExcelNurseCommand(this);
+        public List<T> AllValues { get; set; }
+        #endregion
 
+        #region methods
         public void SetDefaultValues()
         {
             CurrentSituation = Situations.NORMAL;
-            CurrentValue = new NurseModel();
+            CurrentValue = new T();
 
-            SetSelectedValue(null);
+            SetSelectedValue(default(T));
         }
 
-        public void SetSelectedValue(NurseModel nurseModel)
+        public void SetSelectedValue(T model)
         {
-            _selectedValue = nurseModel;
+            _selectedValue = model;
             OnPropertyChanged(nameof(SelectedValue));
         }
+        #endregion
     }
 }

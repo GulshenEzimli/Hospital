@@ -32,10 +32,7 @@ namespace HospitalManagement.Commands.Dashboard
             patientProcedureViewModel.AllValues = patientProcedureModels;
             patientProcedureViewModel.Values = new ObservableCollection<PatientProcedureModel>(patientProcedureModels);
 
-            patientProcedureViewModel.Patients = _serviceUnitOfWork.PatientService.GetAll();
-            patientProcedureViewModel.Doctors = _serviceUnitOfWork.DoctorService.GetAll();
-            patientProcedureViewModel.Nurses = _serviceUnitOfWork.NurseService.GetAll();
-            patientProcedureViewModel.Procedures = _serviceUnitOfWork.ProcedureService.GetAll();
+            patientProcedureViewModel.Load();
 
             patientProcedureControl.DataContext = patientProcedureViewModel;
             _viewModel.CenterGrid.Children.Clear();

@@ -2,6 +2,7 @@
 using HospitalManagement.Enums;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
+using HospitalManagement.Models.Implementations;
 using HospitalManagement.Services.Interfaces;
 using HospitalManagement.Validations.Utils;
 using HospitalManagement.Views.Components;
@@ -16,27 +17,14 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.ViewModels.UserControls
 {
-    public class NursesViewModel : BaseControlViewModel
+    public class NursesViewModel : BaseControlViewModel<NurseModel>
     {
-        private readonly INurseService _nurseService;
-        public NursesViewModel(INurseService nurseService, ErrorDialog errorDialog) : base(errorDialog)
+        private readonly IControlModelService<PositionModel> _positionService;
+        public NursesViewModel(IControlModelService<PositionModel> positionService, IControlModelService<NurseModel> nurseService, ErrorDialog errorDialog) : base(nurseService, errorDialog)
         {
-            _nurseService = nurseService;
-            AllValues = new List<NurseModel>();
-            SetDefaultValues();
+            _positionService = positionService;            
         }
         public override string Header => "Nurses";
-
-        private Situations _currentSituation;
-        public Situations CurrentSituation
-        {
-            get => _currentSituation;
-            set
-            {
-                _currentSituation = value;
-                OnPropertyChanged(nameof(CurrentSituation));
-            }
-        }
 
         private List<PositionModel> _positions;
         public List<PositionModel> Positions
@@ -48,92 +36,10 @@ namespace HospitalManagement.ViewModels.UserControls
             }
         }
 
-        private NurseModel _currentValue;
-        public NurseModel CurrentValue 
-        { 
-            get => _currentValue;
-            set
-            {
-                _currentValue = value;
-                OnPropertyChanged(nameof(CurrentValue));
-            }
-        }
-
-        private NurseModel _selectedValue;
-        public NurseModel SelectedValue
+        public override void Load()
         {
-            get => _selectedValue;
-            set
-            {
-                SetSelectedValue(value); 
-                if (value == null)
-                {
-                    SetDefaultValues();
-                }
-                else
-                {
-                    CurrentValue = new NurseModel();
-                    CurrentValue = SelectedValue.Clone();
-                    CurrentSituation = Situations.SELECTED;
-                }
-                OnPropertyChanged(nameof(_selectedValue));
-            }
-        }
-
-        private ObservableCollection<NurseModel> _values;
-        public ObservableCollection<NurseModel> Values
-        {
-            get => _values ?? (_values = new ObservableCollection<NurseModel>());
-            set
-            {
-                _values = value;
-                OnPropertyChanged(nameof(Values));
-            }
-        }
-
-        public List<NurseModel> AllValues { get; set; }
-        public AddNurseCommand Add => new AddNurseCommand(this);
-        public DeleteNurseCommand Delete => new DeleteNurseCommand(this,_nurseService);
-        public EditNurseCommand Edit => new EditNurseCommand(this);
-        public RejectNurseCommand Reject => new RejectNurseCommand(this);
-        public SaveNurseCommand Save => new SaveNurseCommand(this, _nurseService);
-        public ExportExcelNurseCommand ExportExcel => new ExportExcelNurseCommand(this);
-
-        public void SetDefaultValues()
-        {
-            CurrentSituation = Situations.NORMAL;
-            CurrentValue = new NurseModel();
-
-            SetSelectedValue(null);
-        }
-
-        public void SetSelectedValue(NurseModel nurseModel)
-        {
-            _selectedValue = nurseModel;
-            OnPropertyChanged(nameof(SelectedValue));
-        }
-
-        protected override void OnSearchTextChanged()
-        {
-            if(string.IsNullOrWhiteSpace(SearchText))
-            {
-                Values = new ObservableCollection<NurseModel>(AllValues);
-            }
-            else
-            {
-                var lowerText = SearchText.ToLower();
-                var filteredValues = AllValues.Where(x => x.FirstName?.ToLower().Contains(lowerText) == true ||
-                                                 x.LastName?.ToLower().Contains(lowerText) == true ||
-                                                 x.PIN?.ToLower().Contains(lowerText) == true ||
-                                                 x.Gender.ToString()?.ToLower().Contains(lowerText) == true ||
-                                                 x.Salary.ToString().Contains(lowerText) == true ||
-                                                 x.BirthDate.ToString(SystemConstants.DateDisplayFormat).Contains(lowerText) == true ||
-                                                 x.Position.Name?.ToLower().Contains(lowerText) == true ||
-                                                 x.PhoneNumber?.ToLower().Contains(lowerText) == true ||
-                                                 x.DepartmentName?.ToLower().Contains(lowerText) == true ||
-                                                 x.Email?.ToLower().Contains(lowerText) == true).ToList();
-                Values = new ObservableCollection<NurseModel>(filteredValues);
-            }
+            List<PositionModel> positions = _positionService.GetAll();
+            Positions = new List<PositionModel>(positions);
         }
     }
 }

@@ -31,6 +31,8 @@ namespace HospitalManagement.Commands.Dashboard
             roomsViewModel.AllValues = roomModels;
             roomsViewModel.Values = new ObservableCollection<RoomModel>(roomsViewModel.AllValues);
 
+            roomsViewModel.Load();
+
             roomControl.DataContext = roomsViewModel;
             _viewModel.CenterGrid.Children.Clear();
             _viewModel.CenterGrid.Children.Add(roomControl);

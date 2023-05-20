@@ -31,9 +31,8 @@ namespace HospitalManagement.Commands.Dashboard
             var nurseModels = _serviceUnitOfWork.NurseService.GetAll();
             nursesViewModel.AllValues = nurseModels;
             nursesViewModel.Values = new ObservableCollection<NurseModel>(nursesViewModel.AllValues);
-            
-            nursesViewModel.Positions  = _serviceUnitOfWork.PositionService.GetAll();
 
+            nursesViewModel.Load();
             nurseControl.DataContext = nursesViewModel;
             _viewModel.CenterGrid.Children.Clear();
             _viewModel.CenterGrid.Children.Add(nurseControl);
