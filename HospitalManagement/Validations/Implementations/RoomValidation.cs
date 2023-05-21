@@ -1,4 +1,6 @@
 ﻿using HospitalManagement.Models;
+using HospitalManagement.Models.Implementations;
+using HospitalManagement.Validations.Interfaces;
 using HospitalManagement.Validations.Utils;
 using System;
 using System.Collections.Generic;
@@ -6,11 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HospitalManagement.Validations
+namespace HospitalManagement.Validations.Implementations
 {
-    public static class RoomValidation
+    public class RoomValidation : IControlModelValidation<RoomModel>
     {
-        public static bool IsValid(RoomModel roomModel, out string message)
+        public bool IsValid(RoomModel roomModel, out string message)
         {
             if(roomModel.Number <= 0)
             {

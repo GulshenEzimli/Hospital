@@ -1,4 +1,6 @@
 ﻿using HospitalManagement.Models;
+using HospitalManagement.Models.Implementations;
+using HospitalManagement.Validations.Interfaces;
 using HospitalManagement.Validations.Utils;
 using System;
 using System.Collections.Generic;
@@ -6,11 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HospitalManagement.Validations
+namespace HospitalManagement.Validations.Implementations
 {
-    public static class ProcedureValidation
+    public class ProcedureValidation : IControlModelValidation<ProcedureModel>
     {
-        public static bool IsValid(ProcedureModel procedureModel,out string message)
+        public bool IsValid(ProcedureModel procedureModel,out string message)
         {
             if (string.IsNullOrWhiteSpace(procedureModel.Name))
             {

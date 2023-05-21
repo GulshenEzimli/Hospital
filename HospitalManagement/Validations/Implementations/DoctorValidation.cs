@@ -1,4 +1,5 @@
 ﻿using HospitalManagement.Models.Implementations;
+using HospitalManagement.Validations.Interfaces;
 using HospitalManagement.Validations.Utils;
 using System;
 using System.Collections.Generic;
@@ -7,11 +8,11 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace HospitalManagement.Validations
+namespace HospitalManagement.Validations.Implementations
 {
-    public static class DoctorValidation
+    public class DoctorValidation : IControlModelValidation<DoctorModel>
     {
-        public static bool IsValid(DoctorModel doctorModel, out string message)
+        public bool IsValid(DoctorModel doctorModel, out string message)
         {
             if (string.IsNullOrWhiteSpace(doctorModel.FirstName))
             {
