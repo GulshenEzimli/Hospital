@@ -87,6 +87,7 @@
     <Compile Include="Commands\ControlModel\EditControlModelCommand.cs" />
     <Compile Include="Commands\ControlModel\RejectControlModelCommand.cs" />
     <Compile Include="Commands\ControlModel\SaveControlModelCommand.cs" />
+    <Compile Include="Commands\Dashboard\OpenControlModelCommand.cs" />
     <Compile Include="Commands\Doctors\ExportExcelDoctorCommand.cs" />
     <Compile Include="Commands\SignInCommand.cs" />
     <Compile Include="Kernel.cs" />
@@ -190,16 +191,6 @@
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\Dashboard\DropDownEmloyeesCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenAdminsCommand.cs" />
-    <Compile Include="Commands\Dashboard\OpenDoctorsCommand.cs" />
-    <Compile Include="Commands\Dashboard\OpenNursesCommand.cs" />
-    <Compile Include="Commands\Dashboard\OpenOperationsCommand.cs" />
-    <Compile Include="Commands\Dashboard\OpenOtherEmployeesCommand.cs" />
-    <Compile Include="Commands\Dashboard\OpenPatientProcedureCommand.cs" />
-    <Compile Include="Commands\Dashboard\OpenPatientsCommand.cs" />
-    <Compile Include="Commands\Dashboard\OpenProceduresCommand.cs" />
-    <Compile Include="Commands\Dashboard\OpenQueuesCommand.cs" />
-    <Compile Include="Commands\Dashboard\OpenReceptionistCommand.cs" />
-    <Compile Include="Commands\Dashboard\OpenRoomsCommand.cs" />
     <Compile Include="Commands\Doctors\AddDoctorCommand.cs" />
     <Compile Include="Commands\Doctors\DeleteDoctorCommand.cs" />
     <Compile Include="Commands\Doctors\EditDoctorCommand.cs" />

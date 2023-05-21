@@ -13,12 +13,12 @@ namespace HospitalManagement.Commands.Dashboard
     public class OpenAdminsCommand : BaseCommand
     {
         private readonly DashboardViewModel _viewModel;
-        private readonly IServiceUnitOfWork _serviceUnitOfWork;
+        private readonly IAdminService _adminService;
 
-        public OpenAdminsCommand(DashboardViewModel viewModel, IServiceUnitOfWork serviceUnitOfWork)
+        public OpenAdminsCommand(DashboardViewModel viewModel, IAdminService adminService)
         {
             _viewModel = viewModel;
-            _serviceUnitOfWork = serviceUnitOfWork;
+            _adminService = adminService;
         }
         public override void Execute(object parameter)
         {

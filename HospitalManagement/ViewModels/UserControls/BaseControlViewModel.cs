@@ -1,10 +1,10 @@
 ﻿using HospitalManagement.Commands.ControlModel;
-using HospitalManagement.Commands.Nurses;
 using HospitalManagement.Enums;
 using HospitalManagement.Models;
 using HospitalManagement.Models.Implementations;
 using HospitalManagement.Models.Interfaces;
 using HospitalManagement.Services.Interfaces;
+using HospitalManagement.Validations.Interfaces;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;
@@ -19,9 +19,11 @@ namespace HospitalManagement.ViewModels.UserControls
     public abstract class BaseControlViewModel<T> : BaseViewModel where T : IControlModel, new()
     {
         private readonly IControlModelService<T> _service;
-        protected BaseControlViewModel(IControlModelService<T> service, ErrorDialog errorDialog)
+        private readonly IControlModelValidation<T> _validation;
+        protected BaseControlViewModel(IControlModelService<T> service, IControlModelValidation<T> validation, ErrorDialog errorDialog)
         {
             _service = service;
+            _validation = validation;
             ErrorDialog = errorDialog;
 
             AllValues = new List<T>();
@@ -44,7 +46,7 @@ namespace HospitalManagement.ViewModels.UserControls
         public DeleteControlModelCommand<T> Delete => new DeleteControlModelCommand<T>(this, _service);
         public EditControlModelCommand<T> Edit => new EditControlModelCommand<T>(this);
         public RejectControlModelCommand<T> Reject => new RejectControlModelCommand<T>(this);
-        public SaveControlModelCommand<T> Save => new SaveControlModelCommand<T>(this, _service);
+        public SaveControlModelCommand<T> Save => new SaveControlModelCommand<T>(this, _service,_validation);
         public ExportExcelControlModelCommand<T> ExportExcel => new ExportExcelControlModelCommand<T>(this);
         #endregion
 
