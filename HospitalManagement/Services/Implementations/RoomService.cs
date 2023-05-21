@@ -2,6 +2,7 @@
 using HospitalManagement.Models;
 using HospitalManagement.Models.Implementations;
 using HospitalManagement.Services.Interfaces;
+using HospitalManagement.Utils;
 using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
 using System;
@@ -58,7 +59,25 @@ namespace HospitalManagement.Services.Implementations
                 _unitOfWork.RoomRepository.Update(toBeSavedRoom);
                 return toBeSavedRoom.Id;
             }
-
         }
+
+        public bool IsValid(RoomModel roomModel, out string message)
+        {
+            if (roomModel.Number <= 0)
+            {
+                message = ValidationMessageProvider.GetGreaterThanMessage("Number", 0);
+                return false;
+            }
+
+            if (roomModel.BlockFloor <= 0)
+            {
+                message = ValidationMessageProvider.GetGreaterThanMessage("Block floor", 0);
+                return false;
+            }
+
+            message = null;
+            return true;
+        }
+
     }
 }

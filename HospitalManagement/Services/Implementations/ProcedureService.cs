@@ -3,6 +3,7 @@ using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
 using HospitalManagement.Models.Implementations;
 using HospitalManagement.Services.Interfaces;
+using HospitalManagement.Utils;
 using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
 using System;
@@ -62,7 +63,22 @@ namespace HospitalManagement.Services.Implementations
                 return saveProcedure.Id;
             }
         }
+        public bool IsValid(ProcedureModel procedureModel, out string message)
+        {
+            if (string.IsNullOrWhiteSpace(procedureModel.Name))
+            {
+                message = ValidationMessageProvider.GetRequiredMessage("Procedure name");
+                return false;
+            }
+            if (procedureModel.Cost == 0)
+            {
+                message = ValidationMessageProvider.GetRequiredMessage("Cost");
+                return false;
+            }
+            message = null;
+            return true;
+        }
 
-        
+
     }
 }

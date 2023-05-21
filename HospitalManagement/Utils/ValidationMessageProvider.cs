@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HospitalManagement.Validations.Utils
+namespace HospitalManagement.Utils
 {
     public static class ValidationMessageProvider
     {

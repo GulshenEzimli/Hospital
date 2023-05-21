@@ -45,5 +45,10 @@ namespace HospitalManagement.Services.Implementations
         {
             throw new NotImplementedException();
         }
+
+        public bool IsValid(PositionModel model, out string message)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

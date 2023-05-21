@@ -62,7 +62,11 @@ namespace HospitalManagement
 
 
             LoginPage loginPage = new LoginPage();
-            LoginViewModel loginViewModel = new LoginViewModel(adminService,doctorService,patientService,patientProcedureService,queueService,roomService,procedureService,otherEmployeeService,nurseService,jobService,positionService,receptionistService,operationService,loginPage);
+            LoginViewModel loginViewModel = new LoginViewModel(adminService, doctorService, patientService,
+                                                                nurseService, otherEmployeeService, procedureService, queueService,
+                                                                operationService, receptionistService,
+                                                                roomService, patientProcedureService,
+                                                                jobService, positionService, loginPage);
             loginPage.DataContext = loginViewModel;
             
             MainWindow = loginPage;

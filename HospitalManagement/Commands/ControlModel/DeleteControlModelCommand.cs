@@ -2,7 +2,7 @@
 using HospitalManagement.Models.Implementations;
 using HospitalManagement.Models;
 using HospitalManagement.Models.Interfaces;
-using HospitalManagement.Validations.Utils;
+using HospitalManagement.Utils;
 using HospitalManagement.ViewModels;
 using HospitalManagement.ViewModels.UserControls;
 using HospitalManagement.Views.Dialogs;

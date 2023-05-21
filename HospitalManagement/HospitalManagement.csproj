@@ -106,7 +106,6 @@
     <Compile Include="Models\Interfaces\IControlModel.cs" />
     <Compile Include="Services\Implementations\AdminService.cs" />
     <Compile Include="Services\Interfaces\IAdminService.cs" />
-    <Compile Include="Validations\Interfaces\IControlModelValidation.cs" />
     <Compile Include="ViewModels\Windows\LoginViewModel.cs" />
     <Compile Include="Views\Windows\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -191,11 +190,6 @@
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\Dashboard\DropDownEmloyeesCommand.cs" />
     <Compile Include="Commands\Dashboard\OpenAdminsCommand.cs" />
-    <Compile Include="Commands\Doctors\AddDoctorCommand.cs" />
-    <Compile Include="Commands\Doctors\DeleteDoctorCommand.cs" />
-    <Compile Include="Commands\Doctors\EditDoctorCommand.cs" />
-    <Compile Include="Commands\Doctors\RejectDoctorCommand.cs" />
-    <Compile Include="Commands\Doctors\SaveDoctorCommand.cs" />
     <Compile Include="Commands\Operations\RemoveDoctorCommand.cs" />
     <Compile Include="Commands\Operations\RemoveNurseCommand.cs" />
     <Compile Include="Converters\RadioButtonToEnumConverter.cs" />
@@ -229,18 +223,8 @@
     <Compile Include="Services\Implementations\ProcedureService.cs" />
     <Compile Include="Services\Implementations\RoomService.cs" />
     <Compile Include="Services\Interfaces\IControlModelService.cs" />
-    <Compile Include="Validations\Implementations\NurseValidation.cs" />
-    <Compile Include="Validations\Implementations\OperationValidation.cs" />
-    <Compile Include="Validations\Implementations\OtherEmployeeValidation.cs" />
-    <Compile Include="Validations\Implementations\PatientProcedureValidation.cs" />
-    <Compile Include="Validations\Implementations\PatientValidation.cs" />
-    <Compile Include="Validations\Implementations\QueueValidation.cs" />
-    <Compile Include="Validations\Implementations\ReceptionistValidation.cs" />
-    <Compile Include="Validations\Implementations\ProcedureValidation.cs" />
-    <Compile Include="Validations\Implementations\RoomValidation.cs" />
-    <Compile Include="Validations\Utils\SystemConstants.cs" />
-    <Compile Include="Validations\Utils\ValidationMessageProvider.cs" />
-    <Compile Include="Validations\Implementations\DoctorValidation.cs" />
+    <Compile Include="Utils\SystemConstants.cs" />
+    <Compile Include="Utils\ValidationMessageProvider.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\SureDialogViewModel.cs" />
     <Compile Include="ViewModels\UserControls\AdminsViewModel.cs" />

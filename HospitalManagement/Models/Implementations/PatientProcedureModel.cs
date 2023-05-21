@@ -1,7 +1,7 @@
 ﻿using DocumentFormat.OpenXml.Wordprocessing;
 using HospitalManagement.Models.Implementations;
 using HospitalManagement.Models.Interfaces;
-using HospitalManagement.Validations.Utils;
+using HospitalManagement.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -3,7 +3,7 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using HospitalManagement.Attributes;
 using HospitalManagement.Models.Implementations;
 using HospitalManagement.Models.Interfaces;
-using HospitalManagement.Validations.Utils;
+using HospitalManagement.Utils;
 using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;

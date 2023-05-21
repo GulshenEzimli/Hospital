@@ -1,6 +1,6 @@
 ﻿using HospitalManagement.Attributes;
 using HospitalManagement.Models.Interfaces;
-using HospitalManagement.Validations.Utils;
+using HospitalManagement.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;

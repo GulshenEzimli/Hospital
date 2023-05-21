@@ -1,7 +1,7 @@
 ﻿using DocumentFormat.OpenXml.Wordprocessing;
 using HospitalManagement.Attributes;
 using HospitalManagement.Models.Interfaces;
-using HospitalManagement.Validations.Utils;
+using HospitalManagement.Utils;
 using HospitalManagementCore.Domain.Entities;
 using HospitalManagementCore.Domain.Enums;
 using System;
@@ -96,7 +96,7 @@ namespace HospitalManagement.Models.Implementations
                 return true;
             if (PIN?.ToLower().Contains(lowerSearchText) == true)
                 return true;
-            if (Position.ICompatibleWithFilter(lowerSearchText))
+            if (Position.IsCompatibleWithFilter(lowerSearchText))
                 return true;
             if (Salary.ToString()?.ToLower().Contains(lowerSearchText) == true)
                 return true;

@@ -1,6 +1,4 @@
-﻿using HospitalManagement.Commands.Nurses;
-using HospitalManagement.Commands.Patients;
-using HospitalManagement.Enums;
+﻿using HospitalManagement.Enums;
 using HospitalManagement.Mappers.Interfaces;
 using HospitalManagement.Models;
 using HospitalManagement.Models.Implementations;

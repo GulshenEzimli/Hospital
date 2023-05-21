@@ -7,7 +7,7 @@ using HospitalManagement.Models;
 using HospitalManagement.Models.Implementations;
 using HospitalManagement.Services.Implementations;
 using HospitalManagement.Services.Interfaces;
-using HospitalManagement.Validations.Utils;
+using HospitalManagement.Utils;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Enums;
@@ -41,6 +41,9 @@ namespace HospitalManagement.ViewModels.UserControls
             AllNurseValues = new List<NurseModel>();
         }
         public override string Header => "Operations";
+
+        public RemoveDoctorCommand RemoveDoctor => new RemoveDoctorCommand(this);
+        public RemoveNurseCommand RemoveNurse => new RemoveNurseCommand(this);
 
         private List<PatientModel> _patientValues;
         public List<PatientModel> PatientValues

@@ -1,11 +1,9 @@
-﻿using HospitalManagement.Commands.Patients;
-using HospitalManagement.Commands.Procedures;
-using HospitalManagement.Enums;
+﻿using HospitalManagement.Enums;
 using HospitalManagement.Models;
 using HospitalManagement.Models.Implementations;
 using HospitalManagement.Services.Implementations;
 using HospitalManagement.Services.Interfaces;
-using HospitalManagement.Validations.Utils;
+using HospitalManagement.Utils;
 using HospitalManagement.Views.Components;
 using HospitalManagementCore.DataAccess.Interfaces;
 using System;

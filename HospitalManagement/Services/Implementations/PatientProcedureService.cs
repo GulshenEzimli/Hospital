@@ -2,6 +2,7 @@
 using HospitalManagement.Models;
 using HospitalManagement.Models.Implementations;
 using HospitalManagement.Services.Interfaces;
+using HospitalManagement.Utils;
 using HospitalManagementCore.DataAccess.Interfaces;
 using HospitalManagementCore.Domain.Entities;
 using System;
@@ -54,5 +55,35 @@ namespace HospitalManagement.Services.Implementations
                 return toBeSavedPatientProcedure.Id;
             }
         }
+
+        public bool IsValid(PatientProcedureModel patientProcedureModel, out string message)
+        {
+            if (string.IsNullOrEmpty(patientProcedureModel.Patient.DisplayPatient))
+            {
+                message = ValidationMessageProvider.GetRequiredMessage("Patient value");
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(patientProcedureModel.Doctor.DisplayDoctor))
+            {
+                message = ValidationMessageProvider.GetRequiredMessage("Doctor value");
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(patientProcedureModel.Nurse.DisplayNurse))
+            {
+                message = ValidationMessageProvider.GetRequiredMessage("Nurse value");
+                return false;
+            }
+            if (string.IsNullOrEmpty(patientProcedureModel.Procedure.DisplayProcedure))
+            {
+                message = ValidationMessageProvider.GetRequiredMessage("Procedure value");
+                return false;
+            }
+
+            message = null;
+            return true;
+        }
+
     }
 }

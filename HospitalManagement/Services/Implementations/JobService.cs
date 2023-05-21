@@ -44,5 +44,10 @@ namespace HospitalManagement.Services.Implementations
         {
             throw new NotImplementedException();
         }
+
+        public bool IsValid(JobModel model, out string message)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

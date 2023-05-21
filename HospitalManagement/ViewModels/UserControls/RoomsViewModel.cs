@@ -1,6 +1,4 @@
-﻿using HospitalManagement.Commands.Nurses;
-using HospitalManagement.Commands.Rooms;
-using HospitalManagement.Enums;
+﻿using HospitalManagement.Enums;
 using HospitalManagement.Models;
 using HospitalManagement.Models.Implementations;
 using HospitalManagement.Services.Interfaces;

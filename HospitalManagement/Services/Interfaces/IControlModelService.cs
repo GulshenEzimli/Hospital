@@ -12,5 +12,6 @@ namespace HospitalManagement.Services.Interfaces
         List<T> GetAll();
         int Save(T model);
         bool Delete(int id);
+        bool IsValid(T model, out string message);
     }
 }
