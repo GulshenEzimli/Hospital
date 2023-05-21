@@ -26,7 +26,7 @@ namespace HospitalManagement
 
             IUnitOfWork db = new SqlUnitOfWork(builder.ConnectionString);
             IAdminService adminService = new AdminService(db);
-            IMapperUnitOfWork mapperUnitOfWork = new MapperUnitOfWork();
+            IControlModelMapper mapperUnitOfWork = new MapperUnitOfWork();
             IServiceUnitOfWork serviceUnitOfWork = new ServiceUnitOfWork(db,mapperUnitOfWork);
 
             LoginPage loginPage = new LoginPage();

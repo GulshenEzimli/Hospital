@@ -15,8 +15,8 @@ namespace HospitalManagement.Services.Implementations
     public class JobService : IControlModelService<JobModel>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IJobMapper _jobMapper;
-        public JobService(IUnitOfWork unitOfWork,IJobMapper jobMapper)
+        private readonly IControlModelMapper<Job,JobModel> _jobMapper;
+        public JobService(IUnitOfWork unitOfWork, IControlModelMapper<Job, JobModel> jobMapper)
         {
             _unitOfWork = unitOfWork;
             _jobMapper = jobMapper;

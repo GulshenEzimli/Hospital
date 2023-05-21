@@ -16,9 +16,9 @@ namespace HospitalManagement.Services.Implementations
     public class PatientService : IControlModelService<PatientModel>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IPatientMapper _patientMapper;
+        private readonly IControlModelMapper<Patient, PatientModel> _patientMapper;
 
-        public PatientService(IUnitOfWork unitOfWork, IPatientMapper patientMapper)
+        public PatientService(IUnitOfWork unitOfWork, IControlModelMapper<Patient, PatientModel> patientMapper)
         {
             _unitOfWork = unitOfWork;
             _patientMapper = patientMapper;

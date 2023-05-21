@@ -15,8 +15,8 @@ namespace HospitalManagement.Services.Implementations
     public class OtherEmployeeService : IControlModelService<OtherEmployeeModel>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IOtherEmployeeMapper _otherEmployeeMapper;
-        public OtherEmployeeService(IUnitOfWork unitOfWork, IOtherEmployeeMapper otherEmployeeMapper)
+        private readonly IControlModelMapper<OtherEmployee,OtherEmployeeModel> _otherEmployeeMapper;
+        public OtherEmployeeService(IUnitOfWork unitOfWork, IControlModelMapper<OtherEmployee, OtherEmployeeModel> otherEmployeeMapper)
         {
             _unitOfWork = unitOfWork;
             _otherEmployeeMapper = otherEmployeeMapper;

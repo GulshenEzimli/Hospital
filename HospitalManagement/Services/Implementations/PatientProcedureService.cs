@@ -3,6 +3,7 @@ using HospitalManagement.Models;
 using HospitalManagement.Models.Implementations;
 using HospitalManagement.Services.Interfaces;
 using HospitalManagementCore.DataAccess.Interfaces;
+using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,11 @@ namespace HospitalManagement.Services.Implementations
     public class PatientProcedureService : IControlModelService<PatientProcedureModel>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapperUnitOfWork _mapperUnitOfWork;
-        public PatientProcedureService(IUnitOfWork unitOfWork, IMapperUnitOfWork mapperUnitOfWork)
+        private readonly IControlModelMapper<PatientProcedure,PatientProcedureModel> _patientProcedureMapper;
+        public PatientProcedureService(IUnitOfWork unitOfWork, IControlModelMapper<PatientProcedure, PatientProcedureModel> patientProcedureMapper)
         {
             _unitOfWork = unitOfWork;
-            _mapperUnitOfWork = mapperUnitOfWork;
+            _patientProcedureMapper = patientProcedureMapper;
         }
         public bool Delete(int id)
         {
@@ -32,7 +33,7 @@ namespace HospitalManagement.Services.Implementations
             int no = 1;
             foreach (var patientProcedure in patientProcedures)
             {
-                var model = _mapperUnitOfWork.PatientProcedureMapper.Map(patientProcedure);
+                var model = _patientProcedureMapper.Map(patientProcedure);
                 model.No = no++;
                 patientProcedureModels.Add(model);
             }
@@ -41,7 +42,7 @@ namespace HospitalManagement.Services.Implementations
 
         public int Save(PatientProcedureModel patientProcedureModel)
         {
-            var toBeSavedPatientProcedure = _mapperUnitOfWork.PatientProcedureMapper.Map(patientProcedureModel);
+            var toBeSavedPatientProcedure =_patientProcedureMapper.Map(patientProcedureModel);
 
             if (toBeSavedPatientProcedure.Id == 0)
             {

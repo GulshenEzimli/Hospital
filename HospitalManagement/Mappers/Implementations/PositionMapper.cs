@@ -11,7 +11,7 @@ using System.Xml.Linq;
 
 namespace HospitalManagement.Mappers.Implementations
 {
-    public class PositionMapper : IPositionMapper
+    public class PositionMapper : IControlModelMapper<DoctorPosition,PositionModel>
     {
         public PositionModel Map(DoctorPosition position)
         {

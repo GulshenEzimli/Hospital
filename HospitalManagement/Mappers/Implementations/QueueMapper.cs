@@ -11,27 +11,33 @@ using System.Windows.Documents;
 
 namespace HospitalManagement.Mappers.Implementations
 {
-    public class QueueMapper : IQueueMapper
+    public class QueueMapper : IControlModelMapper<Queue, QueueModel>
     {
-        private readonly IMapperUnitOfWork _mapperUnitOfWork;
-        public QueueMapper(IMapperUnitOfWork mapperUnitOfWork)
+        private readonly IControlModelMapper<Patient, PatientModel> _patientMapper;
+        private readonly IControlModelMapper<Doctor, DoctorModel> _doctorMapper;
+        private readonly IControlModelMapper<Procedure, ProcedureModel> _procedureMapper;
+        public QueueMapper(IControlModelMapper<Patient, PatientModel> patientMapper,
+                                        IControlModelMapper<Doctor, DoctorModel> doctorMapper,
+                                         IControlModelMapper<Procedure, ProcedureModel> procedureMapper)
         {
-            _mapperUnitOfWork = mapperUnitOfWork;
+            _patientMapper = patientMapper;
+            _procedureMapper = procedureMapper;
+            _doctorMapper = doctorMapper;
         }
-        
+
         public QueueModel Map(Queue queue)
         {
             var queueModel = new QueueModel();
             queueModel.Id = queue.Id;
 
             queueModel.Patient = new PatientModel();
-            queueModel.Patient = _mapperUnitOfWork.PatientMapper.Map(queue.Patient);
+            queueModel.Patient =_patientMapper.Map(queue.Patient);
 
             queueModel.Doctor = new DoctorModel();
-            queueModel.Doctor = _mapperUnitOfWork.DoctorMapper.Map(queue.Doctor);
+            queueModel.Doctor = _doctorMapper.Map(queue.Doctor);
 
             queueModel.Procedure = new ProcedureModel();
-            queueModel.Procedure = _mapperUnitOfWork.ProcedureMapper.Map(queue.Procedure);
+            queueModel.Procedure = _procedureMapper.Map(queue.Procedure);
             queueModel.QueueNumber = queue.QueueNumber;
             queueModel.UseDate = queue.UseDate;
             return queueModel;
@@ -42,9 +48,9 @@ namespace HospitalManagement.Mappers.Implementations
         {
             var queue = new Queue();
             queue.Id = queueModel.Id;
-            queue.Patient = _mapperUnitOfWork.PatientMapper.Map(queueModel.Patient);
-            queue.Doctor = _mapperUnitOfWork.DoctorMapper.Map(queueModel.Doctor);
-            queue.Procedure = _mapperUnitOfWork.ProcedureMapper.Map(queueModel.Procedure);
+            queue.Patient =_patientMapper.Map(queueModel.Patient);
+            queue.Doctor = _doctorMapper.Map(queueModel.Doctor);
+            queue.Procedure = _procedureMapper.Map(queueModel.Procedure);
             queue.QueueNumber = queueModel.QueueNumber;
             queue.UseDate = queueModel.UseDate;
             return queue;

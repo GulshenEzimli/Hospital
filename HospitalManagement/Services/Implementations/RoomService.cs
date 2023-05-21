@@ -14,9 +14,9 @@ namespace HospitalManagement.Services.Implementations
     public class RoomService : IControlModelService<RoomModel>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IRoomMapper _roomMapper;
+        private readonly IControlModelMapper<Room, RoomModel> _roomMapper;
 
-        public RoomService(IUnitOfWork unitOfWork, IRoomMapper roomMapper)
+        public RoomService(IUnitOfWork unitOfWork, IControlModelMapper<Room, RoomModel> roomMapper)
         {
             _unitOfWork = unitOfWork;
             _roomMapper = roomMapper;

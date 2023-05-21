@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Mappers.Implementations
 {
-    public class ReceptionistMapper : IReceptionistMapper
+    public class ReceptionistMapper : IControlModelMapper<Receptionist,ReceptionistModel>
     {
         public ReceptionistModel Map(Receptionist receptionist)
         {

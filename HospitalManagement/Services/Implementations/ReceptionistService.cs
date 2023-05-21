@@ -18,9 +18,9 @@ namespace HospitalManagement.Services.Implementations
     public class ReceptionistService : IControlModelService<ReceptionistModel>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IReceptionistMapper _receptionistMapper;
+        private readonly IControlModelMapper<Receptionist,ReceptionistModel> _receptionistMapper;
 
-        public ReceptionistService(IUnitOfWork unitOfWork, IReceptionistMapper receptionistMapper)
+        public ReceptionistService(IUnitOfWork unitOfWork, IControlModelMapper<Receptionist, ReceptionistModel> receptionistMapper)
         {
             _unitOfWork = unitOfWork;
             _receptionistMapper = receptionistMapper;

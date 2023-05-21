@@ -10,12 +10,21 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Mappers.Implementations
 {
-    public class OperationMapper : IOperationMapper
+    public class OperationMapper : IControlModelMapper<Operation, OperationModel>
     {
-        private readonly IMapperUnitOfWork _mapperUnitOfWork;
-        public OperationMapper(IMapperUnitOfWork mapperUnitOfWork) 
+        private readonly IControlModelMapper<Patient, PatientModel> _patientMapper;
+        private readonly IControlModelMapper<Room, RoomModel> _roomMapper;
+        private readonly IControlModelMapper<Nurse, NurseModel> _nurseMapper;
+        private readonly IControlModelMapper<Doctor, DoctorModel> _doctorMapper;
+        public OperationMapper(IControlModelMapper<Patient, PatientModel> patientMapper,
+                                IControlModelMapper<Room, RoomModel> roomMapper,
+                                IControlModelMapper<Nurse, NurseModel> nurseMapper,
+                                IControlModelMapper<Doctor, DoctorModel> doctorMapper)
         {
-            _mapperUnitOfWork = mapperUnitOfWork;
+            _patientMapper = patientMapper;
+            _roomMapper = roomMapper;
+            _nurseMapper = nurseMapper;
+            _doctorMapper = doctorMapper;
         }
         public OperationModel Map(Operation operation)
         {
@@ -25,9 +34,9 @@ namespace HospitalManagement.Mappers.Implementations
             operationModel.OperationCost = operation.OperationCost;
             operationModel.OperationReason = operation.OperationReason;
             operationModel.Patient = new PatientModel();
-            operationModel.Patient = _mapperUnitOfWork.PatientMapper.Map(operation.Patient);
+            operationModel.Patient = _patientMapper.Map(operation.Patient);
             operationModel.Room = new RoomModel();
-            operationModel.Room = _mapperUnitOfWork.RoomMapper.Map(operation.Room);
+            operationModel.Room =_roomMapper.Map(operation.Room);
             return operationModel;
         }
 
@@ -39,18 +48,18 @@ namespace HospitalManagement.Mappers.Implementations
             operation.OperationCost = operationModel.OperationCost;
             operation.OperationReason = operationModel.OperationReason;
             operation.Patient = new Patient();
-            operation.Patient = _mapperUnitOfWork.PatientMapper.Map(operationModel.Patient);
+            operation.Patient =_patientMapper.Map(operationModel.Patient);
             operation.Room = new Room();
-            operation.Room = _mapperUnitOfWork.RoomMapper.Map(operationModel.Room);
+            operation.Room = _roomMapper.Map(operationModel.Room);
             operation.Doctors = new List<Doctor>();
             foreach (DoctorModel doctorModel in operationModel.Doctors)
             {
-                Doctor doctor = _mapperUnitOfWork.DoctorMapper.Map(doctorModel);
+                Doctor doctor = _doctorMapper.Map(doctorModel);
                 operation.Doctors.Add(doctor);
             }
             foreach (NurseModel nurseModel in operationModel.Nurses)
             {
-                Nurse nurse = _mapperUnitOfWork.NurseMapper.Map(nurseModel);
+                Nurse nurse = _nurseMapper.Map(nurseModel);
                 operation.Nurses.Add(nurse);
             }
             return operation;

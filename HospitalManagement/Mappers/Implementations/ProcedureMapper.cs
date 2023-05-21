@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Mappers.Implementations
 {
-    public class ProcedureMapper : IProcedureMapper
+    public class ProcedureMapper : IControlModelMapper<Procedure,ProcedureModel>
     {
         public ProcedureModel Map(Procedure procedure)
         {

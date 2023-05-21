@@ -10,18 +10,18 @@ using System.Windows;
 
 namespace HospitalManagement.Mappers.Implementations
 {
-    internal class DoctorMapper : IDoctorMapper
+    internal class DoctorMapper : IControlModelMapper<Doctor, DoctorModel>
     {
-        private readonly IMapperUnitOfWork _mapperUnitOfWork;
-        public DoctorMapper(IMapperUnitOfWork mapperUnitOfWork) 
+        private readonly IControlModelMapper<DoctorPosition, PositionModel> _positionMapper;
+        public DoctorMapper(IControlModelMapper<DoctorPosition, PositionModel> positionMapper) 
         {
-            _mapperUnitOfWork = mapperUnitOfWork;
+            _positionMapper = positionMapper;
         }
         public DoctorModel Map(Doctor doctor)
         {
             DoctorModel doctorModel = new DoctorModel();
             doctorModel.Id = doctor.Id;
-            doctorModel.Position = _mapperUnitOfWork.PositionMapper.Map(doctor.Position);
+            doctorModel.Position = _positionMapper.Map(doctor.Position);
             doctorModel.DepartmentName = doctor.Position.Department.Name;
             doctorModel.FirstName = doctor.FirstName;
             doctorModel.LastName = doctor.LastName;
@@ -40,7 +40,7 @@ namespace HospitalManagement.Mappers.Implementations
         {
             Doctor doctor = new Doctor();
             doctor.Id = doctorModel.Id;
-            doctor.Position = _mapperUnitOfWork.PositionMapper.Map(doctorModel.Position);
+            doctor.Position = _positionMapper.Map(doctorModel.Position);
             doctor.FirstName = doctorModel.FirstName;
             doctor.LastName = doctorModel.LastName;
             doctor.Gender = doctorModel.Gender;

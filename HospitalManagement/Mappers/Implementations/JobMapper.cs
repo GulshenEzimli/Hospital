@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Mappers.Implementations
 {
-    public class JobMapper : IJobMapper
+    public class JobMapper : IControlModelMapper<Job, JobModel>
     {
         public JobModel Map(Job job)
         {

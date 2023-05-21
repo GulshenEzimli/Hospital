@@ -17,11 +17,11 @@ namespace HospitalManagement.Services.Implementations
     public class PositionService : IControlModelService<PositionModel>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapperUnitOfWork _mapperUnitOfWork;
-        public PositionService(IUnitOfWork unitOfWork, IMapperUnitOfWork mapperUnitOfWork)
+        private readonly IControlModelMapper<DoctorPosition,PositionModel> _positionMapper;
+        public PositionService(IUnitOfWork unitOfWork, IControlModelMapper<DoctorPosition, PositionModel> positionMapper)
         {
             _unitOfWork = unitOfWork;
-            _mapperUnitOfWork = mapperUnitOfWork;
+            _positionMapper = positionMapper;
         }              
 
         public List<PositionModel> GetAll()
@@ -30,7 +30,7 @@ namespace HospitalManagement.Services.Implementations
             List<DoctorPosition> positions = _unitOfWork.PositionRepository.Get();
             foreach (DoctorPosition position in positions)
             {
-                PositionModel positionModel = _mapperUnitOfWork.PositionMapper.Map(position);
+                PositionModel positionModel = _positionMapper.Map(position);
                 positionModels.Add(positionModel);
             }
             return positionModels;

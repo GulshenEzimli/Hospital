@@ -16,11 +16,11 @@ namespace HospitalManagement.Services.Implementations
     public class DoctorService : IControlModelService<DoctorModel>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapperUnitOfWork _mapperUnitOfWork;
-        public DoctorService(IUnitOfWork unitOfWork, IMapperUnitOfWork mapperUnitOfWork) 
+        private readonly IControlModelMapper<Doctor,DoctorModel> _doctorMapper;
+        public DoctorService(IUnitOfWork unitOfWork, IControlModelMapper<Doctor, DoctorModel> doctorMapper) 
         {
             _unitOfWork = unitOfWork;
-            _mapperUnitOfWork = mapperUnitOfWork;
+            _doctorMapper = doctorMapper;
         }
 
         public bool Delete(int id)
@@ -39,7 +39,7 @@ namespace HospitalManagement.Services.Implementations
             int no = 1;
             foreach (Doctor doctor in doctors)
             {
-                DoctorModel doctorModel = _mapperUnitOfWork.DoctorMapper.Map(doctor);
+                DoctorModel doctorModel = _doctorMapper.Map(doctor);
                 doctorModel.No = no++;
                 doctorModels.Add(doctorModel);
             }
@@ -48,7 +48,7 @@ namespace HospitalManagement.Services.Implementations
 
         public int Save(DoctorModel doctorModel)
         {
-            Doctor toBeSavedDoctor = _mapperUnitOfWork.DoctorMapper.Map(doctorModel);
+            Doctor toBeSavedDoctor =_doctorMapper.Map(doctorModel);
             toBeSavedDoctor.ModifiedDate = DateTime.Now;
             toBeSavedDoctor.Modifier = new Admin() { Id = Kernel.Admin.Id };
 

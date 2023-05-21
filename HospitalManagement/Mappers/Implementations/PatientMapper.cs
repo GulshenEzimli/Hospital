@@ -10,9 +10,8 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Mappers.Implementations
 {
-    public class PatientMapper : IPatientMapper
+    public class PatientMapper : IControlModelMapper<Patient,PatientModel>
     {
-
         public PatientModel Map(Patient patient)
         {
             var patientModel = new PatientModel();

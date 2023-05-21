@@ -15,11 +15,18 @@ namespace HospitalManagement.Services.Implementations
     public class OperationService : IControlModelService<OperationModel>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapperUnitOfWork _mapperUnitOfWork;
-        public OperationService(IUnitOfWork unitOfWork, IMapperUnitOfWork mapperUnitOfWork)
+        private readonly IControlModelMapper<Operation,OperationModel> _operationMapper;
+        private readonly IControlModelMapper<Nurse, NurseModel> _nurseMapper;
+        private readonly IControlModelMapper<Doctor, DoctorModel> _doctorMapper;
+        public OperationService(IUnitOfWork unitOfWork, 
+                                IControlModelMapper<Operation, OperationModel> operationMapper,
+                                IControlModelMapper<Nurse, NurseModel> nurseMapper,
+                                IControlModelMapper<Doctor, DoctorModel> doctorMapper)
         {
             _unitOfWork = unitOfWork;
-            _mapperUnitOfWork = mapperUnitOfWork;
+            _operationMapper = operationMapper;
+            _nurseMapper = nurseMapper;
+            _doctorMapper = doctorMapper;
         }
 
         public bool Delete(int id)
@@ -38,14 +45,14 @@ namespace HospitalManagement.Services.Implementations
             int no = 1;
             foreach (Operation operation in operations)
             {
-                OperationModel operationModel = _mapperUnitOfWork.OperationMapper.Map(operation);
+                OperationModel operationModel = _operationMapper.Map(operation);
 
                 foreach (OperationDoctor operationDoctor in operationDoctors)
                 {
                     if (operationDoctor.OperationId == operation.Id)
                     {
                         Doctor doctor = operationDoctor.Doctor;
-                        DoctorModel doctorModel = _mapperUnitOfWork.DoctorMapper.Map(doctor);
+                        DoctorModel doctorModel = _doctorMapper.Map(doctor);
                         operationModel.Doctors.Add(doctorModel);
                     }
                 }
@@ -55,7 +62,7 @@ namespace HospitalManagement.Services.Implementations
                     if (operationNurse.OperationId == operation.Id)
                     {
                         Nurse nurse = operationNurse.Nurse;
-                        NurseModel nurseModel = _mapperUnitOfWork.NurseMapper.Map(nurse);
+                        NurseModel nurseModel = _nurseMapper.Map(nurse);
                         operationModel.Nurses.Add(nurseModel);
                     }
                 }
@@ -67,7 +74,7 @@ namespace HospitalManagement.Services.Implementations
 
         public int Save(OperationModel operationModel)
         {
-            Operation toBeSavedOperation = _mapperUnitOfWork.OperationMapper.Map(operationModel);
+            Operation toBeSavedOperation = _operationMapper.Map(operationModel);
 
             if (toBeSavedOperation.Id == 0)
             {

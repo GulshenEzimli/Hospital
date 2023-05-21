@@ -16,9 +16,9 @@ namespace HospitalManagement.Services.Implementations
     public class ProcedureService : IControlModelService<ProcedureModel>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IProcedureMapper _procedureMapper;
+        private readonly IControlModelMapper<Procedure,ProcedureModel> _procedureMapper;
 
-        public ProcedureService(IUnitOfWork unitOfWork, IProcedureMapper procedureMapper)
+        public ProcedureService(IUnitOfWork unitOfWork, IControlModelMapper<Procedure, ProcedureModel> procedureMapper)
         {
             _unitOfWork = unitOfWork;
             _procedureMapper = procedureMapper;

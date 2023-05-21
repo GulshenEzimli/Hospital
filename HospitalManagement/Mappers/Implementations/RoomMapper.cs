@@ -10,13 +10,8 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Mappers.Implementations
 {
-    internal class RoomMapper : IRoomMapper
+    internal class RoomMapper : IControlModelMapper<Room, RoomModel>
     {
-        private readonly IMapperUnitOfWork _mapperUnitOfWork;
-        public RoomMapper(IMapperUnitOfWork mapperUnitOfWork) 
-        {
-            _mapperUnitOfWork = mapperUnitOfWork;
-        }
         public RoomModel Map(Room room)
         {
             RoomModel roomModel = new RoomModel();

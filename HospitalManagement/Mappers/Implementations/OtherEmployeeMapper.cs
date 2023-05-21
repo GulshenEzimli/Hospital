@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Mappers.Implementations
 {
-    public class OtherEmployeeMapper : IOtherEmployeeMapper
+    public class OtherEmployeeMapper : IControlModelMapper<OtherEmployee, OtherEmployeeModel>
     {
-        private readonly IMapperUnitOfWork _mapperUnitOfWork;
-        public OtherEmployeeMapper(IMapperUnitOfWork mapperUnitOfWork)
+        private readonly IControlModelMapper<Job, JobModel> _jobMapper;
+        public OtherEmployeeMapper(IControlModelMapper<Job, JobModel> jobMapper)
         {
-            _mapperUnitOfWork = mapperUnitOfWork;
+            _jobMapper = jobMapper;
         }
         public OtherEmployeeModel Map(OtherEmployee otherEmployee)
         {
@@ -32,7 +32,7 @@ namespace HospitalManagement.Mappers.Implementations
             model.BirthDate = otherEmployee.BirthDate;
             model.PIN = otherEmployee.PIN;
             model.Gender = otherEmployee.Gender;
-            model.Job = _mapperUnitOfWork.JobMapper.Map(otherEmployee.Job);
+            model.Job = _jobMapper.Map(otherEmployee.Job);
             return model;
         }
 
@@ -49,7 +49,7 @@ namespace HospitalManagement.Mappers.Implementations
             otherEmployee.BirthDate = model.BirthDate;
             otherEmployee.PIN = model.PIN;
             otherEmployee.Gender = model.Gender;
-            otherEmployee.Job = _mapperUnitOfWork.JobMapper.Map(model.Job);
+            otherEmployee.Job = _jobMapper.Map(model.Job);
             
             return otherEmployee;
         }

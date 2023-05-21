@@ -3,6 +3,7 @@ using HospitalManagement.Models;
 using HospitalManagement.Models.Implementations;
 using HospitalManagement.Services.Interfaces;
 using HospitalManagementCore.DataAccess.Interfaces;
+using HospitalManagementCore.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,11 @@ namespace HospitalManagement.Services.Implementations
     public class QueueService : IControlModelService<QueueModel>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapperUnitOfWork _mapperUnitOfWork;
-        public QueueService(IUnitOfWork unitOfWork, IMapperUnitOfWork mapperUnitOfWork)
+        private readonly IControlModelMapper<Queue,QueueModel> _queueMapper;
+        public QueueService(IUnitOfWork unitOfWork, IControlModelMapper<Queue,QueueModel> queueMapper)
         {
-            _mapperUnitOfWork = mapperUnitOfWork;
             _unitOfWork = unitOfWork;
+            _queueMapper = queueMapper;
         }
 
         public bool Delete(int id)
@@ -33,7 +34,7 @@ namespace HospitalManagement.Services.Implementations
             int no = 1;
             foreach(var queue in queues)
             {
-                var model = _mapperUnitOfWork.QueueMapper.Map(queue);
+                var model = _queueMapper.Map(queue);
                 model.No= no++;
                 queueModels.Add(model);
             }
@@ -42,7 +43,7 @@ namespace HospitalManagement.Services.Implementations
 
         public int Save(QueueModel queueModel)
         {
-            var toBeSavedQueue = _mapperUnitOfWork.QueueMapper.Map(queueModel);
+            var toBeSavedQueue = _queueMapper.Map(queueModel);
             toBeSavedQueue.UseDate = DateTime.Now;
             if(toBeSavedQueue.Id==0)
             {
