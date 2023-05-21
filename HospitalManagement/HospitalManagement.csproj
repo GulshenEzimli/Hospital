@@ -92,9 +92,7 @@
     <Compile Include="Commands\SignInCommand.cs" />
     <Compile Include="Kernel.cs" />
     <Compile Include="Models\Implementations\NurseModel.cs" />
-    <Compile Include="Models\Implementations\OperationDoctorModel.cs" />
     <Compile Include="Models\Implementations\OperationModel.cs" />
-    <Compile Include="Models\Implementations\OperationNurseModel.cs" />
     <Compile Include="Models\Implementations\OtherEmployeeModel.cs" />
     <Compile Include="Models\Implementations\PatientModel.cs" />
     <Compile Include="Models\Implementations\PatientProcedureModel.cs" />
